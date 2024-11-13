@@ -5,26 +5,27 @@ export default function CreateTaskButton() {
 
   return (
     <button
-      className="flat-button"
+      className="disabled-button"
       style={styles.main}
       onClick={toggleNewTaskForm}
     >
-      <i className="fa-solid fa-plus" style={styles.icon}></i>
-      New task
+      Cancel
     </button>
   );
 }
 
 const styles = {
   main: {
-    width: "150px",
+    width: "140px",
     height: "45px",
-    fontSize: "16px",
+    fontSize: "18px",
     borderRadius: "8px",
+    border: "1px solid #9470ff",
+    marginLeft: "12px",
   },
   icon: {
     fontSize: "16px",
-    color: "white",
+    color: "#9470ff",
     marginRight: "10px",
   },
 };

@@ -1,25 +1,17 @@
-import { useTaskForm } from "../../contexts/TaskFormContext";
-
 export default function CreateTaskButton() {
-  const { toggleNewTaskForm } = useTaskForm();
-
   return (
-    <button
-      className="flat-button"
-      style={styles.main}
-      onClick={toggleNewTaskForm}
-    >
+    <button className="flat-button" style={styles.main}>
       <i className="fa-solid fa-plus" style={styles.icon}></i>
-      New task
+      Create
     </button>
   );
 }
 
 const styles = {
   main: {
-    width: "150px",
+    width: "280px",
     height: "45px",
-    fontSize: "16px",
+    fontSize: "18px",
     borderRadius: "8px",
   },
   icon: {
