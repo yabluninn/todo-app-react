@@ -1,0 +1,16 @@
+.header {
+  width: 100%;
+  height: 70px;
+  background-color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  padding-left: 320px;
+  padding-right: 320px;
+}
+
+.today-label {
+  font-size: 24px;
+  font-weight: bold;
+}

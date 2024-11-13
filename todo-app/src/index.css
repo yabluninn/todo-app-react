@@ -1,0 +1,43 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap");
+
+:root {
+  --default-btn-background: #7437ff;
+  --hover-btn-background: #660fff;
+  --disabled-btn-background: hsl(251, 100%, 95%);
+  --disabled-btn-text: #9470ff;
+}
+
+* {
+  font-family: "Nunito", sans-serif;
+
+  color: rgb(26, 26, 26);
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+button {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.flat-button {
+  background-color: #7437ff;
+  color: white;
+}
+
+.flat-button:hover {
+  background-color: #660fff;
+}
+
+.flat-button:disabled {
+  background-color: #e9e4ff;
+  color: #9470ff;
+}
