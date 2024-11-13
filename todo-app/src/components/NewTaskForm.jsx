@@ -1,10 +1,13 @@
 /* eslint-disable react/prop-types */
 import CreateButton from "./ui/CreateButton";
 import CancelButton from "./ui/CancelCreatingButton";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
+import TaskListContext from "../contexts/TaskListContext";
 
 export default function NewTaskForm({ isVisible }) {
   const [inputValue, setInputValue] = useState("");
+  const [isFocus, setFocus] = useState(false);
+  const { updateTaskList, tasks } = useContext(TaskListContext);
 
   useEffect(() => {
     if (!isVisible) {
@@ -16,18 +19,42 @@ export default function NewTaskForm({ isVisible }) {
     setInputValue(e.target.value);
   };
 
+  const handleInputFocus = () => {
+    setFocus(true);
+  };
+
+  const handleInputBlur = () => {
+    setFocus(false);
+  };
+
+  const handleAddTask = () => {
+    if (inputValue.trim()) {
+      const newTask = {
+        id: tasks.length,
+        name: inputValue.trim(),
+      };
+      updateTaskList([...tasks, newTask]);
+      setInputValue("");
+    }
+  };
+
   return (
     <div style={{ ...styles.container, display: isVisible ? "flex" : "none" }}>
       <i className="fa-solid fa-plus" style={styles.icon}></i>
       <div style={styles.mainBlock}>
         <input
           placeholder="Task name..."
-          style={styles.taskNameInput}
+          style={{
+            ...styles.taskNameInput,
+            borderColor: isFocus ? "#660fff" : "rgb(206, 206, 206)",
+          }}
           value={inputValue}
           onChange={handleInputChange}
+          onFocus={handleInputFocus}
+          onBlur={handleInputBlur}
         ></input>
         <div style={styles.subBlock}>
-          <CreateButton />
+          <CreateButton onClick={handleAddTask} />
           <CancelButton />
         </div>
       </div>
@@ -56,7 +83,6 @@ const styles = {
   mainBlock: {
     width: "100%",
     height: "100%",
-    // border: "1px solid red",
     marginLeft: "12px",
     display: "flex",
     justifyContent: "start",
@@ -65,6 +91,7 @@ const styles = {
   },
   taskNameInput: {
     width: "100%",
+    outline: "none",
     border: "1px solid rgb(206, 206, 206)",
     borderRadius: "8px",
     padding: "10px",

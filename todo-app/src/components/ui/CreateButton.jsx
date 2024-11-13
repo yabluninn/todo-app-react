@@ -1,6 +1,7 @@
-export default function CreateTaskButton() {
+/* eslint-disable react/prop-types */
+export default function CreateTaskButton({ onClick }) {
   return (
-    <button className="flat-button" style={styles.main}>
+    <button className="flat-button" style={styles.main} onClick={onClick}>
       <i className="fa-solid fa-plus" style={styles.icon}></i>
       Create
     </button>

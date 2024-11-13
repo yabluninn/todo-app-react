@@ -3,19 +3,23 @@
 import NewTaskForm from "./NewTaskForm";
 import Task from "./Task";
 import { useTaskForm } from "../contexts/TaskFormContext";
+import { useTaskList } from "../contexts/TaskListContext";
 
-export default function TasksContainer({ taskList }) {
+export default function TasksContainer() {
   const { isNewTaskFormVisible } = useTaskForm();
+  const { updateTaskList, tasks } = useTaskList();
 
-  const taskOne = {
-    name: "Task One",
+  const deleteTask = (taskId) => {
+    const newTaskList = tasks.filter((_, i) => i != taskId);
+    updateTaskList(newTaskList);
   };
+
   return (
     <div style={styles.main}>
       <NewTaskForm isVisible={isNewTaskFormVisible} />
-      <Task task={taskOne} />
-      <Task task={taskOne} />
-      <Task task={taskOne} />
+      {tasks.map((task, index) => (
+        <Task key={index} task={task} handleDelete={() => deleteTask(index)} />
+      ))}
     </div>
   );
 }

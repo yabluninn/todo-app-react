@@ -2,7 +2,7 @@
 import "./Task.css";
 import { useState } from "react";
 
-export default function Task({ task }) {
+export default function Task({ task, handleDelete }) {
   const [isCompleted, setIsCompleted] = useState(false);
 
   const handleCheckboxChange = () => {
@@ -51,8 +51,11 @@ export default function Task({ task }) {
             textDecoration: isCompleted ? "line-through" : "none",
           }}
         >
-          {task.name}
+          {task.name + " [" + task.id + "]"}
         </p>
+        <button onClick={handleDelete}>
+          <i className="fa-regular fa-trash-can" style={styles.deleteIcon}></i>
+        </button>
       </div>
     </div>
   );
@@ -64,10 +67,18 @@ const styles = {
     height: "100%",
     // border: "1px solid red",
     marginLeft: "12px",
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "start",
+    flexDirection: "row",
   },
   taskName: {
     fontSize: "18px",
     fontWeight: "bold",
     color: "rgb(82, 82, 82)",
+  },
+  deleteIcon: {
+    fontSize: "20px",
+    color: "#9470ff",
   },
 };
