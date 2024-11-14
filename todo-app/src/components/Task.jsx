@@ -45,17 +45,30 @@ export default function Task({ task, handleDelete }) {
         </svg>
       </div>
       <div style={styles.taskBlock}>
-        <p
-          style={{
-            ...styles.taskName,
-            textDecoration: isCompleted ? "line-through" : "none",
-          }}
-        >
-          {task.name + " [" + task.id + "]"}
-        </p>
-        <button onClick={handleDelete}>
-          <i className="fa-regular fa-trash-can" style={styles.deleteIcon}></i>
-        </button>
+        <div style={styles.taskMainBlock}>
+          <p
+            style={{
+              ...styles.taskName,
+              textDecoration: isCompleted ? "line-through" : "none",
+            }}
+          >
+            {task.name + " [" + task.id + "]"}
+          </p>
+          <button onClick={handleDelete}>
+            <i
+              className="fa-regular fa-trash-can"
+              style={styles.deleteIcon}
+            ></i>
+          </button>
+        </div>
+        <div style={styles.taskInfoBlock}>
+          <div style={styles.dateBlock}>
+            <i className="fa-regular fa-clock" style={styles.dateIcon}></i>
+            <p style={styles.dateLabel}>
+              {task.startTime + "  -  " + task.endTime}
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   );
@@ -65,12 +78,11 @@ const styles = {
   taskBlock: {
     width: "100%",
     height: "100%",
-    // border: "1px solid red",
     marginLeft: "12px",
     display: "flex",
     justifyContent: "space-between",
     alignItems: "start",
-    flexDirection: "row",
+    flexDirection: "column",
   },
   taskName: {
     fontSize: "18px",
@@ -80,5 +92,39 @@ const styles = {
   deleteIcon: {
     fontSize: "20px",
     color: "#9470ff",
+  },
+  taskMainBlock: {
+    width: "100%",
+    height: "50%",
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "start",
+    flexDirection: "row",
+  },
+  taskInfoBlock: {
+    width: "100%",
+    height: "50%",
+    display: "flex",
+    justifyContent: "start",
+    alignItems: "center",
+    flexDirection: "row",
+  },
+  dateBlock: {
+    width: "160px",
+    height: "100%",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "row",
+    background: "rgb(238, 238, 238)",
+    borderRadius: "8px",
+  },
+  dateIcon: {
+    fontSize: "18px",
+    color: "rgb(152, 152, 152)",
+    marginRight: "12px",
+  },
+  dateLabel: {
+    color: "grey",
   },
 };

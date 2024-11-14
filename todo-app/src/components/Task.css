@@ -14,7 +14,6 @@
 
 .container:hover {
   border: 1px solid #9470ff;
-  background-color: #9470ff17;
 }
 
 .completed-task {

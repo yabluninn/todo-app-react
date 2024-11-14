@@ -6,6 +6,8 @@ import TaskListContext from "../contexts/TaskListContext";
 
 export default function NewTaskForm({ isVisible }) {
   const [inputValue, setInputValue] = useState("");
+  const [startTimeValue, setStartTimeValue] = useState("");
+  const [endTimeValue, setEndTimeValue] = useState("");
   const [isFocus, setFocus] = useState(false);
   const { updateTaskList, tasks } = useContext(TaskListContext);
 
@@ -19,6 +21,14 @@ export default function NewTaskForm({ isVisible }) {
     setInputValue(e.target.value);
   };
 
+  const handleStartTimeInputChange = (e) => {
+    setStartTimeValue(e.target.value);
+  };
+
+  const handleEndTimeInputChange = (e) => {
+    setEndTimeValue(e.target.value);
+  };
+
   const handleInputFocus = () => {
     setFocus(true);
   };
@@ -28,13 +38,21 @@ export default function NewTaskForm({ isVisible }) {
   };
 
   const handleAddTask = () => {
-    if (inputValue.trim()) {
+    if (
+      inputValue.trim() &&
+      startTimeValue.trim() != "" &&
+      endTimeValue.trim() != ""
+    ) {
       const newTask = {
         id: tasks.length,
         name: inputValue.trim(),
+        startTime: startTimeValue,
+        endTime: endTimeValue,
       };
       updateTaskList([...tasks, newTask]);
       setInputValue("");
+      setStartTimeValue("");
+      setEndTimeValue("");
     }
   };
 
@@ -54,8 +72,28 @@ export default function NewTaskForm({ isVisible }) {
           onBlur={handleInputBlur}
         ></input>
         <div style={styles.subBlock}>
-          <CreateButton onClick={handleAddTask} />
-          <CancelButton />
+          <div style={styles.timeBlock}>
+            <input
+              type="time"
+              value={startTimeValue}
+              onChange={handleStartTimeInputChange}
+              style={styles.timeInput}
+            ></input>
+            <p style={styles.timeLabel}>Start</p>
+          </div>
+          <div style={styles.timeBlock}>
+            <input
+              type="time"
+              value={endTimeValue}
+              onChange={handleEndTimeInputChange}
+              style={styles.timeInput}
+            ></input>
+            <p style={styles.timeLabel}>End</p>
+          </div>
+          <div style={styles.buttonsBlock}>
+            <CreateButton onClick={handleAddTask} />
+            <CancelButton />
+          </div>
         </div>
       </div>
     </div>
@@ -65,7 +103,6 @@ export default function NewTaskForm({ isVisible }) {
 const styles = {
   container: {
     width: "100%",
-    height: "130px",
     border: "1px solid rgb(206, 206, 206)",
     borderRadius: "14px",
     backgroundColor: "rgb(250, 250, 250)",
@@ -105,5 +142,34 @@ const styles = {
     justifyContent: "end",
     alignItems: "center",
     flexDirection: "row",
+  },
+  buttonsBlock: {
+    width: "100%",
+    height: "100%",
+    display: "flex",
+    justifyContent: "end",
+    alignItems: "start",
+    flexDirection: "row",
+  },
+  timeBlock: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "column",
+    marginRight: "12px",
+  },
+  timeInput: {
+    width: "110px",
+    height: "45px",
+    fontSize: "16px",
+    borderRadius: "8px",
+    paddingLeft: "12px",
+    paddingRight: "12px",
+    outline: "none",
+    border: "1px solid rgb(206, 206, 206)",
+    color: "rgb(106, 106, 106)",
+  },
+  timeLabel: {
+    color: "rgb(126, 126, 126)",
   },
 };
