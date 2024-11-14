@@ -1,6 +1,11 @@
 export default function CurrentDate() {
   const currentDate = new Date();
-  const options = { day: "numeric", month: "long" };
+  const options = {
+    day: "numeric",
+    weekday: "short",
+    month: "short",
+    year: "numeric",
+  };
 
   const formattedDate = currentDate.toLocaleDateString("en-US", options);
 
@@ -9,7 +14,7 @@ export default function CurrentDate() {
 
 const styles = {
   label: {
-    fontSize: "24px",
-    fontWeight: "bold",
+    fontSize: "16px",
+    color: "#595959",
   },
 };

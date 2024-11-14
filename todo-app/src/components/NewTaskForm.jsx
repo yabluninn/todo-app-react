@@ -103,7 +103,8 @@ export default function NewTaskForm({ isVisible }) {
 const styles = {
   container: {
     width: "100%",
-    border: "1px solid rgb(206, 206, 206)",
+    // border: "1px solid rgb(206, 206, 206)",
+    boxShadow: "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px",
     borderRadius: "14px",
     backgroundColor: "rgb(250, 250, 250)",
     marginTop: "16px",
