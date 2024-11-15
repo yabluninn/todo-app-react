@@ -1,5 +1,9 @@
 .page-container {
   width: 80%;
   height: 100%;
-  padding: 18px 60px 18px 60px;
+  padding: 24px 60px 24px 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  flex-direction: column;
 }

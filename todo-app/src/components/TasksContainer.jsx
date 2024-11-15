@@ -26,14 +26,13 @@ export default function TasksContainer() {
 
 const styles = {
   main: {
-    marginTop: "32px",
-    paddingLeft: "320px",
-    paddingRight: "320px",
+    marginTop: "16px",
     width: "100%",
-    height: "80%",
+    height: "75%",
     display: "flex",
     justifyContent: "start",
     alignItems: "center",
     flexDirection: "column",
+    border: "1px solid red",
   },
 };

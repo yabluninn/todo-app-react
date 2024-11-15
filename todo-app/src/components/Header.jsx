@@ -1,13 +1,14 @@
 import "./Header.css";
 // import CreateTaskButton from "./ui/CreateTaskButton";
 import CurrentDate from "./util/CurrentDate";
+import Greetings from "./util/Greetings";
 
 export default function Header() {
   return (
     <>
       <div className="header">
         <div className="h-labels-block">
-          <p className="h-main-label">Good Morning, Artem! 👋</p>
+          <Greetings username={"Artem"} />
           <p className="h-sub-label">
             Today, <CurrentDate />
           </p>
