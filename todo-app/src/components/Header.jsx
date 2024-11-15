@@ -25,6 +25,17 @@ export default function Header() {
               <a href="#">Option 4</a>
             </div>
           </div>
+          <button className="h-menu-button">
+            {/* <i class="fa-solid fa-sort-up"></i> */}
+            {/* <i class="fa-solid fa-sort-down"></i> */}
+            <i className="fa-solid fa-sort"></i>
+          </button>
+          <button className="h-menu-button">
+            <i className="fa-solid fa-filter"></i>
+          </button>
+          <button className="h-menu-button">
+            <i className="fa-solid fa-bars"></i>
+          </button>
         </div>
       </div>
     </>

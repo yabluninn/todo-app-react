@@ -21,6 +21,13 @@
   color: #595959;
 }
 
+.h-buttons-block {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+
 .h-dropdown {
   position: relative;
   display: inline-block;
@@ -79,4 +86,27 @@
 
 .h-dropdown:hover .dropdown-content {
   display: block;
+}
+
+.h-menu-button {
+  width: 42px;
+  height: 42px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding-left: 10px;
+  padding-right: 10px;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  color: #333;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-left: 12px;
+}
+
+.h-menu-button i {
+  color: #333;
 }
