@@ -21,6 +21,7 @@ export default function TasksContainer() {
     startTime: "09:00",
     endTime: "22:30",
     note: "Abc",
+    overdue: false,
   };
 
   const testTwoTask = {
@@ -30,6 +31,7 @@ export default function TasksContainer() {
     startTime: "09:00",
     endTime: "16:30",
     note: "",
+    overdue: true,
   };
 
   return (
