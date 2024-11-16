@@ -14,9 +14,36 @@ export default function TasksContainer() {
     updateTaskList(newTaskList);
   };
 
+  const testTask = {
+    id: 0,
+    name: "Test Task",
+    completed: false,
+    startTime: "09:00",
+    endTime: "22:30",
+    note: "Abc",
+  };
+
+  const testTwoTask = {
+    id: 1,
+    name: "Test Task 2",
+    completed: false,
+    startTime: "09:00",
+    endTime: "16:30",
+    note: "",
+  };
+
   return (
     <div style={styles.main}>
       <NewTaskForm isVisible={isNewTaskFormVisible} />
+      <Task task={testTask} />
+      <Task task={testTwoTask} />
+      <Task task={testTwoTask} />
+      <Task task={testTwoTask} />
+      <Task task={testTwoTask} />
+      <Task task={testTwoTask} />
+      <Task task={testTwoTask} />
+      <Task task={testTwoTask} />
+      <Task task={testTwoTask} />
       {tasks.map((task, index) => (
         <Task key={index} task={task} handleDelete={() => deleteTask(index)} />
       ))}
@@ -31,8 +58,8 @@ const styles = {
     height: "75%",
     display: "flex",
     justifyContent: "start",
-    alignItems: "center",
+    alignItems: "start",
     flexDirection: "column",
-    border: "1px solid red",
+    overflowY: "auto",
   },
 };

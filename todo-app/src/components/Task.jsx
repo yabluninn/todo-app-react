@@ -1,49 +1,50 @@
 /* eslint-disable react/prop-types */
 import "./Task.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function Task({ task, handleDelete }) {
   const [isCompleted, setIsCompleted] = useState(false);
+  const [isCurrentTimeInRange, setIsCurrentTimeInRange] = useState(false);
 
   const handleCheckboxChange = () => {
     setIsCompleted(!isCompleted);
   };
 
+  const checkCurrentTimeInRange = () => {
+    const nowTime = new Date();
+    const currentTime = nowTime.getHours() * 60 + nowTime.getMinutes();
+
+    const [startHours, startMinutes] = task.startTime.split(":").map(Number);
+    const [endHours, endMinutes] = task.endTime.split(":").map(Number);
+
+    const taskStartTime = startHours * 60 + startMinutes;
+    const taskEndTime = endHours * 60 + endMinutes;
+
+    setIsCurrentTimeInRange(
+      currentTime >= taskStartTime && currentTime <= taskEndTime
+    );
+  };
+
+  useEffect(() => {
+    checkCurrentTimeInRange();
+    const interval = setInterval(checkCurrentTimeInRange, 60000);
+    return () => clearInterval(interval);
+  }, [task.startTime, task.endTime]);
+
   return (
-    <div className={isCompleted ? "completed-task" : "container"}>
-      <div className="checkbox-wrapper-12">
-        <div className="cbx">
-          <input
-            id="cbx-12"
-            type="checkbox"
-            checked={isCompleted}
-            onChange={handleCheckboxChange}
-          />
-          <label htmlFor="cbx-12"></label>
-          <svg width="15" height="14" viewBox="0 0 15 14" fill="none">
-            <path d="M2 8.36364L6.23077 12L13 2"></path>
-          </svg>
-        </div>
-        {/* Gooey Effect */}
-        <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
-          <defs>
-            <filter id="goo-12">
-              <feGaussianBlur
-                in="SourceGraphic"
-                stdDeviation="4"
-                result="blur"
-              />
-              <feColorMatrix
-                in="blur"
-                mode="matrix"
-                values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 22 -7"
-                result="goo-12"
-              />
-              <feBlend in="SourceGraphic" in2="goo-12" />
-            </filter>
-          </defs>
-        </svg>
+    <div
+      className={isCompleted ? "completed-task" : "container"}
+      style={{
+        border: isCurrentTimeInRange ? "2px solid rgb(66, 189, 250)" : "none",
+        height: isCurrentTimeInRange ? "80px" : "",
+        minHeight: isCurrentTimeInRange ? "80px" : "",
+      }}
+    >
+      <div className="checkbox-wrapper-19">
+        <input type="checkbox" id="cbtest-19" onChange={handleCheckboxChange} />
+        <label htmlFor="cbtest-19" className="check-box"></label>
       </div>
+
       <div style={styles.taskBlock}>
         <div style={styles.taskMainBlock}>
           <p
@@ -54,19 +55,32 @@ export default function Task({ task, handleDelete }) {
           >
             {task.name + " [" + task.id + "]"}
           </p>
-          <button onClick={handleDelete}>
-            <i
-              className="fa-regular fa-trash-can"
-              style={styles.deleteIcon}
-            ></i>
-          </button>
-        </div>
-        <div style={styles.taskInfoBlock}>
-          <div style={styles.dateBlock}>
-            <i className="fa-regular fa-clock" style={styles.dateIcon}></i>
-            <p style={styles.dateLabel}>
-              {task.startTime + "  -  " + task.endTime}
-            </p>
+          <div style={styles.taskSubBlock}>
+            <div
+              className={
+                task.note == "" ? "invisible-block" : "visible-task-info-block"
+              }
+            >
+              <i className="fa-regular fa-note-sticky"></i>
+            </div>
+            <div style={styles.dateBlock}>
+              <i className="fa-regular fa-clock" style={styles.dateIcon}></i>
+              <p style={styles.dateLabel}>
+                {task.startTime + "  -  " + task.endTime}
+              </p>
+            </div>
+            <button onClick={handleDelete} style={styles.deleteButton}>
+              <i
+                className="fa-regular fa-pen-to-square"
+                style={styles.deleteIcon}
+              ></i>
+            </button>
+            <button onClick={handleDelete} style={styles.deleteButton}>
+              <i
+                className="fa-regular fa-trash-can"
+                style={styles.deleteIcon}
+              ></i>
+            </button>
           </div>
         </div>
       </div>
@@ -77,47 +91,44 @@ export default function Task({ task, handleDelete }) {
 const styles = {
   taskBlock: {
     width: "100%",
-    height: "100%",
     marginLeft: "12px",
     display: "flex",
-    justifyContent: "space-between",
-    alignItems: "start",
-    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "row",
   },
   taskName: {
     fontSize: "18px",
-    fontWeight: "bold",
-    color: "rgb(82, 82, 82)",
+    color: "#333",
   },
   deleteIcon: {
     fontSize: "20px",
-    color: "#9470ff",
+    color: "#333",
   },
   taskMainBlock: {
     width: "100%",
-    height: "50%",
     display: "flex",
     justifyContent: "space-between",
-    alignItems: "start",
+    alignItems: "center",
     flexDirection: "row",
   },
-  taskInfoBlock: {
-    width: "100%",
-    height: "50%",
+  taskSubBlock: {
     display: "flex",
-    justifyContent: "start",
+    justifyContent: "center",
     alignItems: "center",
     flexDirection: "row",
   },
   dateBlock: {
     width: "160px",
-    height: "100%",
+    padding: "6px",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
     flexDirection: "row",
     background: "rgb(238, 238, 238)",
     borderRadius: "8px",
+    marginRight: "16px",
+    marginLeft: "16px",
   },
   dateIcon: {
     fontSize: "18px",
@@ -126,5 +137,12 @@ const styles = {
   },
   dateLabel: {
     color: "grey",
+  },
+  deleteButton: {
+    width: "33.6px",
+    height: "33.6px",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
   },
 };
