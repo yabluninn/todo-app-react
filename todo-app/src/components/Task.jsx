@@ -1,41 +1,46 @@
 /* eslint-disable react/prop-types */
+import { taskService } from "../services/TaskService";
 import "./Task.css";
 import { useState, useEffect } from "react";
 
 export default function Task({ task, handleDelete }) {
   const [isCompleted, setIsCompleted] = useState(false);
   const [isCurrentTimeInRange, setIsCurrentTimeInRange] = useState(false);
+  const [isOverdue, setOverdue] = useState(false);
 
   const handleCheckboxChange = () => {
     setIsCompleted(!isCompleted);
   };
 
-  const checkCurrentTimeInRange = () => {
-    const nowTime = new Date();
-    const currentTime = nowTime.getHours() * 60 + nowTime.getMinutes();
+  const checkTimeInRange = () => {
+    setIsCurrentTimeInRange(taskService.checkCurrentTimeInRange(task));
+  };
 
-    const [startHours, startMinutes] = task.startTime.split(":").map(Number);
-    const [endHours, endMinutes] = task.endTime.split(":").map(Number);
-
-    const taskStartTime = startHours * 60 + startMinutes;
-    const taskEndTime = endHours * 60 + endMinutes;
-
-    setIsCurrentTimeInRange(
-      currentTime >= taskStartTime && currentTime <= taskEndTime
-    );
+  const checkOverdue = () => {
+    setOverdue(taskService.checkOverdue(task));
   };
 
   useEffect(() => {
-    checkCurrentTimeInRange();
-    const interval = setInterval(checkCurrentTimeInRange, 60000);
+    checkTimeInRange();
+    const interval = setInterval(checkTimeInRange, 60000);
     return () => clearInterval(interval);
   }, [task.startTime, task.endTime]);
+
+  useEffect(() => {
+    checkOverdue();
+    const interval = setInterval(checkOverdue, 600000);
+    return () => clearInterval(interval);
+  }, [task.endTime]);
 
   return (
     <div
       className={isCompleted ? "completed-task" : "container"}
       style={{
-        border: isCurrentTimeInRange ? "2px solid rgb(66, 189, 250)" : "none",
+        border: isOverdue
+          ? "2px solid rgb(223, 58, 58)"
+          : isCurrentTimeInRange
+          ? "2px solid rgb(66, 189, 250)"
+          : "none",
         height: isCurrentTimeInRange ? "80px" : "",
         minHeight: isCurrentTimeInRange ? "80px" : "",
       }}
