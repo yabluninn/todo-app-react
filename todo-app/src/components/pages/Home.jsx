@@ -1,7 +1,7 @@
-import Header from "../Header";
-import TasksContainer from "../TasksContainer";
+import Header from "../layout/Header";
+import TasksContainer from "../layout/TasksContainer";
 import CreateButton from "../ui/CreateButton";
-import "./Home.css";
+import "../../styles/Home.css";
 
 export default function Home() {
   return (

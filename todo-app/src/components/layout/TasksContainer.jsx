@@ -1,9 +1,9 @@
 /* eslint-disable react/prop-types */
 
-import NewTaskForm from "./NewTaskForm";
-import Task from "./Task";
-import { useTaskForm } from "../contexts/TaskFormContext";
-import { useTaskList } from "../contexts/TaskListContext";
+import NewTaskForm from "../NewTaskForm";
+import Task from "../Task";
+import { useTaskForm } from "../../contexts/TaskFormContext";
+import { useTaskList } from "../../contexts/TaskListContext";
 
 export default function TasksContainer() {
   const { isNewTaskFormVisible } = useTaskForm();

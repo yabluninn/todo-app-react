@@ -1,17 +1,21 @@
-import "./Header.css";
-// import CreateTaskButton from "./ui/CreateTaskButton";
-import CurrentDate from "./util/CurrentDate";
-import Greetings from "./util/Greetings";
+import { headerService } from "../../services/HeaderService";
+import "../../styles/Header.css";
+import { currentDate } from "../../utils/current-date";
 
 export default function Header() {
+  const currDate = currentDate.getFormattedCurrentDate();
+  const { text: greetingsPart, emoji: greetingEmoji } =
+    headerService.getGreeting();
+  const username = "Artem";
+
   return (
     <>
       <div className="header">
         <div className="h-labels-block">
-          <Greetings username={"Artem"} />
-          <p className="h-sub-label">
-            Today, <CurrentDate />
+          <p className="h-greetings-label">
+            {greetingsPart}, {username}! 👋 {greetingEmoji}
           </p>
+          <p className="h-sub-label">Today, {currDate}</p>
         </div>
         <div className="h-buttons-block">
           <div className="h-dropdown">

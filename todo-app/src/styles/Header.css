@@ -110,3 +110,8 @@
 .h-menu-button i {
   color: #333;
 }
+
+.h-greetings-label {
+  font-size: 22px;
+  font-weight: bold;
+}
