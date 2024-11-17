@@ -19,7 +19,7 @@ export default function TasksContainer() {
     name: "Test Task",
     completed: false,
     startTime: "09:00",
-    endTime: "21:30",
+    endTime: "23:59",
     note: "Abc",
   };
 

@@ -36,11 +36,13 @@ export default function Task({ task, handleDelete }) {
     <div
       className={isCompleted ? "completed-task" : "container"}
       style={{
-        border: isOverdue
+        border: isCompleted
+          ? "2px solid transparent"
+          : isOverdue
           ? "2px solid rgb(223, 58, 58)"
           : isCurrentTimeInRange
           ? "2px solid rgb(66, 189, 250)"
-          : "none",
+          : "2px solid transparent",
         height: isCurrentTimeInRange ? "80px" : "",
         minHeight: isCurrentTimeInRange ? "80px" : "",
       }}
@@ -56,6 +58,7 @@ export default function Task({ task, handleDelete }) {
             style={{
               ...styles.taskName,
               textDecoration: isCompleted ? "line-through" : "none",
+              fontWeight: isCurrentTimeInRange ? "bold" : "normal",
             }}
           >
             {task.name + " [" + task.id + "]"}
