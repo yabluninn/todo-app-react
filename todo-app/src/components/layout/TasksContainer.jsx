@@ -54,8 +54,8 @@ export default function TasksContainer() {
 const styles = {
   main: {
     marginTop: "16px",
-    width: "100%",
-    height: "75%",
+    width: "75%",
+    height: "95%",
     display: "flex",
     justifyContent: "start",
     alignItems: "start",
