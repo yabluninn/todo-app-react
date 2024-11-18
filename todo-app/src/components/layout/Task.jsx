@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
-import { taskService } from "../services/TaskService";
-import "./Task.css";
+import { taskService } from "../../services/TaskService";
+import "../../styles/Task.css";
 import { useState, useEffect } from "react";
 
 export default function Task({ task, handleDelete }) {

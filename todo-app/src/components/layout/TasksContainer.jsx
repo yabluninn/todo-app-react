@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 
 import NewTaskForm from "../NewTaskForm";
-import Task from "../Task";
+import Task from "./Task";
 import { useTaskForm } from "../../contexts/TaskFormContext";
 import { useTaskList } from "../../contexts/TaskListContext";
 
