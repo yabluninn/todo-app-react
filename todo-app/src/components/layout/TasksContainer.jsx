@@ -61,5 +61,6 @@ const styles = {
     alignItems: "start",
     flexDirection: "column",
     overflowY: "auto",
+    scrollbarWidth: "none",
   },
 };

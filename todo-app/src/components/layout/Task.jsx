@@ -39,7 +39,7 @@ export default function Task({ task, handleDelete }) {
         border: isCompleted
           ? "2px solid transparent"
           : isOverdue
-          ? "2px solid rgb(223, 58, 58)"
+          ? "1px solid rgb(223, 58, 58)"
           : isCurrentTimeInRange
           ? "2px solid rgb(66, 189, 250)"
           : "2px solid transparent",
@@ -69,23 +69,26 @@ export default function Task({ task, handleDelete }) {
                 task.note == "" ? "invisible-block" : "visible-task-info-block"
               }
             >
-              <i className="fa-regular fa-note-sticky"></i>
+              <i className="hgi-stroke hgi-sticky-note-02"></i>
             </div>
             <div style={styles.dateBlock}>
-              <i className="fa-regular fa-clock" style={styles.dateIcon}></i>
+              <i
+                className="hgi-stroke hgi-clock-01"
+                style={styles.dateIcon}
+              ></i>
               <p style={styles.dateLabel}>
                 {task.startTime + "  -  " + task.endTime}
               </p>
             </div>
             <button onClick={handleDelete} style={styles.deleteButton}>
               <i
-                className="fa-regular fa-pen-to-square"
+                className="hgi-stroke hgi-pencil-edit-01"
                 style={styles.deleteIcon}
               ></i>
             </button>
             <button onClick={handleDelete} style={styles.deleteButton}>
               <i
-                className="fa-regular fa-trash-can"
+                className="hgi-stroke hgi-delete-02"
                 style={styles.deleteIcon}
               ></i>
             </button>
@@ -106,7 +109,7 @@ const styles = {
     flexDirection: "row",
   },
   taskName: {
-    fontSize: "18px",
+    fontSize: "16px",
     color: "#333",
   },
   deleteIcon: {
