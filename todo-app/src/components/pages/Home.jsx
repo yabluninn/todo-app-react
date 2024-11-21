@@ -39,7 +39,10 @@ export default function Home() {
           <HomeNoteWidget />
           <HomeAddWidget />
         </div>
-        <VerticalTimeline tasks={testTasks} />
+        <div className="home-day-overview">
+          <p className="home-day-overview-title">Day Overview</p>
+          <VerticalTimeline tasks={testTasks} />
+        </div>
       </div>
       {/* <div className="home-footer">
         <CreateButton />

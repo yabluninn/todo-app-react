@@ -30,7 +30,7 @@ export default function HomeNoteWidget() {
 const styles = {
   main: {
     width: "49%",
-    height: "55.6%",
+    height: "315px",
     borderRadius: "8px",
     backgroundColor: "white",
     padding: "12px",

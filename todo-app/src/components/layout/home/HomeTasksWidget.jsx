@@ -74,6 +74,7 @@ export default function HomeTasksWidget() {
 const styles = {
   main: {
     width: "49%",
+    height: "315px",
     borderRadius: "8px",
     backgroundColor: "white",
     padding: "12px",

@@ -5,38 +5,34 @@ import "../../styles/VerticalTimeline.css";
 const VerticalTimeline = ({ tasks }) => {
   const [currentTimePosition, setCurrentTimePosition] = useState(0);
 
-  // Функция для преобразования времени в долю суток
   const timeToFraction = (time) => {
     const [hours, minutes] = time.split(":").map(Number);
-    return hours + minutes / 60; // Возвращает время в часах с долей
+    return hours + minutes / 60;
   };
 
-  // Функция для расчёта текущего времени в процентах
   const calculateCurrentTimePosition = () => {
     const now = new Date();
     const hours = now.getHours();
     const minutes = now.getMinutes();
-    const totalMinutes = hours * 60 + minutes; // Общее количество минут с начала дня
-    return (totalMinutes / (24 * 60)) * 100; // Позиция в процентах
+    const totalMinutes = hours * 60 + minutes;
+    return (totalMinutes / (24 * 60)) * 100;
   };
 
-  // Обновляем позицию линии текущего времени каждую минуту
   useEffect(() => {
     const updateTime = () => {
       setCurrentTimePosition(calculateCurrentTimePosition());
     };
 
-    updateTime(); // Инициализация
-    const interval = setInterval(updateTime, 60000); // Обновляем каждую минуту
+    updateTime();
+    const interval = setInterval(updateTime, 60000);
 
-    return () => clearInterval(interval); // Очищаем интервал при размонтировании
+    return () => clearInterval(interval);
   }, []);
 
   return (
     <div className="timeline">
-      {/* Отображение шкалы с интервалами в 4 часа */}
       {Array.from({ length: 6 }, (_, index) => {
-        const hour = index * 4; // Начало интервала (0, 4, 8, 12, 16, 20)
+        const hour = index * 4;
         return (
           <div key={hour} className="timeline-hour">
             <div className="timeline-hour-line"></div>
@@ -45,13 +41,11 @@ const VerticalTimeline = ({ tasks }) => {
         );
       })}
 
-      {/* Отображение текущего времени */}
       <div
         className="current-time-line"
         style={{ top: `${currentTimePosition}%` }}
       ></div>
 
-      {/* Отображение задач */}
       {tasks.map((task) => {
         const startFraction = timeToFraction(task.startTime);
         const endFraction = timeToFraction(task.endTime);

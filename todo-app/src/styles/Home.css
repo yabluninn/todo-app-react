@@ -73,6 +73,7 @@
   flex-wrap: wrap;
   overflow-y: auto;
   gap: 18px;
+  padding-right: 8px;
 }
 
 .page-app-widgets::-webkit-scrollbar {
@@ -92,4 +93,22 @@
 
 .page-app-widgets::-webkit-scrollbar-thumb:hover {
   background: #a985ff;
+}
+
+.home-day-overview {
+  width: 19%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  background-color: white;
+  border-radius: 8px;
+  padding-top: 8px;
+  box-shadow: rgba(99, 99, 99, 0.05) 0px 2px 12px 0px;
+}
+
+.home-day-overview-title {
+  font-size: 18px;
+  font-weight: bold;
 }

@@ -1,11 +1,13 @@
 .timeline {
   position: relative;
-  width: 180px;
+  width: 165px;
   height: 90%;
   border: 1px solid #ccc;
   background: #f9f9f9;
   overflow: visible;
-  margin-top: 30px;
+  align-self: flex-end;
+  margin-right: 16px;
+  top: -15px;
 }
 
 .timeline-hour {
@@ -29,7 +31,7 @@
   left: -45px;
   font-size: 12px;
   color: #666;
-  background: #f9f9f9;
+
   padding: 0 5px;
   z-index: 1;
   text-align: right;
