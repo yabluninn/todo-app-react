@@ -43,8 +43,8 @@ export default function Task({ task, handleDelete }) {
           : isCurrentTimeInRange
           ? "2px solid rgb(66, 189, 250)"
           : "2px solid transparent",
-        height: isCurrentTimeInRange ? "80px" : "",
-        minHeight: isCurrentTimeInRange ? "80px" : "",
+        height: isCurrentTimeInRange ? "60px" : "",
+        minHeight: isCurrentTimeInRange ? "60px" : "",
       }}
     >
       <div className="checkbox-wrapper-19">
@@ -130,19 +130,20 @@ const styles = {
     flexDirection: "row",
   },
   dateBlock: {
-    width: "160px",
-    padding: "6px",
+    width: "130px",
+    padding: "4px",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
     flexDirection: "row",
-    background: "rgb(238, 238, 238)",
+    background: "rgb(248, 248, 248)",
     borderRadius: "8px",
-    marginRight: "16px",
-    marginLeft: "16px",
+    marginRight: "8px",
+    marginLeft: "8px",
+    fontSize: "14px",
   },
   dateIcon: {
-    fontSize: "18px",
+    fontSize: "16px",
     color: "rgb(152, 152, 152)",
     marginRight: "12px",
   },
@@ -150,8 +151,8 @@ const styles = {
     color: "grey",
   },
   deleteButton: {
-    width: "33.6px",
-    height: "33.6px",
+    width: "30px",
+    height: "30px",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",

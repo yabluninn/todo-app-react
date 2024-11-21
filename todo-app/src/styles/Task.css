@@ -6,7 +6,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 8px 14px 8px 14px;
+  padding: 4px 12px 4px 12px;
   position: relative;
   box-shadow: rgba(99, 99, 99, 0.05) 0px 2px 8px 0px;
 }
@@ -19,24 +19,24 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 8px 14px 8px 14px;
+  padding: 4px 12px 4px 12px;
   position: relative;
   box-shadow: rgba(99, 99, 99, 0.05) 0px 2px 8px 0px;
 }
 
 .visible-task-info-block {
-  width: 33.6px;
-  height: 33.6px;
+  width: 30px;
+  height: 30px;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: row;
-  background-color: rgb(238, 238, 238);
+  background-color: rgb(248, 248, 248);
   border-radius: 8px;
 }
 
 .visible-task-info-block i {
-  font-size: 18px;
+  font-size: 16px;
   color: rgb(152, 152, 152);
 }
 
@@ -47,8 +47,8 @@
 .checkbox-wrapper-19 {
   box-sizing: border-box;
   --background-color: #ffffff00;
-  --checkbox-height: 25px;
-  height: 25px;
+  --checkbox-height: 20px;
+  height: 20px;
 }
 
 @-moz-keyframes dothabottomcheck-19 {

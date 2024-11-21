@@ -37,9 +37,6 @@ export default function Header() {
           <button className="h-menu-button">
             <i className="hgi-stroke hgi-filter"></i>
           </button>
-          <button className="h-menu-button">
-            <i className="fa-solid fa-bars"></i>
-          </button>
         </div>
       </div>
     </>

@@ -1,8 +1,17 @@
 import "../../styles/NavMenu.css";
-import CreateListButton from "../ui/CreateListButton";
 import NavButton from "../ui/NavButton";
+import NavUser from "./NavUser";
+import ava from "../../assets/avatar.png";
+import { ACCOUNT_TYPES } from "../../constants/account-types";
 
 export default function NavMenu() {
+  const accType = ACCOUNT_TYPES.FREE;
+  const user = {
+    username: "Artem Yablunin",
+    avatar: ava,
+    accountType: accType,
+  };
+
   return (
     <div className="nav-menu-container">
       <p className="nm-header">My Dailybook</p>
@@ -18,8 +27,13 @@ export default function NavMenu() {
         </div>
         <div className="nm-buttons-group">
           <NavButton icon={"hgi-stroke hgi-analytics-01"} label={"Analytics"} />
+          <NavButton
+            icon={"hgi-stroke hgi-notification-03"}
+            label={"Notifications"}
+          />
+          <NavButton icon={"hgi-stroke hgi-settings-02"} label={"Settings"} />
         </div>
-        <CreateListButton />
+        <NavUser user={user} />
       </div>
     </div>
   );
