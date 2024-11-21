@@ -30,6 +30,9 @@ export default function Header() {
             </div>
           </div>
           <button className="h-menu-button">
+            <i className="hgi-stroke hgi-add-01"></i>
+          </button>
+          <button className="h-menu-button">
             {/* <i class="fa-solid fa-sort-up"></i> */}
             {/* <i class="fa-solid fa-sort-down"></i> */}
             <i className="hgi-stroke hgi-sort-by-down-02"></i>
