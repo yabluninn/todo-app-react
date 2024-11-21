@@ -3,9 +3,9 @@
 // import NewTaskForm from "../NewTaskForm";
 import Task from "./HomeTask";
 // import { useTaskForm } from "../../contexts/TaskFormContext";
-import { useTaskList } from "../../contexts/TaskListContext";
+import { useTaskList } from "../../../contexts/TaskListContext";
 
-export default function TasksContainer() {
+export default function HomeTasksWidget() {
   // const { isNewTaskFormVisible } = useTaskForm();
   const { updateTaskList, tasks } = useTaskList();
 

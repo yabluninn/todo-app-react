@@ -1,8 +1,9 @@
 import Header from "../layout/Header";
-import TasksContainer from "../layout/HomeTasksContainer";
+import TasksContainer from "../layout/home/HomeTasksWidget";
 // import CreateButton from "../ui/CreateButton";
 import "../../styles/Home.css";
 import VerticalTimeline from "../layout/VerticalTimeline";
+import HomeNoteWidget from "../layout/home/HomeNoteWidget";
 
 export default function Home() {
   const testTasks = [];
@@ -34,7 +35,7 @@ export default function Home() {
       <div className="page-app-container">
         <div className="page-app-widgets">
           <TasksContainer />
-          <TasksContainer />
+          <HomeNoteWidget />
           <TasksContainer />
         </div>
         <VerticalTimeline tasks={testTasks} />
