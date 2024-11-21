@@ -4,6 +4,7 @@ import TasksContainer from "../layout/home/HomeTasksWidget";
 import "../../styles/Home.css";
 import VerticalTimeline from "../layout/VerticalTimeline";
 import HomeNoteWidget from "../layout/home/HomeNoteWidget";
+import HomeAddWidget from "../layout/home/HomeAddWidget";
 
 export default function Home() {
   const testTasks = [];
@@ -36,7 +37,7 @@ export default function Home() {
         <div className="page-app-widgets">
           <TasksContainer />
           <HomeNoteWidget />
-          <TasksContainer />
+          <HomeAddWidget />
         </div>
         <VerticalTimeline tasks={testTasks} />
       </div>
