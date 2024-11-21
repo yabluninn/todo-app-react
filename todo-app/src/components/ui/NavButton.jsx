@@ -10,6 +10,7 @@ export default function NavButton({ icon, label }) {
       style={{
         ...styles.button,
         backgroundColor: isHovered ? "#f7f7f7" : "transparent", // Стиль наведения
+        color: isHovered ? "#222" : "#444",
       }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -28,8 +29,8 @@ const styles = {
     justifyContent: "start",
     alignItems: "center",
     flexDirection: "row",
-    fontSize: "20px",
-    color: "#333",
+    fontSize: "18px",
+    color: "#444",
     borderRadius: "8px",
     paddingLeft: "12px",
   },

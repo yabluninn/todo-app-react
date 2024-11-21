@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import { taskService } from "../../services/TaskService";
-import "../../styles/Task.css";
+import "../../styles/HomeTask.css";
 import { useState, useEffect } from "react";
 
 export default function Task({ task, handleDelete }) {
@@ -41,8 +41,15 @@ export default function Task({ task, handleDelete }) {
           : isOverdue
           ? "1px solid rgb(223, 58, 58)"
           : isCurrentTimeInRange
-          ? "2px solid rgb(66, 189, 250)"
-          : "2px solid transparent",
+          ? "2px solid #7437ff"
+          : "",
+        borderRadius: isCompleted
+          ? "8px"
+          : isOverdue
+          ? "8px"
+          : isCurrentTimeInRange
+          ? "8px"
+          : "0px",
         height: isCurrentTimeInRange ? "60px" : "",
         minHeight: isCurrentTimeInRange ? "60px" : "",
       }}

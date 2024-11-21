@@ -1,6 +1,6 @@
 import Header from "../layout/Header";
-import TasksContainer from "../layout/TasksContainer";
-import CreateButton from "../ui/CreateButton";
+import TasksContainer from "../layout/HomeTasksContainer";
+// import CreateButton from "../ui/CreateButton";
 import "../../styles/Home.css";
 import VerticalTimeline from "../layout/VerticalTimeline";
 
@@ -32,22 +32,16 @@ export default function Home() {
     <div className="page-container">
       <Header />
       <div className="page-app-container">
-        <TasksContainer />
+        <div className="page-app-widgets">
+          <TasksContainer />
+          <TasksContainer />
+          <TasksContainer />
+        </div>
         <VerticalTimeline tasks={testTasks} />
       </div>
-      <div className="home-footer">
+      {/* <div className="home-footer">
         <CreateButton />
-        <div className="home-hints-block">
-          <div className="home-hint">
-            <div className="home-hint-ct"></div>
-            <p>Current task</p>
-          </div>
-          <div className="home-hint">
-            <div className="home-hint-cct"></div>
-            <p>Overdue task</p>
-          </div>
-        </div>
-      </div>
+      </div> */}
     </div>
   );
 }
