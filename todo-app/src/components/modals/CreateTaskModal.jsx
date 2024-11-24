@@ -1,8 +1,10 @@
 import { createPortal } from "react-dom";
-import InputWithLabel from "../ui/InputWithLabel";
-import TextAreaWithLabel from "../ui/TextAreaWithLabel";
 import { useTaskList } from "../../contexts/TaskListContext";
 import { useState } from "react";
+
+import InputWithLabel from "../ui/InputWithLabel";
+import TextAreaWithLabel from "../ui/TextAreaWithLabel";
+import TaskPriorityDropdown from "../ui/TaskPriorityDropdown";
 
 export default function CreateTaskModal({ onClose }) {
   const root = document.getElementById("root");
@@ -14,6 +16,11 @@ export default function CreateTaskModal({ onClose }) {
   const [taskDate, setTaskDate] = useState("");
   const [taskStartTime, setTaskStartTime] = useState("");
   const [taskEndTime, setTaskEndTime] = useState("");
+  const [taskPriority, setTaskPriority] = useState("");
+
+  const handlePriorityDropdown = (newPriority) => {
+    setTaskPriority(newPriority);
+  };
 
   const handleAddTask = () => {
     if (
@@ -31,6 +38,7 @@ export default function CreateTaskModal({ onClose }) {
         startTime: taskStartTime,
         endTime: taskEndTime,
         note: "",
+        priority: taskPriority,
       };
       addTask(newTask);
       onClose();
@@ -65,14 +73,17 @@ export default function CreateTaskModal({ onClose }) {
             value={taskDescription}
             onChange={(e) => setTaskDescription(e.target.value)}
           />
-          <InputWithLabel
-            type="date"
-            placeholder=""
-            label="Date"
-            icon="hgi-stroke hgi-calendar-01"
-            value={taskDate}
-            onChange={(e) => setTaskDate(e.target.value)}
-          />
+          <div style={styles.timeInputs}>
+            <InputWithLabel
+              type="date"
+              placeholder=""
+              label="Date"
+              icon="hgi-stroke hgi-calendar-01"
+              value={taskDate}
+              onChange={(e) => setTaskDate(e.target.value)}
+            />
+            <TaskPriorityDropdown onChange={handlePriorityDropdown} />
+          </div>
           <div style={styles.timeInputs}>
             <InputWithLabel
               type="time"

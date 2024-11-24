@@ -8,24 +8,6 @@ import { useTaskList } from "../../../contexts/TaskListContext";
 export default function HomeTasksWidget() {
   const { tasks, removeTask, completeTask } = useTaskList();
 
-  // const testTask = {
-  //   id: 0,
-  //   name: "Test Task",
-  //   completed: false,
-  //   startTime: "13:00",
-  //   endTime: "23:59",
-  //   note: "Abc",
-  // };
-
-  // const testTwoTask = {
-  //   id: 1,
-  //   name: "Test Task 2",
-  //   completed: false,
-  //   startTime: "23:00",
-  //   endTime: "23:30",
-  //   note: "",
-  // };
-
   return (
     <div style={styles.main}>
       <div style={styles.header}>

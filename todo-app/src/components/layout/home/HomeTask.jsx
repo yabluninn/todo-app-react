@@ -55,7 +55,23 @@ export default function Task({ task, handleDelete, handleComplete }) {
           id={`cbtest-${task.id}`}
           onChange={handleComplete}
         />
-        <label htmlFor={`cbtest-${task.id}`} className="check-box"></label>
+        <label
+          htmlFor={`cbtest-${task.id}`}
+          className="check-box"
+          style={{
+            border: !task.completed
+              ? task.priority === "None"
+                ? "2px solid #ccc"
+                : task.priority === "Low"
+                ? "2px solid blue"
+                : task.priority === "Medium"
+                ? "2px solid orange"
+                : task.priority === "High"
+                ? "2px solid red"
+                : "2px solid #ccc"
+              : "",
+          }}
+        ></label>
       </div>
 
       <div style={styles.taskBlock}>
