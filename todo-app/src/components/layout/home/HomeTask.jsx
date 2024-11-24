@@ -3,14 +3,9 @@ import { taskService } from "../../../services/TaskService";
 import "../../../styles/HomeTask.css";
 import { useState, useEffect } from "react";
 
-export default function Task({ task, handleDelete }) {
-  const [isCompleted, setIsCompleted] = useState(false);
+export default function Task({ task, handleDelete, handleComplete }) {
   const [isCurrentTimeInRange, setIsCurrentTimeInRange] = useState(false);
   const [isOverdue, setOverdue] = useState(false);
-
-  const handleCheckboxChange = () => {
-    setIsCompleted(!isCompleted);
-  };
 
   const checkTimeInRange = () => {
     setIsCurrentTimeInRange(taskService.checkCurrentTimeInRange(task));
@@ -34,16 +29,16 @@ export default function Task({ task, handleDelete }) {
 
   return (
     <div
-      className={isCompleted ? "completed-task" : "container"}
+      className={task.completed ? "completed-task" : "container"}
       style={{
-        border: isCompleted
-          ? "2px solid transparent"
+        border: task.completed
+          ? "1px solid #ccc"
           : isOverdue
           ? "1px solid rgb(223, 58, 58)"
           : isCurrentTimeInRange
-          ? "2px solid #7437ff"
-          : "",
-        borderRadius: isCompleted
+          ? "1px solid #7437ff"
+          : "1px solid transparent",
+        borderRadius: task.completed
           ? "8px"
           : isOverdue
           ? "8px"
@@ -55,8 +50,12 @@ export default function Task({ task, handleDelete }) {
       }}
     >
       <div className="checkbox-wrapper-19">
-        <input type="checkbox" id="cbtest-19" onChange={handleCheckboxChange} />
-        <label htmlFor="cbtest-19" className="check-box"></label>
+        <input
+          type="checkbox"
+          id={`cbtest-${task.id}`}
+          onChange={handleComplete}
+        />
+        <label htmlFor={`cbtest-${task.id}`} className="check-box"></label>
       </div>
 
       <div style={styles.taskBlock}>
@@ -64,7 +63,7 @@ export default function Task({ task, handleDelete }) {
           <p
             style={{
               ...styles.taskName,
-              textDecoration: isCompleted ? "line-through" : "none",
+              textDecoration: task.completed ? "line-through" : "none",
               fontWeight: isCurrentTimeInRange ? "bold" : "normal",
             }}
           >

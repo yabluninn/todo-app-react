@@ -10,6 +10,18 @@ export const TaskListProvider = ({ children }) => {
     setTasks((prevTasks) => [...prevTasks, task]);
   };
 
+  const removeTask = (taskId) => {
+    const newTasks = tasks.filter((task) => task.id != taskId);
+    setTasks(newTasks);
+  };
+
+  const completeTask = (taskId, isCompleted) => {
+    const updatedTasks = tasks.map((task) =>
+      task.id === taskId ? { ...task, completed: isCompleted } : task
+    );
+    updateTaskList(updatedTasks);
+  };
+
   const updateTaskList = (newTaskList) => {
     setTasks(newTaskList);
   };
@@ -20,7 +32,14 @@ export const TaskListProvider = ({ children }) => {
 
   return (
     <TaskListContext.Provider
-      value={{ tasks, addTask, updateTaskList, getTasksLength }}
+      value={{
+        tasks,
+        addTask,
+        updateTaskList,
+        getTasksLength,
+        removeTask,
+        completeTask,
+      }}
     >
       {children}
     </TaskListContext.Provider>

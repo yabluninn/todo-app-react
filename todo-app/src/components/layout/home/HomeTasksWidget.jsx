@@ -6,7 +6,7 @@ import Task from "./HomeTask";
 import { useTaskList } from "../../../contexts/TaskListContext";
 
 export default function HomeTasksWidget() {
-  const { tasks } = useTaskList();
+  const { tasks, removeTask, completeTask } = useTaskList();
 
   // const testTask = {
   //   id: 0,
@@ -33,11 +33,12 @@ export default function HomeTasksWidget() {
         <a style={styles.link}>View All</a>
       </div>
       <div style={styles.container}>
-        {tasks.map((task, index) => (
+        {tasks.map((task) => (
           <Task
-            key={index}
+            key={task.id}
             task={task}
-            // handleDelete={() => deleteTask(index)}
+            handleComplete={() => completeTask(task.id, !task.completed)}
+            handleDelete={() => removeTask(task.id)}
           />
         ))}
       </div>
