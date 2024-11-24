@@ -1,12 +1,19 @@
+import { useState } from "react";
 import { headerService } from "../../services/HeaderService";
 import "../../styles/Header.css";
 import { currentDate } from "../../utils/current-date";
 
 export default function Header() {
+  const [isContextMenuVisible, setIsContextMenuVisible] = useState(false);
   const currDate = currentDate.getFormattedCurrentDate();
   const { text: greetingsPart, emoji: greetingEmoji } =
     headerService.getGreeting();
+
   const username = "Artem";
+
+  const toggleContextMenu = () => {
+    setIsContextMenuVisible((prev) => !prev);
+  };
 
   return (
     <>
@@ -29,12 +36,30 @@ export default function Header() {
               <a href="#">Option 4</a>
             </div>
           </div>
-          <button className="h-menu-button">
+          <button className="h-menu-button" onClick={toggleContextMenu}>
             <i className="hgi-stroke hgi-add-01"></i>
           </button>
+          {isContextMenuVisible && (
+            <div className="add-context-menu">
+              <div className="add-context-menu-buttons">
+                <button>
+                  <i className="hgi-stroke hgi-task-add-01"></i>
+                  Create a task
+                </button>
+                <button>
+                  <i className="hgi-stroke hgi-sticky-note-01"></i>
+                  Create a note
+                </button>
+              </div>
+              <button
+                className="add-context-menu-dissmiss-btn"
+                onClick={toggleContextMenu}
+              >
+                Dismiss
+              </button>
+            </div>
+          )}
           <button className="h-menu-button">
-            {/* <i class="fa-solid fa-sort-up"></i> */}
-            {/* <i class="fa-solid fa-sort-down"></i> */}
             <i className="hgi-stroke hgi-sort-by-down-02"></i>
           </button>
           <button className="h-menu-button">
