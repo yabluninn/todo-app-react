@@ -1,52 +1,65 @@
 import Header from "../layout/Header";
-import TasksContainer from "../layout/home/HomeTasksWidget";
+import HomeTasksWidget from "../layout/home/HomeTasksWidget";
 // import CreateButton from "../ui/CreateButton";
 import "../../styles/Home.css";
 import VerticalTimeline from "../layout/VerticalTimeline";
 import HomeNoteWidget from "../layout/home/HomeNoteWidget";
 import HomeAddWidget from "../layout/home/HomeAddWidget";
+import CreateTaskModal from "../modals/CreateTaskModal";
+import { useState } from "react";
+import { useTaskList } from "../../contexts/TaskListContext";
 
 export default function Home() {
-  const testTasks = [];
+  const [isCreateTaskModalOpen, setCreateTaskModalOpen] = useState(false);
+  const { tasks } = useTaskList();
 
-  const testTask = {
-    id: 0,
-    name: "Test Task",
-    completed: false,
-    startTime: "09:00",
-    endTime: "16:00",
-    note: "Abc",
+  const openCreateTaskModal = () => {
+    setCreateTaskModalOpen(true);
+  };
+  const closeCreateTaskModal = () => {
+    setCreateTaskModalOpen(false);
   };
 
-  const testTwoTask = {
-    id: 1,
-    name: "Test Task 2",
-    completed: false,
-    startTime: "16:30",
-    endTime: "18:30",
-    note: "",
-  };
+  // const testTasks = [];
 
-  testTasks.push(testTask);
-  testTasks.push(testTwoTask);
+  // const testTask = {
+  //   id: 0,
+  //   name: "Test Task",
+  //   completed: false,
+  //   startTime: "09:00",
+  //   endTime: "16:00",
+  //   note: "Abc",
+  // };
+
+  // const testTwoTask = {
+  //   id: 1,
+  //   name: "Test Task 2",
+  //   completed: false,
+  //   startTime: "16:30",
+  //   endTime: "18:30",
+  //   note: "",
+  // };
+
+  // testTasks.push(testTask);
+  // testTasks.push(testTwoTask);
 
   return (
     <div className="page-container">
-      <Header />
+      <Header onOpenCreateTaskModal={openCreateTaskModal} />
       <div className="page-app-container">
         <div className="page-app-widgets">
-          <TasksContainer />
+          <HomeTasksWidget />
           <HomeNoteWidget />
           <HomeAddWidget />
         </div>
         <div className="home-day-overview">
           <p className="home-day-overview-title">Day Overview</p>
-          <VerticalTimeline tasks={testTasks} />
+          <VerticalTimeline tasks={tasks} />
         </div>
       </div>
-      {/* <div className="home-footer">
-        <CreateButton />
-      </div> */}
+      {isCreateTaskModalOpen && (
+        <CreateTaskModal onClose={closeCreateTaskModal} />
+      )}
     </div>
   );
 }

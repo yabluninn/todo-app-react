@@ -6,54 +6,38 @@ import Task from "./HomeTask";
 import { useTaskList } from "../../../contexts/TaskListContext";
 
 export default function HomeTasksWidget() {
-  // const { isNewTaskFormVisible } = useTaskForm();
-  const { updateTaskList, tasks } = useTaskList();
+  const { tasks } = useTaskList();
 
-  const deleteTask = (taskId) => {
-    const newTaskList = tasks.filter((_, i) => i != taskId);
-    updateTaskList(newTaskList);
-  };
+  // const testTask = {
+  //   id: 0,
+  //   name: "Test Task",
+  //   completed: false,
+  //   startTime: "13:00",
+  //   endTime: "23:59",
+  //   note: "Abc",
+  // };
 
-  const testTask = {
-    id: 0,
-    name: "Test Task",
-    completed: false,
-    startTime: "13:00",
-    endTime: "23:59",
-    note: "Abc",
-  };
-
-  const testTwoTask = {
-    id: 1,
-    name: "Test Task 2",
-    completed: false,
-    startTime: "23:00",
-    endTime: "23:30",
-    note: "",
-  };
+  // const testTwoTask = {
+  //   id: 1,
+  //   name: "Test Task 2",
+  //   completed: false,
+  //   startTime: "23:00",
+  //   endTime: "23:30",
+  //   note: "",
+  // };
 
   return (
     <div style={styles.main}>
-      {/* <NewTaskForm isVisible={isNewTaskFormVisible} /> */}
       <div style={styles.header}>
         <p style={styles.title}>Tasks for Today</p>
         <a style={styles.link}>View All</a>
       </div>
       <div style={styles.container}>
-        <Task task={testTask} />
-        <Task task={testTwoTask} />
-        <Task task={testTwoTask} />
-        <Task task={testTwoTask} />
-        <Task task={testTwoTask} />
-        <Task task={testTwoTask} />
-        <Task task={testTwoTask} />
-        <Task task={testTwoTask} />
-        <Task task={testTwoTask} />
         {tasks.map((task, index) => (
           <Task
             key={index}
             task={task}
-            handleDelete={() => deleteTask(index)}
+            // handleDelete={() => deleteTask(index)}
           />
         ))}
       </div>

@@ -6,12 +6,22 @@ const TaskListContext = createContext();
 export const TaskListProvider = ({ children }) => {
   const [tasks, setTasks] = useState([]);
 
+  const addTask = (task) => {
+    setTasks((prevTasks) => [...prevTasks, task]);
+  };
+
   const updateTaskList = (newTaskList) => {
     setTasks(newTaskList);
   };
 
+  const getTasksLength = () => {
+    return tasks.length;
+  };
+
   return (
-    <TaskListContext.Provider value={{ tasks, updateTaskList }}>
+    <TaskListContext.Provider
+      value={{ tasks, addTask, updateTaskList, getTasksLength }}
+    >
       {children}
     </TaskListContext.Provider>
   );

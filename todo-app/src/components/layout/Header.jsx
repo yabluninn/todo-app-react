@@ -1,9 +1,10 @@
+/* eslint-disable react/prop-types */
 import { useState } from "react";
 import { headerService } from "../../services/HeaderService";
 import "../../styles/Header.css";
 import { currentDate } from "../../utils/current-date";
 
-export default function Header() {
+export default function Header({ onOpenCreateTaskModal }) {
   const [isContextMenuVisible, setIsContextMenuVisible] = useState(false);
   const currDate = currentDate.getFormattedCurrentDate();
   const { text: greetingsPart, emoji: greetingEmoji } =
@@ -42,7 +43,7 @@ export default function Header() {
           {isContextMenuVisible && (
             <div className="add-context-menu">
               <div className="add-context-menu-buttons">
-                <button>
+                <button onClick={onOpenCreateTaskModal}>
                   <i className="hgi-stroke hgi-task-add-01"></i>
                   Create a task
                 </button>
