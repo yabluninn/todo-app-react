@@ -61,11 +61,11 @@ export default function Header({ onOpenCreateTaskModal }) {
             </div>
           )}
           <button className="h-menu-button">
-            <i className="hgi-stroke hgi-sort-by-down-02"></i>
+            <i className="hgi-stroke hgi-settings-02"></i>
           </button>
-          <button className="h-menu-button">
+          {/* <button className="h-menu-button">
             <i className="hgi-stroke hgi-filter"></i>
-          </button>
+          </button> */}
         </div>
       </div>
     </>

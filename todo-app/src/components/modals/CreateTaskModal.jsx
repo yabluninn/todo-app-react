@@ -16,17 +16,25 @@ export default function CreateTaskModal({ onClose }) {
   const [taskEndTime, setTaskEndTime] = useState("");
 
   const handleAddTask = () => {
-    const id = getTasksLength();
-    const newTask = {
-      id: id,
-      name: taskName,
-      description: taskDescription,
-      date: taskDate,
-      startTime: taskStartTime,
-      endTime: taskEndTime,
-    };
-    addTask(newTask);
-    onClose();
+    if (
+      taskName.trim() != "" &&
+      taskDate.trim() != "" &&
+      taskStartTime.trim() != "" &&
+      taskEndTime.trim() != ""
+    ) {
+      const id = getTasksLength();
+      const newTask = {
+        id: id,
+        name: taskName,
+        description: taskDescription,
+        date: taskDate,
+        startTime: taskStartTime,
+        endTime: taskEndTime,
+        note: "",
+      };
+      addTask(newTask);
+      onClose();
+    }
   };
 
   return createPortal(

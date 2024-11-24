@@ -18,8 +18,8 @@
 }
 
 .textarea-container textarea {
-  padding: 0.5rem;
-  font-size: 1rem;
+  padding: 8px 12px;
+  font-size: 14px;
   border: 2px solid #ccc;
   border-radius: 4px;
   resize: vertical;
