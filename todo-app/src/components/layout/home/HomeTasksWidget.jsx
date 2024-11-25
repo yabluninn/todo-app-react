@@ -1,12 +1,19 @@
 /* eslint-disable react/prop-types */
 
-// import NewTaskForm from "../NewTaskForm";
 import Task from "./HomeTask";
-// import { useTaskForm } from "../../contexts/TaskFormContext";
 import { useTaskList } from "../../../contexts/TaskListContext";
+import { useState } from "react";
+import { taskActionsService } from "../../../services/TaskActionsService";
+import { SORTING_ACTIONS } from "../../../constants/sorting-actions";
 
 export default function HomeTasksWidget() {
-  const { tasks, removeTask, completeTask } = useTaskList();
+  const { tasks, removeTask, completeTask, updateTaskList } = useTaskList();
+
+  const [isSortContextMenuVisible, setSortContextMenuVisible] = useState(false);
+
+  const toggleSortContextMenuVisibility = () => {
+    setSortContextMenuVisible(!isSortContextMenuVisible);
+  };
 
   return (
     <div style={styles.main}>
@@ -16,7 +23,10 @@ export default function HomeTasksWidget() {
           <button style={styles.sortButton}>
             <i className="hgi-stroke hgi-filter" style={styles.sortIcon}></i>
           </button>
-          <button style={styles.sortButton}>
+          <button
+            style={styles.sortButton}
+            onClick={toggleSortContextMenuVisibility}
+          >
             <i
               className="hgi-stroke hgi-sort-by-up-01"
               style={styles.sortIcon}
@@ -25,6 +35,66 @@ export default function HomeTasksWidget() {
           <a style={styles.link}>View All</a>
         </div>
       </div>
+      {isSortContextMenuVisible && (
+        <div style={styles.sortContextMenu}>
+          <div style={styles.contextMenuButtons}>
+            <button
+              style={styles.contextMenuButton}
+              onClick={() => {
+                const sortedTasks = taskActionsService.sort(
+                  tasks,
+                  SORTING_ACTIONS.HIGH_PRIORITY_FIRST
+                );
+                updateTaskList(sortedTasks);
+              }}
+            >
+              <i
+                className="hgi-stroke hgi-flag-02"
+                style={styles.contextMenuButtonIcon}
+              ></i>
+              Sort by Priority
+            </button>
+            <button
+              style={styles.contextMenuButton}
+              onClick={() => {
+                const sortedTasks = taskActionsService.sort(
+                  tasks,
+                  SORTING_ACTIONS.COMPLETED_FIRST
+                );
+                updateTaskList(sortedTasks);
+              }}
+            >
+              <i
+                className="hgi-stroke hgi-checkmark-square-02"
+                style={styles.contextMenuButtonIcon}
+              ></i>
+              Sort by Completed
+            </button>
+            <button
+              style={styles.contextMenuButton}
+              onClick={() => {
+                const sortedTasks = taskActionsService.sort(
+                  tasks,
+                  SORTING_ACTIONS.UNCOMPLETED_FIRST
+                );
+                updateTaskList(sortedTasks);
+              }}
+            >
+              <i
+                className="hgi-stroke hgi-cancel-square"
+                style={styles.contextMenuButtonIcon}
+              ></i>
+              Sort by Uncompleted
+            </button>
+          </div>
+          <button
+            style={styles.contextMenuDismissButton}
+            onClick={toggleSortContextMenuVisibility}
+          >
+            Dismiss
+          </button>
+        </div>
+      )}
       <div style={styles.container}>
         {tasks.map((task) => (
           <Task
@@ -112,5 +182,50 @@ const styles = {
     borderTop: "1px solid #ccc",
     justifyContent: "space-around",
     paddingTop: "8px",
+  },
+  sortContextMenu: {
+    position: "absolute",
+    top: "160px",
+    left: "460px",
+    backgroundColor: "white",
+    boxShadow: "0 4px 10px rgba(0, 0, 0, 0.1)",
+    zIndex: "1000",
+    display: "flex",
+    flexDirection: "column",
+    borderRadius: "8px",
+    padding: "10px",
+  },
+  contextMenuButtons: {
+    width: "100%",
+    display: "flex",
+    justifyContent: "start",
+    alignItems: "center",
+    flexDirection: "column",
+    borderBottom: "1px solid #c8c8c8",
+    paddingBottom: "8px",
+  },
+  contextMenuButton: {
+    width: "190px",
+    height: "35px",
+    paddingLeft: "8px",
+    color: "#333",
+    cursor: "pointer",
+    fontSize: "16px",
+    display: "flex",
+    justifyContent: "start",
+    alignItems: "center",
+    borderRadius: "8px",
+  },
+  contextMenuButtonIcon: {
+    marginRight: "12px",
+  },
+  contextMenuDismissButton: {
+    color: "#6b6b6b !important",
+    backgroundColor: "#efefef",
+    marginTop: "8px",
+    padding: "4px",
+    fontSize: "14px",
+    justifyContent: "center !important",
+    borderRadius: "8px",
   },
 };

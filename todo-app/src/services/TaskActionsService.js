@@ -33,6 +33,13 @@ class TaskActionsService {
         if (a.completed === b.completed) return 0;
         return a.completed ? 1 : -1;
       });
+    } else if (condition === SORTING_ACTIONS.HIGH_PRIORITY_FIRST) {
+      const priorityOrder = ["High", "Medium", "Low", "None"];
+      return tasks.slice().sort((a, b) => {
+        const priorityA = priorityOrder.indexOf(a.priority || "None");
+        const priorityB = priorityOrder.indexOf(b.priority || "None");
+        return priorityA - priorityB;
+      });
     }
   }
 

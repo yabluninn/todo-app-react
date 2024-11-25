@@ -23,7 +23,7 @@ export const TaskListProvider = ({ children }) => {
   };
 
   const updateTaskList = (newTaskList) => {
-    setTasks(newTaskList);
+    setTasks([...newTaskList]);
   };
 
   const getTasksLength = () => {
