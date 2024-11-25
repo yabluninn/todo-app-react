@@ -140,7 +140,9 @@
 }
 
 .add-context-menu button {
-  padding: 10px 15px;
+  width: 160px;
+  height: 35px;
+  padding-left: 8px;
   color: #333;
   cursor: pointer;
   font-size: 16px;
@@ -151,7 +153,7 @@
 }
 
 .add-context-menu button i {
-  margin-right: 8px;
+  margin-right: 12px;
 }
 
 .add-context-menu button:hover {

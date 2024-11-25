@@ -12,7 +12,18 @@ export default function HomeTasksWidget() {
     <div style={styles.main}>
       <div style={styles.header}>
         <p style={styles.title}>Tasks for Today</p>
-        <a style={styles.link}>View All</a>
+        <div style={styles.headerBlock}>
+          <button style={styles.sortButton}>
+            <i className="hgi-stroke hgi-filter" style={styles.sortIcon}></i>
+          </button>
+          <button style={styles.sortButton}>
+            <i
+              className="hgi-stroke hgi-sort-by-up-01"
+              style={styles.sortIcon}
+            ></i>
+          </button>
+          <a style={styles.link}>View All</a>
+        </div>
       </div>
       <div style={styles.container}>
         {tasks.map((task) => (
@@ -64,8 +75,24 @@ const styles = {
     alignItems: "center",
     flexDirection: "row",
     marginBottom: "8px",
-    paddingBottom: "8px",
+    paddingBottom: "4px",
     borderBottom: "1px solid #ccc",
+  },
+  headerBlock: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    flexDirection: "row",
+  },
+  sortButton: {
+    width: "30px",
+    height: "30px",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  sortIcon: {
+    fontSize: "20px",
   },
   title: {
     fontSize: "16px",
@@ -77,6 +104,7 @@ const styles = {
     textDecoration: "underline",
     cursor: "pointer",
     color: "#ab99dd",
+    marginLeft: "8px",
   },
   hintBlock: {
     width: "100%",
