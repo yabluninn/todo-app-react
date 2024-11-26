@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import { useState, useEffect } from "react";
-import "../../styles/VerticalTimeline.css";
+import "../../../styles/VerticalTimeline.css";
 
 const VerticalTimeline = ({ tasks }) => {
   const [currentTimePosition, setCurrentTimePosition] = useState(0);

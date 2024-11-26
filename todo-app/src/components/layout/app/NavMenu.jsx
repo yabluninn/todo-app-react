@@ -1,8 +1,8 @@
-import "../../styles/NavMenu.css";
-import NavButton from "../ui/NavButton";
+import "../../../styles/NavMenu.css";
+import NavButton from "../../ui/NavButton";
 import NavUser from "./NavUser";
-import ava from "../../assets/avatar.png";
-import { ACCOUNT_TYPES } from "../../constants/account-types";
+import ava from "../../../assets/avatar.png";
+import { ACCOUNT_TYPES } from "../../../constants/account-types";
 
 export default function NavMenu() {
   const accType = ACCOUNT_TYPES.FREE;

@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { useTaskList } from "../../contexts/TaskListContext";
 
-import Header from "../layout/Header";
+import HomeHeader from "../layout/home/HomeHeader";
 import HomeTasksWidget from "../layout/home/HomeTasksWidget";
 import "../../styles/Home.css";
-import VerticalTimeline from "../layout/VerticalTimeline";
+import VerticalTimeline from "../layout/app/VerticalTimeline";
 import HomeNoteWidget from "../layout/home/HomeNoteWidget";
 import HomeAddWidget from "../layout/home/HomeAddWidget";
 import CreateTaskModal from "../modals/CreateTaskModal";
@@ -32,7 +32,7 @@ export default function Home() {
 
   return (
     <div className="page-container">
-      <Header
+      <HomeHeader
         onOpenCreateTaskModal={openCreateTaskModal}
         onOpenCreateNoteModal={openCreateNoteModal}
       />

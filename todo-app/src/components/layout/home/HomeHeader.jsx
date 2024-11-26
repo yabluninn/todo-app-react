@@ -1,10 +1,10 @@
 /* eslint-disable react/prop-types */
 import { useState } from "react";
-import { headerService } from "../../services/HeaderService";
-import "../../styles/Header.css";
-import { currentDate } from "../../utils/current-date";
+import { headerService } from "../../../services/HeaderService";
+import "../../../styles/Header.css";
+import { currentDate } from "../../../utils/current-date";
 
-export default function Header({
+export default function HomeHeader({
   onOpenCreateTaskModal,
   onOpenCreateNoteModal,
 }) {
