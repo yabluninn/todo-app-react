@@ -1,11 +1,20 @@
 /* eslint-disable react/prop-types */
-
 export default function NavUser({ user }) {
+  const formatContent = (content) => {
+    if (content.length >= 11) {
+      return content.slice(0, 11) + "...";
+    } else {
+      return content;
+    }
+  };
+
+  const formattedUsername = formatContent(user.username);
+
   return (
     <div style={styles.main}>
       <img src={user.avatar} style={styles.image}></img>
       <div style={styles.info}>
-        <p style={styles.username}>{user.username}</p>
+        <p style={styles.username}>{formattedUsername}</p>
         <p style={styles.account}>{user.accountType} Account</p>
       </div>
     </div>
@@ -23,7 +32,7 @@ const styles = {
     border: "1px solid #ddd",
     borderRadius: "8px",
     padding: "6px",
-    marginTop: "38%",
+    marginTop: "44px",
   },
   image: {
     width: "50px",
@@ -36,10 +45,10 @@ const styles = {
     marginLeft: "12px",
   },
   username: {
-    fontSize: "16px",
+    fontSize: "14px",
   },
   account: {
-    fontSize: "14px",
+    fontSize: "12px",
     color: "#aaa",
   },
 };

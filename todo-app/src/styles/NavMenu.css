@@ -1,5 +1,5 @@
 .nav-menu-container {
-  width: 17%;
+  width: 14%;
   height: 100%;
   background-color: white;
   box-shadow: rgba(99, 99, 99, 0.05) 0px 2px 12px 0px;
@@ -12,8 +12,9 @@
 }
 
 .nm-buttons-container {
-  margin-top: 24px;
+  min-height: 80%;
   color: #f1f1f1;
+  overflow-y: auto;
 }
 
 .nm-buttons-group {

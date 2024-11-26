@@ -10,7 +10,6 @@ function App() {
       <TaskListProvider>
         <NoteListProvider>
           <div className="app">
-            {/* <SideMenu /> */}
             <NavMenu />
             <Home />
           </div>

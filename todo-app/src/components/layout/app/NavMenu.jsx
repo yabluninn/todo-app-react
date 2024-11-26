@@ -24,10 +24,7 @@ export default function NavMenu() {
           <NavButton icon={"hgi-stroke hgi-sticky-note-02"} label={"Notes"} />
           <NavButton icon={"hgi-stroke hgi-brain-02"} label={"Habits"} />
           <NavButton icon={"hgi-stroke hgi-check-list"} label={"Lists"} />
-          <NavButton
-            icon={"hgi-stroke hgi-dashboard-square-01"}
-            label={"Categories"}
-          />
+          <NavButton icon={"hgi-stroke hgi-package"} label={"Categories"} />
         </div>
         <div className="nm-buttons-group">
           <NavButton icon={"hgi-stroke hgi-analytics-01"} label={"Analytics"} />
@@ -37,8 +34,8 @@ export default function NavMenu() {
           />
           <NavButton icon={"hgi-stroke hgi-settings-02"} label={"Settings"} />
         </div>
-        <NavUser user={user} />
       </div>
+      <NavUser user={user} />
     </div>
   );
 }

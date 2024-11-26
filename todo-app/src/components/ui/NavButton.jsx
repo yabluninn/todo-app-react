@@ -24,12 +24,12 @@ export default function NavButton({ icon, label }) {
 const styles = {
   button: {
     width: "100%",
-    height: "45px",
+    height: "40px",
     display: "flex",
     justifyContent: "start",
     alignItems: "center",
     flexDirection: "row",
-    fontSize: "18px",
+    fontSize: "16px",
     color: "#444",
     borderRadius: "8px",
     paddingLeft: "12px",
