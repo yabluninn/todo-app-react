@@ -21,9 +21,13 @@ export default function NavMenu() {
         </div>
         <div className="nm-buttons-group">
           <NavButton icon={"hgi-stroke hgi-task-01"} label={"Tasks"} />
-          <NavButton icon={"hgi-stroke hgi-check-list"} label={"Lists"} />
           <NavButton icon={"hgi-stroke hgi-sticky-note-02"} label={"Notes"} />
           <NavButton icon={"hgi-stroke hgi-brain-02"} label={"Habits"} />
+          <NavButton icon={"hgi-stroke hgi-check-list"} label={"Lists"} />
+          <NavButton
+            icon={"hgi-stroke hgi-dashboard-square-01"}
+            label={"Categories"}
+          />
         </div>
         <div className="nm-buttons-group">
           <NavButton icon={"hgi-stroke hgi-analytics-01"} label={"Analytics"} />

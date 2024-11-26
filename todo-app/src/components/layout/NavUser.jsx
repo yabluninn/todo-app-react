@@ -23,7 +23,7 @@ const styles = {
     border: "1px solid #ddd",
     borderRadius: "8px",
     padding: "6px",
-    marginTop: "60%",
+    marginTop: "38%",
   },
   image: {
     width: "50px",
