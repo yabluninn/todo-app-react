@@ -140,6 +140,7 @@ const styles = {
   },
   header: {
     width: "100%",
+    height: "35px",
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
@@ -160,6 +161,9 @@ const styles = {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
+    border: "1px solid #ccc",
+    borderRadius: "8px",
+    marginRight: "4px",
   },
   sortIcon: {
     fontSize: "20px",
@@ -169,12 +173,18 @@ const styles = {
     fontWeight: "bold",
   },
   link: {
+    height: "30px",
     fontSize: "16px",
-    fontWeight: "bold",
-    textDecoration: "underline",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
     cursor: "pointer",
     color: "#ab99dd",
     marginLeft: "8px",
+    border: "1px solid",
+    borderRadius: "8px",
+    paddingLeft: "8px",
+    paddingRight: "8px",
   },
   hintBlock: {
     width: "100%",

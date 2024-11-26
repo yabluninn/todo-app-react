@@ -1,27 +1,21 @@
 /* eslint-disable react/prop-types */
 
+import { useNoteList } from "../../../contexts/NoteListContext";
 import HomeNote from "./HomeNote";
 
 export default function HomeNoteWidget() {
-  const noteOne = {
-    name: "Test Note",
-    content:
-      "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Maxime explicabo officiis a atque laudantium consequatur nesciunt corporis vitae consectetur. Quaerat soluta rem odio laborum consequatur ea?",
-  };
+  const { notes } = useNoteList();
 
   return (
     <div style={styles.main}>
-      {/* <NewTaskForm isVisible={isNewTaskFormVisible} /> */}
       <div style={styles.header}>
         <p style={styles.title}>Today&apos;s Notes</p>
         <a style={styles.link}>View All</a>
       </div>
       <div style={styles.container}>
-        <HomeNote note={noteOne} />
-        <HomeNote note={noteOne} />
-        <HomeNote note={noteOne} />
-        <HomeNote note={noteOne} />
-        <HomeNote note={noteOne} />
+        {notes.map((note) => (
+          <HomeNote key={note.id} note={note} />
+        ))}
       </div>
     </div>
   );
@@ -50,6 +44,7 @@ const styles = {
   },
   header: {
     width: "100%",
+    height: "35px",
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
@@ -63,11 +58,18 @@ const styles = {
     fontWeight: "bold",
   },
   link: {
+    height: "30px",
     fontSize: "16px",
-    fontWeight: "bold",
-    textDecoration: "underline",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
     cursor: "pointer",
     color: "#ab99dd",
+    marginLeft: "8px",
+    border: "1px solid",
+    borderRadius: "8px",
+    paddingLeft: "8px",
+    paddingRight: "8px",
   },
   hintBlock: {
     width: "100%",

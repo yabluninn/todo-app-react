@@ -42,7 +42,7 @@ export default function HomeNote({ note }) {
 const styles = {
   main: {
     width: "100%",
-    height: "140px",
+    maxHeight: "140px",
     border: "1px solid #ccc",
     borderRadius: "8px",
     padding: "8px",

@@ -4,7 +4,10 @@ import { headerService } from "../../services/HeaderService";
 import "../../styles/Header.css";
 import { currentDate } from "../../utils/current-date";
 
-export default function Header({ onOpenCreateTaskModal }) {
+export default function Header({
+  onOpenCreateTaskModal,
+  onOpenCreateNoteModal,
+}) {
   const [isContextMenuVisible, setIsContextMenuVisible] = useState(false);
   const currDate = currentDate.getFormattedCurrentDate();
   const { text: greetingsPart, emoji: greetingEmoji } =
@@ -47,7 +50,7 @@ export default function Header({ onOpenCreateTaskModal }) {
                   <i className="hgi-stroke hgi-task-add-01"></i>
                   Create a task
                 </button>
-                <button>
+                <button onClick={onOpenCreateNoteModal}>
                   <i className="hgi-stroke hgi-sticky-note-01"></i>
                   Create a note
                 </button>
