@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 
-import Task from "./HomeTask";
+import HomeTask from "./HomeTask";
 import { useTaskList } from "../../../contexts/TaskListContext";
 import { useState } from "react";
 import { taskActionsService } from "../../../services/TaskActionsService";
@@ -97,7 +97,7 @@ export default function HomeTasksWidget() {
       )}
       <div style={styles.container}>
         {tasks.map((task) => (
-          <Task
+          <HomeTask
             key={task.id}
             task={task}
             handleComplete={() => completeTask(task.id, !task.completed)}

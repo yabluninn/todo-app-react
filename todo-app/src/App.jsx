@@ -1,8 +1,9 @@
 import "./styles/App.css";
 import NavMenu from "./components/layout/app/NavMenu";
-import Home from "./components/pages/Home";
+// import Home from "./components/pages/Home";
 import { TaskListProvider } from "./contexts/TaskListContext";
 import { NoteListProvider } from "./contexts/NoteListContext";
+import Tasks from "./components/pages/Tasks";
 
 function App() {
   return (
@@ -11,7 +12,7 @@ function App() {
         <NoteListProvider>
           <div className="app">
             <NavMenu />
-            <Home />
+            <Tasks />
           </div>
         </NoteListProvider>
       </TaskListProvider>

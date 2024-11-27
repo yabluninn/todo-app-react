@@ -1,9 +1,9 @@
 /* eslint-disable react/prop-types */
 import { taskService } from "../../../services/TaskService";
-import "../../../styles/HomeTask.css";
+import "../../../styles/Task.css";
 import { useState, useEffect } from "react";
 
-export default function HomeTask({ task, handleDelete, handleComplete }) {
+export default function Task({ task, handleDelete, handleComplete }) {
   const [isCurrentTimeInRange, setIsCurrentTimeInRange] = useState(false);
   const [isOverdue, setOverdue] = useState(false);
 
@@ -45,8 +45,8 @@ export default function HomeTask({ task, handleDelete, handleComplete }) {
           : isCurrentTimeInRange
           ? "8px"
           : "0px",
-        height: isCurrentTimeInRange ? "60px" : "",
-        minHeight: isCurrentTimeInRange ? "60px" : "",
+        height: "45px",
+        minHeight: "45px",
       }}
     >
       <div className="checkbox-wrapper-19">
@@ -158,7 +158,7 @@ const styles = {
     justifyContent: "center",
     alignItems: "center",
     flexDirection: "row",
-    background: "rgb(248, 248, 248)",
+    background: "#eee",
     borderRadius: "8px",
     marginRight: "8px",
     marginLeft: "8px",
