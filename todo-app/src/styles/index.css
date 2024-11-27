@@ -40,6 +40,7 @@ button {
 .flat-button:disabled {
   background-color: #e9e4ff;
   color: #9470ff;
+  color: #b39cf9c4;
 }
 
 .disabled-button {

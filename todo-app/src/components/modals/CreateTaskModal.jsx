@@ -5,6 +5,7 @@ import { useState } from "react";
 import InputWithLabel from "../ui/InputWithLabel";
 import TextAreaWithLabel from "../ui/TextAreaWithLabel";
 import TaskPriorityDropdown from "../ui/TaskPriorityDropdown";
+import { dateExtensions } from "../../utils/date-extensions";
 
 export default function CreateTaskModal({ onClose }) {
   const root = document.getElementById("root");
@@ -30,11 +31,14 @@ export default function CreateTaskModal({ onClose }) {
       taskEndTime.trim() != ""
     ) {
       const id = getTasksLength();
+
+      const formattedDate = dateExtensions.formatDate(taskDate);
+
       const newTask = {
         id: id,
         name: taskName,
         description: taskDescription,
-        date: taskDate,
+        date: formattedDate,
         startTime: taskStartTime,
         endTime: taskEndTime,
         note: "",

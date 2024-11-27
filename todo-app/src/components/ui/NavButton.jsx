@@ -29,7 +29,7 @@ export default function NavButton({ icon, label, path }) {
 const styles = {
   button: {
     width: "100%",
-    height: "40px",
+    height: "35px",
     display: "flex",
     justifyContent: "start",
     alignItems: "center",

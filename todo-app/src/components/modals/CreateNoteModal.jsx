@@ -5,7 +5,7 @@ import InputWithLabel from "../ui/InputWithLabel";
 import TextAreaWithLabel from "../ui/TextAreaWithLabel";
 import { useNoteList } from "../../contexts/NoteListContext";
 
-export default function CreateTaskModal({ onClose }) {
+export default function CreateNoteModal({ onClose }) {
   const root = document.getElementById("root");
 
   const { addNote, getNotesLength } = useNoteList();
