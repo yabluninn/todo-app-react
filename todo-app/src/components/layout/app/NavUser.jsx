@@ -1,8 +1,8 @@
 /* eslint-disable react/prop-types */
 export default function NavUser({ user }) {
   const formatContent = (content) => {
-    if (content.length >= 11) {
-      return content.slice(0, 11) + "...";
+    if (content.length >= 15) {
+      return content.slice(0, 15) + "...";
     } else {
       return content;
     }

@@ -1,50 +1,13 @@
 /* eslint-disable react/prop-types */
-import { taskService } from "../../../services/TaskService";
 import "../../../styles/Task.css";
-import { useState, useEffect } from "react";
 
 export default function Task({ task, handleDelete, handleComplete }) {
-  const [isCurrentTimeInRange, setIsCurrentTimeInRange] = useState(false);
-  const [isOverdue, setOverdue] = useState(false);
-
-  const checkTimeInRange = () => {
-    setIsCurrentTimeInRange(taskService.checkCurrentTimeInRange(task));
-  };
-
-  const checkOverdue = () => {
-    setOverdue(taskService.checkOverdue(task));
-  };
-
-  useEffect(() => {
-    checkTimeInRange();
-    const interval = setInterval(checkTimeInRange, 60000);
-    return () => clearInterval(interval);
-  }, [task.startTime, task.endTime]);
-
-  useEffect(() => {
-    checkOverdue();
-    const interval = setInterval(checkOverdue, 600000);
-    return () => clearInterval(interval);
-  }, [task.endTime]);
-
   return (
     <div
       className={task.completed ? "completed-task" : "container"}
       style={{
-        border: task.completed
-          ? "1px solid #ccc"
-          : isOverdue
-          ? "1px solid rgb(223, 58, 58)"
-          : isCurrentTimeInRange
-          ? "1px solid #7437ff"
-          : "1px solid transparent",
-        borderRadius: task.completed
-          ? "8px"
-          : isOverdue
-          ? "8px"
-          : isCurrentTimeInRange
-          ? "8px"
-          : "0px",
+        border: "1px solid transparent",
+        borderRadius: "0px",
         height: "45px",
         minHeight: "45px",
       }}
@@ -55,23 +18,7 @@ export default function Task({ task, handleDelete, handleComplete }) {
           id={`cbtest-${task.id}`}
           onChange={handleComplete}
         />
-        <label
-          htmlFor={`cbtest-${task.id}`}
-          className="check-box"
-          style={{
-            border: !task.completed
-              ? task.priority === "None"
-                ? "2px solid #ccc"
-                : task.priority === "Low"
-                ? "2px solid blue"
-                : task.priority === "Medium"
-                ? "2px solid orange"
-                : task.priority === "High"
-                ? "2px solid red"
-                : "2px solid #ccc"
-              : "",
-          }}
-        ></label>
+        <label htmlFor={`cbtest-${task.id}`} className="check-box"></label>
       </div>
 
       <div style={styles.taskBlock}>
@@ -80,12 +27,29 @@ export default function Task({ task, handleDelete, handleComplete }) {
             style={{
               ...styles.taskName,
               textDecoration: task.completed ? "line-through" : "none",
-              fontWeight: isCurrentTimeInRange ? "bold" : "normal",
+              fontWeight: "normal",
             }}
           >
             {task.name + " [" + task.id + "]"}
           </p>
           <div style={styles.taskSubBlock}>
+            <div style={styles.priorityBlock}>
+              <i
+                className="fa-solid fa-flag"
+                style={{
+                  color:
+                    task.priority === "None"
+                      ? "#ccc"
+                      : task.priority === "Low"
+                      ? "blue"
+                      : task.priority === "Medium"
+                      ? "orange"
+                      : task.priority === "High"
+                      ? "red"
+                      : "#ccc",
+                }}
+              ></i>
+            </div>
             <div
               className={
                 task.note == "" ? "invisible-block" : "visible-task-info-block"
@@ -101,6 +65,13 @@ export default function Task({ task, handleDelete, handleComplete }) {
               <p style={styles.dateLabel}>
                 {task.startTime + "  -  " + task.endTime}
               </p>
+            </div>
+            <div style={styles.dateBlock}>
+              <i
+                className="hgi-stroke hgi-calendar-03"
+                style={styles.dateIcon}
+              ></i>
+              <p style={styles.dateLabel}>{task.date}</p>
             </div>
             <button onClick={handleDelete} style={styles.deleteButton}>
               <i
@@ -159,7 +130,7 @@ const styles = {
     justifyContent: "center",
     alignItems: "center",
     flexDirection: "row",
-    background: "#eee",
+    background: "#f5f5f5",
     borderRadius: "8px",
     marginRight: "8px",
     marginLeft: "8px",
@@ -176,6 +147,15 @@ const styles = {
   deleteButton: {
     width: "30px",
     height: "30px",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  priorityBlock: {
+    width: "30px",
+    height: "30px",
+    borderRadius: "8px",
+    border: "1px solid #ddd",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",

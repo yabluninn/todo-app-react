@@ -10,13 +10,6 @@ export default function TasksListContainer({ list }) {
     setTasksVisibility(!isTasksVisible);
   };
 
-  const testTask = {
-    id: 0,
-    name: "Test Task",
-    completed: false,
-    startTime: "15:00",
-    endTime: "23:00",
-  };
   return (
     <div style={styles.main}>
       <div
@@ -50,19 +43,17 @@ export default function TasksListContainer({ list }) {
           }}
         ></div>
         <p style={styles.listName}>{list.name}</p>
-        <div style={styles.tasksCount}>{list.tasks}</div>
+        <div style={styles.tasksCount}>{list.tasks.length}</div>
       </div>
       <div style={{ ...styles.tasks, display: isTasksVisible ? "" : "none" }}>
-        <Task
-          task={testTask}
-          handleComplete={() => console.log("Task completed!")}
-          handleDelete={() => console.log("Task deleted!")}
-        />
-        <Task
-          task={testTask}
-          handleComplete={() => console.log("Task completed!")}
-          handleDelete={() => console.log("Task deleted!")}
-        />
+        {list.tasks.map((task) => (
+          <Task
+            key={task.id}
+            task={task}
+            handleComplete={() => console.log("Task completed!")}
+            handleDelete={() => console.log("Task deleted!")}
+          />
+        ))}
       </div>
     </div>
   );

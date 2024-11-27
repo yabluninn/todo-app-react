@@ -2,14 +2,14 @@
 import { useState } from "react";
 import { headerService } from "../../../services/HeaderService";
 import "../../../styles/Header.css";
-import { currentDate } from "../../../utils/current-date";
+import { dateExtensions } from "../../../utils/date-extensions";
 
 export default function HomeHeader({
   onOpenCreateTaskModal,
   onOpenCreateNoteModal,
 }) {
   const [isContextMenuVisible, setIsContextMenuVisible] = useState(false);
-  const currDate = currentDate.getFormattedCurrentDate();
+  const currDate = dateExtensions.getFormattedCurrentDate();
   const { text: greetingsPart, emoji: greetingEmoji } =
     headerService.getGreeting();
 
