@@ -1,4 +1,4 @@
-.page-container {
+.tasks-container {
   width: 86%;
   height: 100%;
   padding: 30px 144px 24px 144px;
@@ -8,7 +8,7 @@
   flex-direction: column;
 }
 
-.page-header {
+.tasks-header {
   width: 100%;
   display: flex;
   justify-content: space-between;

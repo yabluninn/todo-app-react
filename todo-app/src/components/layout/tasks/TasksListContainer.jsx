@@ -1,22 +1,48 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
+import { useState } from "react";
 import Task from "./Task";
 
 export default function TasksListContainer({ list }) {
+  const [isTasksVisible, setTasksVisibility] = useState(false);
+
+  const toggleTasksVisibility = () => {
+    setTasksVisibility(!isTasksVisible);
+  };
+
   const testTask = {
     id: 0,
     name: "Test Task",
     completed: false,
-    startTime: "09:00",
+    startTime: "15:00",
     endTime: "23:00",
   };
   return (
     <div style={styles.main}>
-      <div style={styles.header}>
-        <i
-          className="hgi-stroke hgi-arrow-down-01"
-          style={styles.headerIcon}
-        ></i>
+      <div
+        style={{
+          ...styles.header,
+          borderBottom: isTasksVisible ? "1px solid #ccc" : "0",
+          paddingBottom: isTasksVisible ? "8px" : "",
+        }}
+      >
+        <button
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+          onClick={toggleTasksVisibility}
+        >
+          <i
+            className={
+              isTasksVisible
+                ? "hgi-stroke hgi-arrow-up-01"
+                : "hgi-stroke hgi-arrow-down-01"
+            }
+            style={styles.headerIcon}
+          ></i>
+        </button>
         <div
           style={{
             ...styles.icon,
@@ -26,7 +52,7 @@ export default function TasksListContainer({ list }) {
         <p style={styles.listName}>{list.name}</p>
         <div style={styles.tasksCount}>{list.tasks}</div>
       </div>
-      <div style={styles.tasks}>
+      <div style={{ ...styles.tasks, display: isTasksVisible ? "" : "none" }}>
         <Task
           task={testTask}
           handleComplete={() => console.log("Task completed!")}
@@ -46,6 +72,10 @@ const styles = {
   main: {
     width: "100%",
     marginTop: "14px",
+    backgroundColor: "white",
+    padding: "12px",
+    borderRadius: "8px",
+    boxShadow: "rgba(99, 99, 99, 0.05) 0px 2px 12px 0px",
   },
   header: {
     width: "100%",
@@ -53,6 +83,8 @@ const styles = {
     justifyContent: "start",
     alignItems: "center",
     flexDirection: "row",
+    borderBottom: "1px solid #ccc",
+    paddingBottom: "8px",
   },
   headerIcon: {
     fontSize: "20px",

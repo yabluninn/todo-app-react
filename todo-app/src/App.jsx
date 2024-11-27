@@ -1,22 +1,31 @@
 import "./styles/App.css";
+
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
 import NavMenu from "./components/layout/app/NavMenu";
-// import Home from "./components/pages/Home";
 import { TaskListProvider } from "./contexts/TaskListContext";
 import { NoteListProvider } from "./contexts/NoteListContext";
+
 import Tasks from "./components/pages/Tasks";
+import Home from "./components/pages/Home";
 
 function App() {
+  const DEFAULT_APP_URL = "/app";
+
   return (
-    <>
+    <Router>
       <TaskListProvider>
         <NoteListProvider>
           <div className="app">
             <NavMenu />
-            <Tasks />
+            <Routes>
+              <Route path={DEFAULT_APP_URL + "/"} element={<Home />} />
+              <Route path={DEFAULT_APP_URL + "/tasks"} element={<Tasks />} />
+            </Routes>
           </div>
         </NoteListProvider>
       </TaskListProvider>
-    </>
+    </Router>
   );
 }
 

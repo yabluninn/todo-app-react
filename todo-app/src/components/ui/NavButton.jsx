@@ -1,23 +1,28 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 /* eslint-disable react/prop-types */
 
-export default function NavButton({ icon, label }) {
+export default function NavButton({ icon, label, path }) {
   const [isHovered, setIsHovered] = useState(false);
 
+  const DEFAULT_APP_URL = "/app";
+
   return (
-    <button
+    <Link
+      to={DEFAULT_APP_URL + path}
       style={{
         ...styles.button,
-        backgroundColor: isHovered ? "#f7f7f7" : "transparent", // Стиль наведения
+        backgroundColor: isHovered ? "#f7f7f7" : "transparent",
         color: isHovered ? "#222" : "#444",
+        textDecoration: "none",
       }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
       <i className={icon} style={styles.icon}></i>
       {label}
-    </button>
+    </Link>
   );
 }
 

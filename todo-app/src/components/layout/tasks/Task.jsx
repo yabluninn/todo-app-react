@@ -153,6 +153,7 @@ const styles = {
   },
   dateBlock: {
     width: "130px",
+    height: "30px",
     padding: "4px",
     display: "flex",
     justifyContent: "center",

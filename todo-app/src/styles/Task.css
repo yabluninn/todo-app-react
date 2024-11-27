@@ -7,13 +7,14 @@
   padding-left: 8px;
   padding-right: 8px;
   border-bottom: 1px solid #ccc;
+  background-color: transparent !important;
   position: relative;
 }
 
 .completed-task {
   width: 100%;
   border-radius: 8px;
-  background-color: rgb(207, 207, 207);
+  background-color: transparent !important;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -28,7 +29,7 @@
   justify-content: center;
   align-items: center;
   flex-direction: row;
-  background-color: #eee;
+  background-color: #eee !important;
   border-radius: 8px;
 }
 

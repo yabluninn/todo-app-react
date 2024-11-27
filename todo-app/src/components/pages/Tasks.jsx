@@ -4,33 +4,22 @@ import TasksListContainer from "../layout/tasks/TasksListContainer";
 import CreateTaskButton from "../ui/CreateTaskButton";
 
 export default function Tasks() {
-  // const defaultLists = [
-  //   { name: "All", color: "rgb(160, 160, 160)", tasks: "14" },
-  //   { name: "Today", color: "rgb(130, 130, 255)", tasks: "5" },
-  // ];
-  const allList = {
-    name: "All",
-    color: "rgb(160, 160, 160)",
-    tasks: "14",
-  };
-
-  const todayList = {
-    name: "Today",
-    color: "rgb(160, 160, 160)",
-    tasks: "6",
-  };
+  const defaultLists = [
+    { name: "All", color: "rgb(160, 160, 160)", tasks: "14" },
+    { name: "Today", color: "rgb(130, 130, 255)", tasks: "5" },
+  ];
 
   return (
-    <div className="page-container">
-      <div className="page-header">
+    <div className="tasks-container">
+      <div className="tasks-header">
         <p className="t-header-title">Tasks</p>
         <button className="t-menu-button">
           <i className="hgi-stroke hgi-settings-02"></i>
         </button>
       </div>
       <CreateTaskButton />
-      <TasksListContainer list={allList} />
-      <TasksListContainer list={todayList} />
+      <TasksListContainer list={defaultLists[0]} />
+      <TasksListContainer list={defaultLists[1]} />
     </div>
   );
 }
