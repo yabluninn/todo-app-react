@@ -3,7 +3,7 @@ import { taskService } from "../../../services/TaskService";
 import "../../../styles/HomeTask.css";
 import { useState, useEffect } from "react";
 
-export default function HomeTask({ task, handleDelete, handleComplete }) {
+export default function HomeTask({ task, handleComplete }) {
   const [isCurrentTimeInRange, setIsCurrentTimeInRange] = useState(false);
   const [isOverdue, setOverdue] = useState(false);
 
@@ -83,7 +83,7 @@ export default function HomeTask({ task, handleDelete, handleComplete }) {
               fontWeight: isCurrentTimeInRange ? "bold" : "normal",
             }}
           >
-            {task.name + " [" + task.id + "]"}
+            {task.name}
           </p>
           <div style={styles.taskSubBlock}>
             <div
@@ -102,18 +102,6 @@ export default function HomeTask({ task, handleDelete, handleComplete }) {
                 {task.startTime + "  -  " + task.endTime}
               </p>
             </div>
-            <button onClick={handleDelete} style={styles.deleteButton}>
-              <i
-                className="hgi-stroke hgi-pencil-edit-01"
-                style={styles.deleteIcon}
-              ></i>
-            </button>
-            <button onClick={handleDelete} style={styles.deleteButton}>
-              <i
-                className="hgi-stroke hgi-delete-02"
-                style={styles.deleteIcon}
-              ></i>
-            </button>
           </div>
         </div>
       </div>
@@ -132,10 +120,6 @@ const styles = {
   },
   taskName: {
     fontSize: "16px",
-    color: "#333",
-  },
-  deleteIcon: {
-    fontSize: "20px",
     color: "#333",
   },
   taskMainBlock: {
@@ -171,12 +155,5 @@ const styles = {
   },
   dateLabel: {
     color: "grey",
-  },
-  deleteButton: {
-    width: "30px",
-    height: "30px",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
   },
 };

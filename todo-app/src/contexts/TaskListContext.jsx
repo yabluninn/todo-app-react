@@ -22,6 +22,12 @@ export const TaskListProvider = ({ children }) => {
     updateTaskList(updatedTasks);
   };
 
+  const updateTask = (newTask) => {
+    setTasks((prevTasks) =>
+      prevTasks.map((task) => (task.id === newTask.id ? newTask : task))
+    );
+  };
+
   const updateTaskList = (newTaskList) => {
     setTasks([...newTaskList]);
   };
@@ -39,6 +45,7 @@ export const TaskListProvider = ({ children }) => {
         getTasksLength,
         removeTask,
         completeTask,
+        updateTask,
       }}
     >
       {children}

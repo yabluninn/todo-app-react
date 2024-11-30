@@ -7,7 +7,7 @@ import { taskActionsService } from "../../../services/TaskActionsService";
 import { SORTING_ACTIONS } from "../../../constants/sorting-actions";
 
 export default function HomeTasksWidget() {
-  const { tasks, removeTask, completeTask, updateTaskList } = useTaskList();
+  const { tasks, completeTask, updateTaskList } = useTaskList();
 
   const [isSortContextMenuVisible, setSortContextMenuVisible] = useState(false);
 
@@ -101,7 +101,7 @@ export default function HomeTasksWidget() {
             key={task.id}
             task={task}
             handleComplete={() => completeTask(task.id, !task.completed)}
-            handleDelete={() => removeTask(task.id)}
+            // handleDelete={() => removeTask(task.id)}
           />
         ))}
       </div>

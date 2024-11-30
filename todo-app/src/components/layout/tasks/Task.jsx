@@ -1,7 +1,15 @@
 /* eslint-disable react/prop-types */
 import "../../../styles/Task.css";
+import { dateExtensions } from "../../../utils/date-extensions";
 
-export default function Task({ task, handleDelete, handleComplete }) {
+export default function Task({
+  task,
+  handleDelete,
+  handleComplete,
+  handleEdit,
+}) {
+  const formattedDate = dateExtensions.formatDate(task.date);
+
   return (
     <div
       className={task.completed ? "completed-task" : "container"}
@@ -30,7 +38,7 @@ export default function Task({ task, handleDelete, handleComplete }) {
               fontWeight: "normal",
             }}
           >
-            {task.name + " [" + task.id + "]"}
+            {task.name}
           </p>
           <div style={styles.taskSubBlock}>
             <div style={styles.priorityBlock}>
@@ -71,9 +79,9 @@ export default function Task({ task, handleDelete, handleComplete }) {
                 className="hgi-stroke hgi-calendar-03"
                 style={styles.dateIcon}
               ></i>
-              <p style={styles.dateLabel}>{task.date}</p>
+              <p style={styles.dateLabel}>{formattedDate}</p>
             </div>
-            <button onClick={handleDelete} style={styles.deleteButton}>
+            <button onClick={handleEdit} style={styles.deleteButton}>
               <i
                 className="hgi-stroke hgi-pencil-edit-01"
                 style={styles.deleteIcon}
@@ -82,7 +90,7 @@ export default function Task({ task, handleDelete, handleComplete }) {
             <button onClick={handleDelete} style={styles.deleteButton}>
               <i
                 className="hgi-stroke hgi-delete-02"
-                style={styles.deleteIcon}
+                style={{ ...styles.deleteIcon, color: "red" }}
               ></i>
             </button>
           </div>

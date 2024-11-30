@@ -5,7 +5,7 @@ import { useState } from "react";
 import InputWithLabel from "../ui/InputWithLabel";
 import TextAreaWithLabel from "../ui/TextAreaWithLabel";
 import TaskPriorityDropdown from "../ui/TaskPriorityDropdown";
-import { dateExtensions } from "../../utils/date-extensions";
+// import { dateExtensions } from "../../utils/date-extensions";
 
 export default function CreateTaskModal({ onClose }) {
   const root = document.getElementById("root");
@@ -32,13 +32,13 @@ export default function CreateTaskModal({ onClose }) {
     ) {
       const id = getTasksLength();
 
-      const formattedDate = dateExtensions.formatDate(taskDate);
+      // const formattedDate = dateExtensions.formatDate(taskDate);
 
       const newTask = {
         id: id,
         name: taskName,
         description: taskDescription,
-        date: formattedDate,
+        date: taskDate,
         startTime: taskStartTime,
         endTime: taskEndTime,
         note: "",
@@ -186,9 +186,10 @@ const styles = {
     backgroundColor: "#7437ff",
     color: "white",
     fontSize: "16px",
+    fontWeight: "bold",
     borderRadius: "8px",
     width: "50%",
-    height: "45px",
+    height: "40px",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",

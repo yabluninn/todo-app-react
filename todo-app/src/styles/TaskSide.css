@@ -1,24 +1,24 @@
 .container {
   width: 100%;
   border-radius: 8px;
-  background-color: white;
   display: flex;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
-  padding: 12px !important;
   border-bottom: 1px solid #ccc;
+  background-color: transparent !important;
   position: relative;
+  padding-left: 0px !important;
 }
 
 .completed-task {
   width: 100%;
   border-radius: 8px;
-  background-color: rgb(248, 248, 248);
+  background-color: transparent !important;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 12px !important;
   position: relative;
+  padding-left: 0px !important;
 }
 
 .visible-task-info-block {
@@ -28,8 +28,9 @@
   justify-content: center;
   align-items: center;
   flex-direction: row;
-  background-color: rgb(248, 248, 248);
+  background-color: #f5f5f5 !important;
   border-radius: 8px;
+  margin-left: 12px;
 }
 
 .visible-task-info-block i {

@@ -29,5 +29,5 @@
 }
 
 .textarea-container textarea:focus {
-  border-color: #7437ff;
+  outline: 1px solid #7437ff;
 }

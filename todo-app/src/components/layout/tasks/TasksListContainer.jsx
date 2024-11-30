@@ -2,16 +2,26 @@
 /* eslint-disable no-unused-vars */
 import { useState } from "react";
 import Task from "./Task";
+import { useTaskList } from "../../../contexts/TaskListContext";
 
-export default function TasksListContainer({ list }) {
+export default function TasksListContainer({ list, onTaskSideOpen }) {
   const [isTasksVisible, setTasksVisibility] = useState(false);
 
-  const toggleTasksVisibility = () => {
-    setTasksVisibility(!isTasksVisible);
-  };
+  const { removeTask } = useTaskList();
+
+  const toggleTasksVisibility = () => setTasksVisibility(!isTasksVisible);
 
   return (
     <div style={styles.main}>
+      <i
+        className="hgi-stroke hgi-task-daily-02"
+        style={{
+          position: "absolute",
+          color: "#bbb",
+          marginLeft: "-50px",
+          fontSize: "20px",
+        }}
+      ></i>
       <div
         style={{
           ...styles.header,
@@ -50,8 +60,12 @@ export default function TasksListContainer({ list }) {
           <Task
             key={task.id}
             task={task}
+            handleEdit={() => {
+              console.log("Task to edit:", task);
+              onTaskSideOpen(task);
+            }}
             handleComplete={() => console.log("Task completed!")}
-            handleDelete={() => console.log("Task deleted!")}
+            handleDelete={() => removeTask(task.id)}
           />
         ))}
       </div>

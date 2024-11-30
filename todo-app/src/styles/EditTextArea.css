@@ -1,0 +1,22 @@
+.edit-textarea-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-top: 16px;
+}
+
+.edit-textarea-container textarea {
+  padding: 8px 12px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+  min-height: 150px;
+  max-height: 300px;
+  resize: none;
+  background-color: rgb(251, 251, 251);
+}
+
+.edit-textarea-container textarea:focus {
+  outline: 1px solid #7437ff;
+}

@@ -6,17 +6,30 @@ import "../../styles/Tasks.css";
 import TasksListContainer from "../layout/tasks/TasksListContainer";
 import CreateTaskModal from "../modals/CreateTaskModal";
 import CreateTaskButton from "../ui/CreateTaskButton";
+import TaskSideSection from "../layout/tasks/TaskSideSection";
 
 export default function Tasks() {
   const [isCreateTaskModalOpen, setCreateTaskModalOpen] = useState(false);
+  const [isTaskSideMenuOpen, setTaskSideMenuOpen] = useState(false);
+  const [selectedTask, setSelectedTask] = useState(null);
 
   const { tasks } = useTaskList();
 
-  const openCreateTaskModal = () => {
-    setCreateTaskModalOpen(true);
+  const openCreateTaskModal = () => setCreateTaskModalOpen(true);
+  const closeCreateTaskModal = () => setCreateTaskModalOpen(false);
+
+  const handleEditTask = (task) => {
+    if (!task) {
+      console.error("Task is undefined");
+      return;
+    }
+    setSelectedTask(task); // Устанавливаем выбранную задачу
+    setTaskSideMenuOpen(true); // Открываем боковое меню
   };
-  const closeCreateTaskModal = () => {
-    setCreateTaskModalOpen(false);
+
+  const closeTaskSideMenu = () => {
+    setTaskSideMenuOpen(false);
+    setSelectedTask(null); // Сбрасываем выбранную задачу
   };
 
   const defaultLists = [
@@ -37,10 +50,20 @@ export default function Tasks() {
         </button>
       </div>
       <CreateTaskButton onClick={openCreateTaskModal} />
-      <TasksListContainer list={defaultLists[0]} />
+      <TasksListContainer
+        list={defaultLists[0]}
+        onTaskSideOpen={handleEditTask}
+      />
       <TasksListContainer list={defaultLists[1]} />
       {isCreateTaskModalOpen && (
         <CreateTaskModal onClose={closeCreateTaskModal} />
+      )}
+      {isTaskSideMenuOpen && selectedTask && (
+        <TaskSideSection
+          task={selectedTask}
+          listName={"All"}
+          onClose={closeTaskSideMenu}
+        />
       )}
     </div>
   );
