@@ -5,7 +5,7 @@ import "../../styles/Tasks.css";
 
 import TasksListContainer from "../layout/tasks/TasksListContainer";
 import CreateTaskModal from "../modals/CreateTaskModal";
-import CreateTaskButton from "../ui/CreateTaskButton";
+import CreateButton from "../ui/CreateButton";
 import TaskSideSection from "../layout/tasks/TaskSideSection";
 
 export default function Tasks() {
@@ -49,7 +49,7 @@ export default function Tasks() {
           <i className="hgi-stroke hgi-settings-02"></i>
         </button>
       </div>
-      <CreateTaskButton onClick={openCreateTaskModal} />
+      <CreateButton title={"New Task"} onClick={openCreateTaskModal} />
       <TasksListContainer
         list={defaultLists[0]}
         onTaskSideOpen={handleEditTask}

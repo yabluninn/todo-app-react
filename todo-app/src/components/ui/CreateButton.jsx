@@ -1,32 +1,34 @@
 /* eslint-disable react/prop-types */
-export default function CreateTaskButton({ onClick }) {
+export default function CreateButton({ title, onClick }) {
   return (
     <button style={styles.main} onClick={onClick}>
       <i className="fa-solid fa-plus" style={styles.icon}></i>
-      Create new task
+      {title}
     </button>
   );
 }
 
 const styles = {
   main: {
-    width: "480px",
-    height: "48px",
-    fontSize: "18px",
-    borderRadius: "25px",
+    width: "100%",
+    height: "45px",
+    fontSize: "16px",
+    fontWeight: "bold",
+    borderRadius: "8px",
     display: "flex",
     justifyContent: "start",
     alignItems: "center",
     flexDirection: "row",
-    background: "black",
     paddingLeft: "18px",
     paddingRight: "18px",
-    color: "white",
-    boxShadow: "0 6px 12px rgba(0, 0, 0, 0.1)",
+    color: "black",
+    border: "2px dashed #bbb",
+    background: "#eee",
+    marginTop: "12px",
   },
   icon: {
-    fontSize: "18px",
-    color: "white",
+    fontSize: "16px",
+    color: "black",
     marginRight: "10px",
   },
 };
