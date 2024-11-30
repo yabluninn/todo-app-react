@@ -51,7 +51,7 @@ const styles = {
     flexDirection: "row",
     marginBottom: "8px",
     paddingBottom: "8px",
-    borderBottom: "1px solid #ccc",
+    borderBottom: "1px solid #eee",
   },
   title: {
     fontSize: "16px",

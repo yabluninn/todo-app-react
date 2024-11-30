@@ -27,9 +27,13 @@ export default function List({ list, listType }) {
           ></i>
           <p>
             {listType === LIST_TYPES.TASK_LIST
-              ? list.tasks.length
+              ? list.tasks
+                ? list.tasks.length
+                : 0
               : listType === LIST_TYPES.NOTES_LIST
-              ? list.notes.length
+              ? list.notes
+                ? list.notes.length
+                : 0
               : ""}
           </p>
         </div>

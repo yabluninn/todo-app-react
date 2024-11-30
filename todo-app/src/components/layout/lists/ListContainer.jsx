@@ -3,7 +3,11 @@ import CreateButton from "../../ui/CreateButton";
 import List from "./List";
 
 /* eslint-disable react/prop-types */
-export default function ListContainer({ listType, lists }) {
+export default function ListContainer({
+  listType,
+  lists,
+  onOpenCreateListModal,
+}) {
   return (
     <div style={styles.container}>
       <div style={styles.header}>
@@ -33,7 +37,7 @@ export default function ListContainer({ listType, lists }) {
             <List key={list.id} list={list} listType={listType} />
           ))}
       </div>
-      <CreateButton title={"New List"} />
+      <CreateButton title={"New List"} onClick={onOpenCreateListModal} />
     </div>
   );
 }
@@ -54,7 +58,7 @@ const styles = {
     justifyContent: "space-between",
     alignItems: "center",
     flexDirection: "row",
-    borderBottom: "1px solid #ccc",
+    borderBottom: "1px solid #eee",
   },
   headerBlock: {
     display: "flex",

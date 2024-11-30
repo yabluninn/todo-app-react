@@ -144,7 +144,7 @@ const styles = {
     flexDirection: "row",
     marginBottom: "8px",
     paddingBottom: "4px",
-    borderBottom: "1px solid #ccc",
+    borderBottom: "1px solid #eee",
   },
   headerBlock: {
     display: "flex",
@@ -185,7 +185,7 @@ const styles = {
   hintBlock: {
     width: "100%",
     display: "flex",
-    borderTop: "1px solid #ccc",
+    borderTop: "1px solid #eee",
     justifyContent: "space-around",
     paddingTop: "8px",
   },
