@@ -21,16 +21,13 @@ export default function HomeTasksWidget() {
         <p style={styles.title}>Tasks for Today</p>
         <div style={styles.headerBlock}>
           <button style={styles.sortButton}>
-            <i className="hgi-stroke hgi-filter" style={styles.sortIcon}></i>
+            <i className="fa-solid fa-filter" style={styles.sortIcon}></i>
           </button>
           <button
             style={styles.sortButton}
             onClick={toggleSortContextMenuVisibility}
           >
-            <i
-              className="hgi-stroke hgi-sort-by-up-01"
-              style={styles.sortIcon}
-            ></i>
+            <i className="fa-solid fa-sort" style={styles.sortIcon}></i>
           </button>
           <a style={styles.link}>View All</a>
         </div>
@@ -161,12 +158,11 @@ const styles = {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    border: "1px solid #ccc",
-    borderRadius: "8px",
     marginRight: "4px",
   },
   sortIcon: {
-    fontSize: "20px",
+    fontSize: "18px",
+    color: "#333",
   },
   title: {
     fontSize: "16px",
