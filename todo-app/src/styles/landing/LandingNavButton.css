@@ -1,0 +1,16 @@
+.lnb-button {
+  padding: 6px 14px 6px 14px;
+  border: 0;
+  border-radius: 8px;
+  background-color: transparent;
+  font-size: 16px;
+  transition: 0.3s all;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+
+.lnb-button:hover {
+  background-color: #f4f4f4;
+}

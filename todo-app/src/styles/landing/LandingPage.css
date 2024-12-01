@@ -1,0 +1,143 @@
+.lp-container {
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  padding: 16px 144px 0px 144px;
+}
+
+.lp-header {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+}
+
+.lp-h-block {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+
+.logo-block {
+  width: fit-content;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+
+.logo-block img {
+  width: 45px;
+  height: auto;
+}
+
+.logo-block p {
+  font-size: 28px;
+  font-weight: bold;
+  margin-left: 14px;
+}
+
+.lp-h-button {
+  padding: 6px 14px 6px 14px;
+  border: 0;
+  border-radius: 8px;
+  background-color: transparent;
+  font-size: 16px;
+}
+
+.lph-b-demo {
+  border-radius: 0;
+  border-right: 1px solid #ccc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #6a6a6a;
+}
+
+.lph-b-demo i {
+  margin-left: 8px;
+  color: #6a6a6a;
+}
+
+.lph-b-login {
+  border: 1px solid #bbb;
+  border-radius: 8px;
+  margin-left: 8px;
+  transition: 0.3s all;
+}
+
+.lph-b-login:hover {
+  background-color: #eee;
+}
+
+.lph-b-signup {
+  background-color: #7437ff;
+  color: white;
+  font-weight: bold;
+  border-radius: 8px;
+  margin-left: 8px;
+}
+
+.lp-main {
+  width: 100%;
+  height: 85%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.lp-main-h {
+  font-size: 48px;
+  font-weight: bold;
+}
+
+.lp-main-h span {
+  color: #7437ff;
+  text-decoration: underline;
+}
+
+.lp-main-subh {
+  width: 530px;
+  font-size: 24px;
+  text-align: center;
+  margin-top: 12px;
+}
+
+.lp-main-subh span {
+  color: #8e5ffc;
+}
+
+.lp-main-button {
+  background-color: #7437ff;
+  width: 35%;
+  font-size: 24px;
+  font-weight: bold;
+  color: white;
+  border-radius: 12px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  margin-top: 124px;
+}
+
+.lp-icon {
+  position: absolute;
+  width: 128px;
+  height: auto;
+}
+
+.lpi-1 {
+  top: 180px;
+  rotate: -25deg;
+  opacity: 30%;
+}
+
+.lpi-2 {
+  bottom: 125px;
+  right: 155px;
+  rotate: 25deg;
+  opacity: 50%;
+}

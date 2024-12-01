@@ -10,9 +10,12 @@ import Tasks from "./components/pages/Tasks";
 import Home from "./components/pages/Home";
 import Lists from "./components/pages/Lists";
 import { ListsProvider } from "./contexts/ListsContext";
+import LandingPage from "./landing/LandingPage";
 
 function App() {
   const DEFAULT_APP_URL = "/app";
+
+  const isLandingPage = location.pathname === "/";
 
   return (
     <Router>
@@ -20,8 +23,9 @@ function App() {
         <TaskListProvider>
           <NoteListProvider>
             <div className="app">
-              <NavMenu />
+              {!isLandingPage && <NavMenu />}
               <Routes>
+                <Route path="/" element={<LandingPage />} />
                 <Route path={DEFAULT_APP_URL + "/"} element={<Home />} />
                 <Route path={DEFAULT_APP_URL + "/tasks"} element={<Tasks />} />
                 <Route path={DEFAULT_APP_URL + "/lists"} element={<Lists />} />
