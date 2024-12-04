@@ -34,11 +34,11 @@ export default function NavMenu() {
             label={"Notes"}
             path={"/notes"}
           />
-          <NavButton
+          {/* <NavButton
             icon={"hgi-stroke hgi-brain-02"}
             label={"Habits"}
             path={"/habits"}
-          />
+          /> */}
           <NavButton
             icon={"hgi-stroke hgi-check-list"}
             label={"Lists"}

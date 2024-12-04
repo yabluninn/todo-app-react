@@ -81,16 +81,16 @@ export default function Task({
               ></i>
               <p style={styles.dateLabel}>{formattedDate}</p>
             </div>
-            <button onClick={handleEdit} style={styles.deleteButton}>
+            <button onClick={handleEdit} style={styles.actionButton}>
               <i
                 className="hgi-stroke hgi-pencil-edit-01"
-                style={styles.deleteIcon}
+                style={styles.actionIcon}
               ></i>
             </button>
-            <button onClick={handleDelete} style={styles.deleteButton}>
+            <button onClick={handleDelete} style={styles.actionButton}>
               <i
                 className="hgi-stroke hgi-delete-02"
-                style={{ ...styles.deleteIcon, color: "red" }}
+                style={{ ...styles.actionIcon, color: "red" }}
               ></i>
             </button>
           </div>
@@ -111,10 +111,6 @@ const styles = {
   },
   taskName: {
     fontSize: "16px",
-    color: "#333",
-  },
-  deleteIcon: {
-    fontSize: "20px",
     color: "#333",
   },
   taskMainBlock: {
@@ -152,12 +148,16 @@ const styles = {
   dateLabel: {
     color: "grey",
   },
-  deleteButton: {
+  actionButton: {
     width: "30px",
     height: "30px",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
+  },
+  actionIcon: {
+    fontSize: "20px",
+    color: "#333",
   },
   priorityBlock: {
     width: "30px",

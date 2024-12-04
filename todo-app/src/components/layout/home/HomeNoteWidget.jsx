@@ -9,7 +9,7 @@ export default function HomeNoteWidget() {
   return (
     <div style={styles.main}>
       <div style={styles.header}>
-        <p style={styles.title}>Today&apos;s Notes</p>
+        <p style={styles.title}>Recent Notes</p>
         <a style={styles.link}>View All</a>
       </div>
       <div style={styles.container}>
@@ -51,7 +51,7 @@ const styles = {
     flexDirection: "row",
     marginBottom: "8px",
     paddingBottom: "8px",
-    borderBottom: "1px solid #ccc",
+    borderBottom: "1px solid #eee",
   },
   title: {
     fontSize: "16px",

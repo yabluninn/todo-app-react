@@ -19,4 +19,6 @@
 
 .nm-buttons-group {
   margin-top: 18px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 18px;
 }

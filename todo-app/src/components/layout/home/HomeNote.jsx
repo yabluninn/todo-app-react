@@ -67,6 +67,11 @@ const styles = {
     fontSize: "14px",
     color: "#666",
     padding: "8px",
+    wordWrap: "break-word",
+    overflow: "hidden",
+    display: "-webkit-box",
+    WebkitLineClamp: 3,
+    WebkitBoxOrient: "vertical",
   },
   categories: {
     width: "100%",

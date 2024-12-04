@@ -88,7 +88,7 @@ const styles = {
     justifyContent: "start",
     alignItems: "center",
     flexDirection: "row",
-    borderBottom: "1px solid #ccc",
+    borderBottom: "1px solid #eee",
     paddingBottom: "8px",
   },
   headerIcon: {
