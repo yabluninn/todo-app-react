@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useTaskList } from "../../contexts/TaskListContext";
 
 import HomeHeader from "../layout/home/HomeHeader";
 import HomeTasksWidget from "../layout/home/HomeTasksWidget";
@@ -9,12 +8,13 @@ import HomeNoteWidget from "../layout/home/HomeNoteWidget";
 import HomeAddWidget from "../layout/home/HomeAddWidget";
 import CreateTaskModal from "../modals/CreateTaskModal";
 import CreateNoteModal from "../modals/CreateNoteModal";
+import { useListsContext } from "../../contexts/ListsContext";
 
 export default function Home() {
   const [isCreateTaskModalOpen, setCreateTaskModalOpen] = useState(false);
   const [isCreateNoteModalOpen, setCreateNoteModalOpen] = useState(false);
 
-  const { tasks } = useTaskList();
+  const { getTodayTasks } = useListsContext();
 
   const openCreateTaskModal = () => {
     setCreateTaskModalOpen(true);
@@ -29,6 +29,8 @@ export default function Home() {
   const closeCreateNoteModal = () => {
     setCreateNoteModalOpen(false);
   };
+
+  const tasks = getTodayTasks();
 
   return (
     <div className="page-container">

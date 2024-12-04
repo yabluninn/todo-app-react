@@ -54,6 +54,17 @@ export default function TasksListContainer({ list, onTaskSideOpen }) {
         ></div>
         <p style={styles.listName}>{list.name}</p>
         <div style={styles.tasksCount}>{list.tasks.length}</div>
+        <div style={styles.actions}>
+          <button style={styles.sortButton}>
+            <i className="hgi-stroke hgi-filter" style={styles.sortIcon}></i>
+          </button>
+          <button style={styles.sortButton}>
+            <i
+              className="hgi-stroke hgi-sort-by-down-02"
+              style={styles.sortIcon}
+            ></i>
+          </button>
+        </div>
       </div>
       <div style={{ ...styles.tasks, display: isTasksVisible ? "" : "none" }}>
         {list.tasks.map((task) => (
@@ -119,5 +130,24 @@ const styles = {
   tasks: {
     marginLeft: "64px",
     marginTop: "12px",
+  },
+  actions: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "row",
+    marginLeft: "auto",
+  },
+  sortButton: {
+    width: "30px",
+    height: "30px",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    marginRight: "4px",
+  },
+  sortIcon: {
+    fontSize: "18px",
+    color: "#333",
   },
 };

@@ -1,3 +1,4 @@
+import { dateExtensions } from "../../../utils/date-extensions";
 import HomeCategory from "./HomeCategory";
 
 /* eslint-disable react/prop-types */
@@ -24,11 +25,14 @@ export default function HomeNote({ note }) {
 
   const formattedContent = formatContent(note.content);
 
+  const formattedDate = dateExtensions.getFormattedDate(note.creationDate);
+
   return (
     <div style={styles.main}>
       <div style={styles.header}>
         <i className="hgi-stroke hgi-note-02" style={styles.icon}></i>
         <p style={styles.name}>{note.name}</p>
+        <p style={styles.date}>{formattedDate}</p>
       </div>
       <p style={styles.content}>{formattedContent}</p>
       <div style={styles.categories}>
@@ -81,5 +85,10 @@ const styles = {
     alignItems: "center",
     flexDirection: "row",
     gap: "10px",
+  },
+  date: {
+    fontSize: "14px",
+    color: "#aaa",
+    marginLeft: "auto",
   },
 };

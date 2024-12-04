@@ -24,6 +24,16 @@ class DateExtensions {
 
     return `${day}.${month}.${year}`;
   }
+
+  getFormattedDate(date) {
+    const options = {
+      day: "numeric",
+      month: "short",
+      year: "numeric",
+    };
+
+    return date.toLocaleDateString("en-US", options);
+  }
 }
 
 export const dateExtensions = new DateExtensions();

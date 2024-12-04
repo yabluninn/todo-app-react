@@ -4,31 +4,49 @@ import { createContext, useContext, useState } from "react";
 const ListsContext = createContext();
 
 export const ListsProvider = ({ children }) => {
-  const [taskLists, setTasksList] = useState([]);
-  const [noteLists, setNotesList] = useState([]);
+  const [taskLists, setTaskLists] = useState([]);
+  const [noteLists, setNoteLists] = useState([]);
 
   const addTaskList = (list) => {
-    setTasksList((prevList) => [...prevList, list]);
+    setTaskLists((prevLists) => [...prevLists, { ...list, tasks: [] }]);
   };
+
   const addNoteList = (list) => {
-    setNotesList((prevList) => [...prevList, list]);
+    setNoteLists((prevLists) => [...prevLists, list]);
   };
 
   const removeTaskList = (listId) => {
-    const newList = taskLists.filter((list) => list.id != listId);
-    setTasksList(newList);
-  };
-  const removeNoteList = (listId) => {
-    const newList = noteLists.filter((list) => list.id != listId);
-    setNotesList(newList);
+    setTaskLists((prevLists) => prevLists.filter((list) => list.id !== listId));
   };
 
-  const getTaskListsLength = () => {
-    return taskLists.length;
+  const removeNoteList = (listId) => {
+    setNoteLists((prevLists) => prevLists.filter((list) => list.id !== listId));
   };
-  const getNoteListsLength = () => {
-    return taskLists.length;
+
+  const addTaskToList = (task, listId) => {
+    setTaskLists((prevLists) =>
+      prevLists.map((list) =>
+        list.id === listId
+          ? { ...list, tasks: [...(list.tasks || []), task] }
+          : list
+      )
+    );
   };
+
+  const getTasksByDate = (date) => {
+    return taskLists.flatMap((list) =>
+      list.tasks.filter((task) => task.date === date)
+    );
+  };
+
+  const getTodayTasks = () => {
+    const today = new Date().toISOString().split("T")[0];
+    return getTasksByDate(today);
+  };
+
+  const getTaskListsLength = () => taskLists.length;
+
+  const getNoteListsLength = () => noteLists.length;
 
   return (
     <ListsContext.Provider
@@ -41,6 +59,9 @@ export const ListsProvider = ({ children }) => {
         removeNoteList,
         getTaskListsLength,
         getNoteListsLength,
+        addTaskToList,
+        getTasksByDate,
+        getTodayTasks,
       }}
     >
       {children}

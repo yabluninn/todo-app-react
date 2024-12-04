@@ -16,10 +16,14 @@ export default function CreateNoteModal({ onClose }) {
   const handleAddNote = () => {
     if (noteName.trim() != "" && noteContent.trim() != "") {
       const id = getNotesLength();
+
+      const currentDate = new Date();
+
       const newNote = {
         id: id,
         name: noteName,
         content: noteContent,
+        creationDate: currentDate,
       };
       addNote(newNote);
       onClose();
