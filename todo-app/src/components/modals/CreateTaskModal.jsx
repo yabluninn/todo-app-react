@@ -1,16 +1,15 @@
 import { createPortal } from "react-dom";
-import { useTaskList } from "../../contexts/TaskListContext";
+import { useListsContext } from "../../contexts/ListsContext";
 import { useState } from "react";
 
 import InputWithLabel from "../ui/InputWithLabel";
 import TextAreaWithLabel from "../ui/TextAreaWithLabel";
 import TaskPriorityDropdown from "../ui/TaskPriorityDropdown";
-// import { dateExtensions } from "../../utils/date-extensions";
+import ListDropdown from "../ui/TaskListDropdown";
 
 export default function CreateTaskModal({ onClose }) {
   const root = document.getElementById("root");
-
-  const { addTask, getTasksLength } = useTaskList();
+  const { addTaskToList } = useListsContext();
 
   const [taskName, setTaskName] = useState("");
   const [taskDescription, setTaskDescription] = useState("");
@@ -18,35 +17,32 @@ export default function CreateTaskModal({ onClose }) {
   const [taskStartTime, setTaskStartTime] = useState("");
   const [taskEndTime, setTaskEndTime] = useState("");
   const [taskPriority, setTaskPriority] = useState("");
-
-  const handlePriorityDropdown = (newPriority) => {
-    setTaskPriority(newPriority);
-  };
+  const [selectedList, setSelectedList] = useState(-1);
 
   const handleAddTask = () => {
     if (
-      taskName.trim() != "" &&
-      taskDate.trim() != "" &&
-      taskStartTime.trim() != "" &&
-      taskEndTime.trim() != ""
+      taskName.trim() === "" ||
+      taskDate.trim() === "" ||
+      taskStartTime.trim() === "" ||
+      taskEndTime.trim() === "" ||
+      selectedList === -1
     ) {
-      const id = getTasksLength();
-
-      // const formattedDate = dateExtensions.formatDate(taskDate);
-
-      const newTask = {
-        id: id,
-        name: taskName,
-        description: taskDescription,
-        date: taskDate,
-        startTime: taskStartTime,
-        endTime: taskEndTime,
-        note: "",
-        priority: taskPriority,
-      };
-      addTask(newTask);
-      onClose();
+      // alert("Please fill in all fields and select a list.");
+      return;
     }
+
+    const newTask = {
+      id: Date.now(),
+      name: taskName,
+      description: taskDescription,
+      date: taskDate,
+      startTime: taskStartTime,
+      endTime: taskEndTime,
+      priority: taskPriority,
+    };
+
+    addTaskToList(newTask, selectedList);
+    onClose();
   };
 
   return createPortal(
@@ -66,54 +62,43 @@ export default function CreateTaskModal({ onClose }) {
             type="text"
             placeholder="Enter task name"
             label="Name"
-            icon="hgi-stroke hgi-text-font"
             value={taskName}
             onChange={(e) => setTaskName(e.target.value)}
           />
           <TextAreaWithLabel
             placeholder="Enter task description"
-            label="Description (Optional)"
-            icon="hgi-stroke hgi-text-firstline-left"
+            label="Description"
             value={taskDescription}
             onChange={(e) => setTaskDescription(e.target.value)}
           />
           <div style={styles.timeInputs}>
             <InputWithLabel
               type="date"
-              placeholder=""
               label="Date"
-              icon="hgi-stroke hgi-calendar-01"
               value={taskDate}
               onChange={(e) => setTaskDate(e.target.value)}
             />
-            <TaskPriorityDropdown onChange={handlePriorityDropdown} />
-          </div>
-          <div style={styles.timeInputs}>
             <InputWithLabel
               type="time"
-              placeholder=""
               label="Start Time"
-              icon="hgi-stroke hgi-calendar-01"
               value={taskStartTime}
               onChange={(e) => setTaskStartTime(e.target.value)}
             />
             <InputWithLabel
               type="time"
-              placeholder=""
               label="End Time"
-              icon="hgi-stroke hgi-calendar-01"
               value={taskEndTime}
               onChange={(e) => setTaskEndTime(e.target.value)}
             />
           </div>
+          <div style={styles.timeInputs}>
+            <TaskPriorityDropdown onChange={setTaskPriority} />
+            <ListDropdown onChange={setSelectedList} />
+          </div>
         </div>
         <div style={styles.footer}>
           <button style={styles.addButton} onClick={handleAddTask}>
-            <i
-              className="hgi-stroke hgi-task-add-01"
-              style={styles.addIcon}
-            ></i>
-            Create task
+            Create Task
           </button>
         </div>
       </div>

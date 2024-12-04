@@ -1,0 +1,9 @@
+.lnm-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  width: fit-content;
+  margin-left: 120px;
+  gap: 12px;
+}

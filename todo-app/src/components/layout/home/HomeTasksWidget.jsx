@@ -5,9 +5,11 @@ import { useTaskList } from "../../../contexts/TaskListContext";
 import { useState } from "react";
 import { taskActionsService } from "../../../services/TaskActionsService";
 import { SORTING_ACTIONS } from "../../../constants/sorting-actions";
+import { useListsContext } from "../../../contexts/ListsContext";
 
 export default function HomeTasksWidget() {
-  const { tasks, completeTask, updateTaskList } = useTaskList();
+  const { completeTask, updateTaskList } = useTaskList();
+  const { getTodayTasks } = useListsContext();
 
   const [isSortContextMenuVisible, setSortContextMenuVisible] = useState(false);
 
@@ -15,21 +17,28 @@ export default function HomeTasksWidget() {
     setSortContextMenuVisible(!isSortContextMenuVisible);
   };
 
+  const tasks = getTodayTasks();
+
   return (
     <div style={styles.main}>
       <div style={styles.header}>
         <p style={styles.title}>Tasks for Today</p>
         <div style={styles.headerBlock}>
           <button style={styles.sortButton}>
-            <i className="fa-solid fa-filter" style={styles.sortIcon}></i>
+            <i className="hgi-stroke hgi-filter" style={styles.sortIcon}></i>
           </button>
           <button
             style={styles.sortButton}
             onClick={toggleSortContextMenuVisibility}
           >
-            <i className="fa-solid fa-sort" style={styles.sortIcon}></i>
+            <i
+              className="hgi-stroke hgi-sort-by-down-02"
+              style={styles.sortIcon}
+            ></i>
           </button>
-          <a style={styles.link}>View All</a>
+          <a style={styles.link} href="/app/tasks">
+            View All
+          </a>
         </div>
       </div>
       {isSortContextMenuVisible && (
@@ -181,6 +190,7 @@ const styles = {
     borderRadius: "8px",
     paddingLeft: "8px",
     paddingRight: "8px",
+    textDecoration: "none",
   },
   hintBlock: {
     width: "100%",
