@@ -1,7 +1,9 @@
 /* eslint-disable react/prop-types */
 
+import { Link } from "react-router-dom";
 import { useNoteList } from "../../../contexts/NoteListContext";
 import HomeNote from "./HomeNote";
+import NothingHere from "../../ui/NothingHere";
 
 export default function HomeNoteWidget() {
   const { notes } = useNoteList();
@@ -10,12 +12,14 @@ export default function HomeNoteWidget() {
     <div style={styles.main}>
       <div style={styles.header}>
         <p style={styles.title}>Recent Notes</p>
-        <a style={styles.link}>View All</a>
+        <Link to={"/app/notes"} style={styles.link}>
+          View All
+        </Link>
       </div>
       <div style={styles.container}>
-        {notes.map((note) => (
-          <HomeNote key={note.id} note={note} />
-        ))}
+        {notes.length === 0 && <NothingHere icon={"fa-solid fa-note-sticky"} />}
+        {notes.length > 0 &&
+          notes.map((note) => <HomeNote key={note.id} note={note} />)}
       </div>
     </div>
   );
@@ -70,6 +74,7 @@ const styles = {
     borderRadius: "8px",
     paddingLeft: "8px",
     paddingRight: "8px",
+    textDecoration: "none",
   },
   hintBlock: {
     width: "100%",

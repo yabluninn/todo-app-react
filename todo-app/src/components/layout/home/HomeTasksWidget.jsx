@@ -6,6 +6,8 @@ import { useState } from "react";
 import { taskActionsService } from "../../../services/TaskActionsService";
 import { SORTING_ACTIONS } from "../../../constants/sorting-actions";
 import { useListsContext } from "../../../contexts/ListsContext";
+import { Link } from "react-router-dom";
+import NothingHere from "../../ui/NothingHere";
 
 export default function HomeTasksWidget() {
   const { completeTask, updateTaskList } = useTaskList();
@@ -36,9 +38,9 @@ export default function HomeTasksWidget() {
               style={styles.sortIcon}
             ></i>
           </button>
-          <a style={styles.link} href="/app/tasks">
+          <Link to={"/app/tasks"} style={styles.link}>
             View All
-          </a>
+          </Link>
         </div>
       </div>
       {isSortContextMenuVisible && (
@@ -102,14 +104,18 @@ export default function HomeTasksWidget() {
         </div>
       )}
       <div style={styles.container}>
-        {tasks.map((task) => (
-          <HomeTask
-            key={task.id}
-            task={task}
-            handleComplete={() => completeTask(task.id, !task.completed)}
-            // handleDelete={() => removeTask(task.id)}
-          />
-        ))}
+        {tasks.length === 0 && (
+          <NothingHere icon={"fa-solid fa-clipboard-list"} />
+        )}
+        {tasks.length > 0 &&
+          tasks.map((task) => (
+            <HomeTask
+              key={task.id}
+              task={task}
+              handleComplete={() => completeTask(task.id, !task.completed)}
+              // handleDelete={() => removeTask(task.id)}
+            />
+          ))}
       </div>
       <div style={styles.hintBlock}>
         <div className="home-hint">

@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useState } from "react";
 import { useListsContext } from "../../contexts/ListsContext";
+import { Link } from "react-router-dom";
 
 export default function ListDropdown({ onChange }) {
   const [selectedList, setSelectedList] = useState("Select a list");
@@ -40,24 +41,34 @@ export default function ListDropdown({ onChange }) {
             display: isListVisible ? "block" : "none",
           }}
         >
-          {taskLists.map((list) => (
-            <li
-              key={list.id}
-              style={{
-                ...styles.dropdownItem,
-                fontWeight: list.name === selectedList ? "bold" : "normal",
-              }}
-              onClick={() => handleSelect(list)}
-            >
-              <div
+          {taskLists.length === 0 && (
+            <Link to={"/app/lists"} style={styles.newListButton}>
+              <i
+                className="hgi-stroke hgi-add-01"
+                style={{ marginRight: "6px" }}
+              ></i>
+              New List
+            </Link>
+          )}
+          {taskLists.length > 0 &&
+            taskLists.map((list) => (
+              <li
+                key={list.id}
                 style={{
-                  ...styles.listColorIcon,
-                  backgroundColor: list.color || "grey",
+                  ...styles.dropdownItem,
+                  fontWeight: list.name === selectedList ? "bold" : "normal",
                 }}
-              ></div>
-              {list.name}
-            </li>
-          ))}
+                onClick={() => handleSelect(list)}
+              >
+                <div
+                  style={{
+                    ...styles.listColorIcon,
+                    backgroundColor: list.color || "grey",
+                  }}
+                ></div>
+                {list.name}
+              </li>
+            ))}
         </ul>
       </div>
     </div>
@@ -124,5 +135,25 @@ const styles = {
     height: "10px",
     borderRadius: "3px",
     marginRight: "8px",
+  },
+  newListButton: {
+    justifySelf: "center",
+    width: "95%",
+    height: "30px",
+    fontSize: "14px",
+    fontWeight: "bold",
+    borderRadius: "8px",
+    display: "flex",
+    justifyContent: "start",
+    alignItems: "center",
+    flexDirection: "row",
+    paddingLeft: "18px",
+    paddingRight: "18px",
+    color: "black",
+    border: "2px dashed #bbb",
+    background: "#eee",
+    marginTop: "4px",
+    marginBottom: "4px",
+    textDecoration: "none",
   },
 };
