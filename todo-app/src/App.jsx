@@ -14,6 +14,7 @@ import Lists from "./components/pages/Lists";
 import LandingPage from "./landing/LandingPage";
 import LandingSignIn from "./landing/pages/LandingSignIn";
 import LandingLogin from "./landing/pages/LandingLogin";
+import Notes from "./components/pages/Notes";
 
 function App() {
   const DEFAULT_APP_URL = "/app";
@@ -36,6 +37,7 @@ function App() {
                 <Route path="/login" element={<LandingLogin />} />
                 <Route path={DEFAULT_APP_URL + "/"} element={<Home />} />
                 <Route path={DEFAULT_APP_URL + "/tasks"} element={<Tasks />} />
+                <Route path={DEFAULT_APP_URL + "/notes"} element={<Notes />} />
                 <Route path={DEFAULT_APP_URL + "/lists"} element={<Lists />} />
               </Routes>
             </div>

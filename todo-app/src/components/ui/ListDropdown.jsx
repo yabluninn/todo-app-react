@@ -2,16 +2,17 @@
 import { useState } from "react";
 import { useListsContext } from "../../contexts/ListsContext";
 import { Link } from "react-router-dom";
+import { LIST_TYPES } from "../../constants/list-types";
 
-export default function ListDropdown({ onChange }) {
+export default function ListDropdown({ onChange, listType }) {
   const [selectedList, setSelectedList] = useState("Select a list");
   const [isListVisible, setListVisible] = useState(false);
 
-  const { taskLists } = useListsContext();
+  const { taskLists, noteLists } = useListsContext();
 
   const handleSelect = (list) => {
     setSelectedList(list.name);
-    onChange(list.id); // Передаём ID списка
+    onChange(list.id);
   };
 
   const toggleVisibility = () => {
@@ -41,17 +42,47 @@ export default function ListDropdown({ onChange }) {
             display: isListVisible ? "block" : "none",
           }}
         >
-          {taskLists.length === 0 && (
+          {listType === LIST_TYPES.TASK_LIST && taskLists.length === 0 && (
             <Link to={"/app/lists"} style={styles.newListButton}>
               <i
                 className="hgi-stroke hgi-add-01"
                 style={{ marginRight: "6px" }}
               ></i>
-              New List
+              New Task List
             </Link>
           )}
-          {taskLists.length > 0 &&
+          {listType === LIST_TYPES.NOTES_LIST && noteLists.length === 0 && (
+            <Link to={"/app/lists"} style={styles.newListButton}>
+              <i
+                className="hgi-stroke hgi-add-01"
+                style={{ marginRight: "6px" }}
+              ></i>
+              New Notes List
+            </Link>
+          )}
+          {listType === LIST_TYPES.TASK_LIST &&
+            taskLists.length > 0 &&
             taskLists.map((list) => (
+              <li
+                key={list.id}
+                style={{
+                  ...styles.dropdownItem,
+                  fontWeight: list.name === selectedList ? "bold" : "normal",
+                }}
+                onClick={() => handleSelect(list)}
+              >
+                <div
+                  style={{
+                    ...styles.listColorIcon,
+                    backgroundColor: list.color || "grey",
+                  }}
+                ></div>
+                {list.name}
+              </li>
+            ))}
+          {listType === LIST_TYPES.NOTES_LIST &&
+            noteLists.length > 0 &&
+            noteLists.map((list) => (
               <li
                 key={list.id}
                 style={{

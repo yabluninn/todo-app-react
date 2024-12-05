@@ -1,4 +1,5 @@
 import { dateExtensions } from "../../../utils/date-extensions";
+import { stringExtensions } from "../../../utils/string-extensions";
 import HomeCategory from "./HomeCategory";
 
 /* eslint-disable react/prop-types */
@@ -15,15 +16,7 @@ export default function HomeNote({ note }) {
     color: "white",
   };
 
-  const formatContent = (content) => {
-    if (content.length >= 180) {
-      return content.slice(0, 180) + " ...";
-    } else {
-      return content;
-    }
-  };
-
-  const formattedContent = formatContent(note.content);
+  const formattedContent = stringExtensions.sliceWithDots(note.content, 180);
 
   const formattedDate = dateExtensions.getFormattedDate(note.creationDate);
 

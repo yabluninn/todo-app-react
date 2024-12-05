@@ -50,7 +50,8 @@
 .home-hint-ct {
   width: 14px;
   height: 14px;
-  border: 2px solid #7437ff;
+  border: 2px solid #378aff;
+  color: #60a2ff24;
   border-radius: 4px;
   margin-right: 16px;
 }

@@ -33,7 +33,7 @@ export default function CreateListModal({ listType, onClose }) {
           id: id,
           name: listName,
           color: listColor,
-          tasks: [],
+          notes: [],
         };
         addNoteList(newList);
       }

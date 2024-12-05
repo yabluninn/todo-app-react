@@ -1,5 +1,4 @@
 import { useState } from "react";
-// import { useTaskList } from "../../contexts/TaskListContext";
 
 import "../../styles/Tasks.css";
 
@@ -16,8 +15,6 @@ export default function Tasks() {
 
   const { taskLists } = useListsContext();
 
-  // const { tasks } = useTaskList();
-
   const openCreateTaskModal = () => setCreateTaskModalOpen(true);
   const closeCreateTaskModal = () => setCreateTaskModalOpen(false);
 
@@ -26,13 +23,13 @@ export default function Tasks() {
       console.error("Task is undefined");
       return;
     }
-    setSelectedTask(task); // Устанавливаем выбранную задачу
-    setTaskSideMenuOpen(true); // Открываем боковое меню
+    setSelectedTask(task);
+    setTaskSideMenuOpen(true);
   };
 
   const closeTaskSideMenu = () => {
     setTaskSideMenuOpen(false);
-    setSelectedTask(null); // Сбрасываем выбранную задачу
+    setSelectedTask(null);
   };
 
   // const defaultLists = [
@@ -47,7 +44,12 @@ export default function Tasks() {
   return (
     <div className="tasks-container">
       <div className="tasks-header">
-        <p className="t-header-title">Tasks</p>
+        <div>
+          <p className="t-header-title">Tasks</p>
+          <p className="t-header-subtitle">
+            Here you can manage all your tasks
+          </p>
+        </div>
         <button className="t-menu-button">
           <i className="hgi-stroke hgi-settings-02"></i>
         </button>

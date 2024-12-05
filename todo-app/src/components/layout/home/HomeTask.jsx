@@ -2,6 +2,7 @@
 import { taskService } from "../../../services/TaskService";
 import "../../../styles/HomeTask.css";
 import { useState, useEffect } from "react";
+import { stringExtensions } from "../../../utils/string-extensions";
 
 export default function HomeTask({ task, handleComplete }) {
   const [isCurrentTimeInRange, setIsCurrentTimeInRange] = useState(false);
@@ -27,33 +28,48 @@ export default function HomeTask({ task, handleComplete }) {
     return () => clearInterval(interval);
   }, [task.endTime]);
 
+  const formattedName = stringExtensions.sliceWithDots(task.name, 24);
+
   return (
     <div
       className={task.completed ? "completed-task" : "container"}
       style={{
-        border: task.completed
-          ? "1px solid #ccc"
+        borderLeft: task.completed
+          ? "0px"
           : isOverdue
-          ? "1px solid rgb(223, 58, 58)"
+          ? "2px solid rgb(223, 58, 58)"
           : isCurrentTimeInRange
-          ? "1px solid #7437ff"
-          : "1px solid transparent",
-        borderRadius: task.completed
-          ? "8px"
-          : isOverdue
-          ? "8px"
-          : isCurrentTimeInRange
-          ? "8px"
+          ? "2px solid #378aff"
           : "0px",
-        height: isCurrentTimeInRange ? "60px" : "",
-        minHeight: isCurrentTimeInRange ? "60px" : "",
+        marginTop: isOverdue ? "4px" : isCurrentTimeInRange ? "4px" : "0px",
+        marginBottom: isOverdue ? "4px" : isCurrentTimeInRange ? "4px" : "0px",
+        background: task.completed
+          ? "#8d8d8d20"
+          : isCurrentTimeInRange
+          ? "#60a2ff24"
+          : "none",
       }}
     >
+      <i
+        className="fa-solid fa-circle-dot"
+        style={{
+          ...styles.currentIcon,
+          display: isCurrentTimeInRange && !task.completed ? "block" : "none",
+        }}
+      ></i>
+      <i
+        className="fa-solid fa-clock"
+        style={{
+          ...styles.overdueIcon,
+          display: isOverdue && !task.completed ? "block" : "none",
+        }}
+      ></i>
       <div className="checkbox-wrapper-19">
         <input
           type="checkbox"
           id={`cbtest-${task.id}`}
           onChange={handleComplete}
+          checked={task.completed}
         />
         <label
           htmlFor={`cbtest-${task.id}`}
@@ -83,17 +99,32 @@ export default function HomeTask({ task, handleComplete }) {
               fontWeight: isCurrentTimeInRange ? "bold" : "normal",
             }}
           >
-            {task.name}
+            {formattedName}
           </p>
           <div style={styles.taskSubBlock}>
-            <div
+            {/* <div
               className={
                 task.note == "" ? "invisible-block" : "visible-task-info-block"
               }
+              style={{
+                background: isCurrentTimeInRange
+                  ? "#60a2ff24"
+                  : "rgb(248, 248, 248)",
+              }}
             >
               <i className="hgi-stroke hgi-sticky-note-02"></i>
-            </div>
-            <div style={styles.dateBlock}>
+            </div> */}
+            <div
+              style={{
+                ...styles.dateBlock,
+                background: task.completed
+                  ? "transparent"
+                  : isCurrentTimeInRange
+                  ? "#60a2ff24"
+                  : "rgb(248, 248, 248)",
+                border: task.completed ? "1px solid #ccc" : "0px",
+              }}
+            >
               <i
                 className="hgi-stroke hgi-clock-01"
                 style={styles.dateIcon}
@@ -155,5 +186,15 @@ const styles = {
   },
   dateLabel: {
     color: "grey",
+  },
+  currentIcon: {
+    color: "#378aff",
+    fontSize: "16px",
+    marginRight: "12px",
+  },
+  overdueIcon: {
+    color: "rgb(223, 58, 58)",
+    fontSize: "16px",
+    marginRight: "12px",
   },
 };

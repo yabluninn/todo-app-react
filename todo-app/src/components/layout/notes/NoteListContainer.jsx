@@ -1,20 +1,17 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import { useState } from "react";
-import Task from "./Task";
-import { useListsContext } from "../../../contexts/ListsContext";
+import Note from "../notes/Note";
 
-export default function TasksListContainer({ list, onTaskSideOpen }) {
-  const [isTasksVisible, setTasksVisibility] = useState(false);
+export default function NoteListContainer({ list, onNoteSideOpen }) {
+  const [isNotesVisible, setNotesVisibility] = useState(false);
 
-  const { removeTask, completeTask } = useListsContext();
-
-  const toggleTasksVisibility = () => setTasksVisibility(!isTasksVisible);
+  const toggleNotesVisibility = () => setNotesVisibility(!isNotesVisible);
 
   return (
     <div style={styles.main}>
       <i
-        className="hgi-stroke hgi-task-daily-02"
+        className="hgi-stroke hgi-note"
         style={{
           position: "absolute",
           color: "#bbb",
@@ -25,8 +22,8 @@ export default function TasksListContainer({ list, onTaskSideOpen }) {
       <div
         style={{
           ...styles.header,
-          borderBottom: isTasksVisible ? "1px solid #eee" : "0",
-          paddingBottom: isTasksVisible ? "8px" : "",
+          borderBottom: isNotesVisible ? "1px solid #eee" : "0",
+          paddingBottom: isNotesVisible ? "8px" : "",
         }}
       >
         <button
@@ -35,11 +32,11 @@ export default function TasksListContainer({ list, onTaskSideOpen }) {
             justifyContent: "center",
             alignItems: "center",
           }}
-          onClick={toggleTasksVisibility}
+          onClick={toggleNotesVisibility}
         >
           <i
             className={
-              isTasksVisible
+              isNotesVisible
                 ? "hgi-stroke hgi-arrow-up-01"
                 : "hgi-stroke hgi-arrow-down-01"
             }
@@ -53,7 +50,7 @@ export default function TasksListContainer({ list, onTaskSideOpen }) {
           }}
         ></div>
         <p style={styles.listName}>{list.name}</p>
-        <div style={styles.tasksCount}>{list.tasks.length}</div>
+        <div style={styles.notesCount}>{list.notes.length}</div>
         <div style={styles.actions}>
           <button style={styles.sortButton}>
             <i className="hgi-stroke hgi-filter" style={styles.sortIcon}></i>
@@ -66,16 +63,17 @@ export default function TasksListContainer({ list, onTaskSideOpen }) {
           </button>
         </div>
       </div>
-      <div style={{ ...styles.tasks, display: isTasksVisible ? "" : "none" }}>
-        {list.tasks.map((task) => (
-          <Task
-            key={task.id}
-            task={task}
+      <div style={{ ...styles.notes, display: isNotesVisible ? "" : "none" }}>
+        {list.notes.map((note) => (
+          <Note
+            key={note.id}
+            note={note}
             handleEdit={() => {
-              onTaskSideOpen(task);
+              console.log("Note to edit:", note);
+              onNoteSideOpen(note);
             }}
-            handleComplete={() => completeTask(task.id, list.id)}
-            handleDelete={() => removeTask(task.id, list.id)}
+            handleComplete={() => console.log("Task completed!")}
+            handleDelete={() => console.log("Delete task")}
           />
         ))}
       </div>
@@ -117,7 +115,7 @@ const styles = {
     fontSize: "18px",
     fontWeight: "bold",
   },
-  tasksCount: {
+  notesCount: {
     fontSize: "14px",
     backgroundColor: "#e6e6e6",
     borderRadius: "16px",
@@ -126,7 +124,7 @@ const styles = {
     color: "#333",
     marginLeft: "12px",
   },
-  tasks: {
+  notes: {
     marginLeft: "64px",
     marginTop: "12px",
   },

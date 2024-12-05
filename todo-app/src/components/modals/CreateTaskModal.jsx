@@ -5,7 +5,8 @@ import { useState } from "react";
 import InputWithLabel from "../ui/InputWithLabel";
 import TextAreaWithLabel from "../ui/TextAreaWithLabel";
 import TaskPriorityDropdown from "../ui/TaskPriorityDropdown";
-import ListDropdown from "../ui/TaskListDropdown";
+import ListDropdown from "../ui/ListDropdown";
+import { LIST_TYPES } from "../../constants/list-types";
 
 export default function CreateTaskModal({ onClose }) {
   const root = document.getElementById("root");
@@ -39,6 +40,7 @@ export default function CreateTaskModal({ onClose }) {
       startTime: taskStartTime,
       endTime: taskEndTime,
       priority: taskPriority,
+      listId: selectedList,
     };
 
     addTaskToList(newTask, selectedList);
@@ -93,7 +95,10 @@ export default function CreateTaskModal({ onClose }) {
           </div>
           <div style={styles.timeInputs}>
             <TaskPriorityDropdown onChange={setTaskPriority} />
-            <ListDropdown onChange={setSelectedList} />
+            <ListDropdown
+              onChange={setSelectedList}
+              listType={LIST_TYPES.TASK_LIST}
+            />
           </div>
         </div>
         <div style={styles.footer}>

@@ -1,17 +1,15 @@
 /* eslint-disable react/prop-types */
 
 import HomeTask from "./HomeTask";
-import { useTaskList } from "../../../contexts/TaskListContext";
 import { useState } from "react";
-import { taskActionsService } from "../../../services/TaskActionsService";
-import { SORTING_ACTIONS } from "../../../constants/sorting-actions";
+// import { taskActionsService } from "../../../services/TaskActionsService";
+// import { SORTING_ACTIONS } from "../../../constants/sorting-actions";
 import { useListsContext } from "../../../contexts/ListsContext";
 import { Link } from "react-router-dom";
 import NothingHere from "../../ui/NothingHere";
 
 export default function HomeTasksWidget() {
-  const { completeTask, updateTaskList } = useTaskList();
-  const { getTodayTasks } = useListsContext();
+  const { getTodayTasks, completeTask } = useListsContext();
 
   const [isSortContextMenuVisible, setSortContextMenuVisible] = useState(false);
 
@@ -49,11 +47,11 @@ export default function HomeTasksWidget() {
             <button
               style={styles.contextMenuButton}
               onClick={() => {
-                const sortedTasks = taskActionsService.sort(
-                  tasks,
-                  SORTING_ACTIONS.HIGH_PRIORITY_FIRST
-                );
-                updateTaskList(sortedTasks);
+                // const sortedTasks = taskActionsService.sort(
+                //   tasks,
+                //   SORTING_ACTIONS.HIGH_PRIORITY_FIRST
+                // );
+                // updateTaskList(sortedTasks);
               }}
             >
               <i
@@ -65,11 +63,11 @@ export default function HomeTasksWidget() {
             <button
               style={styles.contextMenuButton}
               onClick={() => {
-                const sortedTasks = taskActionsService.sort(
-                  tasks,
-                  SORTING_ACTIONS.COMPLETED_FIRST
-                );
-                updateTaskList(sortedTasks);
+                // const sortedTasks = taskActionsService.sort(
+                //   tasks,
+                //   SORTING_ACTIONS.COMPLETED_FIRST
+                // );
+                // updateTaskList(sortedTasks);
               }}
             >
               <i
@@ -81,11 +79,11 @@ export default function HomeTasksWidget() {
             <button
               style={styles.contextMenuButton}
               onClick={() => {
-                const sortedTasks = taskActionsService.sort(
-                  tasks,
-                  SORTING_ACTIONS.UNCOMPLETED_FIRST
-                );
-                updateTaskList(sortedTasks);
+                // const sortedTasks = taskActionsService.sort(
+                //   tasks,
+                //   SORTING_ACTIONS.UNCOMPLETED_FIRST
+                // );
+                // updateTaskList(sortedTasks);
               }}
             >
               <i
@@ -112,18 +110,26 @@ export default function HomeTasksWidget() {
             <HomeTask
               key={task.id}
               task={task}
-              handleComplete={() => completeTask(task.id, !task.completed)}
+              handleComplete={() => {
+                completeTask(task.id, task.listId);
+              }}
               // handleDelete={() => removeTask(task.id)}
             />
           ))}
       </div>
       <div style={styles.hintBlock}>
         <div className="home-hint">
-          <div className="home-hint-ct"></div>
+          <i
+            className="fa-solid fa-circle-dot"
+            style={{ color: "#378aff", marginRight: "8px" }}
+          ></i>
           <p>Current task</p>
         </div>
         <div className="home-hint">
-          <div className="home-hint-cct"></div>
+          <i
+            className="fa-solid fa-clock"
+            style={{ color: "rgb(223, 58, 58)", marginRight: "8px" }}
+          ></i>
           <p>Overdue task</p>
         </div>
       </div>

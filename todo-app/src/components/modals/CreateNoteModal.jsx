@@ -3,29 +3,37 @@ import { useState } from "react";
 
 import InputWithLabel from "../ui/InputWithLabel";
 import TextAreaWithLabel from "../ui/TextAreaWithLabel";
-import { useNoteList } from "../../contexts/NoteListContext";
+import ListDropdown from "../ui/ListDropdown";
+import { LIST_TYPES } from "../../constants/list-types";
+import { useListsContext } from "../../contexts/ListsContext";
 
 export default function CreateNoteModal({ onClose }) {
   const root = document.getElementById("root");
 
-  const { addNote, getNotesLength } = useNoteList();
+  // const { addNote, getNotesLength } = useNoteList();
+  const { addNoteToList } = useListsContext();
 
   const [noteName, setNoteName] = useState("");
   const [noteContent, setNoteContent] = useState("");
 
-  const handleAddNote = () => {
-    if (noteName.trim() != "" && noteContent.trim() != "") {
-      const id = getNotesLength();
+  const [selectedList, setSelectedList] = useState(-1);
 
+  const handleAddNote = () => {
+    if (
+      noteName.trim() != "" &&
+      noteContent.trim() != "" &&
+      selectedList != -1
+    ) {
       const currentDate = new Date();
 
       const newNote = {
-        id: id,
+        id: Date.now(),
         name: noteName,
         content: noteContent,
         creationDate: currentDate,
       };
-      addNote(newNote);
+
+      addNoteToList(newNote, selectedList);
       onClose();
     }
   };
@@ -57,6 +65,11 @@ export default function CreateNoteModal({ onClose }) {
             icon="hgi-stroke hgi-text-firstline-left"
             value={noteContent}
             onChange={(e) => setNoteContent(e.target.value)}
+            height={"220px"}
+          />
+          <ListDropdown
+            onChange={setSelectedList}
+            listType={LIST_TYPES.NOTES_LIST}
           />
         </div>
         <div style={styles.footer}>

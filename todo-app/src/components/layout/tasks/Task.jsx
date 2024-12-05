@@ -12,7 +12,7 @@ export default function Task({
 
   return (
     <div
-      className={task.completed ? "completed-task" : "container"}
+      className={task.completed ? "completed-task" : "t-container"}
       style={{
         border: "1px solid transparent",
         borderRadius: "0px",
@@ -25,6 +25,7 @@ export default function Task({
           type="checkbox"
           id={`cbtest-${task.id}`}
           onChange={handleComplete}
+          checked={task.completed}
         />
         <label htmlFor={`cbtest-${task.id}`} className="check-box"></label>
       </div>

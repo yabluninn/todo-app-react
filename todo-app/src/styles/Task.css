@@ -1,6 +1,6 @@
-.container {
+.t-container {
   width: 100%;
-  border-radius: 8px;
+  /* border-radius: 8px; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -13,7 +13,7 @@
 
 .completed-task {
   width: 100%;
-  border-radius: 8px;
+  /* border-radius: 8px; */
   background-color: transparent !important;
   display: flex;
   justify-content: center;

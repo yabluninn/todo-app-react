@@ -23,11 +23,52 @@ export const ListsProvider = ({ children }) => {
     setNoteLists((prevLists) => prevLists.filter((list) => list.id !== listId));
   };
 
+  const getTaskListById = (listId) => {
+    return taskLists.find((list) => list.id === listId);
+  };
+
   const addTaskToList = (task, listId) => {
     setTaskLists((prevLists) =>
       prevLists.map((list) =>
         list.id === listId
           ? { ...list, tasks: [...(list.tasks || []), task] }
+          : list
+      )
+    );
+  };
+
+  const addNoteToList = (note, listId) => {
+    setNoteLists((prevLists) =>
+      prevLists.map((list) =>
+        list.id === listId
+          ? { ...list, notes: [...(list.notes || []), note] }
+          : list
+      )
+    );
+  };
+
+  const completeTask = (taskId, listId) => {
+    setTaskLists((prevLists) =>
+      prevLists.map((list) =>
+        list.id === listId
+          ? {
+              ...list,
+              tasks: list.tasks.map((task) =>
+                task.id === taskId
+                  ? { ...task, completed: !task.completed }
+                  : task
+              ),
+            }
+          : list
+      )
+    );
+  };
+
+  const removeTask = (taskId, listId) => {
+    setTaskLists((prevLists) =>
+      prevLists.map((list) =>
+        list.id === listId
+          ? { ...list, tasks: list.tasks.filter((task) => task.id !== taskId) }
           : list
       )
     );
@@ -60,8 +101,12 @@ export const ListsProvider = ({ children }) => {
         getTaskListsLength,
         getNoteListsLength,
         addTaskToList,
+        addNoteToList,
         getTasksByDate,
         getTodayTasks,
+        getTaskListById,
+        completeTask,
+        removeTask,
       }}
     >
       {children}
