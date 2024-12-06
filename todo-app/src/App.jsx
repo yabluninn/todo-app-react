@@ -15,6 +15,7 @@ import LandingSignIn from "./landing/pages/LandingSignIn";
 import LandingLogin from "./landing/pages/LandingLogin";
 import Notes from "./components/pages/Notes";
 import Groups from "./components/pages/Groups";
+import {CategoriesProvider} from "./contexts/CategoriesContext.jsx";
 
 function App() {
   const DEFAULT_APP_URL = "/app";
@@ -27,7 +28,8 @@ function App() {
   return (
     <Router>
       <ListsProvider>
-        <TaskListProvider>
+        <CategoriesProvider>
+          <TaskListProvider>
           <NoteListProvider>
             <div className="app">
               {!isLandingPage && <NavMenu />}
@@ -39,13 +41,13 @@ function App() {
                 <Route path={DEFAULT_APP_URL + "/tasks"} element={<Tasks />} />
                 <Route path={DEFAULT_APP_URL + "/notes"} element={<Notes />} />
                 <Route
-                  path={DEFAULT_APP_URL + "/groups"}
-                  element={<Groups />}
+                    path={DEFAULT_APP_URL + "/groups"}
+                    element={<Groups />}
                 />
               </Routes>
             </div>
           </NoteListProvider>
-        </TaskListProvider>
+        </TaskListProvider></CategoriesProvider>
       </ListsProvider>
     </Router>
   );

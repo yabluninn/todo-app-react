@@ -1,5 +1,10 @@
-export default function CreateCategoryButton() {
-  return <button style={styles.main}>Create category</button>;
+// eslint-disable-next-line react/prop-types
+export default function CreateCategoryButton({onOpenModal}) {
+  return (
+      <button style={styles.main} onClick={onOpenModal}>
+        <i className="fa-solid fa-plus" style={styles.icon}></i>
+          Create Category
+      </button>);
 }
 
 const styles = {
@@ -12,5 +17,12 @@ const styles = {
     color: "black",
     border: "2px dashed #bbb",
     background: "#eee",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "row",
   },
+  icon: {
+    marginRight: "8px",
+  }
 };

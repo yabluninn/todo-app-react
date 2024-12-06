@@ -1,4 +1,11 @@
-export default function CategoriesContainer() {
+import CreateCategoryButton from "../../ui/CreateCategoryButton";
+import {useCategories} from "../../../contexts/CategoriesContext.jsx";
+import Category from "./Category.jsx";
+
+// eslint-disable-next-line react/prop-types
+export default function CategoriesContainer({openModal}) {
+  const {categories} = useCategories();
+
   return (
     <div style={styles.main}>
       <div style={styles.header}>
@@ -16,6 +23,12 @@ export default function CategoriesContainer() {
           ></i>
         </button>
       </div>
+      <div style={styles.grid}>
+        {categories && categories.length > 0 && categories.map((category) => (
+            <Category key={category.id} category={category} />
+        ))}
+        <CreateCategoryButton onOpenModal={openModal}/>
+      </div>
     </div>
   );
 }
@@ -23,7 +36,7 @@ export default function CategoriesContainer() {
 const styles = {
   main: {
     width: "100%",
-    height: "240px",
+    height: "120px",
     maxHeight: "240px",
     backgroundColor: "white",
     borderRadius: "8px",
@@ -60,5 +73,13 @@ const styles = {
   moreIcon: {
     fontSize: "22px",
     fontWeight: "bold",
+  },
+  grid: {
+    paddingTop: "12px",
+    display: "flex",
+    justifyContent: "start",
+    alignItems: "center",
+    flexDirection: "row",
+    flexWrap: "wrap",
   },
 };

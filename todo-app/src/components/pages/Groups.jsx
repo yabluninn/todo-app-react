@@ -8,9 +8,11 @@ import ListContainer from "../layout/groups/ListContainer";
 import CreateListModal from "../modals/CreateListModal";
 import { useListsContext } from "../../contexts/ListsContext";
 import CategoriesContainer from "../layout/groups/CategoriesContainer";
+import CreateCategoryModal from "../modals/CreateCategoryModal.jsx";
 
 export default function Groups() {
   const [isCreateListModalOpen, setCreateListModalOpen] = useState(false);
+  const [isCreateCategoryModalOpen, setCreateCategoryModalOpen] = useState(false);
   const [currentListType, setCurrentListType] = useState(null);
 
   const { taskLists, noteLists } = useListsContext();
@@ -25,15 +27,12 @@ export default function Groups() {
     setCurrentListType(null);
   };
 
-  // const defaultLists = [
-  //   {
-  //     id: 0,
-  //     name: "All",
-  //     color: "rgb(160, 160, 160)",
-  //     tasks: [],
-  //   },
-  //   { id: 1, name: "Today", color: "rgb(130, 130, 255)", tasks: [] },
-  // ];
+  const openCreateCategoryModal = () => {
+    setCreateCategoryModalOpen(true);
+  }
+  const closeCreateCategoryModal = () => {
+    setCreateCategoryModalOpen(false);
+  }
 
   return (
     <div className="lists-container">
@@ -48,7 +47,7 @@ export default function Groups() {
           <i className="hgi-stroke hgi-settings-02"></i>
         </button>
       </div>
-      <CategoriesContainer />
+      <CategoriesContainer openModal={openCreateCategoryModal}/>
       <div className="lists-grid">
         <ListContainer
           listType={LIST_TYPES.TASK_LIST}
@@ -70,6 +69,9 @@ export default function Groups() {
           listType={currentListType}
           onClose={closeCreateListModal}
         />
+      )}
+      {isCreateCategoryModalOpen && (
+          <CreateCategoryModal onClose={closeCreateCategoryModal} />
       )}
     </div>
   );
