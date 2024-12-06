@@ -4,9 +4,12 @@ import EditInput from "../../ui/EditInput";
 import EditPriorityDropdown from "../../ui/EditPriorityDropdown";
 import EditTextArea from "../../ui/EditTextArea";
 import { useTaskList } from "../../../contexts/TaskListContext";
+import { useListsContext } from "../../../contexts/ListsContext";
 
-export default function TaskSideSection({ task, listName, onClose }) {
+export default function TaskSideSection({ task, onClose }) {
   const { updateTask } = useTaskList();
+
+  const { getTaskListById } = useListsContext();
 
   const [newTaskName, setNewTaskName] = useState("");
   const [newStartTime, setNewStartTime] = useState("");
@@ -45,6 +48,8 @@ export default function TaskSideSection({ task, listName, onClose }) {
     updateTask(task);
     onClose();
   };
+
+  const listName = getTaskListById(task.listId).name;
 
   return (
     <div style={styles.container}>

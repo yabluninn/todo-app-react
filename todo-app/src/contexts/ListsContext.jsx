@@ -89,6 +89,13 @@ export const ListsProvider = ({ children }) => {
 
   const getNoteListsLength = () => noteLists.length;
 
+  const getRecentNotes = () => {
+    const allNotes = noteLists.flatMap((list) => list.notes);
+    return allNotes.sort(
+      (a, b) => new Date(b.creationDate) - new Date(a.creationDate)
+    );
+  };
+
   return (
     <ListsContext.Provider
       value={{
@@ -107,6 +114,7 @@ export const ListsProvider = ({ children }) => {
         getTaskListById,
         completeTask,
         removeTask,
+        getRecentNotes,
       }}
     >
       {children}

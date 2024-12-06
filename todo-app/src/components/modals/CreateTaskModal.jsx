@@ -61,6 +61,7 @@ export default function CreateTaskModal({ onClose }) {
         </div>
         <div style={styles.content}>
           <InputWithLabel
+            icon="hgi-stroke hgi-text-font"
             type="text"
             placeholder="Enter task name"
             label="Name"
@@ -68,6 +69,7 @@ export default function CreateTaskModal({ onClose }) {
             onChange={(e) => setTaskName(e.target.value)}
           />
           <TextAreaWithLabel
+            icon="hgi-stroke hgi-text-firstline-left"
             placeholder="Enter task description"
             label="Description"
             value={taskDescription}
@@ -75,20 +77,23 @@ export default function CreateTaskModal({ onClose }) {
           />
           <div style={styles.timeInputs}>
             <InputWithLabel
+              icon={"hgi-stroke hgi-calendar-01"}
               type="date"
               label="Date"
               value={taskDate}
               onChange={(e) => setTaskDate(e.target.value)}
             />
             <InputWithLabel
+              icon={"hgi-stroke hgi-clock-03"}
               type="time"
-              label="Start Time"
+              label="From"
               value={taskStartTime}
               onChange={(e) => setTaskStartTime(e.target.value)}
             />
             <InputWithLabel
+              icon={"hgi-stroke hgi-clock-02"}
               type="time"
-              label="End Time"
+              label="To"
               value={taskEndTime}
               onChange={(e) => setTaskEndTime(e.target.value)}
             />

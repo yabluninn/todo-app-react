@@ -109,7 +109,7 @@ export default function ListDropdown({ onChange, listType }) {
 const styles = {
   container: {
     position: "relative",
-    width: "450px",
+    width: "100%",
     marginBottom: "16px",
   },
   label: {

@@ -4,11 +4,12 @@
 import { useState } from "react";
 import { LIST_TYPES } from "../../constants/list-types";
 import "../../styles/Lists.css";
-import ListContainer from "../layout/lists/ListContainer";
+import ListContainer from "../layout/groups/ListContainer";
 import CreateListModal from "../modals/CreateListModal";
 import { useListsContext } from "../../contexts/ListsContext";
+import CategoriesContainer from "../layout/groups/CategoriesContainer";
 
-export default function Lists() {
+export default function Groups() {
   const [isCreateListModalOpen, setCreateListModalOpen] = useState(false);
   const [currentListType, setCurrentListType] = useState(null);
 
@@ -37,11 +38,17 @@ export default function Lists() {
   return (
     <div className="lists-container">
       <div className="lists-header">
-        <p className="l-header-title">Lists</p>
+        <div>
+          <p className="t-header-title">Groups</p>
+          <p className="t-header-subtitle">
+            Here you can manage all your lists and categories
+          </p>
+        </div>
         <button className="l-menu-button">
           <i className="hgi-stroke hgi-settings-02"></i>
         </button>
       </div>
+      <CategoriesContainer />
       <div className="lists-grid">
         <ListContainer
           listType={LIST_TYPES.TASK_LIST}

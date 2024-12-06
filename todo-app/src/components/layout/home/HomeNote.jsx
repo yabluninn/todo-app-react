@@ -62,7 +62,7 @@ const styles = {
   },
   content: {
     fontSize: "14px",
-    color: "#666",
+    color: "#aaa",
     padding: "8px",
     wordWrap: "break-word",
     overflow: "hidden",
@@ -81,7 +81,7 @@ const styles = {
   },
   date: {
     fontSize: "14px",
-    color: "#aaa",
+    color: "#bbb",
     marginLeft: "auto",
   },
 };

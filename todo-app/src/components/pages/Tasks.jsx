@@ -32,15 +32,6 @@ export default function Tasks() {
     setSelectedTask(null);
   };
 
-  // const defaultLists = [
-  //   {
-  //     name: "All",
-  //     color: "rgb(160, 160, 160)",
-  //     tasks: tasks,
-  //   },
-  //   { name: "Today", color: "rgb(130, 130, 255)", tasks: [] },
-  // ];
-
   return (
     <div className="tasks-container">
       <div className="tasks-header">
@@ -67,11 +58,7 @@ export default function Tasks() {
         <CreateTaskModal onClose={closeCreateTaskModal} />
       )}
       {isTaskSideMenuOpen && selectedTask && (
-        <TaskSideSection
-          task={selectedTask}
-          listName={"All"}
-          onClose={closeTaskSideMenu}
-        />
+        <TaskSideSection task={selectedTask} onClose={closeTaskSideMenu} />
       )}
     </div>
   );

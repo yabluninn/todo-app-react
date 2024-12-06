@@ -10,11 +10,11 @@ import NavMenu from "./components/layout/app/NavMenu";
 
 import Tasks from "./components/pages/Tasks";
 import Home from "./components/pages/Home";
-import Lists from "./components/pages/Lists";
 import LandingPage from "./landing/LandingPage";
 import LandingSignIn from "./landing/pages/LandingSignIn";
 import LandingLogin from "./landing/pages/LandingLogin";
 import Notes from "./components/pages/Notes";
+import Groups from "./components/pages/Groups";
 
 function App() {
   const DEFAULT_APP_URL = "/app";
@@ -38,7 +38,10 @@ function App() {
                 <Route path={DEFAULT_APP_URL + "/"} element={<Home />} />
                 <Route path={DEFAULT_APP_URL + "/tasks"} element={<Tasks />} />
                 <Route path={DEFAULT_APP_URL + "/notes"} element={<Notes />} />
-                <Route path={DEFAULT_APP_URL + "/lists"} element={<Lists />} />
+                <Route
+                  path={DEFAULT_APP_URL + "/groups"}
+                  element={<Groups />}
+                />
               </Routes>
             </div>
           </NoteListProvider>

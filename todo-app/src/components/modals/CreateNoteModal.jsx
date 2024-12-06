@@ -6,6 +6,7 @@ import TextAreaWithLabel from "../ui/TextAreaWithLabel";
 import ListDropdown from "../ui/ListDropdown";
 import { LIST_TYPES } from "../../constants/list-types";
 import { useListsContext } from "../../contexts/ListsContext";
+import CreateCategoryButton from "../ui/CreateCategoryButton";
 
 export default function CreateNoteModal({ onClose }) {
   const root = document.getElementById("root");
@@ -51,25 +52,29 @@ export default function CreateNoteModal({ onClose }) {
           </button>
         </div>
         <div style={styles.content}>
-          <InputWithLabel
-            type="text"
-            placeholder="Enter note name"
-            label="Name"
-            icon="hgi-stroke hgi-text-font"
-            value={noteName}
-            onChange={(e) => setNoteName(e.target.value)}
-          />
+          <div style={styles.block}>
+            <InputWithLabel
+              type="text"
+              placeholder="Enter note name"
+              label="Name"
+              icon="hgi-stroke hgi-text-font"
+              value={noteName}
+              onChange={(e) => setNoteName(e.target.value)}
+            />
+            <ListDropdown
+              onChange={setSelectedList}
+              listType={LIST_TYPES.NOTES_LIST}
+            />
+            <CreateCategoryButton />
+          </div>
           <TextAreaWithLabel
             placeholder="Enter note content"
             label="Content"
             icon="hgi-stroke hgi-text-firstline-left"
             value={noteContent}
             onChange={(e) => setNoteContent(e.target.value)}
-            height={"220px"}
-          />
-          <ListDropdown
-            onChange={setSelectedList}
-            listType={LIST_TYPES.NOTES_LIST}
+            width={"450px"}
+            height={"300px"}
           />
         </div>
         <div style={styles.footer}>
@@ -103,7 +108,7 @@ const styles = {
   modal: {
     position: "relative",
     width: "60%",
-    maxWidth: "500px",
+    maxWidth: "55%",
     backgroundColor: "#fff",
     borderRadius: "8px",
     boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
@@ -131,7 +136,15 @@ const styles = {
     color: "#888",
   },
   content: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "start",
+    flexDirection: "row",
     padding: "24px",
+  },
+  block: {
+    width: "55%",
+    marginRight: "24px",
   },
   footer: {
     padding: "16px 24px",

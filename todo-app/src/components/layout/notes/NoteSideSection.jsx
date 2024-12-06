@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
 import EditInput from "../../ui/EditInput";
+import EditTextArea from "../../ui/EditTextArea";
 // import EditPriorityDropdown from "../../ui/EditPriorityDropdown";
 // import EditTextArea from "../../ui/EditTextArea";
 // import { useTaskList } from "../../../contexts/TaskListContext";
@@ -9,14 +10,16 @@ export default function NoteSideSection({ note, listName, onClose }) {
   // const { updateTask } = useTaskList();
 
   const [newName, setNewName] = useState("");
+  const [newContent, setNewContent] = useState("");
 
   useEffect(() => {
     setNewName(note.name);
-  }, [note.name]);
+    setNewContent(note.content);
+  }, [note.name, note.content]);
 
   const saveNote = () => {
     note.name = newName;
-
+    note.content = newContent;
     //updateTask(task);
     onClose();
   };
@@ -40,6 +43,11 @@ export default function NoteSideSection({ note, listName, onClose }) {
         placeholder="Note name..."
         value={newName}
         onChange={(e) => setNewName(e.target.value)}
+      />
+      <EditTextArea
+        placeholder={"Note text..."}
+        value={newContent}
+        onChange={(e) => setNewContent(e.target.value)}
       />
 
       <button style={styles.saveButton} onClick={saveNote}>

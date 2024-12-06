@@ -1,12 +1,14 @@
 /* eslint-disable react/prop-types */
 
 import { Link } from "react-router-dom";
-import { useNoteList } from "../../../contexts/NoteListContext";
 import HomeNote from "./HomeNote";
 import NothingHere from "../../ui/NothingHere";
+import { useListsContext } from "../../../contexts/ListsContext";
 
 export default function HomeNoteWidget() {
-  const { notes } = useNoteList();
+  const { getRecentNotes } = useListsContext();
+
+  const notes = getRecentNotes();
 
   return (
     <div style={styles.main}>

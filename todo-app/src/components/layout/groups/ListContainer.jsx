@@ -46,6 +46,7 @@ const styles = {
   container: {
     width: "100%",
     minHeight: "120px",
+    maxHeight: "420px",
     backgroundColor: "white",
     borderRadius: "8px",
     boxShadow: "rgba(99, 99, 99, 0.05) 0px 2px 12px 0px",
@@ -83,6 +84,8 @@ const styles = {
     fontWeight: "bold",
   },
   grid: {
+    maxHeight: "230px",
     marginTop: "12px",
+    overflowY: "auto",
   },
 };

@@ -7,6 +7,7 @@ export default function TextAreaWithLabel({
   icon,
   value,
   onChange,
+  width,
   height,
 }) {
   return (
@@ -20,7 +21,7 @@ export default function TextAreaWithLabel({
         value={value}
         onChange={onChange}
         required
-        style={{ height: height }}
+        style={{ width: width, height: height }}
       />
     </div>
   );

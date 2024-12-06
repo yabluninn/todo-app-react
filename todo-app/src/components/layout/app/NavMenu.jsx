@@ -34,20 +34,10 @@ export default function NavMenu() {
             label={"Notes"}
             path={"/notes"}
           />
-          {/* <NavButton
-            icon={"hgi-stroke hgi-brain-02"}
-            label={"Habits"}
-            path={"/habits"}
-          /> */}
           <NavButton
-            icon={"hgi-stroke hgi-check-list"}
-            label={"Lists"}
-            path={"/lists"}
-          />
-          <NavButton
-            icon={"hgi-stroke hgi-package"}
-            label={"Categories"}
-            path={"/categories"}
+            icon={"hgi-stroke hgi-dashboard-square-02"}
+            label={"Groups"}
+            path={"/groups"}
           />
         </div>
         <div className="nm-buttons-group">
