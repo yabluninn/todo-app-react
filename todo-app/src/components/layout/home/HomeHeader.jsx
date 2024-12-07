@@ -3,6 +3,8 @@ import { useState } from "react";
 import { headerService } from "../../../services/HeaderService";
 import "../../../styles/Header.css";
 import { dateExtensions } from "../../../utils/date-extensions";
+import ContextMenu from "../../contextMenus/ContextMenu.jsx";
+import ContextMenuButton from "../../contextMenus/ContextMenuButton.jsx";
 
 export default function HomeHeader({
   onOpenCreateTaskModal,
@@ -44,31 +46,14 @@ export default function HomeHeader({
             <i className="hgi-stroke hgi-add-01"></i>
           </button>
           {isContextMenuVisible && (
-            <div className="add-context-menu">
-              <div className="add-context-menu-buttons">
-                <button onClick={onOpenCreateTaskModal}>
-                  <i className="hgi-stroke hgi-task-add-01"></i>
-                  Create a task
-                </button>
-                <button onClick={onOpenCreateNoteModal}>
-                  <i className="hgi-stroke hgi-sticky-note-01"></i>
-                  Create a note
-                </button>
-              </div>
-              <button
-                className="add-context-menu-dissmiss-btn"
-                onClick={toggleContextMenu}
-              >
-                Dismiss
-              </button>
-            </div>
+              <ContextMenu position={{top: "90px", right: "80px"}} toggleVisibility={toggleContextMenu}>
+                <ContextMenuButton title={"Create Task"} icon={"hgi-stroke hgi-task-add-01"} onClick={onOpenCreateTaskModal}/>
+                <ContextMenuButton title={"Create Note"} icon={"hgi-stroke hgi-sticky-note-01"} onClick={onOpenCreateNoteModal}/>
+              </ContextMenu>
           )}
           <button className="h-menu-button">
             <i className="hgi-stroke hgi-settings-02"></i>
           </button>
-          {/* <button className="h-menu-button">
-            <i className="hgi-stroke hgi-filter"></i>
-          </button> */}
         </div>
       </div>
     </>

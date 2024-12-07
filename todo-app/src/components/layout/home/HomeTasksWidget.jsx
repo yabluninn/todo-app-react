@@ -7,6 +7,8 @@ import { useState } from "react";
 import { useListsContext } from "../../../contexts/ListsContext";
 import { Link } from "react-router-dom";
 import NothingHere from "../../ui/NothingHere";
+import ContextMenu from "../../contextMenus/ContextMenu.jsx";
+import ContextMenuButton from "../../contextMenus/ContextMenuButton.jsx";
 
 export default function HomeTasksWidget() {
   const { getTodayTasks, completeTask } = useListsContext();
@@ -42,64 +44,28 @@ export default function HomeTasksWidget() {
         </div>
       </div>
       {isSortContextMenuVisible && (
-        <div style={styles.sortContextMenu}>
-          <div style={styles.contextMenuButtons}>
-            <button
-              style={styles.contextMenuButton}
-              onClick={() => {
+          <ContextMenu position={{top: "160px", left: "410px"}} toggleVisibility={toggleSortContextMenuVisibility}>
+            <ContextMenuButton title={"Sort by Priority"} icon={"hgi-stroke hgi-flag-02"} onClick={""}/>
+            <ContextMenuButton title={"Sort by Completed"} icon={"hgi-stroke hgi-checkmark-square-02"} onClick={""}/>
+            <ContextMenuButton title={"Sort by Uncompleted"} icon={"hgi-stroke hgi-cancel-square"} onClick={""}/>
+           </ContextMenu>
                 // const sortedTasks = taskActionsService.sort(
                 //   tasks,
                 //   SORTING_ACTIONS.HIGH_PRIORITY_FIRST
                 // );
                 // updateTaskList(sortedTasks);
-              }}
-            >
-              <i
-                className="hgi-stroke hgi-flag-02"
-                style={styles.contextMenuButtonIcon}
-              ></i>
-              Sort by Priority
-            </button>
-            <button
-              style={styles.contextMenuButton}
-              onClick={() => {
+
                 // const sortedTasks = taskActionsService.sort(
                 //   tasks,
                 //   SORTING_ACTIONS.COMPLETED_FIRST
                 // );
-                // updateTaskList(sortedTasks);
-              }}
-            >
-              <i
-                className="hgi-stroke hgi-checkmark-square-02"
-                style={styles.contextMenuButtonIcon}
-              ></i>
-              Sort by Completed
-            </button>
-            <button
-              style={styles.contextMenuButton}
-              onClick={() => {
+                // updateTaskList(sortedTasks)
+
                 // const sortedTasks = taskActionsService.sort(
                 //   tasks,
                 //   SORTING_ACTIONS.UNCOMPLETED_FIRST
                 // );
                 // updateTaskList(sortedTasks);
-              }}
-            >
-              <i
-                className="hgi-stroke hgi-cancel-square"
-                style={styles.contextMenuButtonIcon}
-              ></i>
-              Sort by Uncompleted
-            </button>
-          </div>
-          <button
-            style={styles.contextMenuDismissButton}
-            onClick={toggleSortContextMenuVisibility}
-          >
-            Dismiss
-          </button>
-        </div>
       )}
       <div style={styles.container}>
         {tasks.length === 0 && (
@@ -210,50 +176,5 @@ const styles = {
     borderTop: "1px solid #eee",
     justifyContent: "space-around",
     paddingTop: "8px",
-  },
-  sortContextMenu: {
-    position: "absolute",
-    top: "160px",
-    left: "460px",
-    backgroundColor: "white",
-    boxShadow: "0 4px 10px rgba(0, 0, 0, 0.1)",
-    zIndex: "1000",
-    display: "flex",
-    flexDirection: "column",
-    borderRadius: "8px",
-    padding: "10px",
-  },
-  contextMenuButtons: {
-    width: "100%",
-    display: "flex",
-    justifyContent: "start",
-    alignItems: "center",
-    flexDirection: "column",
-    borderBottom: "1px solid #c8c8c8",
-    paddingBottom: "8px",
-  },
-  contextMenuButton: {
-    width: "190px",
-    height: "35px",
-    paddingLeft: "8px",
-    color: "#333",
-    cursor: "pointer",
-    fontSize: "16px",
-    display: "flex",
-    justifyContent: "start",
-    alignItems: "center",
-    borderRadius: "8px",
-  },
-  contextMenuButtonIcon: {
-    marginRight: "12px",
-  },
-  contextMenuDismissButton: {
-    color: "#6b6b6b !important",
-    backgroundColor: "#efefef",
-    marginTop: "8px",
-    padding: "4px",
-    fontSize: "14px",
-    justifyContent: "center !important",
-    borderRadius: "8px",
   },
 };

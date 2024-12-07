@@ -1,6 +1,9 @@
 import { LIST_TYPES } from "../../../constants/list-types";
 import CreateButton from "../../ui/CreateButton";
 import List from "./List";
+import {useState} from "react";
+import ContextMenu from "../../contextMenus/ContextMenu.jsx";
+import ContextMenuButton from "../../contextMenus/ContextMenuButton.jsx";
 
 /* eslint-disable react/prop-types */
 export default function ListContainer({
@@ -8,6 +11,16 @@ export default function ListContainer({
   lists,
   onOpenCreateListModal,
 }) {
+  const [isTasksContextMenuVisible, setIsTasksContextMenuVisible] = useState(false);
+  const [isNotesContextMenuVisible, setIsNotesContextMenuVisible] = useState(false);
+
+  const handleTasksContextMenuClick = () => {
+    setIsTasksContextMenuVisible(!isTasksContextMenuVisible);
+  };
+  const handleNotesContextMenuClick = () => {
+    setIsNotesContextMenuVisible(!isNotesContextMenuVisible);
+  };
+
   return (
     <div style={styles.container}>
       <div style={styles.header}>
@@ -24,7 +37,7 @@ export default function ListContainer({
           ></i>
           <p style={styles.title}>{listType + " List"}</p>
         </div>
-        <button style={styles.moreButton}>
+        <button style={styles.moreButton} onClick={listType === LIST_TYPES.TASK_LIST ? handleTasksContextMenuClick : listType === LIST_TYPES.NOTES_LIST ? handleNotesContextMenuClick : ""}>
           <i
             className="hgi-stroke hgi-more-vertical"
             style={styles.moreIcon}
@@ -38,6 +51,28 @@ export default function ListContainer({
           ))}
       </div>
       <CreateButton title={"New List"} onClick={onOpenCreateListModal} />
+      {isTasksContextMenuVisible && LIST_TYPES.TASK_LIST && (
+          <ContextMenu
+              position={{
+                top: "282px",
+                left: "675px",
+              }}
+              toggleVisibility={handleTasksContextMenuClick}
+          >
+            <ContextMenuButton title={"Remove All"} icon={"hgi-stroke hgi-delete-02"} onClick={""}/>
+          </ContextMenu>
+      )}
+      {isNotesContextMenuVisible && LIST_TYPES.NOTES_LIST && (
+          <ContextMenu
+              position={{
+                top: "282px",
+                right: "135px",
+              }}
+              toggleVisibility={handleNotesContextMenuClick}
+          >
+            <ContextMenuButton title={"Remove All"} icon={"hgi-stroke hgi-delete-02"} onClick={""}/>
+          </ContextMenu>
+      )}
     </div>
   );
 }

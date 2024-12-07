@@ -1,10 +1,19 @@
 import CreateCategoryButton from "../../ui/CreateCategoryButton";
 import {useCategories} from "../../../contexts/CategoriesContext.jsx";
 import Category from "./Category.jsx";
+import {useState} from "react";
+import ContextMenu from "../../contextMenus/ContextMenu.jsx";
+import ContextMenuButton from "../../contextMenus/ContextMenuButton.jsx";
 
 // eslint-disable-next-line react/prop-types
 export default function CategoriesContainer({openModal}) {
   const {categories} = useCategories();
+
+  const [isContextMenuVisible, setIsContextMenuVisible] = useState(false);
+
+  const toggleContextMenuVisibility = () => {
+    setIsContextMenuVisible(!isContextMenuVisible);
+  }
 
   return (
     <div style={styles.main}>
@@ -16,7 +25,7 @@ export default function CategoriesContainer({openModal}) {
           ></i>
           <p style={styles.title}>Categories</p>
         </div>
-        <button style={styles.moreButton}>
+        <button style={styles.moreButton} onClick={toggleContextMenuVisibility}>
           <i
             className="hgi-stroke hgi-more-vertical"
             style={styles.moreIcon}
@@ -29,6 +38,11 @@ export default function CategoriesContainer({openModal}) {
         ))}
         <CreateCategoryButton onOpenModal={openModal}/>
       </div>
+      {isContextMenuVisible && (
+          <ContextMenu position={{top: "160px", right: "135px"}} toggleVisibility={toggleContextMenuVisibility}>
+            <ContextMenuButton title={"Remove All"} icon={"hgi-stroke hgi-delete-02"} onClick={""}/>
+          </ContextMenu>
+      )}
     </div>
   );
 }
