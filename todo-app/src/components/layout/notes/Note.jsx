@@ -1,9 +1,13 @@
 /* eslint-disable react/prop-types */
 import "../../../styles/Note.css";
 import { stringExtensions } from "../../../utils/string-extensions";
+import {useCategories} from "../../../contexts/CategoriesContext.jsx";
+import Category from "../groups/Category.jsx";
 
 export default function Note({ note, handleDelete, handleEdit }) {
   const formattedContent = stringExtensions.sliceWithDots(note.content, 80);
+
+  const {getCategoryById} = useCategories();
 
   return (
     <div
@@ -17,15 +21,23 @@ export default function Note({ note, handleDelete, handleEdit }) {
     >
       <div style={styles.block}>
         <div style={styles.mainBlock}>
-          <div>
-            <p style={styles.noteName}>{note.name}</p>
-            <p style={styles.noteContent}>{formattedContent}</p>
+          <div style={styles.mainSublock}>
+            <div style={{width: "65%"}}>
+              <p style={styles.noteName}>{note.name}</p>
+              <p style={styles.noteContent}>{formattedContent}</p>
+            </div>
+            <div style={styles.categories}>
+              {note.categories && note.categories.map(categoryId => {
+                const category = getCategoryById(categoryId);
+                return <Category key={categoryId} category={category}/>
+              })}
+            </div>
           </div>
           <div style={styles.subBlock}>
             <button onClick={handleEdit} style={styles.actionButton}>
               <i
-                className="hgi-stroke hgi-pencil-edit-01"
-                style={styles.actionIcon}
+                  className="hgi-stroke hgi-pencil-edit-01"
+                  style={styles.actionIcon}
               ></i>
             </button>
             <button onClick={handleDelete} style={styles.actionButton}>
@@ -91,4 +103,18 @@ const styles = {
     justifyContent: "center",
     alignItems: "center",
   },
+  mainSublock: {
+    width: "100%",
+    display: "flex",
+    justifyContent: "start",
+    alignItems: "center",
+    flexDirection: "row",
+  },
+  categories: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "start",
+    flexDirection: "row",
+    marginLeft: "12px"
+  }
 };

@@ -1,18 +1,10 @@
 /* eslint-disable react/prop-types */
 
 import {colorExtensions} from "../../../utils/color-extensions.js";
-import {useState} from "react";
 
-export default  function NoteModalCategory({category, onChange}) {
+export default  function NoteModalCategory({category, onChange, isSelected}) {
     const categoryRgbColor = colorExtensions.hexToRgb(category.color);
     const categoryRgbaColor = colorExtensions.rgbToRgba(categoryRgbColor, 0.1);
-
-    const [isSelected, setIsSelected] = useState(false);
-
-    const handleSelect = (category) => {
-        setIsSelected(true);
-        onChange(category);
-    }
 
     return (<p
         style={{
@@ -21,7 +13,7 @@ export default  function NoteModalCategory({category, onChange}) {
             border: `1px solid ${category.color}`,
             color: isSelected ? "white" : category.color,
         }}
-        onClick={() => handleSelect(category)}
+        onClick={() => onChange(category.id)}
     >
         {category.name}
     </p>)

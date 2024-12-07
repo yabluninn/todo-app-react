@@ -12,7 +12,11 @@ export const CategoriesProvider = ({ children }) => {
 
     const getCategoriesLength = () => {return categories.length;}
 
-    return <CategoriesContext.Provider value={{categories, addCategory, getCategoriesLength}}>{children}</CategoriesContext.Provider>;
+    const getCategoryById = (id) => {
+        return categories.find(category => category.id === id);
+    }
+
+    return <CategoriesContext.Provider value={{categories, addCategory, getCategoriesLength, getCategoryById}}>{children}</CategoriesContext.Provider>;
 }
 
 export const useCategories = () => useContext(CategoriesContext);

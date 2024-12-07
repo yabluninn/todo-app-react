@@ -45,9 +45,13 @@ export default function CreateNoteModal({ onClose }) {
     }
   };
 
-  const handleSetCategories = (category) => {
-    setSelectedCategories((prevCategories) => [...prevCategories, category]);
-  }
+  const handleSetCategories = (categoryId) => {
+    setSelectedCategories((prevCategories) =>
+        prevCategories.includes(categoryId)
+            ? prevCategories.filter((id) => id !== categoryId) // Убираем категорию
+            : [...prevCategories, categoryId] // Добавляем категорию
+    );
+  };
 
   return createPortal(
     <div style={styles.container}>
@@ -64,22 +68,28 @@ export default function CreateNoteModal({ onClose }) {
         <div style={styles.content}>
           <div style={styles.block}>
             <InputWithLabel
-              type="text"
-              placeholder="Enter note name"
-              label="Name"
-              icon="hgi-stroke hgi-text-font"
-              value={noteName}
-              onChange={(e) => setNoteName(e.target.value)}
+                type="text"
+                placeholder="Enter note name"
+                label="Name"
+                icon="hgi-stroke hgi-text-font"
+                value={noteName}
+                onChange={(e) => setNoteName(e.target.value)}
             />
             <ListDropdown
-              onChange={setSelectedList}
-              listType={LIST_TYPES.NOTES_LIST}
+                onChange={setSelectedList}
+                listType={LIST_TYPES.NOTES_LIST}
             />
             <p style={styles.categoriesLabel}><i className={"hgi-stroke hgi-delivery-box-01"}></i>Select Category</p>
             <div style={styles.categoriesGrid}>
-              {categories && categories.map((category) => (
-                  <NoteModalCategory key={category.id} category={category} onChange={handleSetCategories}/>
-              ))}
+              {categories &&
+                  categories.map((category) => (
+                      <NoteModalCategory
+                          key={category.id}
+                          category={category}
+                          onChange={handleSetCategories}
+                          isSelected={selectedCategories.includes(category.id)}
+                      />
+                  ))}
               <Link style={styles.createButton} to={"/app/groups"}>
                 <i className="fa-solid fa-plus" style={styles.createIcon}></i>
                 Create Category
@@ -87,18 +97,18 @@ export default function CreateNoteModal({ onClose }) {
             </div>
           </div>
           <TextAreaWithLabel
-            placeholder="Enter note content"
-            label="Content"
-            icon="hgi-stroke hgi-text-firstline-left"
-            value={noteContent}
-            onChange={(e) => setNoteContent(e.target.value)}
-            width={"450px"}
-            height={"300px"}
+              placeholder="Enter note content"
+              label="Content"
+              icon="hgi-stroke hgi-text-firstline-left"
+              value={noteContent}
+              onChange={(e) => setNoteContent(e.target.value)}
+              width={"450px"}
+              height={"300px"}
           />
         </div>
         <div style={styles.footer}>
           <button style={styles.addButton} onClick={handleAddNote}>
-            <i
+          <i
               className="hgi-stroke hgi-sticky-note-01"
               style={styles.addIcon}
             ></i>

@@ -1,22 +1,13 @@
 import { dateExtensions } from "../../../utils/date-extensions";
 import { stringExtensions } from "../../../utils/string-extensions";
 import HomeCategory from "./HomeCategory";
+import {useCategories} from "../../../contexts/CategoriesContext.jsx";
 
 /* eslint-disable react/prop-types */
 export default function HomeNote({ note }) {
-  // const noteCategory = {
-  //   name: "Test",
-  //   bgColor: "rgb(164, 94, 230)",
-  //   color: "white",
-  // };
-  //
-  // const noteTwoCategory = {
-  //   name: "JS",
-  //   bgColor: "orange",
-  //   color: "white",
-  // };
-
   const formattedContent = stringExtensions.sliceWithDots(note.content, 180);
+
+  const {getCategoryById} = useCategories();
 
   const formattedDate = dateExtensions.getFormattedDate(note.creationDate);
 
@@ -29,9 +20,10 @@ export default function HomeNote({ note }) {
       </div>
       <p style={styles.content}>{formattedContent}</p>
       <div style={styles.categories}>
-        {note.categories && note.categories.map((category) => (
-            <HomeCategory key={category.id} category={category}/>
-        ))}
+        {note.categories && note.categories.map((categoryId) => {
+          const category = getCategoryById(categoryId);
+          return <HomeCategory key={categoryId} category={category} />;
+        })}
       </div>
     </div>
   );
