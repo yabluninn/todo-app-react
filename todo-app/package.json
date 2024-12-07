@@ -8,10 +8,11 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "server": "./server/server.js",
+    "server": "node server/server.js",
     "server:dev": "nodemon ./server/server.js"
   },
   "dependencies": {
+    "axios": "^1.7.9",
     "bcrypt": "^5.1.1",
     "body-parser": "^1.20.3",
     "cors": "^2.8.5",

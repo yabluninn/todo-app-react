@@ -4,17 +4,17 @@ import HomeCategory from "./HomeCategory";
 
 /* eslint-disable react/prop-types */
 export default function HomeNote({ note }) {
-  const noteCategory = {
-    name: "Test",
-    bgColor: "rgb(164, 94, 230)",
-    color: "white",
-  };
-
-  const noteTwoCategory = {
-    name: "JS",
-    bgColor: "orange",
-    color: "white",
-  };
+  // const noteCategory = {
+  //   name: "Test",
+  //   bgColor: "rgb(164, 94, 230)",
+  //   color: "white",
+  // };
+  //
+  // const noteTwoCategory = {
+  //   name: "JS",
+  //   bgColor: "orange",
+  //   color: "white",
+  // };
 
   const formattedContent = stringExtensions.sliceWithDots(note.content, 180);
 
@@ -29,8 +29,9 @@ export default function HomeNote({ note }) {
       </div>
       <p style={styles.content}>{formattedContent}</p>
       <div style={styles.categories}>
-        <HomeCategory category={noteCategory} />
-        <HomeCategory category={noteTwoCategory} />
+        {note.categories && note.categories.map((category) => (
+            <HomeCategory key={category.id} category={category}/>
+        ))}
       </div>
     </div>
   );

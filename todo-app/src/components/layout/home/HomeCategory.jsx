@@ -4,8 +4,8 @@ export default function HomeCategory({ category }) {
     <p
       style={{
         ...styles.main,
-        backgroundColor: category.bgColor,
-        color: category.color,
+        backgroundColor: category.color,
+        color: "white",
       }}
     >
       {category.name}

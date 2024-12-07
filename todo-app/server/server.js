@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import express from "express";
 import mongoose from "mongoose";
+import cors from "cors";
 import bcrypt from "bcrypt";
 
 import { registerValidation } from "./validations/auth.js";
@@ -8,6 +9,7 @@ import { registerValidation } from "./validations/auth.js";
 import { validationResult } from "express-validator";
 
 import User from "./models/User.js";
+import authRoutes from "./routes/auth.js";
 
 mongoose
   .connect(
@@ -23,32 +25,14 @@ mongoose
 const app = express();
 
 app.use(express.json());
+app.use(cors());
+
+// Подключение маршрутов
+app.use("/api", authRoutes);
 
 // Тестовый маршрут
 app.get("/", (req, res) => {
   res.send("API is running!");
-});
-
-app.post("/auth/register", registerValidation, async (req, res) => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty) {
-    return res.status(400).json(errors.array());
-  }
-
-  const password = req.body.password;
-  const salt = await bcrypt.genSalt(10);
-
-  const passwordHash = await bcrypt.hash(password, salt);
-
-  const doc = new User({
-    email: req.body.email,
-    username: req.body.username,
-    passwordHash,
-  });
-
-  const user = await doc.save();
-
-  res.json({ success: true });
 });
 
 app.listen(5000, (err) => {

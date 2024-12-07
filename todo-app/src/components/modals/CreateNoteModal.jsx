@@ -6,7 +6,9 @@ import TextAreaWithLabel from "../ui/TextAreaWithLabel";
 import ListDropdown from "../ui/ListDropdown";
 import { LIST_TYPES } from "../../constants/list-types";
 import { useListsContext } from "../../contexts/ListsContext";
-import CreateCategoryButton from "../ui/CreateCategoryButton";
+import {useCategories} from "../../contexts/CategoriesContext.jsx";
+import {Link} from "react-router-dom";
+import NoteModalCategory from "../layout/groups/NoteModalCategory.jsx";
 
 export default function CreateNoteModal({ onClose }) {
   const root = document.getElementById("root");
@@ -14,10 +16,13 @@ export default function CreateNoteModal({ onClose }) {
   // const { addNote, getNotesLength } = useNoteList();
   const { addNoteToList } = useListsContext();
 
+  const { categories } = useCategories();
+
   const [noteName, setNoteName] = useState("");
   const [noteContent, setNoteContent] = useState("");
 
   const [selectedList, setSelectedList] = useState(-1);
+  const [selectedCategories, setSelectedCategories] = useState([]);
 
   const handleAddNote = () => {
     if (
@@ -32,12 +37,17 @@ export default function CreateNoteModal({ onClose }) {
         name: noteName,
         content: noteContent,
         creationDate: currentDate,
+        categories: selectedCategories,
       };
 
       addNoteToList(newNote, selectedList);
       onClose();
     }
   };
+
+  const handleSetCategories = (category) => {
+    setSelectedCategories((prevCategories) => [...prevCategories, category]);
+  }
 
   return createPortal(
     <div style={styles.container}>
@@ -65,7 +75,16 @@ export default function CreateNoteModal({ onClose }) {
               onChange={setSelectedList}
               listType={LIST_TYPES.NOTES_LIST}
             />
-            <CreateCategoryButton />
+            <p style={styles.categoriesLabel}><i className={"hgi-stroke hgi-delivery-box-01"}></i>Select Category</p>
+            <div style={styles.categoriesGrid}>
+              {categories && categories.map((category) => (
+                  <NoteModalCategory key={category.id} category={category} onChange={handleSetCategories}/>
+              ))}
+              <Link style={styles.createButton} to={"/app/groups"}>
+                <i className="fa-solid fa-plus" style={styles.createIcon}></i>
+                Create Category
+              </Link>
+            </div>
           </div>
           <TextAreaWithLabel
             placeholder="Enter note content"
@@ -176,4 +195,46 @@ const styles = {
     color: "white",
     marginRight: "8px",
   },
+  categoriesGrid: {
+    width: "100%",
+    height: "134px",
+    display: "flex",
+    justifyContent: "start",
+    alignItems: "start",
+    flexDirection: "row",
+    flexWrap: "wrap",
+    border: "2px solid #ccc",
+    borderRadius: "4px",
+    padding: "8px",
+    overflowY: "auto",
+  },
+  categoriesLabel: {
+    fontSize: "14px",
+    fonweight: "500",
+    color: "#333",
+    display: "flex",
+    justifyContent: "start",
+    alignItems: "center",
+    flexDirection: "row",
+    gap: "8px",
+    marginBottom: "8px"
+  },
+  createButton: {
+    width: "fit-content",
+    fontSize: "14px",
+    fontWeight: "bold",
+    padding: "4px 12px 4px 12px",
+    borderRadius: "16px",
+    color: "black",
+    border: "2px dashed #bbb",
+    background: "#eee",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "row",
+    textDecoration: "none",
+  },
+  createIcon: {
+    marginRight: "8px",
+  }
 };
