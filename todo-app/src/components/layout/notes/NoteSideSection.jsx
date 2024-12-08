@@ -2,15 +2,18 @@
 import { useEffect, useState } from "react";
 import EditInput from "../../ui/EditInput";
 import EditTextArea from "../../ui/EditTextArea";
-// import EditPriorityDropdown from "../../ui/EditPriorityDropdown";
-// import EditTextArea from "../../ui/EditTextArea";
-// import { useTaskList } from "../../../contexts/TaskListContext";
+import {useCategories} from "../../../contexts/CategoriesContext.jsx";
+import SideCategory from "./SideCategory.jsx";
+import {useListsContext} from "../../../contexts/ListsContext.jsx";
 
-export default function NoteSideSection({ note, listName, onClose }) {
-  // const { updateTask } = useTaskList();
+export default function NoteSideSection({ note, onClose }) {
 
   const [newName, setNewName] = useState("");
   const [newContent, setNewContent] = useState("");
+  const [categories, setCategories] = useState(note.categories || []);
+
+  const {getCategoryById} = useCategories();
+  const {getNoteListById} = useListsContext();
 
   useEffect(() => {
     setNewName(note.name);
@@ -20,40 +23,76 @@ export default function NoteSideSection({ note, listName, onClose }) {
   const saveNote = () => {
     note.name = newName;
     note.content = newContent;
+    note.categories = categories;
     //updateTask(task);
     onClose();
   };
 
+  const removeCategory = (categoryId) => {
+    setCategories((prevCategories) =>
+        prevCategories.filter((id) => id !== categoryId)
+    );
+  };
+
+  const listName = getNoteListById(note.listId).name;
+
   return (
-    <div style={styles.container}>
-      <div style={styles.header}>
-        <div style={styles.headerSubblock}>
-          <i
-            className="hgi-stroke hgi-arrow-right-double"
-            style={styles.headerIcon}
-          ></i>
-          <p style={styles.headerListName}>{listName}</p>
+      <div style={styles.container}>
+        <div style={styles.header}>
+          <div style={styles.headerSubblock}>
+            <i
+                className="hgi-stroke hgi-arrow-right-double"
+                style={styles.headerIcon}
+            ></i>
+            <p style={styles.headerListName}>{listName}</p>
+          </div>
+          <button style={styles.closeButton} onClick={onClose}>
+            <i className="hgi-stroke hgi-cancel-01" style={styles.closeIcon}></i>
+          </button>
         </div>
-        <button style={styles.closeButton} onClick={onClose}>
-          <i className="hgi-stroke hgi-cancel-01" style={styles.closeIcon}></i>
+        <div style={styles.infoBlock}>
+          <div style={styles.infoSubBlock}>
+            <EditInput
+                type="text"
+                placeholder="Note name..."
+                value={newName}
+                onChange={(e) => setNewName(e.target.value)}
+            />
+            <p style={styles.infoLabel}>Name</p>
+          </div>
+        </div>
+        <div style={styles.infoBlock}>
+          <div style={styles.infoSubBlock}>
+            <EditTextArea
+                placeholder={"Note text..."}
+                value={newContent}
+                onChange={(e) => setNewContent(e.target.value)}
+            />
+            <p style={styles.infoLabel}>Text</p>
+          </div>
+        </div>
+        <div style={styles.infoBlock}>
+          <div style={styles.infoSubBlock}>
+            <div style={styles.categories}>
+              {categories.map((categoryId) => {
+                const category = getCategoryById(categoryId);
+                return (
+                    <SideCategory
+                        key={categoryId}
+                        category={category}
+                        onSelected={removeCategory}
+                    />
+                );
+              })}
+            </div>
+            <p style={styles.infoLabel}>Categories</p>
+          </div>
+        </div>
+
+        <button style={styles.saveButton} onClick={saveNote}>
+          Save
         </button>
       </div>
-      <EditInput
-        type="text"
-        placeholder="Note name..."
-        value={newName}
-        onChange={(e) => setNewName(e.target.value)}
-      />
-      <EditTextArea
-        placeholder={"Note text..."}
-        value={newContent}
-        onChange={(e) => setNewContent(e.target.value)}
-      />
-
-      <button style={styles.saveButton} onClick={saveNote}>
-        Save
-      </button>
-    </div>
   );
 }
 
@@ -138,4 +177,17 @@ const styles = {
     alignItems: "center",
     marginTop: "43%",
   },
+  categories: {
+    width: "100%",
+    minHeight: "40px",
+    display: "flex",
+    justifyContent: "start",
+    alignItems: "center",
+    flexDirection: "row",
+    flexWrap: "wrap",
+    padding: "8px 12px",
+    border: "1px solid #ccc",
+    borderRadius: "4px",
+    backgroundColor:"rgb(251, 251, 251)",
+  }
 };

@@ -2,9 +2,12 @@
 /* eslint-disable no-unused-vars */
 import { useState } from "react";
 import Note from "../notes/Note";
+import {useListsContext} from "../../../contexts/ListsContext.jsx";
 
 export default function NoteListContainer({ list, onNoteSideOpen }) {
   const [isNotesVisible, setNotesVisibility] = useState(false);
+
+  const {removeNote} = useListsContext()
 
   const toggleNotesVisibility = () => setNotesVisibility(!isNotesVisible);
 
@@ -72,8 +75,7 @@ export default function NoteListContainer({ list, onNoteSideOpen }) {
               console.log("Note to edit:", note);
               onNoteSideOpen(note);
             }}
-            handleComplete={() => console.log("Task completed!")}
-            handleDelete={() => console.log("Delete task")}
+            handleDelete={() => removeNote(note.id, note.listId)}
           />
         ))}
       </div>

@@ -16,7 +16,11 @@ export const CategoriesProvider = ({ children }) => {
         return categories.find(category => category.id === id);
     }
 
-    return <CategoriesContext.Provider value={{categories, addCategory, getCategoriesLength, getCategoryById}}>{children}</CategoriesContext.Provider>;
+    const removeAllCategories = () => {
+        setCategories([]);
+    }
+
+    return <CategoriesContext.Provider value={{categories, addCategory, getCategoriesLength, getCategoryById, removeAllCategories}}>{children}</CategoriesContext.Provider>;
 }
 
 export const useCategories = () => useContext(CategoriesContext);

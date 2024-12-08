@@ -23,9 +23,21 @@ export const ListsProvider = ({ children }) => {
     setNoteLists((prevLists) => prevLists.filter((list) => list.id !== listId));
   };
 
+  const removeAllTaskLists = () => {
+      setTaskLists([]);
+  }
+
+  const removeAllNoteLists = () => {
+      setNoteLists([]);
+  }
+
   const getTaskListById = (listId) => {
     return taskLists.find((list) => list.id === listId);
   };
+
+  const getNoteListById = (listId) => {
+      return noteLists.find((list) => list.id === listId);
+  }
 
   const addTaskToList = (task, listId) => {
     setTaskLists((prevLists) =>
@@ -74,6 +86,16 @@ export const ListsProvider = ({ children }) => {
     );
   };
 
+  const removeNote = (noteId, listId) => {
+      setNoteLists((prevLists) =>
+          prevLists.map((list) =>
+              list.id === listId
+                  ? { ...list, notes: list.notes.filter((note) => note.id !== noteId) }
+                  : list
+          )
+      );
+  }
+
   const getTasksByDate = (date) => {
     return taskLists.flatMap((list) =>
       list.tasks.filter((task) => task.date === date)
@@ -112,9 +134,13 @@ export const ListsProvider = ({ children }) => {
         getTasksByDate,
         getTodayTasks,
         getTaskListById,
+        getNoteListById,
         completeTask,
         removeTask,
+        removeNote,
         getRecentNotes,
+        removeAllTaskLists,
+        removeAllNoteLists,
       }}
     >
       {children}

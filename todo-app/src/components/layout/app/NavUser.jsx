@@ -1,14 +1,8 @@
 /* eslint-disable react/prop-types */
-export default function NavUser({ user }) {
-  const formatContent = (content) => {
-    if (content.length >= 15) {
-      return content.slice(0, 15) + "...";
-    } else {
-      return content;
-    }
-  };
+import {stringExtensions} from "../../../utils/string-extensions.js";
 
-  const formattedUsername = formatContent(user.username);
+export default function NavUser({ user }) {
+  const formattedUsername = stringExtensions.sliceWithDots(user.username, 15);
 
   return (
     <div style={styles.main}>

@@ -4,6 +4,7 @@ import List from "./List";
 import {useState} from "react";
 import ContextMenu from "../../contextMenus/ContextMenu.jsx";
 import ContextMenuButton from "../../contextMenus/ContextMenuButton.jsx";
+import {useListsContext} from "../../../contexts/ListsContext.jsx";
 
 /* eslint-disable react/prop-types */
 export default function ListContainer({
@@ -14,11 +15,16 @@ export default function ListContainer({
   const [isTasksContextMenuVisible, setIsTasksContextMenuVisible] = useState(false);
   const [isNotesContextMenuVisible, setIsNotesContextMenuVisible] = useState(false);
 
+  const {removeTaskList, removeNoteList, removeAllTaskLists, removeAllNoteLists} = useListsContext()
+
   const handleTasksContextMenuClick = () => {
     setIsTasksContextMenuVisible(!isTasksContextMenuVisible);
+    setIsNotesContextMenuVisible(false);
   };
+
   const handleNotesContextMenuClick = () => {
     setIsNotesContextMenuVisible(!isNotesContextMenuVisible);
+    setIsTasksContextMenuVisible(false);
   };
 
   return (
@@ -35,7 +41,7 @@ export default function ListContainer({
             }
             style={styles.headerIcon}
           ></i>
-          <p style={styles.title}>{listType + " List"}</p>
+          <p style={styles.title}>{listType + " Lists"}</p>
         </div>
         <button style={styles.moreButton} onClick={listType === LIST_TYPES.TASK_LIST ? handleTasksContextMenuClick : listType === LIST_TYPES.NOTES_LIST ? handleNotesContextMenuClick : ""}>
           <i
@@ -47,11 +53,17 @@ export default function ListContainer({
       <div style={styles.grid}>
         {lists &&
           lists.map((list) => (
-            <List key={list.id} list={list} listType={listType} />
+            <List key={list.id} list={list} listType={listType} onDelete={() =>
+                listType === LIST_TYPES.TASK_LIST
+                    ? removeTaskList(list.id)
+                    : listType === LIST_TYPES.NOTES_LIST
+                        ? removeNoteList(list.id)
+                        : console.error("Unknown list type")
+            }/>
           ))}
       </div>
       <CreateButton title={"New List"} onClick={onOpenCreateListModal} />
-      {isTasksContextMenuVisible && LIST_TYPES.TASK_LIST && (
+      {isTasksContextMenuVisible && listType === LIST_TYPES.TASK_LIST && (
           <ContextMenu
               position={{
                 top: "282px",
@@ -59,10 +71,10 @@ export default function ListContainer({
               }}
               toggleVisibility={handleTasksContextMenuClick}
           >
-            <ContextMenuButton title={"Remove All"} icon={"hgi-stroke hgi-delete-02"} onClick={""}/>
+            <ContextMenuButton title={"Remove All"} icon={"hgi-stroke hgi-delete-02"} onClick={removeAllTaskLists}/>
           </ContextMenu>
       )}
-      {isNotesContextMenuVisible && LIST_TYPES.NOTES_LIST && (
+      {isNotesContextMenuVisible && listType === LIST_TYPES.NOTES_LIST && (
           <ContextMenu
               position={{
                 top: "282px",
@@ -70,7 +82,7 @@ export default function ListContainer({
               }}
               toggleVisibility={handleNotesContextMenuClick}
           >
-            <ContextMenuButton title={"Remove All"} icon={"hgi-stroke hgi-delete-02"} onClick={""}/>
+            <ContextMenuButton title={"Remove All"} icon={"hgi-stroke hgi-delete-02"} onClick={removeAllNoteLists}/>
           </ContextMenu>
       )}
     </div>

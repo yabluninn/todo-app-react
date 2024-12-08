@@ -60,7 +60,7 @@ export default function CreateCategoryModal({ onClose }) {
         </div>
         <div style={styles.footer}>
           <button style={styles.addButton} onClick={handleAddCategory}>
-            Create list
+            Create category
           </button>
         </div>
       </div>

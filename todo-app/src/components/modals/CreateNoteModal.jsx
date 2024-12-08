@@ -38,6 +38,7 @@ export default function CreateNoteModal({ onClose }) {
         content: noteContent,
         creationDate: currentDate,
         categories: selectedCategories,
+        listId: selectedList,
       };
 
       addNoteToList(newNote, selectedList);

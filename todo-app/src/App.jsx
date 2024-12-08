@@ -30,24 +30,25 @@ function App() {
       <ListsProvider>
         <CategoriesProvider>
           <TaskListProvider>
-          <NoteListProvider>
-            <div className="app">
-              {!isLandingPage && <NavMenu />}
-              <Routes>
-                <Route path="/" element={<LandingPage />} />
-                <Route path="/signup" element={<LandingSignIn />} />
-                <Route path="/login" element={<LandingLogin />} />
-                <Route path={DEFAULT_APP_URL + "/"} element={<Home />} />
-                <Route path={DEFAULT_APP_URL + "/tasks"} element={<Tasks />} />
-                <Route path={DEFAULT_APP_URL + "/notes"} element={<Notes />} />
-                <Route
-                    path={DEFAULT_APP_URL + "/groups"}
-                    element={<Groups />}
-                />
-              </Routes>
-            </div>
-          </NoteListProvider>
-        </TaskListProvider></CategoriesProvider>
+            <NoteListProvider>
+              <div className="app">
+                {!isLandingPage && <NavMenu />}
+                <Routes>
+                  <Route path="/" element={<LandingPage />} />
+                  <Route path="/signup" element={<LandingSignIn />} />
+                  <Route path="/login" element={<LandingLogin />} />
+                  <Route path={DEFAULT_APP_URL + "/"} element={<Home />} />
+                  <Route path={DEFAULT_APP_URL + "/tasks"} element={<Tasks />} />
+                  <Route path={DEFAULT_APP_URL + "/notes"} element={<Notes />} />
+                  <Route
+                      path={DEFAULT_APP_URL + "/groups"}
+                      element={<Groups />}
+                  />
+                </Routes>
+              </div>
+            </NoteListProvider>
+          </TaskListProvider>
+        </CategoriesProvider>
       </ListsProvider>
     </Router>
   );

@@ -7,7 +7,7 @@ import ContextMenuButton from "../../contextMenus/ContextMenuButton.jsx";
 
 // eslint-disable-next-line react/prop-types
 export default function CategoriesContainer({openModal}) {
-  const {categories} = useCategories();
+  const {categories, removeAllCategories} = useCategories();
 
   const [isContextMenuVisible, setIsContextMenuVisible] = useState(false);
 
@@ -40,7 +40,7 @@ export default function CategoriesContainer({openModal}) {
       </div>
       {isContextMenuVisible && (
           <ContextMenu position={{top: "160px", right: "135px"}} toggleVisibility={toggleContextMenuVisibility}>
-            <ContextMenuButton title={"Remove All"} icon={"hgi-stroke hgi-delete-02"} onClick={""}/>
+            <ContextMenuButton title={"Remove All"} icon={"hgi-stroke hgi-delete-02"} onClick={removeAllCategories}/>
           </ContextMenu>
       )}
     </div>

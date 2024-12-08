@@ -1,7 +1,7 @@
 import { LIST_TYPES } from "../../../constants/list-types";
 
 /* eslint-disable react/prop-types */
-export default function List({ list, listType }) {
+export default function List({ list, listType, onDelete }) {
   return (
     <div style={styles.container}>
       <div style={styles.block}>
@@ -43,7 +43,7 @@ export default function List({ list, listType }) {
             style={styles.actionIcon}
           ></i>
         </button>
-        <button onClick={"handleDelete"} style={styles.actionButton}>
+        <button onClick={onDelete} style={styles.actionButton}>
           <i
             className="hgi-stroke hgi-delete-02"
             style={{ ...styles.actionIcon, color: "red" }}

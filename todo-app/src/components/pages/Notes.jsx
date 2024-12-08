@@ -62,7 +62,6 @@ export default function Notes() {
       {isNoteSideMenuOpen && selectedNote && (
         <NoteSideSection
           note={selectedNote}
-          listName={"All"}
           onClose={closeNoteSideMenu}
         />
       )}

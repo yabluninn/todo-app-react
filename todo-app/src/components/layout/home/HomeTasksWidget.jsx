@@ -2,8 +2,6 @@
 
 import HomeTask from "./HomeTask";
 import { useState } from "react";
-// import { taskActionsService } from "../../../services/TaskActionsService";
-// import { SORTING_ACTIONS } from "../../../constants/sorting-actions";
 import { useListsContext } from "../../../contexts/ListsContext";
 import { Link } from "react-router-dom";
 import NothingHere from "../../ui/NothingHere";
