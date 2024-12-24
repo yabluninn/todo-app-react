@@ -1,14 +1,17 @@
 /* eslint-disable react/prop-types */
 
 import HomeTask from "./HomeTask";
-import { useState } from "react";
+import {useEffect, useState} from "react";
 import { useListsContext } from "../../../contexts/ListsContext";
 import { Link } from "react-router-dom";
 import NothingHere from "../../ui/NothingHere";
 import ContextMenu from "../../contextMenus/ContextMenu.jsx";
 import ContextMenuButton from "../../contextMenus/ContextMenuButton.jsx";
+import {taskActionsService} from "../../../services/TaskActionsService.js";
+import {SORTING_ACTIONS} from "../../../constants/sorting-actions.js";
 
 export default function HomeTasksWidget() {
+  const [todayTasks, setTodayTasks] = useState([]);
   const { getTodayTasks, completeTask } = useListsContext();
 
   const [isSortContextMenuVisible, setSortContextMenuVisible] = useState(false);
@@ -17,7 +20,15 @@ export default function HomeTasksWidget() {
     setSortContextMenuVisible(!isSortContextMenuVisible);
   };
 
-  const tasks = getTodayTasks();
+  useEffect(() => {
+    const tasks = getTodayTasks();
+    setTodayTasks(tasks);
+  }, [getTodayTasks]);
+
+  const sortTodayTasks = (action) => {
+    const sortedTasks = taskActionsService.sort(todayTasks, action);
+    setTodayTasks(sortedTasks);
+  }
 
   return (
     <div style={styles.main}>
@@ -43,34 +54,23 @@ export default function HomeTasksWidget() {
       </div>
       {isSortContextMenuVisible && (
           <ContextMenu position={{top: "160px", left: "410px"}} toggleVisibility={toggleSortContextMenuVisibility}>
-            <ContextMenuButton title={"Sort by Priority"} icon={"hgi-stroke hgi-flag-02"} onClick={""}/>
-            <ContextMenuButton title={"Sort by Completed"} icon={"hgi-stroke hgi-checkmark-square-02"} onClick={""}/>
-            <ContextMenuButton title={"Sort by Uncompleted"} icon={"hgi-stroke hgi-cancel-square"} onClick={""}/>
+            <ContextMenuButton title={"Sort by Priority"} icon={"hgi-stroke hgi-flag-02"} onClick={() => {
+              sortTodayTasks(SORTING_ACTIONS.HIGH_PRIORITY_FIRST)
+            }} />
+            <ContextMenuButton title={"Sort by Completed"} icon={"hgi-stroke hgi-checkmark-square-02"} onClick={() => {
+              sortTodayTasks(SORTING_ACTIONS.COMPLETED_FIRST)
+            }}/>
+            <ContextMenuButton title={"Sort by Uncompleted"} icon={"hgi-stroke hgi-cancel-square"} onClick={() => {
+              sortTodayTasks(SORTING_ACTIONS.UNCOMPLETED_FIRST)
+            }}/>
            </ContextMenu>
-                // const sortedTasks = taskActionsService.sort(
-                //   tasks,
-                //   SORTING_ACTIONS.HIGH_PRIORITY_FIRST
-                // );
-                // updateTaskList(sortedTasks);
-
-                // const sortedTasks = taskActionsService.sort(
-                //   tasks,
-                //   SORTING_ACTIONS.COMPLETED_FIRST
-                // );
-                // updateTaskList(sortedTasks)
-
-                // const sortedTasks = taskActionsService.sort(
-                //   tasks,
-                //   SORTING_ACTIONS.UNCOMPLETED_FIRST
-                // );
-                // updateTaskList(sortedTasks);
       )}
       <div style={styles.container}>
-        {tasks.length === 0 && (
+        {todayTasks.length === 0 && (
           <NothingHere icon={"fa-solid fa-clipboard-list"} />
         )}
-        {tasks.length > 0 &&
-          tasks.map((task) => (
+        {todayTasks.length > 0 &&
+            todayTasks.map((task) => (
             <HomeTask
               key={task.id}
               task={task}
