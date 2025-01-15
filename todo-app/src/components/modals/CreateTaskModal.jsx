@@ -7,6 +7,8 @@ import TextAreaWithLabel from "../ui/TextAreaWithLabel";
 import TaskPriorityDropdown from "../ui/TaskPriorityDropdown";
 import ListDropdown from "../ui/ListDropdown";
 import { LIST_TYPES } from "../../constants/list-types";
+import CreateButton from "../ui/CreateButton.jsx";
+import SelectRelatedNoteModal from "./SelectRelatedNoteModal.jsx";
 
 export default function CreateTaskModal({ onClose }) {
   const root = document.getElementById("root");
@@ -19,6 +21,8 @@ export default function CreateTaskModal({ onClose }) {
   const [taskEndTime, setTaskEndTime] = useState("");
   const [taskPriority, setTaskPriority] = useState("");
   const [selectedList, setSelectedList] = useState(-1);
+  const [relatedNote, setRelatedNote] = useState(null);
+  const [showSelectNoteModal, setShowSelectNoteModal] = useState(false);
 
   const handleAddTask = () => {
     if (
@@ -41,6 +45,7 @@ export default function CreateTaskModal({ onClose }) {
       endTime: taskEndTime,
       priority: taskPriority,
       listId: selectedList,
+      relatedNoteId: relatedNote?.id || null,
     };
 
     addTaskToList(newTask, selectedList);
@@ -105,6 +110,22 @@ export default function CreateTaskModal({ onClose }) {
               listType={LIST_TYPES.TASK_LIST}
             />
           </div>
+          {relatedNote ? (
+              <div style={styles.relatedNote}>
+                <p>Related Note: {relatedNote.name}</p>
+                <button
+                    style={styles.changeNoteButton}
+                    onClick={() => setShowSelectNoteModal(true)}
+                >
+                  Change Related Note
+                </button>
+              </div>
+          ) : (
+              <CreateButton
+                  title={"Add Related Note"}
+                  onClick={() => setShowSelectNoteModal(true)}
+              />
+          )}
         </div>
         <div style={styles.footer}>
           <button style={styles.addButton} onClick={handleAddTask}>
@@ -112,6 +133,15 @@ export default function CreateTaskModal({ onClose }) {
           </button>
         </div>
       </div>
+      {showSelectNoteModal && (
+          <SelectRelatedNoteModal
+              onClose={() => setShowSelectNoteModal(false)}
+              onSelect={(note) => {
+                setRelatedNote(note);
+                setShowSelectNoteModal(false);
+              }}
+          />
+      )}
     </div>,
     root
   );
