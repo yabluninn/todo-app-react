@@ -1,0 +1,57 @@
+.profile-container {
+    width: 86%;
+    height: 100%;
+    padding: 30px 112px 24px 112px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.profile-wrapper{
+    width: 50%;
+    height: 90%;
+    background-color: white;
+    border-radius: 8px;
+    padding: 18px;
+    box-shadow: rgba(99, 99, 99, 0.05) 0px 2px 12px 0px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    flex-direction: column;
+}
+
+.profile-main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.logout-button{
+    width: 50%;
+    height: 35px;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #aaa;
+    transition: background-color 0.3s;
+}
+
+.logout-button:hover{
+    background-color: #f4f4f4;
+}
+
+.delete-button{
+    width: 50%;
+    height: 35px;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #cf0000;
+    transition: background-color 0.3s;
+}
+
+.delete-button:hover{
+    background-color: rgba(255, 0, 0, 0.1);
+}

@@ -16,6 +16,7 @@ import LandingLogin from "./landing/pages/LandingLogin";
 import Notes from "./components/pages/Notes";
 import Groups from "./components/pages/Groups";
 import {CategoriesProvider} from "./contexts/CategoriesContext.jsx";
+import Profile from "./components/pages/Profile.jsx";
 
 function App() {
   const DEFAULT_APP_URL = "/app";
@@ -44,6 +45,7 @@ function App() {
                       path={DEFAULT_APP_URL + "/groups"}
                       element={<Groups />}
                   />
+                  <Route path={DEFAULT_APP_URL + "/profile"} element={<Profile />} />
                 </Routes>
               </div>
             </NoteListProvider>

@@ -1,17 +1,28 @@
 /* eslint-disable react/prop-types */
 import {stringExtensions} from "../../../utils/string-extensions.js";
+import {useState} from "react";
+import {Link} from "react-router-dom";
 
 export default function NavUser({ user }) {
+  const [isHovered, setIsHovered] = useState(false);
+
+  const DEFAULT_APP_URL = "/app";
+
   const formattedUsername = stringExtensions.sliceWithDots(user.username, 15);
 
   return (
-    <div style={styles.main}>
+    <Link
+        to={DEFAULT_APP_URL + "/profile"}
+        style={{...styles.main, cursor: isHovered? "pointer" : "default"}}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+    >
       <img src={user.avatar} style={styles.image}></img>
       <div style={styles.info}>
         <p style={styles.username}>{formattedUsername}</p>
         <p style={styles.account}>{user.accountType} Account</p>
       </div>
-    </div>
+    </Link>
   );
 }
 
@@ -27,6 +38,7 @@ const styles = {
     borderRadius: "8px",
     padding: "6px",
     marginTop: "44px",
+    textDecoration: "none",
   },
   image: {
     width: "50px",

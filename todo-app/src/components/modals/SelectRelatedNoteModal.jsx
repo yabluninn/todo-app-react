@@ -34,8 +34,8 @@ export default function SelectRelatedNoteModal({ onClose, onSelect }) {
                                 key={note.id}
                                 style={{
                                     ...styles.noteItem,
-                                    backgroundColor:
-                                        selectedNote?.id === note.id ? "#f0f0f0" : "transparent",
+                                    borderColor:
+                                        selectedNote?.id === note.id ? "#7437ff" : "transparent",
                                 }}
                                 onClick={() => setSelectedNote(note)}
                             >
@@ -104,6 +104,7 @@ const styles = {
         cursor: "pointer",
         borderRadius: "4px",
         marginBottom: "8px",
+        border: "1px solid transparent",
     },
     addButton: {
         backgroundColor: "#7437ff",
