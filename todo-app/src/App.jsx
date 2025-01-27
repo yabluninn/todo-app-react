@@ -17,6 +17,7 @@ import Notes from "./components/pages/Notes";
 import Groups from "./components/pages/Groups";
 import {CategoriesProvider} from "./contexts/CategoriesContext.jsx";
 import Profile from "./components/pages/Profile.jsx";
+import Analytics from "./components/pages/Analytics.jsx";
 
 function App() {
   const DEFAULT_APP_URL = "/app";
@@ -41,6 +42,7 @@ function App() {
                   <Route path={DEFAULT_APP_URL + "/"} element={<Home />} />
                   <Route path={DEFAULT_APP_URL + "/tasks"} element={<Tasks />} />
                   <Route path={DEFAULT_APP_URL + "/notes"} element={<Notes />} />
+                  <Route path={DEFAULT_APP_URL + "/analytics"} element={<Analytics />} />
                   <Route
                       path={DEFAULT_APP_URL + "/groups"}
                       element={<Groups />}
