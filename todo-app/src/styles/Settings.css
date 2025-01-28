@@ -1,0 +1,105 @@
+.settings-container {
+    width: 86%;
+    height: 100%;
+    padding: 30px 112px 24px 112px;
+    display: flex;
+    justify-content: start;
+    align-items: start;
+    flex-direction: column;
+}
+
+.settings-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    margin-bottom: 26px;
+}
+
+.s-header-title {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.s-header-subtitle {
+    font-size: 16px;
+    color: #676767;
+}
+
+.settings-wrapper {
+    width: 100%;
+    background-color: white;
+    border-radius: 8px;
+    padding: 18px;
+    box-shadow: rgba(99, 99, 99, 0.05) 0px 2px 12px 0px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.s-block {
+    width: 100%;
+    background-color: #f8f8f8;
+    border-radius: 8px;
+    padding: 18px;
+}
+
+.s-block-title {
+    width: 100%;
+    text-align: start;
+    font-size: 18px;
+    font-weight: bold;
+    border-bottom: 1px solid #e4e4e4;
+    padding-bottom: 12px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    flex-direction: row;
+    gap: 12px;
+}
+
+.s-block-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    margin-top: 16px;
+}
+
+.s-block-info-title {
+    font-size: 16px;
+}
+
+.s-block-info-content-p {
+    font-size: 16px;
+    color: #6a6a6a;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 12px;
+}
+
+.s-block-info-content-p button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.s-block-info-content-p i {
+    font-size: 18px;
+    color: #6a6a6a;
+}
+
+.s-block-default-button {
+    font-size: 16px;
+    color: #7437ff;
+}
+
+.s-block-red-button {
+    font-size: 16px;
+    color: #ea1111;
+}
