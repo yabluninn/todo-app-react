@@ -9,7 +9,7 @@ export default function Settings() {
                 <div>
                     <p className="s-header-title">Settings</p>
                     <p className="s-header-subtitle">
-                        Here you can manage your profile&apos;s info, data, and appearance.
+                        Here you can manage your profile&apos;s info, data, and appearance
                     </p>
                 </div>
             </div>
