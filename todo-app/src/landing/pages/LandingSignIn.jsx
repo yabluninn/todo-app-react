@@ -1,7 +1,8 @@
 import "../../styles/landing/LandingSignIn.css";
 
 import axios from "axios";
-import {useState} from "react";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function LandingSignIn() {
     const [formData, setFormData] = useState({
@@ -12,8 +13,8 @@ export default function LandingSignIn() {
 
     const [error, setError] = useState("");
     const [success, setSuccess] = useState(false);
+    const [loading, setLoading] = useState(false);
 
-    // Обновление состояния при вводе данных
     const handleChange = (e) => {
         setFormData({
             ...formData,
@@ -21,63 +22,74 @@ export default function LandingSignIn() {
         });
     };
 
-    // Обработка отправки формы
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true);
+        setError("");
+        setSuccess(false);
+
         try {
-            // Отправка данных на сервер
             const response = await axios.post("http://localhost:5000/api/auth/register", formData);
             setSuccess(true);
-            setError(""); // Очистка ошибок при успехе
             console.log("Registration successful:", response.data);
+            setFormData({ email: "", username: "", password: "" });
         } catch (err) {
-            // Обработка ошибок
-            if (err.response) {
-                setError(err.response.data.message || "Registration failed");
-            } else {
-                setError("Server error, please try again later.");
-            }
+            setError(err.response?.data?.message || "Something went wrong, please try again.");
+        } finally {
+            setLoading(false);
         }
     };
 
     return (
-        <div style={{ maxWidth: "400px", margin: "auto", textAlign: "center" }}>
-            <h2>Register</h2>
-            {error && <p style={{ color: "red" }}>{error}</p>}
-            {success && <p style={{ color: "green" }}>Registration successful!</p>}
-            <form onSubmit={handleSubmit}>
-                <div style={{ marginBottom: "10px" }}>
-                    <label>Email:</label>
-                    <input
-                        type="email"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
-                <div style={{ marginBottom: "10px" }}>
-                    <label>Username:</label>
-                    <input
-                        type="text"
-                        name="username"
-                        value={formData.username}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
-                <div style={{ marginBottom: "10px" }}>
-                    <label>Password:</label>
-                    <input
-                        type="password"
-                        name="password"
-                        value={formData.password}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
-                <button type="submit" style={{ padding: "10px 20px" }}>Register</button>
-            </form>
+        <div className="signup-container">
+            <div className="signup-box">
+                <h2>Create an Account</h2>
+                {error && <p className="error-message">{error}</p>}
+                {success && <p className="success-message">Registration successful! 🎉</p>}
+
+                <form onSubmit={handleSubmit} className="signup-form">
+                    <div className="input-group">
+                        <label>Email</label>
+                        <input
+                            type="email"
+                            name="email"
+                            value={formData.email}
+                            onChange={handleChange}
+                            required
+                            placeholder="Enter your email"
+                        />
+                    </div>
+                    <div className="input-group">
+                        <label>Username</label>
+                        <input
+                            type="text"
+                            name="username"
+                            value={formData.username}
+                            onChange={handleChange}
+                            required
+                            placeholder="Choose a username"
+                        />
+                    </div>
+                    <div className="input-group">
+                        <label>Password</label>
+                        <input
+                            type="password"
+                            name="password"
+                            value={formData.password}
+                            onChange={handleChange}
+                            required
+                            placeholder="Create a password"
+                        />
+                    </div>
+                    <button type="submit" className="submit-btn" disabled={loading}>
+                        {loading ? "Registering..." : "Sign Up"}
+                    </button>
+                </form>
+
+                <p className="login-link">
+                    Already have an account? <Link to="/login">Sign In</Link>
+                </p>
+            </div>
         </div>
     );
 }
