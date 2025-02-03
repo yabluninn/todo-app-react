@@ -43,7 +43,7 @@ export default function ListDropdown({ onChange, listType }) {
           }}
         >
           {listType === LIST_TYPES.TASK_LIST && taskLists.length === 0 && (
-            <Link to={"/app/lists"} style={styles.newListButton}>
+            <Link to={"/app/groups"} style={styles.newListButton}>
               <i
                 className="hgi-stroke hgi-add-01"
                 style={{ marginRight: "6px" }}
@@ -52,7 +52,7 @@ export default function ListDropdown({ onChange, listType }) {
             </Link>
           )}
           {listType === LIST_TYPES.NOTES_LIST && noteLists.length === 0 && (
-            <Link to={"/app/lists"} style={styles.newListButton}>
+            <Link to={"/app/groups"} style={styles.newListButton}>
               <i
                 className="hgi-stroke hgi-add-01"
                 style={{ marginRight: "6px" }}

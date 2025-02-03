@@ -43,9 +43,6 @@ export default function Groups() {
             Here you can manage all your lists and categories
           </p>
         </div>
-        <button className="l-menu-button">
-          <i className="hgi-stroke hgi-settings-02"></i>
-        </button>
       </div>
       <CategoriesContainer openModal={openCreateCategoryModal}/>
       <div className="lists-grid">
