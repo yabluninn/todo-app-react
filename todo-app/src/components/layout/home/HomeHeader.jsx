@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { useState } from "react";
+import {useEffect, useState} from "react";
 import { headerService } from "../../../services/HeaderService";
 import "../../../styles/Header.css";
 import { dateExtensions } from "../../../utils/date-extensions";
@@ -15,7 +15,14 @@ export default function HomeHeader({
   const { text: greetingsPart, emoji: greetingEmoji } =
     headerService.getGreeting();
 
-  const username = "Artem";
+  const [username, setUsername] = useState("");
+
+  useEffect(() => {
+    const storedUser = JSON.parse(localStorage.getItem("user"));
+    if (storedUser) {
+      setUsername(storedUser.username);
+    }
+  }, []);
 
   const toggleContextMenu = () => {
     setIsContextMenuVisible((prev) => !prev);
@@ -26,7 +33,7 @@ export default function HomeHeader({
       <div className="header">
         <div className="h-labels-block">
           <p className="h-greetings-label">
-            {greetingsPart}, {username}! 👋 {greetingEmoji}
+            {greetingsPart}, {username || "Guest"}! 👋 {greetingEmoji}
           </p>
           <p className="h-sub-label">Today, {currDate}</p>
         </div>

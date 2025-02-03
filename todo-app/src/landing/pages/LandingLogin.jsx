@@ -1,8 +1,10 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom"; // Импорт для редиректа
+import axios from "axios";
+import { Link } from "react-router-dom";
+
 import "../../styles/landing/LandingLogin.css";
 
-import axios from "axios";
-import { useState } from "react";
-import { Link } from "react-router-dom";
 
 export default function LandingLogin() {
     const [formData, setFormData] = useState({
@@ -12,6 +14,7 @@ export default function LandingLogin() {
 
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
+    const navigate = useNavigate(); // Хук для редиректа
 
     const handleChange = (e) => {
         setFormData({
@@ -27,9 +30,15 @@ export default function LandingLogin() {
 
         try {
             const response = await axios.post("http://localhost:5000/api/auth/login", formData);
+
+            // Сохранение токена и данных пользователя
+            localStorage.setItem("token", response.data.token);
+            localStorage.setItem("user", JSON.stringify(response.data.user));
+
             console.log("Login successful:", response.data);
-            setFormData({ email: "", password: "" });
-            // Логика после успешного входа, например, перенаправление
+
+            // Перенаправление на главную страницу
+            navigate("/app/");
         } catch (err) {
             setError(err.response?.data?.message || "Invalid credentials. Please try again.");
         } finally {
@@ -71,7 +80,6 @@ export default function LandingLogin() {
                     </button>
                 </form>
 
-                {/* Ссылка на регистрацию */}
                 <p className="register-link">
                     Don't have an account? <Link to="/signup">Sign Up</Link>
                 </p>

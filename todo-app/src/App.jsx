@@ -1,6 +1,6 @@
 import "./styles/App.css";
 
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 
 import { TaskListProvider } from "./contexts/TaskListContext";
 import { NoteListProvider } from "./contexts/NoteListContext";
@@ -21,21 +21,32 @@ import Analytics from "./components/pages/Analytics.jsx";
 import Settings from "./components/pages/Settings.jsx";
 import Notifications from "./components/pages/Notifications.jsx";
 
+function AppWrapper() {
+  return (
+      <Router>
+        <App />
+      </Router>
+  );
+}
+
 function App() {
   const DEFAULT_APP_URL = "/app";
 
+  // Используем useLocation, чтобы корректно получать текущий путь
+  const location = useLocation();
+
   const isLandingPage =
-    location.pathname === "/" ||
-    location.pathname.startsWith("/signup") ||
-    location.pathname.startsWith("/login");
+      location.pathname === "/" ||
+      location.pathname.startsWith("/signup") ||
+      location.pathname.startsWith("/login");
 
   return (
-    <Router>
       <ListsProvider>
         <CategoriesProvider>
           <TaskListProvider>
             <NoteListProvider>
               <div className="app">
+                {/* Теперь NavMenu корректно отображается на страницах приложения */}
                 {!isLandingPage && <NavMenu />}
                 <Routes>
                   <Route path="/" element={<LandingPage />} />
@@ -47,10 +58,7 @@ function App() {
                   <Route path={DEFAULT_APP_URL + "/analytics"} element={<Analytics />} />
                   <Route path={DEFAULT_APP_URL + "/settings"} element={<Settings />} />
                   <Route path={DEFAULT_APP_URL + "/notifications"} element={<Notifications />} />
-                  <Route
-                      path={DEFAULT_APP_URL + "/groups"}
-                      element={<Groups />}
-                  />
+                  <Route path={DEFAULT_APP_URL + "/groups"} element={<Groups />} />
                   <Route path={DEFAULT_APP_URL + "/profile"} element={<Profile />} />
                 </Routes>
               </div>
@@ -58,8 +66,7 @@ function App() {
           </TaskListProvider>
         </CategoriesProvider>
       </ListsProvider>
-    </Router>
   );
 }
 
-export default App;
+export default AppWrapper;
