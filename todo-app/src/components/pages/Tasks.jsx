@@ -41,9 +41,6 @@ export default function Tasks() {
             Here you can manage all your tasks
           </p>
         </div>
-        <button className="t-menu-button">
-          <i className="hgi-stroke hgi-settings-02"></i>
-        </button>
       </div>
       <CreateButton title={"New Task"} onClick={openCreateTaskModal} />
       {taskLists &&
