@@ -52,23 +52,24 @@ export default function TasksListContainer({ list, onTaskSideOpen }) {
     setCurrentFilter(filterAction);
   };
 
-  const toggleSortContextMenuVisibility = () => {
-    if (sortButtonRef.current) {
-      const rect = sortButtonRef.current.getBoundingClientRect();
-      setSortMenuPosition({ top: rect.bottom + 5, left: rect.left }); // Ставим меню НИЖЕ кнопки
-    }
+  const toggleSortContextMenuVisibility = (event) => {
+    setSortMenuPosition({
+      top: window.scrollY + event.clientY  + 25,
+      left: 1185
+    });
     setSortContextMenuVisible(!isSortContextMenuVisible);
     setFilterContextMenuVisible(false);
   };
 
-  const toggleFilterContextMenuVisibility = () => {
-    if (filterButtonRef.current) {
-      const rect = filterButtonRef.current.getBoundingClientRect();
-      setFilterMenuPosition({ top: rect.bottom + 5, left: rect.left }); // Ставим меню НИЖЕ кнопки
-    }
+  const toggleFilterContextMenuVisibility = (event) => {
+    setFilterMenuPosition({
+      top: window.scrollY + event.clientY + 25,
+      left: 1150
+    });
     setFilterContextMenuVisible(!isFilterContextMenuVisible);
     setSortContextMenuVisible(false);
   };
+
 
 
   const { removeTask, completeTask } = useListsContext();
