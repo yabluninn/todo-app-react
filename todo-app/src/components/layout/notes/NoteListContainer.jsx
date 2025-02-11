@@ -3,13 +3,27 @@
 import { useState } from "react";
 import Note from "../notes/Note";
 import {useListsContext} from "../../../contexts/ListsContext.jsx";
+import ContextMenu from "../../contextMenus/ContextMenu.jsx";
+import ContextMenuButton from "../../contextMenus/ContextMenuButton.jsx";
+import {SORTING_ACTIONS} from "../../../constants/sorting-actions.js";
 
 export default function NoteListContainer({ list, onNoteSideOpen }) {
   const [isNotesVisible, setNotesVisibility] = useState(false);
 
-  const {removeNote} = useListsContext()
+  const [notesContextMenuVisible, setNotesContextMenuVisible] = useState(false);
+  const [notesMenuPosition, setNotesMenuPosition] = useState({ top: 0, left: 1185 });
+
+  const {removeNote, removeAllNotesFromList} = useListsContext()
 
   const toggleNotesVisibility = () => setNotesVisibility(!isNotesVisible);
+
+  const toggleNotesContextMenuVisibility = (event) => {
+    setNotesMenuPosition({
+      top: window.scrollY + event.clientY  + 25,
+      left: 1185
+    });
+    setNotesContextMenuVisible(!notesContextMenuVisible);
+  };
 
   return (
     <div style={styles.main}>
@@ -55,14 +69,8 @@ export default function NoteListContainer({ list, onNoteSideOpen }) {
         <p style={styles.listName}>{list.name}</p>
         <div style={styles.notesCount}>{list.notes.length}</div>
         <div style={styles.actions}>
-          <button style={styles.sortButton}>
-            <i className="hgi-stroke hgi-filter" style={styles.sortIcon}></i>
-          </button>
-          <button style={styles.sortButton}>
-            <i
-              className="hgi-stroke hgi-sort-by-down-02"
-              style={styles.sortIcon}
-            ></i>
+          <button style={styles.sortButton} onClick={toggleNotesContextMenuVisibility}>
+            <i className="hgi-stroke hgi-more-vertical" style={styles.sortIcon}></i>
           </button>
         </div>
       </div>
@@ -79,6 +87,12 @@ export default function NoteListContainer({ list, onNoteSideOpen }) {
           />
         ))}
       </div>
+      {notesContextMenuVisible && (
+          <ContextMenu position={notesMenuPosition} toggleVisibility={toggleNotesContextMenuVisibility}>
+            <ContextMenuButton title={"Remove All Notes"} icon={"hgi-stroke hgi-delete-02"} onClick={() => {
+              removeAllNotesFromList(list.id);
+            }} />
+          </ContextMenu>)}
     </div>
   );
 }
@@ -146,7 +160,8 @@ const styles = {
     marginRight: "4px",
   },
   sortIcon: {
-    fontSize: "18px",
+    fontSize: "22px",
+    fontWeight: "bold",
     color: "#333",
   },
 };

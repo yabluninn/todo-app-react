@@ -43,9 +43,6 @@ export default function Notes() {
             Here you can manage all your notes
           </p>
         </div>
-        <button className="t-menu-button">
-          <i className="hgi-stroke hgi-settings-02"></i>
-        </button>
       </div>
       <CreateButton title={"New Note"} onClick={openCreateNoteModal} />
       {noteLists &&

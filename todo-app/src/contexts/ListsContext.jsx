@@ -28,7 +28,16 @@ export const ListsProvider = ({ children }) => {
     setNoteLists((prevLists) => prevLists.filter((list) => list.id !== listId));
   };
 
-  const removeAllTaskLists = () => {
+    const removeAllNotesFromList = (listId) => {
+        setNoteLists((prevLists) =>
+            prevLists.map((list) =>
+                list.id === listId ? { ...list, notes: [] } : list
+            )
+        );
+    };
+
+
+    const removeAllTaskLists = () => {
       setTaskLists([]);
   }
 
@@ -209,7 +218,8 @@ export const ListsProvider = ({ children }) => {
         getRecentNotes,
         removeAllTaskLists,
         removeAllNoteLists,
-          shownNotifications,
+        shownNotifications,
+        removeAllNotesFromList
       }}
     >
       {children}

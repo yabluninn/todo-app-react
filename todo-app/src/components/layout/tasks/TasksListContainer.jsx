@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
-import {useEffect, useRef, useState} from "react";
+import {useEffect, useState} from "react";
 import Task from "./Task";
 import { useListsContext } from "../../../contexts/ListsContext";
 import ContextMenu from "../../contextMenus/ContextMenu.jsx";
@@ -20,9 +20,6 @@ export default function TasksListContainer({ list, onTaskSideOpen }) {
 
   const [sortMenuPosition, setSortMenuPosition] = useState({ top: 0, left: 1185 });
   const [filterMenuPosition, setFilterMenuPosition] = useState({ top: 0, left: 1150 });
-
-  const sortButtonRef = useRef(null);
-  const filterButtonRef = useRef(null);
 
   useEffect(() => {
     setFilteredTasks(list.tasks);
