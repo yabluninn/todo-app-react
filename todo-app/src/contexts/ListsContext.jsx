@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import {createContext, useContext, useEffect, useState} from "react";
+import axios from "axios";
 
 import { useNotifications } from "../hooks/useNotifications";
 
@@ -16,17 +17,10 @@ export const ListsProvider = ({ children }) => {
       setShownNotifications((prevState) => prevState.filter(notification => notification.id !== id));
   }
 
-  const addTaskList = (list) => {
-    setTaskLists((prevLists) => [...prevLists, { ...list, tasks: [] }]);
-  };
-
   const addNoteList = (list) => {
     setNoteLists((prevLists) => [...prevLists, list]);
   };
 
-  const removeTaskList = (listId) => {
-    setTaskLists((prevLists) => prevLists.filter((list) => list.id !== listId));
-  };
 
   const removeNoteList = (listId) => {
     setNoteLists((prevLists) => prevLists.filter((list) => list.id !== listId));
@@ -40,10 +34,6 @@ export const ListsProvider = ({ children }) => {
         );
     };
 
-
-    const removeAllTaskLists = () => {
-      setTaskLists([]);
-  }
 
   const removeAllNoteLists = () => {
       setNoteLists([]);
@@ -125,8 +115,6 @@ export const ListsProvider = ({ children }) => {
     return getTasksByDate(today);
   };
 
-  const getTaskListsLength = () => taskLists.length;
-
   const getNoteListsLength = () => noteLists.length;
 
   const getRecentNotes = () => {
@@ -198,6 +186,89 @@ export const ListsProvider = ({ children }) => {
             }
         });
     }, [taskLists]);
+
+    useEffect(() => {
+        fetchTaskLists();
+    }, []);
+
+    const fetchTaskLists = async () => {
+        try {
+            const user = JSON.parse(localStorage.getItem("user"));
+            if (!user) return;
+
+            const response = await axios.get(`http://localhost:5000/api/taskLists?userId=${user.id}`);
+            setTaskLists(response.data);
+        } catch (err) {
+            console.error("Error fetching task lists:", err);
+        }
+    };
+
+    const addTaskList = async (list) => {
+        try {
+            const user = JSON.parse(localStorage.getItem("user"));
+            const response = await axios.post("http://localhost:5000/api/taskLists", {
+                userId: user.id,
+                name: list.name,
+                color: list.color,
+            });
+
+            setTaskLists((prevLists) => [...prevLists, response.data]);
+        } catch (err) {
+            console.error("Error adding task list:", err);
+        }
+    };
+
+    const updateTaskList = async (id, updatedData) => {
+        try {
+            const response = await axios.put(`http://localhost:5000/api/taskLists/${id}`, updatedData);
+
+            setTaskLists((prevLists) =>
+                prevLists.map((list) =>
+                    list._id === id ? response.data : list
+                )
+            );
+        } catch (err) {
+            console.error("Error updating task list:", err);
+        }
+    };
+
+    const removeTaskList = async (id) => {
+        try {
+            const user = JSON.parse(localStorage.getItem("user"));
+            if (!user) {
+                console.error("User not found in localStorage");
+                return;
+            }
+
+            if (!id) {
+                console.error("Error: Task List ID is undefined");
+                return;
+            }
+
+            await axios.delete(`http://localhost:5000/api/taskLists/${id}?userId=${user.id}`);
+
+            setTaskLists((prevLists) =>
+                prevLists.filter((list) => list._id !== id) 
+            );
+        } catch (err) {
+            console.error("Error deleting task list:", err);
+        }
+    };
+
+    const removeAllTaskLists = async () => {
+        try {
+            const user = JSON.parse(localStorage.getItem("user"));
+            if (!user) return;
+
+            await axios.delete(`http://localhost:5000/api/taskLists?userId=${user.id}`);
+
+            setTaskLists([]);
+        } catch (err) {
+            console.error("Error deleting all task lists:", err);
+        }
+    };
+
+    const getTaskListsLength = () => taskLists.length;
 
   return (
     <ListsContext.Provider

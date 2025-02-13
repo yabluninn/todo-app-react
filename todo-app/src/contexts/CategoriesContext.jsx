@@ -1,4 +1,5 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
+import axios from "axios";
 
 const CategoriesContext = createContext();
 
@@ -6,22 +7,85 @@ const CategoriesContext = createContext();
 export const CategoriesProvider = ({ children }) => {
     const [categories, setCategories] = useState([]);
 
-    const addCategory = (category) => {
-        setCategories((prevCategories) => [...prevCategories, category]);
-    }
+    useEffect(() => {
+        fetchCategories();
+    }, []);
 
-    const getCategoriesLength = () => {return categories.length;}
+    const fetchCategories = async () => {
+        try {
+            const user = JSON.parse(localStorage.getItem("user"));
+            if (!user) return;
 
-    const getCategoryById = (id) => {
-        return categories.find(category => category.id === id);
-    }
+            const response = await axios.get(`http://localhost:5000/api/categories?userId=${user.id}`);
+            setCategories(response.data);
+        } catch (err) {
+            console.error("Error fetching categories:", err);
+        }
+    };
 
-    const removeAllCategories = () => {
-        setCategories([]);
-    }
+    const addCategory = async (category) => {
+        try {
+            const user = JSON.parse(localStorage.getItem("user"));
+            const response = await axios.post("http://localhost:5000/api/categories", {
+                userId: user.id,
+                name: category.name,
+                color: category.color,
+            });
 
-    return <CategoriesContext.Provider value={{categories, addCategory, getCategoriesLength, getCategoryById, removeAllCategories}}>{children}</CategoriesContext.Provider>;
-}
+            setCategories((prevCategories) => [...prevCategories, response.data]);
+        } catch (err) {
+            console.error("Error adding category:", err);
+        }
+    };
+
+    const updateCategory = async (id, updatedData) => {
+        try {
+            const response = await axios.put(`http://localhost:5000/api/categories/${id}`, updatedData);
+
+            setCategories((prevCategories) =>
+                prevCategories.map((category) =>
+                    category._id === id ? response.data : category
+                )
+            );
+        } catch (err) {
+            console.error("Error updating category:", err);
+        }
+    };
+
+    const removeCategory = async (id) => {
+        try {
+            const user = JSON.parse(localStorage.getItem("user"));
+            await axios.delete(`http://localhost:5000/api/categories/${id}?userId=${user.id}`);
+
+            setCategories((prevCategories) =>
+                prevCategories.filter((category) => category._id !== id)
+            );
+        } catch (err) {
+            console.error("Error deleting category:", err);
+        }
+    };
+
+    const removeAllCategories = async () => {
+        try {
+            const user = JSON.parse(localStorage.getItem("user"));
+            if (!user) return;
+
+            await axios.delete(`http://localhost:5000/api/categories/all/${user.id}`);
+
+            setCategories([]); // Очищаем стейт
+        } catch (err) {
+            console.error("Error deleting all categories:", err);
+        }
+    };
+
+    const getCategoriesLength = () => categories.length;
+
+    return (
+        <CategoriesContext.Provider value={{ categories, addCategory, updateCategory, removeCategory, removeAllCategories, getCategoriesLength }}>
+            {children}
+        </CategoriesContext.Provider>
+    );
+};
 
 export const useCategories = () => useContext(CategoriesContext);
 export default CategoriesContext;

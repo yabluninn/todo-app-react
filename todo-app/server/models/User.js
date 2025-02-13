@@ -7,7 +7,7 @@ const UserSchema = new mongoose.Schema(
         email: { type: String, required: true, unique: true },
         taskLists: [{ type: mongoose.Schema.Types.ObjectId, ref: "TaskList" }],
         noteLists: [{ type: mongoose.Schema.Types.ObjectId, ref: "NoteList" }],
-            categories: [{ type: mongoose.Schema.Types.ObjectId, ref: "Category" }],
+        categories: [{ type: mongoose.Schema.Types.ObjectId, ref: "Category" }],
     },
     { timestamps: true }
 );

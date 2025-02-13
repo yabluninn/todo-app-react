@@ -10,6 +10,8 @@ import { validationResult } from "express-validator";
 
 import User from "./models/User.js";
 import authRoutes from "./routes/auth.js";
+import categoryRoutes from "./routes/categories.js";
+import taskListsRoutes from "./routes/taskLists.js";
 
 mongoose
   .connect(
@@ -29,6 +31,8 @@ app.use(cors());
 
 // Подключение маршрутов
 app.use("/api", authRoutes);
+app.use("/api/categories", categoryRoutes);
+app.use("/api/taskLists", taskListsRoutes);
 
 // Тестовый маршрут
 app.get("/", (req, res) => {

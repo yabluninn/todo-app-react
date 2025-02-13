@@ -55,9 +55,9 @@ export default function ListContainer({
           lists.map((list) => (
             <List key={list.id} list={list} listType={listType} onDelete={() =>
                 listType === LIST_TYPES.TASK_LIST
-                    ? removeTaskList(list.id)
+                    ? removeTaskList(list._id)
                     : listType === LIST_TYPES.NOTES_LIST
-                        ? removeNoteList(list.id)
+                        ? removeNoteList(list._id)
                         : console.error("Unknown list type")
             }/>
           ))}
