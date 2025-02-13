@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 
-export default function NotificationComponent ({ task }) {
+export default function NotificationComponent ({ task, removeNotification }) {
     if (!task) return null;
 
     const [timeAgo, setTimeAgo] = useState("");
@@ -32,9 +32,14 @@ export default function NotificationComponent ({ task }) {
 
     return (
         <div className="notification-item">
-            <p className="notification-title">{task.type === "start" ? "It's time to start the task!" : "You have 5 minutes left!"}</p>
-            <p className="notification-time">Task: {task.name}</p>
-            <p className="notification-received">{timeAgo} ago</p>
+            <div className="notification-info">
+                <p className="notification-title">{task.type === "start" ? "It's time to start the task!" : "You have 5 minutes left!"}</p>
+                <p className="notification-time">Task: {task.name}</p>
+                <p className="notification-received">{timeAgo} ago</p>
+            </div>
+            <button className="notification-remove-btn" onClick={() => removeNotification(task.id)}>
+                <i className="hgi-stroke hgi-delete-02"></i>
+            </button>
         </div>
     );
 };

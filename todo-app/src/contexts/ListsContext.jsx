@@ -9,8 +9,12 @@ export const ListsProvider = ({ children }) => {
   const [taskLists, setTaskLists] = useState([]);
   const [noteLists, setNoteLists] = useState([]);
 
-    const { showNotification } = useNotifications();
-    const [shownNotifications, setShownNotifications] = useState([]);
+  const { showNotification } = useNotifications();
+  const [shownNotifications, setShownNotifications] = useState([]);
+
+  const removeNotification = (id) => {
+      setShownNotifications((prevState) => prevState.filter(notification => notification.id !== id));
+  }
 
   const addTaskList = (list) => {
     setTaskLists((prevLists) => [...prevLists, { ...list, tasks: [] }]);
@@ -219,6 +223,7 @@ export const ListsProvider = ({ children }) => {
         removeAllTaskLists,
         removeAllNoteLists,
         shownNotifications,
+        removeNotification,
         removeAllNotesFromList
       }}
     >

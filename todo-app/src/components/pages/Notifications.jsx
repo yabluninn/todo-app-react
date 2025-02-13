@@ -4,14 +4,17 @@ import NotificationComponent from "../layout/notifications/NotificationComponent
 
 export default function Notifications() {
 
-    const { taskLists, shownNotifications } = useListsContext();
+    const { taskLists, shownNotifications, removeNotification } = useListsContext();
 
     const tasks = taskLists.flatMap(list => list.tasks || []);
 
-    const notificationsToShow = shownNotifications.map(notification => {
-        const task = tasks.find(task => task.id === notification.id);
-        return task ? { ...task, timestamp: notification.timestamp, type: notification.type } : null;
-    }).filter(task => task !== null);
+    const notificationsToShow = shownNotifications
+        .map(notification => {
+            const task = tasks.find(task => task.id === notification.id);
+            return task ? { ...task, timestamp: notification.timestamp, type: notification.type } : null;
+        })
+        .filter(task => task !== null)
+        .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
 
     return (
         <div className="notifications-container">
@@ -27,7 +30,11 @@ export default function Notifications() {
             <div className="notifications-body">
                 {notificationsToShow.length > 0 ? (
                     notificationsToShow.map((task) => (
-                        <NotificationComponent key={task.id} task={task} />
+                        <NotificationComponent
+                            key={task.id}
+                            task={task}
+                            removeNotification={removeNotification}
+                        />
                     ))
                 ) : (
                     <p>No notifications available</p>
