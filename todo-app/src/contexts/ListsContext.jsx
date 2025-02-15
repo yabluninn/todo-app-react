@@ -17,15 +17,6 @@ export const ListsProvider = ({ children }) => {
       setShownNotifications((prevState) => prevState.filter(notification => notification.id !== id));
   }
 
-  const addNoteList = (list) => {
-    setNoteLists((prevLists) => [...prevLists, list]);
-  };
-
-
-  const removeNoteList = (listId) => {
-    setNoteLists((prevLists) => prevLists.filter((list) => list.id !== listId));
-  };
-
     const removeAllNotesFromList = (listId) => {
         setNoteLists((prevLists) =>
             prevLists.map((list) =>
@@ -33,11 +24,6 @@ export const ListsProvider = ({ children }) => {
             )
         );
     };
-
-
-  const removeAllNoteLists = () => {
-      setNoteLists([]);
-  }
 
   const getTaskListById = (listId) => {
     return taskLists.find((list) => list.id === listId);
@@ -113,9 +99,7 @@ export const ListsProvider = ({ children }) => {
   const getTodayTasks = () => {
     const today = new Date().toISOString().split("T")[0];
     return getTasksByDate(today);
-  };
-
-  const getNoteListsLength = () => noteLists.length;
+  }
 
   const getRecentNotes = () => {
     const allNotes = noteLists.flatMap((list) => list.notes);
@@ -269,6 +253,82 @@ export const ListsProvider = ({ children }) => {
     };
 
     const getTaskListsLength = () => taskLists.length;
+
+    useEffect(() => {
+        fetchNoteLists();
+    }, []);
+
+    const fetchNoteLists = async () => {
+        try {
+            const user = JSON.parse(localStorage.getItem("user"));
+            if (!user) return;
+
+            const response = await axios.get(`http://localhost:5000/api/noteLists?userId=${user.id}`, {
+                timeout: 10000
+            });
+
+            setNoteLists(response.data);
+        } catch (err) {
+            console.error("Error fetching note lists:", err);
+        }
+    };
+
+    const addNoteList = async (list) => {
+        try {
+            const user = JSON.parse(localStorage.getItem("user"));
+            const response = await axios.post("http://localhost:5000/api/noteLists", {
+                userId: user.id,
+                name: list.name,
+                color: list.color,
+            });
+
+            setNoteLists((prevLists) => [...prevLists, response.data]);
+        } catch (err) {
+            console.error("Error adding note list:", err);
+        }
+    };
+
+    const updateNoteList = async (id, updatedData) => {
+        try {
+            const response = await axios.put(`http://localhost:5000/api/noteLists/${id}`, updatedData);
+
+            setNoteLists((prevLists) =>
+                prevLists.map((list) =>
+                    list._id === id ? response.data : list
+                )
+            );
+        } catch (err) {
+            console.error("Error updating note list:", err);
+        }
+    };
+
+    const removeNoteList = async (id) => {
+        try {
+            const user = JSON.parse(localStorage.getItem("user"));
+            await axios.delete(`http://localhost:5000/api/noteLists/${id}?userId=${user.id}`);
+
+            setNoteLists((prevLists) =>
+                prevLists.filter((list) => list._id !== id)
+            );
+        } catch (err) {
+            console.error("Error deleting note list:", err);
+        }
+    };
+
+    const removeAllNoteLists = async () => {
+        try {
+            const user = JSON.parse(localStorage.getItem("user"));
+            if (!user) return;
+
+            await axios.delete(`http://localhost:5000/api/noteLists?userId=${user.id}`);
+
+            setNoteLists([]);
+        } catch (err) {
+            console.error("Error deleting all note lists:", err);
+        }
+    };
+
+    const getNoteListsLength = () => noteLists.length;
 
   return (
     <ListsContext.Provider
