@@ -40,7 +40,8 @@ function App() {
       location.pathname === "/" ||
       location.pathname.startsWith("/signup") ||
       location.pathname.startsWith("/login") ||
-      location.pathname.startsWith("/product");
+      location.pathname.startsWith("/product") ||
+      location.pathname.startsWith("/features");
 
   return (
       <ListsProvider>

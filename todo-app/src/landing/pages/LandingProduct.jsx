@@ -41,7 +41,6 @@ export default function LandingProduct() {
                     </div>
                 </div>
 
-                {/* Блок "Как это работает?" */}
                 <div className="how-it-works">
                     <h2>How Does It Work?</h2>
                     <div className="steps">
@@ -76,7 +75,6 @@ export default function LandingProduct() {
                     </div>
                 </div>
 
-                {/* CTA-блок */}
                 <div className="cta-container">
                     <Link to="/signup" className="cta-button">Get Started for Free</Link>
                     <Link to="/signin" className="cta-secondary">Already have an account? Log in</Link>
