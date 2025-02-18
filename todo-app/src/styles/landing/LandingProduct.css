@@ -1,0 +1,148 @@
+.product-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+}
+
+.product-content {
+    max-width: 900px;
+    text-align: center;
+    background: white;
+    padding: 50px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.product-title {
+    font-size: 32px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.product-description {
+    font-size: 18px;
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+.product-features {
+    text-align: left;
+    margin-bottom: 40px;
+}
+
+.product-features h2 {
+    font-size: 24px;
+    color: #7437ff;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.feature {
+    margin-bottom: 15px;
+}
+
+.feature h3 {
+    font-size: 18px;
+    color: #7437ff;
+    margin-bottom: 5px;
+}
+
+.feature p {
+    font-size: 16px;
+    color: #555;
+}
+
+.how-it-works {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.how-it-works h2 {
+    margin-bottom: 20px;
+}
+
+.steps {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.step {
+    background: rgba(116, 55, 255, 0.06);
+    padding: 20px;
+    border-radius: 8px;
+    width: 30%;
+    text-align: center;
+}
+
+.step h3 {
+    font-size: 18px;
+    margin-bottom: 12px;
+}
+
+.step p {
+    font-size: 16px;
+    color: #333;
+}
+
+.testimonials {
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.testimonials h2 {
+    font-size: 24px;
+    color: #7437ff;
+    margin-bottom: 20px;
+}
+
+.testimonial {
+    background: rgba(116, 55, 255, 0.06);
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    font-size: 16px;
+}
+
+.testimonial span {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+    color: #333;
+}
+
+.cta-container {
+    margin-top: 20px;
+}
+
+.cta-button {
+    display: inline-block;
+    background-color: #7437ff;
+    color: white;
+    text-decoration: none;
+    padding: 12px 20px;
+    border-radius: 5px;
+    font-size: 18px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.cta-button:hover {
+    background-color: #6932e8;
+}
+
+.cta-secondary {
+    display: block;
+    font-size: 16px;
+    color: #7437ff;
+    text-decoration: none;
+    margin-top: 10px;
+    transition: 0.3s;
+}
+
+.cta-secondary:hover {
+    text-decoration: underline;
+}

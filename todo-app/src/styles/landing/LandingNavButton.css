@@ -9,6 +9,7 @@
   justify-content: center;
   align-items: center;
   flex-direction: row;
+  text-decoration: none;
 }
 
 .lnb-button:hover {

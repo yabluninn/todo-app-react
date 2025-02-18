@@ -20,6 +20,7 @@ import Profile from "./components/pages/Profile.jsx";
 import Analytics from "./components/pages/Analytics.jsx";
 import Settings from "./components/pages/Settings.jsx";
 import Notifications from "./components/pages/Notifications.jsx";
+import LandingProduct from "./landing/pages/LandingProduct.jsx";
 
 function AppWrapper() {
   return (
@@ -38,7 +39,8 @@ function App() {
   const isLandingPage =
       location.pathname === "/" ||
       location.pathname.startsWith("/signup") ||
-      location.pathname.startsWith("/login");
+      location.pathname.startsWith("/login") ||
+      location.pathname.startsWith("/product");
 
   return (
       <ListsProvider>
@@ -52,6 +54,7 @@ function App() {
                   <Route path="/" element={<LandingPage />} />
                   <Route path="/signup" element={<LandingSignIn />} />
                   <Route path="/login" element={<LandingLogin />} />
+                  <Route path="/*" element={<LandingPage />} />
                   <Route path={DEFAULT_APP_URL + "/"} element={<Home />} />
                   <Route path={DEFAULT_APP_URL + "/tasks"} element={<Tasks />} />
                   <Route path={DEFAULT_APP_URL + "/notes"} element={<Notes />} />

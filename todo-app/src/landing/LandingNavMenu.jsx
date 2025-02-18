@@ -4,11 +4,11 @@ import LandingNavButton from "./LandingNavButton";
 export default function LandingNavMenu() {
   return (
     <div className="lnm-container">
-      <LandingNavButton title={"Product"} isDropdown={true} />
-      <LandingNavButton title={"Features"} isDropdown={true} />
-      <LandingNavButton title={"Solution"} isDropdown={true} />
-      <LandingNavButton title={"Help"} isDropdown={true} />
-      <LandingNavButton title={"Pricing"} isDropdown={false} />
+      <LandingNavButton title={"Product"} path={"/product"} />
+      <LandingNavButton title={"Features"} />
+      <LandingNavButton title={"Solution"} />
+      <LandingNavButton title={"Help"} />
+      <LandingNavButton title={"Pricing"} />
     </div>
   );
 }

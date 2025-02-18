@@ -1,16 +1,11 @@
 /* eslint-disable react/prop-types */
 import "../styles/landing/LandingNavButton.css";
+import {Link} from "react-router-dom";
 
-export default function LandingNavButton({ title, isDropdown }) {
+export default function LandingNavButton({ title, path }) {
   return (
-    <button className="lnb-button">
+    <Link to={path} className="lnb-button">
       {title}
-      {isDropdown && (
-        <i
-          className="hgi-stroke hgi-arrow-down-01"
-          style={{ marginLeft: "8px", fontWeight: "bold" }}
-        ></i>
-      )}
-    </button>
+    </Link>
   );
 }

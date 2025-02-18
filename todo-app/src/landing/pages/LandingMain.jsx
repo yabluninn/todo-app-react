@@ -10,24 +10,6 @@ import icon2 from "../../assets/i-2.png";
 export default function LandingMain() {
   return (
     <div className="lpm-container">
-      <div className="lp-header">
-        <div className="lp-h-block">
-          <div className="logo-block">
-            <img src={logo} alt="" />
-            <p>Booxee</p>
-          </div>
-          <LandingNavMenu />
-        </div>
-        <div className="lp-h-block">
-          <button className="lp-h-button lph-b-demo">
-            Book a demo <i className="hgi-stroke hgi-arrow-right-01"></i>
-          </button>
-          <button className="lp-h-button lph-b-login">Log in</button>
-          <Link to={"/signup"} className="lp-h-button lph-b-signup">
-            Start for free
-          </Link>
-        </div>
-      </div>
       <div className="lp-main">
         <p className="lp-main-h">
           Your productivity, <span>Simplified</span>
