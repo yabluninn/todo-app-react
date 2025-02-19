@@ -7,6 +7,7 @@ import logo from "../../assets/logo.png";
 import LandingMain from "./LandingMain.jsx";
 import LandingProduct from "./LandingProduct.jsx";
 import LandingFeatures from "./LandingFeatures.jsx";
+import LandingSolution from "./LandingSolution.jsx";
 
 export default function LandingApp() {
     return (
@@ -34,6 +35,7 @@ export default function LandingApp() {
                     <Route path="/" element={<LandingMain/>}/>
                     <Route path="/product" element={<LandingProduct/>}/>
                     <Route path="/features" element={<LandingFeatures/>}/>
+                    <Route path="/solution" element={<LandingSolution/>}/>
                 </Routes>
             </main>
         </div>

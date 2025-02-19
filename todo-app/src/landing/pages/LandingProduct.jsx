@@ -32,10 +32,6 @@ export default function LandingProduct() {
                         <p>Get timely reminders about upcoming tasks, deadlines, and goals.</p>
                     </div>
                     <div className="feature">
-                        <h3>🚀 AI-Powered Insights</h3>
-                        <p>Let our smart assistant suggest the best way to manage your time and tasks.</p>
-                    </div>
-                    <div className="feature">
                         <h3>🌎 Sync Across All Devices</h3>
                         <p>Access Booxee from your phone, tablet, or desktop—your data is always with you.</p>
                     </div>
@@ -61,10 +57,6 @@ export default function LandingProduct() {
 
                 <div className="testimonials">
                     <h2>What Our Users Say</h2>
-                    <div className="testimonial">
-                        <p>"Booxee has completely changed the way I organize my work. The AI suggestions are amazing!"</p>
-                        <span>- Emily R., Project Manager</span>
-                    </div>
                     <div className="testimonial">
                         <p>"I used to struggle with productivity, but Booxee keeps me focused and motivated every day!"</p>
                         <span>- Mark S., Freelancer</span>
