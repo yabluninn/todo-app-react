@@ -1,4 +1,4 @@
-.header {
+.m-header {
   width: 100%;
   height: 70px;
   display: flex;
@@ -107,8 +107,13 @@
   margin-left: 12px;
 }
 
+.h-menu-button:hover i{
+  color: #7437ff;
+}
+
 .h-menu-button i {
   color: #333;
+  transition: color 0.3s;
 }
 
 .h-greetings-label {

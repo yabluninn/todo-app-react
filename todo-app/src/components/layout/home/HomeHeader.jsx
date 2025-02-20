@@ -30,7 +30,7 @@ export default function HomeHeader({
 
   return (
     <>
-      <div className="header">
+      <div className="m-header">
         <div className="h-labels-block">
           <p className="h-greetings-label">
             {greetingsPart}, {username || "Guest"}! 👋 {greetingEmoji}
