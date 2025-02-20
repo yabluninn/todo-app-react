@@ -26,13 +26,12 @@ export default function CreateTaskModal({ onClose }) {
 
   const handleAddTask = () => {
     if (
-      taskName.trim() === "" ||
-      taskDate.trim() === "" ||
-      taskStartTime.trim() === "" ||
-      taskEndTime.trim() === "" ||
-      selectedList === -1
+        taskName.trim() === "" ||
+        taskDate.trim() === "" ||
+        taskStartTime.trim() === "" ||
+        taskEndTime.trim() === "" ||
+        selectedList === -1
     ) {
-      // alert("Please fill in all fields and select a list.");
       return;
     }
 
@@ -53,97 +52,97 @@ export default function CreateTaskModal({ onClose }) {
   };
 
   return createPortal(
-    <div style={styles.container}>
-      <div style={styles.modal}>
-        <div style={styles.header}>
-          <p style={styles.title}>Create new task</p>
-          <button style={styles.closeButton} onClick={onClose}>
-            <i
-              className="hgi-stroke hgi-cancel-01"
-              style={styles.closeIcon}
-            ></i>
-          </button>
-        </div>
-        <div style={styles.content}>
-          <InputWithLabel
-            icon="hgi-stroke hgi-text-font"
-            type="text"
-            placeholder="Enter task name"
-            label="Name"
-            value={taskName}
-            onChange={(e) => setTaskName(e.target.value)}
-          />
-          <TextAreaWithLabel
-            icon="hgi-stroke hgi-text-firstline-left"
-            placeholder="Enter task description"
-            label="Description"
-            value={taskDescription}
-            onChange={(e) => setTaskDescription(e.target.value)}
-          />
-          <div style={styles.timeInputs}>
-            <InputWithLabel
-              icon={"hgi-stroke hgi-calendar-01"}
-              type="date"
-              label="Date"
-              value={taskDate}
-              onChange={(e) => setTaskDate(e.target.value)}
-            />
-            <InputWithLabel
-              icon={"hgi-stroke hgi-clock-03"}
-              type="time"
-              label="From"
-              value={taskStartTime}
-              onChange={(e) => setTaskStartTime(e.target.value)}
-            />
-            <InputWithLabel
-              icon={"hgi-stroke hgi-clock-02"}
-              type="time"
-              label="To"
-              value={taskEndTime}
-              onChange={(e) => setTaskEndTime(e.target.value)}
-            />
+      <div style={styles.container}>
+        <div style={styles.modal}>
+          <div style={styles.header}>
+            <p style={styles.title}>Create new task</p>
+            <button style={styles.closeButton} onClick={onClose}>
+              <i
+                  className="hgi-stroke hgi-cancel-01"
+                  style={styles.closeIcon}
+              ></i>
+            </button>
           </div>
-          <div style={styles.timeInputs}>
-            <TaskPriorityDropdown onChange={setTaskPriority} />
-            <ListDropdown
-              onChange={setSelectedList}
-              listType={LIST_TYPES.TASK_LIST}
+          <div style={styles.content}>
+            <InputWithLabel
+                icon="hgi-stroke hgi-text-font"
+                type="text"
+                placeholder="Enter task name"
+                label="Name"
+                value={taskName}
+                onChange={(e) => setTaskName(e.target.value)}
             />
-          </div>
-          {relatedNote ? (
-              <div style={styles.relatedNote}>
-                <p>Related Note: {relatedNote.name}</p>
-                <button
-                    style={styles.changeNoteButton}
-                    onClick={() => setShowSelectNoteModal(true)}
-                >
-                  Change Related Note
-                </button>
-              </div>
-          ) : (
-              <CreateButton
-                  title={"Add Related Note"}
-                  onClick={() => setShowSelectNoteModal(true)}
+            <TextAreaWithLabel
+                icon="hgi-stroke hgi-text-firstline-left"
+                placeholder="Enter task description"
+                label="Description"
+                value={taskDescription}
+                onChange={(e) => setTaskDescription(e.target.value)}
+            />
+            <div style={styles.timeInputs}>
+              <InputWithLabel
+                  icon={"hgi-stroke hgi-calendar-01"}
+                  type="date"
+                  label="Date"
+                  value={taskDate}
+                  onChange={(e) => setTaskDate(e.target.value)}
               />
-          )}
+              <InputWithLabel
+                  icon={"hgi-stroke hgi-clock-03"}
+                  type="time"
+                  label="From"
+                  value={taskStartTime}
+                  onChange={(e) => setTaskStartTime(e.target.value)}
+              />
+              <InputWithLabel
+                  icon={"hgi-stroke hgi-clock-02"}
+                  type="time"
+                  label="To"
+                  value={taskEndTime}
+                  onChange={(e) => setTaskEndTime(e.target.value)}
+              />
+            </div>
+            <div style={styles.timeInputs}>
+              <TaskPriorityDropdown onChange={setTaskPriority} />
+              <ListDropdown
+                  onChange={setSelectedList}
+                  listType={LIST_TYPES.TASK_LIST}
+              />
+            </div>
+            {relatedNote ? (
+                <div style={styles.relatedNote}>
+                  <p>Related Note: {relatedNote.name}</p>
+                  <button
+                      style={styles.changeNoteButton}
+                      onClick={() => setShowSelectNoteModal(true)}
+                  >
+                    Change Related Note
+                  </button>
+                </div>
+            ) : (
+                <CreateButton
+                    title={"Add Related Note"}
+                    onClick={() => setShowSelectNoteModal(true)}
+                />
+            )}
+          </div>
+          <div style={styles.footer}>
+            <button style={styles.addButton} className="add-task-button" onClick={handleAddTask}>
+              Create Task
+            </button>
+          </div>
         </div>
-        <div style={styles.footer}>
-          <button style={styles.addButton} onClick={handleAddTask}>
-            Create Task
-          </button>
-        </div>
-      </div>
-      {showSelectNoteModal && (
-          <SelectRelatedNoteModal
-              onClose={() => setShowSelectNoteModal(false)}
-              onSelect={(note) => {
-                setRelatedNote(note);
-                setShowSelectNoteModal(false);
-              }}
-          />
-      )}
-    </div>,
-    root
+        {showSelectNoteModal && (
+            <SelectRelatedNoteModal
+                onClose={() => setShowSelectNoteModal(false)}
+                onSelect={(note) => {
+                  setRelatedNote(note);
+                  setShowSelectNoteModal(false);
+                }}
+            />
+        )}
+      </div>,
+      root
   );
 }
 
@@ -218,9 +217,18 @@ const styles = {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
+    cursor: "pointer",
+    transition: "background 0.3s ease-in-out",
   },
   addIcon: {
     color: "white",
     marginRight: "8px",
   },
 };
+
+const styleSheet = document.styleSheets[0];
+styleSheet.insertRule(`
+  .add-addButton-button:hover {
+    background: #5b2db3 !important;
+  }
+`, styleSheet.cssRules.length);

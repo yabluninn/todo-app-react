@@ -49,6 +49,7 @@ export default function SelectRelatedNoteModal({ onClose, onSelect }) {
                 <div style={styles.footer}>
                     <button
                         style={styles.addButton}
+                        className="add-related-note-button"
                         onClick={handleSelect}
                         disabled={!selectedNote}
                     >
@@ -105,6 +106,7 @@ const styles = {
         borderRadius: "4px",
         marginBottom: "8px",
         border: "1px solid transparent",
+        transition: "background 0.2s ease-in-out",
     },
     addButton: {
         backgroundColor: "#7437ff",
@@ -113,5 +115,14 @@ const styles = {
         fontWeight: "bold",
         borderRadius: "8px",
         padding: "10px 20px",
+        cursor: "pointer",
+        transition: "background 0.3s ease-in-out",
     },
 };
+
+const styleSheet = document.styleSheets[0];
+styleSheet.insertRule(`
+  .add-related-note-button:hover {
+    background: #5b2db3 !important;
+  }
+`, styleSheet.cssRules.length);

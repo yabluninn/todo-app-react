@@ -1,8 +1,7 @@
 import { createPortal } from "react-dom";
 import { useState } from "react";
-
 import InputWithLabel from "../ui/InputWithLabel";
-import {useCategories} from "../../contexts/CategoriesContext.jsx";
+import { useCategories } from "../../contexts/CategoriesContext.jsx";
 
 export default function CreateCategoryModal({ onClose }) {
   const root = document.getElementById("root");
@@ -13,7 +12,7 @@ export default function CreateCategoryModal({ onClose }) {
   const [categoryColor, setCategoryColor] = useState("");
 
   const handleAddCategory = () => {
-    if (categoryName.trim() != "" && categoryColor.trim() != "") {
+    if (categoryName.trim() !== "" && categoryColor.trim() !== "") {
       const id = getCategoriesLength();
       const newCategory = {
         id: id,
@@ -27,45 +26,43 @@ export default function CreateCategoryModal({ onClose }) {
   };
 
   return createPortal(
-    <div style={styles.container}>
-      <div style={styles.modal}>
-        <div style={styles.header}>
-          <p style={styles.title}>
-            Create Category
-          </p>
-          <button style={styles.closeButton} onClick={onClose}>
-            <i
-              className="hgi-stroke hgi-cancel-01"
-              style={styles.closeIcon}
-            ></i>
-          </button>
+      <div style={styles.container}>
+        <div style={styles.modal}>
+          <div style={styles.header}>
+            <p style={styles.title}>Create Category</p>
+            <button style={styles.closeButton} onClick={onClose}>
+              <i
+                  className="hgi-stroke hgi-cancel-01"
+                  style={styles.closeIcon}
+              ></i>
+            </button>
+          </div>
+          <div style={styles.content}>
+            <InputWithLabel
+                type="text"
+                placeholder="Enter category name"
+                label="Name"
+                icon="hgi-stroke hgi-text-font"
+                value={categoryName}
+                onChange={(e) => setCategoryName(e.target.value)}
+            />
+            <InputWithLabel
+                type="color"
+                placeholder="Set category color"
+                label="Color"
+                icon="hgi-stroke hgi-paint-board"
+                value={categoryColor}
+                onChange={(e) => setCategoryColor(e.target.value)}
+            />
+          </div>
+          <div style={styles.footer}>
+            <button style={styles.addButton} onClick={handleAddCategory}>
+              Create category
+            </button>
+          </div>
         </div>
-        <div style={styles.content}>
-          <InputWithLabel
-            type="text"
-            placeholder="Enter category name"
-            label="Name"
-            icon="hgi-stroke hgi-text-font"
-            value={categoryName}
-            onChange={(e) => setCategoryName(e.target.value)}
-          />
-          <InputWithLabel
-            type="color"
-            placeholder="Set category color"
-            label="Color"
-            icon="hgi-stroke hgi-paint-board"
-            value={categoryColor}
-            onChange={(e) => setCategoryColor(e.target.value)}
-          />
-        </div>
-        <div style={styles.footer}>
-          <button style={styles.addButton} onClick={handleAddCategory}>
-            Create category
-          </button>
-        </div>
-      </div>
-    </div>,
-    root
+      </div>,
+      root
   );
 }
 
@@ -122,13 +119,6 @@ const styles = {
     justifyContent: "center",
     alignItems: "center",
   },
-  timeInputs: {
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    flexDirection: "row",
-    gap: "36px",
-  },
   addButton: {
     backgroundColor: "#7437ff",
     color: "white",
@@ -140,9 +130,21 @@ const styles = {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
+    cursor: "pointer",
+    transition: "background 0.3s ease-in-out",
+  },
+  addButtonHover: {
+    backgroundColor: "#5b2db3",
   },
   addIcon: {
     color: "white",
     marginRight: "8px",
   },
 };
+
+const styleSheet = document.styleSheets[0];
+styleSheet.insertRule(`
+  .addButton:hover {
+    background: #5b2db3 !important;
+  }
+`, styleSheet.cssRules.length);
