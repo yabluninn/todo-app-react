@@ -8,6 +8,7 @@ import LandingMain from "./LandingMain.jsx";
 import LandingProduct from "./LandingProduct.jsx";
 import LandingFeatures from "./LandingFeatures.jsx";
 import LandingSolution from "./LandingSolution.jsx";
+import LandingHelp from "./LandingHelp.jsx";
 
 export default function LandingApp() {
     return (
@@ -36,6 +37,7 @@ export default function LandingApp() {
                     <Route path="/product" element={<LandingProduct/>}/>
                     <Route path="/features" element={<LandingFeatures/>}/>
                     <Route path="/solution" element={<LandingSolution/>}/>
+                    <Route path="/help" element={<LandingHelp/>}/>
                 </Routes>
             </main>
         </div>

@@ -7,7 +7,7 @@ export default function LandingNavMenu() {
       <LandingNavButton title={"Product"} path={"/product"} />
       <LandingNavButton title={"Features"} path={"/features"} />
       <LandingNavButton title={"Solution"} path={"/solution"}/>
-      <LandingNavButton title={"Help"} />
+      <LandingNavButton title={"Help"} path={"/help"}/>
       <LandingNavButton title={"Pricing"} />
     </div>
   );

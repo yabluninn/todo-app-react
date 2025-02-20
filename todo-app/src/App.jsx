@@ -42,7 +42,8 @@ function App() {
       location.pathname.startsWith("/login") ||
       location.pathname.startsWith("/product") ||
       location.pathname.startsWith("/features") ||
-      location.pathname.startsWith("/solution") ;
+      location.pathname.startsWith("/solution") ||
+      location.pathname.startsWith("/help") ;
 
   return (
       <ListsProvider>
@@ -50,7 +51,6 @@ function App() {
           <TaskListProvider>
             <NoteListProvider>
               <div className="app">
-                {/* Теперь NavMenu корректно отображается на страницах приложения */}
                 {!isLandingPage && <NavMenu />}
                 <Routes>
                   <Route path="/" element={<LandingPage />} />
