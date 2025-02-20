@@ -1,0 +1,120 @@
+.pricing-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+}
+
+.pricing-content {
+    max-width: 800px;
+    text-align: center;
+    background: white;
+    padding: 50px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.pricing-title {
+    font-size: 32px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.pricing-description {
+    font-size: 18px;
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+.pricing-cards {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.pricing-card {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    text-align: center;
+    transition: 0.3s;
+}
+
+.pricing-card:hover {
+    transform: translateY(-5px);
+}
+
+.price {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 10px 0;
+    color: #333;
+}
+
+.pricing-features {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 20px;
+}
+
+.pricing-features li {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 8px;
+}
+
+.pricing-button {
+    display: inline-block;
+    background-color: #7437ff;
+    color: white;
+    text-decoration: none;
+    padding: 12px 20px;
+    border-radius: 5px;
+    font-size: 18px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.pricing-button:hover {
+    background-color: #6932e8;
+}
+
+.support-section {
+    margin-top: 40px;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.support-section h2 {
+    font-size: 24px;
+    color: #d9534f;
+    margin-bottom: 10px;
+}
+
+.support-section p {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 15px;
+}
+
+.support-button {
+    display: inline-block;
+    background-color: #d9534f;
+    color: white;
+    text-decoration: none;
+    padding: 12px 20px;
+    border-radius: 5px;
+    font-size: 18px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.support-button:hover {
+    background-color: #c9302c;
+}

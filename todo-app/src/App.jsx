@@ -43,7 +43,8 @@ function App() {
       location.pathname.startsWith("/product") ||
       location.pathname.startsWith("/features") ||
       location.pathname.startsWith("/solution") ||
-      location.pathname.startsWith("/help") ;
+      location.pathname.startsWith("/help") ||
+      location.pathname.startsWith("/pricing") ;
 
   return (
       <ListsProvider>
