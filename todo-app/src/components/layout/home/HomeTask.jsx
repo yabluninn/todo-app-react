@@ -76,13 +76,13 @@ export default function HomeTask({ task, handleComplete }) {
           className="check-box"
           style={{
             border: !task.completed
-              ? task.priority === "None"
+              ? task.priority === "none"
                 ? "2px solid #ccc"
-                : task.priority === "Low"
+                : task.priority === "low"
                 ? "2px solid blue"
-                : task.priority === "Medium"
+                : task.priority === "medium"
                 ? "2px solid orange"
-                : task.priority === "High"
+                : task.priority === "high"
                 ? "2px solid red"
                 : "2px solid #ccc"
               : "",

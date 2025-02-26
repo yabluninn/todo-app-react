@@ -26,24 +26,36 @@ export const ListsProvider = ({ children }) => {
     };
 
   const getTaskListById = (listId) => {
-    return taskLists.find((list) => list.id === listId);
+    return taskLists.find((list) => list._id === listId);
   };
 
   const getNoteListById = (listId) => {
       return noteLists.find((list) => list.id === listId);
   }
 
-  const addTaskToList = (task, listId) => {
-    setTaskLists((prevLists) =>
-      prevLists.map((list) =>
-        list.id === listId
-          ? { ...list, tasks: [...(list.tasks || []), task] }
-          : list
-      )
-    );
-  };
+    const addTask = async (task, listId) => {
+        console.log("📤 Отправка задачи в API:", { listId, ...task });
 
-  const addNoteToList = (note, listId) => {
+        try {
+            const response = await axios.post(`http://localhost:5000/api/tasks`, {
+                listId,
+                ...task,
+            });
+
+            console.log("✅ Ответ сервера:", response.data);
+
+            setTaskLists((prevLists) =>
+                prevLists.map((list) =>
+                    list._id === listId ? { ...list, tasks: [...list.tasks, response.data] } : list
+                )
+            );
+        } catch (err) {
+            console.error("❌ Ошибка при добавлении задачи:", err.response?.data || err);
+        }
+    };
+
+
+    const addNoteToList = (note, listId) => {
     setNoteLists((prevLists) =>
       prevLists.map((list) =>
         list.id === listId
@@ -53,32 +65,50 @@ export const ListsProvider = ({ children }) => {
     );
   };
 
-  const completeTask = (taskId, listId) => {
-    setTaskLists((prevLists) =>
-      prevLists.map((list) =>
-        list.id === listId
-          ? {
-              ...list,
-              tasks: list.tasks.map((task) =>
-                task.id === taskId
-                  ? { ...task, completed: !task.completed }
-                  : task
-              ),
-            }
-          : list
-      )
-    );
+    const updateTask = async (taskId, updatedData) => {
+        try {
+            const response = await axios.put(`http://localhost:5000/api/tasks/${taskId}`, updatedData);
+
+            setTaskLists((prevLists) =>
+                prevLists.map((list) => ({
+                    ...list,
+                    tasks: list.tasks.map((task) =>
+                        task._id === taskId ? response.data : task
+                    ),
+                }))
+            );
+        } catch (err) {
+            console.error("Error updating task:", err);
+        }
+    };
+
+  const completeTask = async (taskId, listId) => {
+      try {
+          const list = taskLists.find((l) => l._id === listId);
+          const task = list?.tasks.find((t) => t._id === taskId);
+          if (!task) return;
+
+          const updatedTask = { ...task, completed: !task.completed };
+          await updateTask(taskId, updatedTask);
+      } catch (err) {
+          console.error("Error toggling task completion:", err);
+      }
   };
 
-  const removeTask = (taskId, listId) => {
-    setTaskLists((prevLists) =>
-      prevLists.map((list) =>
-        list.id === listId
-          ? { ...list, tasks: list.tasks.filter((task) => task.id !== taskId) }
-          : list
-      )
-    );
-  };
+  const removeTask = async (taskId, listId) => {
+      try {
+          await axios.delete(`http://localhost:5000/api/tasks/${taskId}`);
+          setTaskLists((prevLists) =>
+              prevLists.map((list) =>
+                  list._id === listId
+                      ? { ...list, tasks: list.tasks.filter((task) => task._id !== taskId) }
+                      : list
+              )
+          );
+        } catch (err) {
+            console.error("Error deleting task:", err);
+        }
+    };
 
   const removeNote = (noteId, listId) => {
       setNoteLists((prevLists) =>
@@ -90,18 +120,20 @@ export const ListsProvider = ({ children }) => {
       );
   }
 
-  const getTasksByDate = (date) => {
-    return taskLists.flatMap((list) =>
-      list.tasks.filter((task) => task.date === date)
-    );
-  };
+    const getTasksByDate = (date) => {
+        return taskLists.flatMap((list) =>
+            list.tasks.filter((task) =>
+                new Date(task.date).toISOString().split("T")[0] === date
+            )
+        );
+    };
 
-  const getTodayTasks = () => {
-    const today = new Date().toISOString().split("T")[0];
-    return getTasksByDate(today);
-  }
+    const getTodayTasks = () => {
+        const today = new Date().toISOString().split("T")[0];
+        return getTasksByDate(today);
+    };
 
-  const getRecentNotes = () => {
+    const getRecentNotes = () => {
     const allNotes = noteLists.flatMap((list) => list.notes);
     return allNotes.sort(
       (a, b) => new Date(b.creationDate) - new Date(a.creationDate)
@@ -171,6 +203,7 @@ export const ListsProvider = ({ children }) => {
         });
     }, [taskLists]);
 
+    // TASK LISTS
     useEffect(() => {
         fetchTaskLists();
     }, []);
@@ -180,12 +213,16 @@ export const ListsProvider = ({ children }) => {
             const user = JSON.parse(localStorage.getItem("user"));
             if (!user) return;
 
+            console.log("📡 Загружаем списки задач...");
             const response = await axios.get(`http://localhost:5000/api/taskLists?userId=${user.id}`);
+
+            console.log("📥 Получены списки задач:", response.data);
             setTaskLists(response.data);
         } catch (err) {
-            console.error("Error fetching task lists:", err);
+            console.error("❌ Ошибка загрузки списков задач:", err.response?.data || err);
         }
     };
+
 
     const addTaskList = async (list) => {
         try {
@@ -254,6 +291,7 @@ export const ListsProvider = ({ children }) => {
 
     const getTaskListsLength = () => taskLists.length;
 
+    // NOTE LISTS
     useEffect(() => {
         fetchNoteLists();
     }, []);
@@ -341,13 +379,14 @@ export const ListsProvider = ({ children }) => {
         removeNoteList,
         getTaskListsLength,
         getNoteListsLength,
-        addTaskToList,
+        addTask,
         addNoteToList,
         getTasksByDate,
         getTodayTasks,
         getTaskListById,
         getNoteListById,
         completeTask,
+        updateTask,
         removeTask,
         removeNote,
         getRecentNotes,

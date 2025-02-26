@@ -12,7 +12,7 @@ export default function ListDropdown({ onChange, listType }) {
 
   const handleSelect = (list) => {
     setSelectedList(list.name);
-    onChange(list.id);
+    onChange(list._id);
   };
 
   const toggleVisibility = () => {
@@ -64,7 +64,7 @@ export default function ListDropdown({ onChange, listType }) {
                 taskLists.length > 0 &&
                 taskLists.map((list) => (
                     <li
-                        key={list.id}
+                        key={list._id}
                         style={{
                           ...styles.dropdownItem,
                           fontWeight: list.name === selectedList ? "bold" : "normal",
@@ -84,7 +84,7 @@ export default function ListDropdown({ onChange, listType }) {
                 noteLists.length > 0 &&
                 noteLists.map((list) => (
                     <li
-                        key={list.id}
+                        key={list._id}
                         style={{
                           ...styles.dropdownItem,
                           fontWeight: list.name === selectedList ? "bold" : "normal",

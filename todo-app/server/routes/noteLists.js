@@ -4,7 +4,6 @@ import User from "../models/User.js";
 
 const router = express.Router();
 
-// 📥 Получение всех списков заметок пользователя
 router.get("/", async (req, res) => {
     try {
         const { userId } = req.query;
@@ -20,7 +19,6 @@ router.get("/", async (req, res) => {
     }
 });
 
-// ➕ Добавление нового списка заметок
 router.post("/", async (req, res) => {
     try {
         const { userId, name, color } = req.body;
@@ -38,7 +36,6 @@ router.post("/", async (req, res) => {
     }
 });
 
-// ✏️ Обновление списка заметок
 router.put("/:id", async (req, res) => {
     try {
         const { name, color } = req.body;
@@ -57,7 +54,6 @@ router.put("/:id", async (req, res) => {
     }
 });
 
-// ❌ Удаление списка заметок
 router.delete("/:id", async (req, res) => {
     try {
         const { userId } = req.query;
@@ -79,7 +75,6 @@ router.delete("/:id", async (req, res) => {
     }
 });
 
-// 🚀 Удаление всех списков заметок пользователя
 router.delete("/", async (req, res) => {
     try {
         const { userId } = req.query;

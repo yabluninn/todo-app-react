@@ -4,13 +4,19 @@ import User from "../models/User.js";
 
 const router = express.Router();
 
-// 📥 Получение всех списков задач пользователя
 router.get("/", async (req, res) => {
     try {
         const { userId } = req.query;
         if (!userId) return res.status(400).json({ message: "User ID is required" });
 
-        const user = await User.findById(userId).populate("taskLists");
+        // Загружаем taskLists вместе с их задачами
+        const user = await User.findById(userId).populate({
+            path: "taskLists",
+            populate: {
+                path: "tasks", // Загружаем вложенные задачи
+            },
+        });
+
         if (!user) return res.status(404).json({ message: "User not found" });
 
         res.json(user.taskLists);
@@ -20,7 +26,7 @@ router.get("/", async (req, res) => {
     }
 });
 
-// ➕ Добавление нового списка задач
+
 router.post("/", async (req, res) => {
     try {
         const { userId, name, color } = req.body;
@@ -38,7 +44,6 @@ router.post("/", async (req, res) => {
     }
 });
 
-// ✏️ Обновление списка задач
 router.put("/:id", async (req, res) => {
     try {
         const { name, color } = req.body;
@@ -57,7 +62,6 @@ router.put("/:id", async (req, res) => {
     }
 });
 
-// ❌ Удаление списка задач
 router.delete("/:id", async (req, res) => {
     try {
         const { userId } = req.query;
@@ -75,7 +79,6 @@ router.delete("/:id", async (req, res) => {
     }
 });
 
-// 🚀 Удаление всех списков задач пользователя
 router.delete("/:id", async (req, res) => {
     try {
         const { id } = req.params;

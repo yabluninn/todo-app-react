@@ -48,7 +48,7 @@ export default function Notes() {
       {noteLists &&
         noteLists.map((list) => (
           <NoteListContainer
-            key={list.id}
+            key={list._id}
             list={list}
             onNoteSideOpen={handleEditNote}
           />

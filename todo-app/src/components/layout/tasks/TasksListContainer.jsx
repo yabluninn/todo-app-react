@@ -28,12 +28,10 @@ export default function TasksListContainer({ list, onTaskSideOpen }) {
   useEffect(() => {
     let updatedTasks = [...list.tasks];
 
-    // Применяем текущий фильтр
     if (currentFilter) {
       updatedTasks = taskActionsService.filter(updatedTasks, currentFilter);
     }
 
-    // Применяем текущую сортировку
     if (currentSorting) {
       updatedTasks = taskActionsService.sort(updatedTasks, currentSorting);
     }
@@ -136,8 +134,8 @@ export default function TasksListContainer({ list, onTaskSideOpen }) {
             handleEdit={() => {
               onTaskSideOpen(task);
             }}
-            handleComplete={() => completeTask(task.id, list.id)}
-            handleDelete={() => removeTask(task.id, list.id)}
+            handleComplete={() => completeTask(task._id, list._id)}
+            handleDelete={() => removeTask(task._id, list._id)}
           />
         ))}
       </div>

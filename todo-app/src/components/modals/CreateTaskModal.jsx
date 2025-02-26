@@ -12,14 +12,14 @@ import SelectRelatedNoteModal from "./SelectRelatedNoteModal.jsx";
 
 export default function CreateTaskModal({ onClose }) {
   const root = document.getElementById("root");
-  const { addTaskToList } = useListsContext();
+  const { addTask } = useListsContext();
 
   const [taskName, setTaskName] = useState("");
   const [taskDescription, setTaskDescription] = useState("");
   const [taskDate, setTaskDate] = useState("");
   const [taskStartTime, setTaskStartTime] = useState("");
   const [taskEndTime, setTaskEndTime] = useState("");
-  const [taskPriority, setTaskPriority] = useState("");
+  const [taskPriority, setTaskPriority] = useState("none");
   const [selectedList, setSelectedList] = useState(-1);
   const [relatedNote, setRelatedNote] = useState(null);
   const [showSelectNoteModal, setShowSelectNoteModal] = useState(false);
@@ -42,12 +42,12 @@ export default function CreateTaskModal({ onClose }) {
       date: taskDate,
       startTime: taskStartTime,
       endTime: taskEndTime,
-      priority: taskPriority,
+      priority: taskPriority.toLowerCase(),
       listId: selectedList,
       relatedNoteId: relatedNote?.id || null,
     };
 
-    addTaskToList(newTask, selectedList);
+    addTask(newTask, selectedList);
     onClose();
   };
 

@@ -61,7 +61,7 @@ const VerticalTimeline = ({ tasks }) => {
 
         return (
           <div
-            key={task.id}
+            key={task._id}
             className="timeline-task"
             style={{
               top: `${(startFraction / 24) * 100}%`,

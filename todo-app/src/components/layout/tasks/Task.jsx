@@ -47,13 +47,13 @@ export default function Task({
                 className="fa-solid fa-flag"
                 style={{
                   color:
-                    task.priority === "None"
+                    task.priority === "none"
                       ? "#ccc"
-                      : task.priority === "Low"
+                      : task.priority === "low"
                       ? "blue"
-                      : task.priority === "Medium"
+                      : task.priority === "medium"
                       ? "orange"
-                      : task.priority === "High"
+                      : task.priority === "high"
                       ? "red"
                       : "#ccc",
                 }}

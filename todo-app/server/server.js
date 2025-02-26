@@ -13,6 +13,7 @@ import authRoutes from "./routes/auth.js";
 import categoryRoutes from "./routes/categories.js";
 import taskListsRoutes from "./routes/taskLists.js";
 import noteListRoutes from "./routes/noteLists.js";
+import tasksRoutes from "./routes/tasks.js";
 
 mongoose
   .connect(
@@ -35,6 +36,7 @@ app.use("/api", authRoutes);
 app.use("/api/categories", categoryRoutes);
 app.use("/api/taskLists", taskListsRoutes);
 app.use("/api/noteLists", noteListRoutes);
+app.use("/api/tasks", tasksRoutes);
 
 // Тестовый маршрут
 app.get("/", (req, res) => {

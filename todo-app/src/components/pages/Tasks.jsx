@@ -46,7 +46,7 @@ export default function Tasks() {
       {taskLists &&
         taskLists.map((list) => (
           <TasksListContainer
-            key={list.id}
+            key={list._id}
             list={list}
             onTaskSideOpen={handleEditTask}
           />

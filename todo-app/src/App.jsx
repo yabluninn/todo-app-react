@@ -1,9 +1,6 @@
 import "./styles/App.css";
 
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
-
-import { TaskListProvider } from "./contexts/TaskListContext";
-import { NoteListProvider } from "./contexts/NoteListContext";
 import { ListsProvider } from "./contexts/ListsContext";
 
 import NavMenu from "./components/layout/app/NavMenu";
@@ -49,8 +46,6 @@ function App() {
   return (
       <ListsProvider>
         <CategoriesProvider>
-          <TaskListProvider>
-            <NoteListProvider>
               <div className="app">
                 {!isLandingPage && <NavMenu />}
                 <Routes>
@@ -68,8 +63,6 @@ function App() {
                   <Route path={DEFAULT_APP_URL + "/profile"} element={<Profile />} />
                 </Routes>
               </div>
-            </NoteListProvider>
-          </TaskListProvider>
         </CategoriesProvider>
       </ListsProvider>
   );

@@ -4,7 +4,6 @@ import User from "../models/User.js";
 
 const router = express.Router();
 
-// Получение категорий пользователя
 router.get("/", async (req, res) => {
     try {
         const { userId } = req.query;
@@ -24,7 +23,6 @@ router.get("/", async (req, res) => {
     }
 });
 
-// Добавление категории
 router.post("/", async (req, res) => {
     try {
         const { userId, name, color } = req.body;
@@ -44,7 +42,6 @@ router.post("/", async (req, res) => {
     }
 });
 
-// Обновление категории
 router.put("/:id", async (req, res) => {
     try {
         const { name, color } = req.body;
@@ -65,7 +62,6 @@ router.put("/:id", async (req, res) => {
     }
 });
 
-// Удаление категории
 router.delete("/:id", async (req, res) => {
     try {
         const { userId } = req.query;
@@ -85,7 +81,6 @@ router.delete("/:id", async (req, res) => {
     }
 });
 
-// Удаление всех категорий пользователя
 router.delete("/all/:userId", async (req, res) => {
     try {
         const { userId } = req.params;

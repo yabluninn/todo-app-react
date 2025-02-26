@@ -3,53 +3,44 @@ import { useEffect, useState } from "react";
 import EditInput from "../../ui/EditInput";
 import EditPriorityDropdown from "../../ui/EditPriorityDropdown";
 import EditTextArea from "../../ui/EditTextArea";
-import { useTaskList } from "../../../contexts/TaskListContext";
 import { useListsContext } from "../../../contexts/ListsContext";
 
 export default function TaskSideSection({ task, onClose }) {
-  const { updateTask } = useTaskList();
+  const { getTaskListById, updateTask } = useListsContext();
 
-  const { getTaskListById } = useListsContext();
-
-  const [newTaskName, setNewTaskName] = useState("");
-  const [newStartTime, setNewStartTime] = useState("");
-  const [newEndTime, setNewEndTime] = useState("");
-  const [newTaskDate, setNewTaskDate] = useState("");
-  const [newTaskPriority, setNewTaskPriority] = useState("");
-  const [newTaskDescription, setNewTaskDescription] = useState("");
+  const [newTaskName, setNewTaskName] = useState(task.name || "");
+  const [newStartTime, setNewStartTime] = useState(task.startTime || "");
+  const [newEndTime, setNewEndTime] = useState(task.endTime || "");
+  const [newTaskDate, setNewTaskDate] = useState(task.date || "");
+  const [newTaskPriority, setNewTaskPriority] = useState(task.priority || "none");
+  const [newTaskDescription, setNewTaskDescription] = useState(task.description || "");
 
   useEffect(() => {
-    setNewTaskName(task.name);
-  }, [task.name]);
-  useEffect(() => {
-    setNewStartTime(task.startTime);
-  }, [task.startTime]);
-  useEffect(() => {
-    setNewEndTime(task.endTime);
-  }, [task.endTime]);
-  useEffect(() => {
-    setNewTaskDate(task.date);
-  }, [task.date]);
-  useEffect(() => {
-    setNewTaskPriority(task.priority);
-  }, [task.priority]);
-  useEffect(() => {
-    setNewTaskDescription(task.description);
-  }, [task.description]);
+    setNewTaskName(task.name || "");
+    setNewStartTime(task.startTime || "");
+    setNewEndTime(task.endTime || "");
+    setNewTaskDate(task.date || "");
+    setNewTaskPriority(task.priority || "none");
+    setNewTaskDescription(task.description || "");
+  }, [task]);
 
   const saveTask = () => {
-    task.name = newTaskName;
-    task.startTime = newStartTime;
-    task.endTime = newEndTime;
-    task.date = newTaskDate;
-    task.priority = newTaskPriority;
-    task.description = newTaskDescription;
+    const updatedTask = {
+      name: newTaskName,
+      startTime: newStartTime,
+      endTime: newEndTime,
+      date: newTaskDate,
+      priority: newTaskPriority,
+      description: newTaskDescription,
+      listId: task.listId,
+    };
 
-    updateTask(task);
+    updateTask(task._id, updatedTask);
     onClose();
   };
 
-  const listName = getTaskListById(task.listId).name;
+  const list = getTaskListById(task.listId);
+  const listName = list ? list.name : "Unknown List";
 
   return (
     <div style={styles.container}>

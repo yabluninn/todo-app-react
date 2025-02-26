@@ -2,10 +2,10 @@
 import { useState } from "react";
 
 export default function PriorityDropdown({ onChange }) {
-  const [selectedPriority, setSelectedPriority] = useState("None");
+  const [selectedPriority, setSelectedPriority] = useState("none");
   const [isListVisible, setListVisible] = useState(false);
 
-  const priorities = ["None", "Low", "Medium", "High"];
+  const priorities = ["none", "low", "medium", "high"];
 
   const handleSelect = (priority) => {
     setSelectedPriority(priority);
@@ -53,11 +53,11 @@ export default function PriorityDropdown({ onChange }) {
                 style={{
                   ...styles.priorityIcon,
                   backgroundColor:
-                    priority === "Low"
+                    priority === "low"
                       ? "blue"
-                      : priority === "Medium"
+                      : priority === "medium"
                       ? "orange"
-                      : priority === "High"
+                      : priority === "high"
                       ? "red"
                       : "grey",
                 }}
