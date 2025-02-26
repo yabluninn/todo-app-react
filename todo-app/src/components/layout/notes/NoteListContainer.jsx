@@ -76,16 +76,17 @@ export default function NoteListContainer({ list, onNoteSideOpen }) {
       </div>
       <div style={{ ...styles.notes, display: isNotesVisible ? "" : "none" }}>
         {list.notes.map((note) => (
-          <Note
-            key={note._id}
-            note={note}
-            handleEdit={() => {
-              console.log("Note to edit:", note);
-              onNoteSideOpen(note);
-            }}
-            handleDelete={() => removeNote(note._id, note.listId)}
-          />
+            <Note
+                key={note._id}
+                note={note}
+                handleEdit={() => {
+                  console.log("Note to edit:", note);
+                  onNoteSideOpen(note);
+                }}
+                handleDelete={() => removeNote(note._id, note.listId)}
+            />
         ))}
+
       </div>
       {notesContextMenuVisible && (
           <ContextMenu position={notesMenuPosition} toggleVisibility={toggleNotesContextMenuVisibility}>

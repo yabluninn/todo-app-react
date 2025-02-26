@@ -26,13 +26,16 @@ class DateExtensions {
   }
 
   getFormattedDate(date) {
-    const options = {
-      day: "numeric",
-      month: "short",
-      year: "numeric",
-    };
+    if (!date) return "Unknown date";
 
-    return date.toLocaleDateString("en-US", options);
+    const dateObj = date instanceof Date ? date : new Date(date); // Приводим к объекту Date
+    if (isNaN(dateObj)) return "Invalid date"; // Проверяем корректность
+
+    return dateObj.toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+    });
   }
 }
 

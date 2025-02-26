@@ -12,8 +12,7 @@ export default function NoteSideSection({ note, onClose }) {
   const [newContent, setNewContent] = useState("");
   const [categories, setCategories] = useState(note.categories || []);
 
-  const {getCategoryById} = useCategories();
-  const {getNoteListById} = useListsContext();
+  const {getNoteListById, updateNote} = useListsContext();
 
   useEffect(() => {
     setNewName(note.name);
@@ -24,7 +23,7 @@ export default function NoteSideSection({ note, onClose }) {
     note.name = newName;
     note.content = newContent;
     note.categories = categories;
-    //updateTask(task);
+    updateNote(note._id, note);
     onClose();
   };
 
@@ -34,7 +33,10 @@ export default function NoteSideSection({ note, onClose }) {
     );
   };
 
-  const listName = getNoteListById(note.listId).name;
+  console.log("Note list id to edit: ", note.listId);
+  const list = getNoteListById(note.listId);
+  console.log("List to edit: ", list);
+  //const listName = getNoteListById(note.listId).name;
 
   return (
       <div style={styles.container}>
@@ -44,7 +46,7 @@ export default function NoteSideSection({ note, onClose }) {
                 className="hgi-stroke hgi-arrow-right-double"
                 style={styles.headerIcon}
             ></i>
-            <p style={styles.headerListName}>{listName}</p>
+            <p style={styles.headerListName}>{list.name}</p>
           </div>
           <button style={styles.closeButton} onClick={onClose}>
             <i className="hgi-stroke hgi-cancel-01" style={styles.closeIcon}></i>
@@ -74,11 +76,10 @@ export default function NoteSideSection({ note, onClose }) {
         <div style={styles.infoBlock}>
           <div style={styles.infoSubBlock}>
             <div style={styles.categories}>
-              {categories.map((categoryId) => {
-                const category = getCategoryById(categoryId);
+              {categories.map((category) => {
                 return (
                     <SideCategory
-                        key={categoryId}
+                        key={category._id}
                         category={category}
                         onSelected={removeCategory}
                     />

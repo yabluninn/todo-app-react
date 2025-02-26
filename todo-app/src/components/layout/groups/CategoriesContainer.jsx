@@ -27,10 +27,11 @@ export default function CategoriesContainer({ openModal }) {
           </button>
         </div>
         <div className="grid">
-          {categories && categories.length > 0 && categories.map((category) => (
-              <Category key={category._id} category={category} />
-          ))}
-          <CreateCategoryButton onOpenModal={openModal} />
+            {categories && categories.length > 0 && categories.map((category) => {
+                return <Category key={category._id} category={category} />;
+            })}
+
+            <CreateCategoryButton onOpenModal={openModal} />
         </div>
         {isContextMenuVisible && (
             <ContextMenu position={{ top: "160px", right: "135px" }} toggleVisibility={toggleContextMenuVisibility}>

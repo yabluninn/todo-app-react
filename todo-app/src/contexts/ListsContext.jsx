@@ -30,7 +30,7 @@ export const ListsProvider = ({ children }) => {
   };
 
   const getNoteListById = (listId) => {
-      return noteLists.find((list) => list.id === listId);
+      return noteLists.find((list) => list._id === listId);
   }
 
     const addTask = async (task, listId) => {
@@ -55,15 +55,23 @@ export const ListsProvider = ({ children }) => {
     };
 
 
-    const addNoteToList = (note, listId) => {
-    setNoteLists((prevLists) =>
-      prevLists.map((list) =>
-        list.id === listId
-          ? { ...list, notes: [...(list.notes || []), note] }
-          : list
-      )
-    );
-  };
+    const addNoteToList = async (note, listId) => {
+        try {
+            const response = await axios.post("http://localhost:5000/api/notes", {
+                ...note,
+                listId,
+                creationDate: new Date(),
+            });
+
+            setNoteLists((prevLists) =>
+                prevLists.map((list) =>
+                    list._id === listId ? { ...list, notes: [...list.notes, response.data] } : list
+                )
+            );
+        } catch (err) {
+            console.error("Ошибка при добавлении заметки:", err);
+        }
+    };
 
     const updateTask = async (taskId, updatedData) => {
         try {
@@ -79,6 +87,23 @@ export const ListsProvider = ({ children }) => {
             );
         } catch (err) {
             console.error("Error updating task:", err);
+        }
+    };
+
+    const updateNote = async (noteId, updatedData) => {
+        try {
+            const response = await axios.put(`http://localhost:5000/api/notes/${noteId}`, updatedData);
+
+            setNoteLists((prevLists) =>
+                prevLists.map((list) => ({
+                    ...list,
+                    notes: list.notes.map((note) =>
+                        note._id === noteId ? response.data : note
+                    ),
+                }))
+            );
+        } catch (err) {
+            console.error("Ошибка при обновлении заметки:", err);
         }
     };
 
@@ -110,15 +135,21 @@ export const ListsProvider = ({ children }) => {
         }
     };
 
-  const removeNote = (noteId, listId) => {
-      setNoteLists((prevLists) =>
-          prevLists.map((list) =>
-              list.id === listId
-                  ? { ...list, notes: list.notes.filter((note) => note.id !== noteId) }
-                  : list
-          )
-      );
-  }
+    const removeNote = async (noteId, listId) => {
+        try {
+            await axios.delete(`http://localhost:5000/api/notes/${noteId}`);
+
+            setNoteLists((prevLists) =>
+                prevLists.map((list) =>
+                    list._id === listId
+                        ? { ...list, notes: list.notes.filter((note) => note._id !== noteId) }
+                        : list
+                )
+            );
+        } catch (err) {
+            console.error("Ошибка при удалении заметки:", err);
+        }
+    };
 
     const getTasksByDate = (date) => {
         return taskLists.flatMap((list) =>
@@ -134,11 +165,11 @@ export const ListsProvider = ({ children }) => {
     };
 
     const getRecentNotes = () => {
-    const allNotes = noteLists.flatMap((list) => list.notes);
-    return allNotes.sort(
-      (a, b) => new Date(b.creationDate) - new Date(a.creationDate)
-    );
-  };
+        const allNotes = noteLists.flatMap((list) => list.notes);
+        return allNotes.sort(
+          (a, b) => new Date(b.creationDate).toISOString().split("T")[0] - new Date(a.creationDate).toISOString().split("T")[0]
+        );
+    };
 
     useEffect(() => {
         if (taskLists.length === 0) return;
@@ -387,6 +418,7 @@ export const ListsProvider = ({ children }) => {
         getNoteListById,
         completeTask,
         updateTask,
+        updateNote,
         removeTask,
         removeNote,
         getRecentNotes,

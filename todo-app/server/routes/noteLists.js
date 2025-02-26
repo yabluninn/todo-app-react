@@ -4,12 +4,21 @@ import User from "../models/User.js";
 
 const router = express.Router();
 
+// Получение всех списков заметок пользователя + заметки внутри них
 router.get("/", async (req, res) => {
     try {
         const { userId } = req.query;
         if (!userId) return res.status(400).json({ message: "User ID is required" });
 
-        const user = await User.findById(userId).populate("noteLists");
+        // Загружаем пользователя с его списками заметок + заметки в этих списках
+        const user = await User.findById(userId).populate({
+            path: "noteLists",
+            populate: {
+                path: "notes", // Теперь заметки загружаются в списках
+                populate: { path: "categories" } // Загружаем категории заметок (если есть)
+            }
+        });
+
         if (!user) return res.status(404).json({ message: "User not found" });
 
         res.json(user.noteLists);
@@ -19,12 +28,13 @@ router.get("/", async (req, res) => {
     }
 });
 
+// Создание списка заметок
 router.post("/", async (req, res) => {
     try {
         const { userId, name, color } = req.body;
         if (!userId || !name) return res.status(400).json({ message: "User ID and name are required" });
 
-        const newNoteList = new NoteList({ name, color });
+        const newNoteList = new NoteList({ name, color, notes: [] }); // Инициализируем пустой массив заметок
         await newNoteList.save();
 
         await User.findByIdAndUpdate(userId, { $push: { noteLists: newNoteList._id } });
@@ -36,6 +46,7 @@ router.post("/", async (req, res) => {
     }
 });
 
+// Обновление списка заметок
 router.put("/:id", async (req, res) => {
     try {
         const { name, color } = req.body;
@@ -43,7 +54,7 @@ router.put("/:id", async (req, res) => {
             req.params.id,
             { name, color },
             { new: true }
-        );
+        ).populate("notes"); // Загружаем заметки после обновления
 
         if (!updatedNoteList) return res.status(404).json({ message: "Note list not found" });
 
@@ -54,6 +65,7 @@ router.put("/:id", async (req, res) => {
     }
 });
 
+// Удаление списка заметок
 router.delete("/:id", async (req, res) => {
     try {
         const { userId } = req.query;
@@ -75,6 +87,7 @@ router.delete("/:id", async (req, res) => {
     }
 });
 
+// Удаление всех списков заметок пользователя
 router.delete("/", async (req, res) => {
     try {
         const { userId } = req.query;

@@ -1,13 +1,12 @@
 /* eslint-disable react/prop-types */
 import "../../../styles/Note.css";
 import { stringExtensions } from "../../../utils/string-extensions";
-import {useCategories} from "../../../contexts/CategoriesContext.jsx";
 import Category from "../groups/Category.jsx";
 
 export default function Note({ note, handleDelete, handleEdit }) {
-  const formattedContent = stringExtensions.sliceWithDots(note.content, 80);
+  const formattedContent = stringExtensions.sliceWithDots(note.content || "", 80);
 
-  const {getCategoryById} = useCategories();
+  console.log("🚀 Debug Note:", note);
 
   return (
     <div
@@ -27,9 +26,8 @@ export default function Note({ note, handleDelete, handleEdit }) {
               <p style={styles.noteContent}>{formattedContent}</p>
             </div>
             <div style={styles.categories}>
-              {note.categories && note.categories.map(categoryId => {
-                const category = getCategoryById(categoryId);
-                return <Category key={categoryId} category={category}/>
+              {note.categories && note.categories.map(category => {
+                return <Category key={category._id} category={category}/>
               })}
             </div>
           </div>

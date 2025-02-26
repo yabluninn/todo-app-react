@@ -32,7 +32,7 @@ export default function Notes() {
     setSelectedNote(null);
   };
 
-  console.log(noteLists);
+  console.log("Note lists: ", noteLists);
 
   return (
     <div className="tasks-container">

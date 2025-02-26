@@ -1,15 +1,12 @@
 import { dateExtensions } from "../../../utils/date-extensions";
 import { stringExtensions } from "../../../utils/string-extensions";
 import HomeCategory from "./HomeCategory";
-import {useCategories} from "../../../contexts/CategoriesContext.jsx";
 
 /* eslint-disable react/prop-types */
 export default function HomeNote({ note }) {
-  const formattedContent = stringExtensions.sliceWithDots(note.content, 180);
+  const formattedContent = stringExtensions.sliceWithDots(note.content || "", 180);
 
-  const {getCategoryById} = useCategories();
-
-  const formattedDate = dateExtensions.getFormattedDate(note.creationDate);
+  const formattedDate = dateExtensions.getFormattedDate(new Date(note.creationDate));
 
   return (
     <div style={styles.main}>
@@ -20,10 +17,13 @@ export default function HomeNote({ note }) {
       </div>
       <p style={styles.content}>{formattedContent}</p>
       <div style={styles.categories}>
-        {note.categories && note.categories.map((categoryId) => {
-          const category = getCategoryById(categoryId);
-          return <HomeCategory key={categoryId} category={category} />;
+        {note.categories && note.categories.map((category) => {
+          if (!category) {
+            return null;
+          }
+          return <HomeCategory key={category._id} category={category} />;
         })}
+
       </div>
     </div>
   );
