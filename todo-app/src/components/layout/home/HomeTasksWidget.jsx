@@ -83,7 +83,7 @@ export default function HomeTasksWidget() {
           {todayTasks.length === 0 && <NothingHere icon={"fa-solid fa-clipboard-list"} />}
           {todayTasks.length > 0 &&
               todayTasks.map((task) => (
-                  <HomeTask key={task.id} task={task} handleComplete={() => completeTask(task.id, task.listId)} />
+                  <HomeTask key={task._id} task={task} handleComplete={() => completeTask(task._id, task.listId)} />
               ))}
         </div>
 

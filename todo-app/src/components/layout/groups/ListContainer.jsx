@@ -49,7 +49,7 @@ export default function ListContainer({ listType, lists, onOpenCreateListModal }
           {lists &&
               lists.map((list) => (
                   <List
-                      key={list.id}
+                      key={list._id}
                       list={list}
                       listType={listType}
                       onDelete={() =>

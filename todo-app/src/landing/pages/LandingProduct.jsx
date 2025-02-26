@@ -69,7 +69,7 @@ export default function LandingProduct() {
 
                 <div className="cta-container">
                     <Link to="/signup" className="cta-button">Get Started for Free</Link>
-                    <Link to="/signin" className="cta-secondary">Already have an account? Log in</Link>
+                    <Link to="/login" className="cta-secondary">Already have an account? Log in</Link>
                 </div>
             </div>
         </div>

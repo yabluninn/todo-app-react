@@ -37,7 +37,7 @@ export default function NotificationComponent ({ task, removeNotification }) {
                 <p className="notification-time">Task: {task.name}</p>
                 <p className="notification-received">{timeAgo} ago</p>
             </div>
-            <button className="notification-remove-btn" onClick={() => removeNotification(task.id)}>
+            <button className="notification-remove-btn" onClick={() => removeNotification(task._id)}>
                 <i className="hgi-stroke hgi-delete-02"></i>
             </button>
         </div>

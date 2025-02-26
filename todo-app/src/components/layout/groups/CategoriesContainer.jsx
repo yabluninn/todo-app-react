@@ -28,7 +28,7 @@ export default function CategoriesContainer({ openModal }) {
         </div>
         <div className="grid">
           {categories && categories.length > 0 && categories.map((category) => (
-              <Category key={category.id} category={category} />
+              <Category key={category._id} category={category} />
           ))}
           <CreateCategoryButton onOpenModal={openModal} />
         </div>

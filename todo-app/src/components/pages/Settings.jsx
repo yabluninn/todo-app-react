@@ -14,7 +14,6 @@ export default function Settings() {
                 </div>
             </div>
             <div className="settings-wrapper">
-                {/*Profile Section*/}
                 <SettingsBlock title="Profile" icon="hgi-user">
                     <SettingsItem
                         title="Username"
@@ -37,23 +36,15 @@ export default function Settings() {
                     />
                 </SettingsBlock>
 
-                {/* Appearance Section */}
                 <SettingsBlock title="Appearance" icon="hgi-paint-brush-04">
                     <SettingsItem
-                        title="Theme [In Development]"
-                        content="Light"
-                        buttonIcon="hgi-paint-board"
-                        buttonAction={() => alert("Change theme")}
-                    />
-                    <SettingsItem
-                        title="Language [In Development]"
+                        title="Language"
                         content="English"
                         buttonIcon="hgi-pencil-edit-01"
                         buttonAction={() => alert("Change language")}
                     />
                 </SettingsBlock>
 
-                {/* Notifications Section */}
                 <SettingsBlock title="Notifications" icon="hgi-notification-01">
                     <SettingsItem
                         title="Push Notifications"

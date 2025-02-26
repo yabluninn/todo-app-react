@@ -23,11 +23,11 @@ export default function Task({
       <div className="checkbox-wrapper-19">
         <input
           type="checkbox"
-          id={`cbtest-${task.id}`}
+          id={`cbtest-${task._id}`}
           onChange={handleComplete}
           checked={task.completed}
         />
-        <label htmlFor={`cbtest-${task.id}`} className="check-box"></label>
+        <label htmlFor={`cbtest-${task._id}`} className="check-box"></label>
       </div>
 
       <div style={styles.taskBlock}>

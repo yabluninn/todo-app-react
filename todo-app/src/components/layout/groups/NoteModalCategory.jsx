@@ -13,7 +13,7 @@ export default  function NoteModalCategory({category, onChange, isSelected}) {
             border: `1px solid ${category.color}`,
             color: isSelected ? "white" : category.color,
         }}
-        onClick={() => onChange(category.id)}
+        onClick={() => onChange(category._id)}
     >
         {category.name}
     </p>)

@@ -58,9 +58,6 @@ export default function HomeHeader({
                 <ContextMenuButton title={"Create Note"} icon={"hgi-stroke hgi-sticky-note-01"} onClick={onOpenCreateNoteModal}/>
               </ContextMenu>
           )}
-          <button className="h-menu-button">
-            <i className="hgi-stroke hgi-settings-02"></i>
-          </button>
         </div>
       </div>
     </>

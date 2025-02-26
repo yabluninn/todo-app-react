@@ -31,11 +31,11 @@ export default function SelectRelatedNoteModal({ onClose, onSelect }) {
                     {recentNotes.length > 0 ? (
                         recentNotes.map((note) => (
                             <div
-                                key={note.id}
+                                key={note._id}
                                 style={{
                                     ...styles.noteItem,
                                     borderColor:
-                                        selectedNote?.id === note.id ? "#7437ff" : "transparent",
+                                        selectedNote?._id === note._id ? "#7437ff" : "transparent",
                                 }}
                                 onClick={() => setSelectedNote(note)}
                             >

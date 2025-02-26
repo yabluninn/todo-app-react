@@ -5,7 +5,7 @@ export default function SideCategory({ category, onSelected }) {
     const [isHovered, setHovered] = useState(false);
 
     const selectCategory = () => {
-        onSelected(category.id)
+        onSelected(category._id)
     }
 
     return (

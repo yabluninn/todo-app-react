@@ -23,10 +23,7 @@ export default function LandingApp() {
                     <LandingNavMenu />
                 </div>
                 <div className="lp-h-block">
-                    <button className="lp-h-button lph-b-demo">
-                        Book a demo <i className="hgi-stroke hgi-arrow-right-01"></i>
-                    </button>
-                    <button className="lp-h-button lph-b-login">Log in</button>
+                    <Link to={"/login"} className="lp-h-button lph-b-login">Log in</Link>
                     <Link to={"/signup"} className="lp-h-button lph-b-signup">
                         Start for free
                     </Link>

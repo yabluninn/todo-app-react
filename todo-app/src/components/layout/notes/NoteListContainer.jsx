@@ -77,20 +77,20 @@ export default function NoteListContainer({ list, onNoteSideOpen }) {
       <div style={{ ...styles.notes, display: isNotesVisible ? "" : "none" }}>
         {list.notes.map((note) => (
           <Note
-            key={note.id}
+            key={note._id}
             note={note}
             handleEdit={() => {
               console.log("Note to edit:", note);
               onNoteSideOpen(note);
             }}
-            handleDelete={() => removeNote(note.id, note.listId)}
+            handleDelete={() => removeNote(note._id, note.listId)}
           />
         ))}
       </div>
       {notesContextMenuVisible && (
           <ContextMenu position={notesMenuPosition} toggleVisibility={toggleNotesContextMenuVisibility}>
             <ContextMenuButton title={"Remove All Notes"} icon={"hgi-stroke hgi-delete-02"} onClick={() => {
-              removeAllNotesFromList(list.id);
+              removeAllNotesFromList(list._id);
             }} />
           </ContextMenu>)}
     </div>

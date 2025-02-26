@@ -84,10 +84,10 @@ export default function CreateNoteModal({ onClose }) {
                 {categories &&
                     categories.map((category) => (
                         <NoteModalCategory
-                            key={category.id}
+                            key={category._id}
                             category={category}
                             onChange={handleSetCategories}
-                            isSelected={selectedCategories.includes(category.id)}
+                            isSelected={selectedCategories.includes(category._id)}
                         />
                     ))}
                 <Link style={styles.createButton} to={"/app/groups"}>

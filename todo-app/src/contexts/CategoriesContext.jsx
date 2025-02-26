@@ -80,8 +80,12 @@ export const CategoriesProvider = ({ children }) => {
 
     const getCategoriesLength = () => categories.length;
 
+    const getCategoryById = (id) => {
+        return categories.find((c) => c._id === id);
+    }
+
     return (
-        <CategoriesContext.Provider value={{ categories, addCategory, updateCategory, removeCategory, removeAllCategories, getCategoriesLength }}>
+        <CategoriesContext.Provider value={{ categories, addCategory, updateCategory, removeCategory, removeAllCategories, getCategoriesLength, getCategoryById }}>
             {children}
         </CategoriesContext.Provider>
     );

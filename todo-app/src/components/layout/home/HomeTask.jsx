@@ -67,12 +67,12 @@ export default function HomeTask({ task, handleComplete }) {
       <div className="checkbox-wrapper-19">
         <input
           type="checkbox"
-          id={`cbtest-${task.id}`}
+          id={`cbtest-${task._id}`}
           onChange={handleComplete}
           checked={task.completed}
         />
         <label
-          htmlFor={`cbtest-${task.id}`}
+          htmlFor={`cbtest-${task._id}`}
           className="check-box"
           style={{
             border: !task.completed
@@ -102,18 +102,6 @@ export default function HomeTask({ task, handleComplete }) {
             {formattedName}
           </p>
           <div style={styles.taskSubBlock}>
-            {/* <div
-              className={
-                task.note == "" ? "invisible-block" : "visible-task-info-block"
-              }
-              style={{
-                background: isCurrentTimeInRange
-                  ? "#60a2ff24"
-                  : "rgb(248, 248, 248)",
-              }}
-            >
-              <i className="hgi-stroke hgi-sticky-note-02"></i>
-            </div> */}
             <div
               style={{
                 ...styles.dateBlock,

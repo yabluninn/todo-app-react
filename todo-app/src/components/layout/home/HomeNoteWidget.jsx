@@ -21,7 +21,7 @@ export default function HomeNoteWidget() {
         <div className="note-container">
           {notes.length === 0 && <NothingHere icon={"fa-solid fa-note-sticky"} />}
           {notes.length > 0 &&
-              notes.map((note) => <HomeNote key={note.id} note={note} />)}
+              notes.map((note) => <HomeNote key={note._id} note={note} />)}
         </div>
       </div>
   );

@@ -14,7 +14,7 @@ export default function NavMenu() {
 
   return (
     <div className="nav-menu-container">
-      <p className="nm-header">My Dailybook</p>
+      <p className="nm-header">Booxee</p>
       <div className="nm-buttons-container">
         <div className="nm-buttons-group">
           <NavButton

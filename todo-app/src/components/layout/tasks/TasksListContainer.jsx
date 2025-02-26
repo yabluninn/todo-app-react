@@ -131,7 +131,7 @@ export default function TasksListContainer({ list, onTaskSideOpen }) {
       <div style={{ ...styles.tasks, display: isTasksVisible ? "" : "none" }}>
         {filteredTasks.map((task) => (
           <Task
-            key={task.id}
+            key={task._id}
             task={task}
             handleEdit={() => {
               onTaskSideOpen(task);
