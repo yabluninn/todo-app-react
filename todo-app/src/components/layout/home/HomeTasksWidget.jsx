@@ -12,10 +12,10 @@ import { taskActionsService } from "../../../services/TaskActionsService.js";
 import { SORTING_ACTIONS } from "../../../constants/sorting-actions.js";
 import { FILTER_ACTIONS } from "../../../constants/filter-actions.js";
 
-export default function HomeTasksWidget() {
-  const [todayTasks, setTodayTasks] = useState([]);
+export default function HomeTasksWidget({ selectedPeriod }) {
+  const [filteredTasks, setFilteredTasks] = useState([]);
   const [originalTasks, setOriginalTasks] = useState([]);
-  const { getTodayTasks, completeTask } = useListsContext();
+  const { getTasksByPeriod, completeTask } = useListsContext();
 
   const [isSortContextMenuVisible, setSortContextMenuVisible] = useState(false);
   const [isFilterContextMenuVisible, setFilterContextMenuVisible] = useState(false);
@@ -30,26 +30,27 @@ export default function HomeTasksWidget() {
     setSortContextMenuVisible(false);
   };
 
-  useEffect(() => {
-    const tasks = getTodayTasks();
-    setTodayTasks(tasks);
-    setOriginalTasks(tasks);
-  }, [getTodayTasks]);
 
-  const sortTodayTasks = (action) => {
+  useEffect(() => {
+    const tasks = getTasksByPeriod(selectedPeriod);
+    setFilteredTasks(tasks);
+    setOriginalTasks(tasks);
+  }, [selectedPeriod, getTasksByPeriod]);
+
+  const sortTasks = (action) => {
     const sortedTasks = taskActionsService.sort([...originalTasks], action);
-    setTodayTasks(sortedTasks);
+    setFilteredTasks(sortedTasks);
   };
 
-  const filterTodayTasks = (action) => {
+  const filterTasks = (action) => {
     const filteredTasks = taskActionsService.filter([...originalTasks], action);
-    setTodayTasks(filteredTasks);
+    setFilteredTasks(filteredTasks);
   };
 
   return (
       <div className="home-tasks-widget">
         <div className="header">
-          <p className="title">Tasks for Today</p>
+          <p className="title">Tasks for {selectedPeriod}</p>
           <div className="header-block">
             <button className="sort-button" onClick={toggleFilterContextMenuVisibility}>
               <i className="hgi-stroke hgi-filter sort-icon"></i>
@@ -65,26 +66,28 @@ export default function HomeTasksWidget() {
 
         {isSortContextMenuVisible && (
             <ContextMenu position={{ top: "160px", left: "410px" }} toggleVisibility={toggleSortContextMenuVisibility}>
-              <ContextMenuButton title={"Sort by Priority"} icon={"hgi-stroke hgi-flag-02"} onClick={() => sortTodayTasks(SORTING_ACTIONS.HIGH_PRIORITY_FIRST)} />
-              <ContextMenuButton title={"Sort by Completed"} icon={"hgi-stroke hgi-checkmark-square-02"} onClick={() => sortTodayTasks(SORTING_ACTIONS.COMPLETED_FIRST)} />
-              <ContextMenuButton title={"Sort by Uncompleted"} icon={"hgi-stroke hgi-cancel-square"} onClick={() => sortTodayTasks(SORTING_ACTIONS.UNCOMPLETED_FIRST)} />
+              <ContextMenuButton title={"Sort by Priority"} icon={"hgi-stroke hgi-flag-02"} onClick={() => sortTasks(SORTING_ACTIONS.HIGH_PRIORITY_FIRST)} />
+              <ContextMenuButton title={"Sort by Completed"} icon={"hgi-stroke hgi-checkmark-square-02"} onClick={() => sortTasks(SORTING_ACTIONS.COMPLETED_FIRST)} />
+              <ContextMenuButton title={"Sort by Uncompleted"} icon={"hgi-stroke hgi-cancel-square"} onClick={() => sortTasks(SORTING_ACTIONS.UNCOMPLETED_FIRST)} />
             </ContextMenu>
         )}
 
         {isFilterContextMenuVisible && (
             <ContextMenu position={{ top: "160px", left: "375px" }} toggleVisibility={toggleFilterContextMenuVisibility}>
-              <ContextMenuButton title={"Show Completed"} icon={"hgi-stroke hgi-checkmark-square-02"} onClick={() => filterTodayTasks(FILTER_ACTIONS.SHOW_COMPLETED)} />
-              <ContextMenuButton title={"Show Uncompleted"} icon={"hgi-stroke hgi-cancel-square"} onClick={() => filterTodayTasks(FILTER_ACTIONS.SHOW_UNCOMPLETED)} />
-              <ContextMenuButton title={"Show Overdue"} icon={"hgi-stroke hgi-clock-04"} onClick={() => filterTodayTasks(FILTER_ACTIONS.SHOW_OVERDUE)} />
+              <ContextMenuButton title={"Show Completed"} icon={"hgi-stroke hgi-checkmark-square-02"} onClick={() => filterTasks(FILTER_ACTIONS.SHOW_COMPLETED)} />
+              <ContextMenuButton title={"Show Uncompleted"} icon={"hgi-stroke hgi-cancel-square"} onClick={() => filterTasks(FILTER_ACTIONS.SHOW_UNCOMPLETED)} />
+              <ContextMenuButton title={"Show Overdue"} icon={"hgi-stroke hgi-clock-04"} onClick={() => filterTasks(FILTER_ACTIONS.SHOW_OVERDUE)} />
             </ContextMenu>
         )}
 
         <div className="task-container">
-          {todayTasks.length === 0 && <NothingHere icon={"fa-solid fa-clipboard-list"} />}
-          {todayTasks.length > 0 &&
-              todayTasks.map((task) => (
+          {filteredTasks.length === 0 ? (
+              <NothingHere icon={"fa-solid fa-clipboard-list"} />
+          ) : (
+              filteredTasks.map((task) => (
                   <HomeTask key={task._id} task={task} handleComplete={() => completeTask(task._id, task.listId)} />
-              ))}
+              ))
+          )}
         </div>
 
         <div className="hint-block">

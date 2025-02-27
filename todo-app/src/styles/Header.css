@@ -60,34 +60,6 @@
   margin-right: 10px;
 }
 
-.h-dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #ffffff;
-  min-width: 160px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-  overflow: hidden;
-  margin-top: 5px;
-  z-index: 100;
-}
-
-.h-dropdown-content a {
-  color: #333;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-  transition: all 0.2s ease;
-}
-
-.h-dropdown-content a:hover {
-  background-color: #f1f1f1;
-}
-
-.h-dropdown:hover .dropdown-content {
-  display: block;
-}
-
 .h-menu-button {
   width: 42px;
   height: 42px;

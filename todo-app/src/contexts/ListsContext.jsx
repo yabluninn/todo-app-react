@@ -171,6 +171,64 @@ export const ListsProvider = ({ children }) => {
         );
     };
 
+    const getTasksByPeriod = (period) => {
+        const allTasks = taskLists.flatMap(list => list.tasks || []);
+
+        if (period === "Today") {
+            const today = new Date().toISOString().split("T")[0];
+
+            const filteredTasks = allTasks.filter(task => {
+                const taskDate = new Date(task.date).toISOString().split("T")[0];
+                return taskDate === today;
+            });
+
+            return filteredTasks;
+        }
+
+        if (period === "3 days") {
+            const today = new Date();
+            const threeDaysLater = new Date();
+            threeDaysLater.setDate(today.getDate() + 2);
+
+            const filteredTasks = allTasks.filter(task => {
+                const taskDate = new Date(task.date);
+                return taskDate >= today && taskDate <= threeDaysLater;
+            });
+
+            return filteredTasks;
+        }
+
+        if (period === "Week") {
+            const today = new Date();
+            const weekLater = new Date();
+            weekLater.setDate(today.getDate() + 6);
+
+            const filteredTasks = allTasks.filter(task => {
+                const taskDate = new Date(task.date);
+                return taskDate >= today && taskDate <= weekLater;
+            });
+
+            return filteredTasks;
+        }
+
+        if (period === "Month") {
+            const today = new Date();
+            const currentMonth = today.getMonth();
+
+            const filteredTasks = allTasks.filter(task => {
+                const taskDate = new Date(task.date);
+                return taskDate.getMonth() === currentMonth;
+            });
+
+            return filteredTasks;
+        }
+
+        return [];
+    };
+
+
+
+
     useEffect(() => {
         if (taskLists.length === 0) return;
 
@@ -426,7 +484,8 @@ export const ListsProvider = ({ children }) => {
         removeAllNoteLists,
         shownNotifications,
         removeNotification,
-        removeAllNotesFromList
+        removeAllNotesFromList,
+        getTasksByPeriod
       }}
     >
       {children}
