@@ -2,8 +2,28 @@ import "../../styles/Analytics.css";
 import RecentCompletionCurve from "../layout/analytics/RecentCompletionCurve.jsx";
 import TaskCompletionDoughnut from "../layout/analytics/TaskCompletionDoughnut.jsx";
 import TasksCompletionBlock from "../layout/analytics/TasksCompletionBlock.jsx";
+import {useListsContext} from "../../contexts/ListsContext.jsx";
+import {taskService} from "../../services/TaskService.js";
 
 export default function Analytics() {
+
+    const { taskLists, noteLists } = useListsContext();
+
+    const totalTasks = taskLists.reduce((acc, list) => acc + list.tasks.length, 0);
+    const totalNotes = noteLists.reduce((acc, list) => acc + list.notes.length, 0);
+
+    const completedTasks = taskLists.reduce(
+        (acc, list) => acc + list.tasks.filter(task => task.completed).length,
+        0
+    );
+
+    const overdueTasks = taskLists.reduce(
+        (acc, list) => acc + list.tasks.filter(task => taskService.checkOverdue(task)).length,
+        0
+    );
+
+    const taskListsCount = taskLists.length;
+    const noteListsCount = noteLists.length;
 
 
     return (
@@ -17,11 +37,11 @@ export default function Analytics() {
                 </div>
             </div>
             <div className="a-overview-block">
-                <p><strong style={{marginRight: "4px", color: "black"}}>50</strong> Tasks</p>
-                <p><strong style={{marginRight: "4px", color: "black"}}>13</strong> Completed</p>
-                <p><strong style={{marginRight: "4px", color: "black"}}>2</strong> Overdue</p>
-                <p><strong style={{marginRight: "4px", color: "black"}}>10</strong> Task Lists</p>
-                <p><strong style={{marginRight: "4px", color: "black"}}>4</strong> Note Lists</p>
+                <p><strong style={{marginRight: "4px", color: "black"}}>{totalTasks}</strong> Tasks</p>
+                <p><strong style={{marginRight: "4px", color: "black"}}>{completedTasks}</strong> Completed</p>
+                <p><strong style={{marginRight: "4px", color: "black"}}>{overdueTasks}</strong> Overdue</p>
+                <p><strong style={{marginRight: "4px", color: "black"}}>{taskListsCount}</strong> Task Lists</p>
+                <p><strong style={{marginRight: "4px", color: "black"}}>{noteListsCount}</strong> Note Lists</p>
             </div>
             <div className="a-data-container">
                 <TasksCompletionBlock/>
@@ -34,7 +54,7 @@ export default function Analytics() {
                         </button>
                     </div>
                     <div className="a-tib-data">
-                        <p><strong style={{marginRight: "4px", color: "black"}}>12</strong> Total</p>
+                        <p><strong style={{marginRight: "4px", color: "black"}}>{totalNotes}</strong> Total</p>
                     </div>
                 </div>
             </div>

@@ -9,9 +9,10 @@ import {
     Tooltip,
     Legend,
 } from "chart.js";
-import {useState} from "react";
+import { useState } from "react";
 import ContextMenuButton from "../../contextMenus/ContextMenuButton.jsx";
 import ContextMenu from "../../contextMenus/ContextMenu.jsx";
+import {useListsContext} from "../../../contexts/ListsContext.jsx";
 
 ChartJS.register(
     CategoryScale,
@@ -29,7 +30,7 @@ const getLast7Days = () => {
     for (let i = 6; i >= 0; i--) {
         const date = new Date();
         date.setDate(today.getDate() - i);
-        days.push(date.toLocaleDateString("en-US", { day: "numeric", month: "short" })); // Формат: "25 Jan"
+        days.push(date.toLocaleDateString("en-US", { day: "numeric", month: "short" }));
     }
     return days;
 };
@@ -41,7 +42,7 @@ const getLast7Weeks = () => {
         const date = new Date();
         date.setDate(today.getDate() - i * 7);
         const weekStart = new Date(date);
-        weekStart.setDate(date.getDate() - date.getDay()); // Начало недели
+        weekStart.setDate(date.getDate() - date.getDay());
         weeks.push(`Week of ${weekStart.toLocaleDateString("en-US", { month: "short", day: "numeric" })}`);
     }
     return weeks;
@@ -53,24 +54,47 @@ const getLast7Months = () => {
     for (let i = 6; i >= 0; i--) {
         const date = new Date();
         date.setMonth(today.getMonth() - i);
-        months.push(date.toLocaleDateString("en-US", { month: "long", year: "numeric" })); // Формат: "January 2023"
+        months.push(date.toLocaleDateString("en-US", { month: "long", year: "numeric" }));
     }
     return months;
 };
 
-const generateRandomData = (length = 7) => {
-    return Array.from({ length }, () => Math.floor(Math.random() * 15)); // Генерация случайных данных
+const getTasksCompletedInRange = (tasks, dataRange) => {
+    const now = new Date();
+    let filteredTasks = [];
+
+    if (dataRange === "Today") {
+        filteredTasks = tasks.filter(task => {
+            const taskDate = new Date(task.date);
+            return taskDate.toDateString() === now.toDateString();
+        });
+    } else if (dataRange === "Week") {
+        const startOfWeek = new Date(now.setDate(now.getDate() - now.getDay()));
+        const endOfWeek = new Date(startOfWeek);
+        endOfWeek.setDate(endOfWeek.getDate() + 6);
+
+        filteredTasks = tasks.filter(task => {
+            const taskDate = new Date(task.date);
+            return taskDate >= startOfWeek && taskDate <= endOfWeek;
+        });
+    } else if (dataRange === "Month") {
+        filteredTasks = tasks.filter(task => {
+            const taskDate = new Date(task.date);
+            return taskDate.getMonth() === now.getMonth() && taskDate.getFullYear() === now.getFullYear();
+        });
+    }
+
+    return filteredTasks.length;
 };
 
 const RecentCompletionCurve = () => {
-    const [dataRange, setDataRange] = useState("Today"); // Диапазон данных
+    const [dataRange, setDataRange] = useState("Today");
     const [menuVisible, setMenuVisible] = useState(false);
-    const contextMenuPos = {
-        top: "390px",
-        left: "725px",
-    }
+    const { taskLists } = useListsContext();
 
-    // Определение меток и данных на основе выбранного диапазона
+    const allTasks = taskLists.flatMap(list => list.tasks);
+    const completedTasks = allTasks.filter(task => task.completed && task.date); // Только завершенные
+
     const labels =
         dataRange === "Today"
             ? getLast7Days()
@@ -78,7 +102,7 @@ const RecentCompletionCurve = () => {
                 ? getLast7Weeks()
                 : getLast7Months();
 
-    const dataValues = generateRandomData(labels.length);
+    const dataValues = labels.map(() => getTasksCompletedInRange(completedTasks, dataRange));
 
     const data = {
         labels,
@@ -125,7 +149,7 @@ const RecentCompletionCurve = () => {
                 </button>
                 {menuVisible && (
                     <ContextMenu
-                        position={contextMenuPos}
+                        position={{ top: "390px", left: "725px" }}
                         toggleVisibility={() => setMenuVisible(false)}
                     >
                         <ContextMenuButton

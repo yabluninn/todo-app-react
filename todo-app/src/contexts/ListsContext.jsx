@@ -107,20 +107,64 @@ export const ListsProvider = ({ children }) => {
         }
     };
 
-  const completeTask = async (taskId, listId) => {
-      try {
-          const list = taskLists.find((l) => l._id === listId);
-          const task = list?.tasks.find((t) => t._id === taskId);
-          if (!task) return;
+    const completeTask = async (taskId, listId) => {
+        try {
+            console.log(`🔍 Ищем список задач (listId: ${listId})...`);
+            const list = taskLists.find((l) => l._id === listId);
 
-          const updatedTask = { ...task, completed: !task.completed };
-          await updateTask(taskId, updatedTask);
-      } catch (err) {
-          console.error("Error toggling task completion:", err);
-      }
-  };
+            if (!list) {
+                console.error(`❌ Ошибка: список с ID ${listId} не найден!`);
+                return;
+            }
 
-  const removeTask = async (taskId, listId) => {
+            console.log(`✅ Найден список: `, list);
+
+            console.log(`🔍 Ищем задачу (taskId: ${taskId})...`);
+            const task = list.tasks.find((t) => t._id === taskId);
+
+            if (!task) {
+                console.error(`❌ Ошибка: задача с ID ${taskId} не найдена!`);
+                return;
+            }
+
+            console.log(`✅ Найдена задача: `, task);
+
+            // Переключаем статус completed
+            const updatedCompleted = !task.completed;
+            console.log(`🔄 Переключаем статус задачи: ${task.name} -> completed: ${updatedCompleted}`);
+
+            // Отправляем запрос на сервер
+            console.log(`📤 Отправляем PUT запрос на сервер...`);
+            const response = await axios.put(`http://localhost:5000/api/tasks/${taskId}`, {
+                completed: updatedCompleted
+            });
+
+            console.log(`✅ Сервер ответил:`, response.data);
+
+            // Обновляем состояние
+            console.log(`📌 Обновляем состояние taskLists...`);
+            setTaskLists((prevLists) =>
+                prevLists.map((list) =>
+                    list._id === listId
+                        ? {
+                            ...list,
+                            tasks: list.tasks.map((t) =>
+                                t._id === taskId ? response.data : t
+                            ),
+                        }
+                        : list
+                )
+            );
+
+            console.log(`✅ Статус задачи успешно обновлен!`);
+        } catch (err) {
+            console.error("❌ Ошибка при переключении статуса задачи:", err);
+        }
+    };
+
+
+
+    const removeTask = async (taskId, listId) => {
       try {
           await axios.delete(`http://localhost:5000/api/tasks/${taskId}`);
           setTaskLists((prevLists) =>

@@ -21,6 +21,12 @@ export default function TasksListContainer({ list, onTaskSideOpen }) {
   const [sortMenuPosition, setSortMenuPosition] = useState({ top: 0, left: 1185 });
   const [filterMenuPosition, setFilterMenuPosition] = useState({ top: 0, left: 1150 });
 
+  const handleCompleteTask = (taskId, listId) => {
+    completeTask(taskId, listId);
+
+    console.log("Task completed: ", taskId, listId);
+  };
+
   useEffect(() => {
     setFilteredTasks(list.tasks);
   }, [list.tasks]);
@@ -134,7 +140,7 @@ export default function TasksListContainer({ list, onTaskSideOpen }) {
             handleEdit={() => {
               onTaskSideOpen(task);
             }}
-            handleComplete={() => completeTask(task._id, list._id)}
+            handleComplete={() => handleCompleteTask(task._id, list._id)}
             handleDelete={() => removeTask(task._id, list._id)}
           />
         ))}

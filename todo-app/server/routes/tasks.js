@@ -26,7 +26,18 @@ router.post("/", async (req, res) => {
 
 router.put("/:id", async (req, res) => {
     try {
-        const task = await Task.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        const { completed } = req.body;
+
+        if (typeof completed !== "boolean") {
+            return res.status(400).json({ message: "Completed field must be a boolean" });
+        }
+
+        const task = await Task.findByIdAndUpdate(
+            req.params.id,
+            { completed },
+            { new: true }
+        );
+
         if (!task) return res.status(404).json({ message: "Task not found" });
 
         res.json(task);

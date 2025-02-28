@@ -8,34 +8,67 @@ import {
 import { useState } from "react";
 import ContextMenuButton from "../../contextMenus/ContextMenuButton.jsx";
 import ContextMenu from "../../contextMenus/ContextMenu.jsx";
+import {useListsContext} from "../../../contexts/ListsContext.jsx";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-const generateRandomData = (length = 2) => {
-    return Array.from({ length }, () => Math.floor(Math.random() * 15)); // Генерация случайных данных
+const checkOverdue = (task) => {
+    if (!task.completed) {
+        const nowTime = new Date();
+        const currentTime = nowTime.getHours() * 60 + nowTime.getMinutes();
+
+        const [endHours, endMinutes] = task.endTime.split(":").map(Number);
+        const taskEndTime = endHours * 60 + endMinutes;
+
+        return currentTime > taskEndTime;
+    }
+    return false;
+};
+
+const getTasksDataForRange = (tasks, dataRange) => {
+    const now = new Date();
+    let completed = 0;
+    let overdue = 0;
+
+    tasks.forEach(task => {
+        const taskDate = new Date(task.date);
+
+        if (dataRange === "Today") {
+            if (taskDate.toDateString() === now.toDateString()) {
+                task.completed ? completed++ : checkOverdue(task) && overdue++;
+            }
+        } else if (dataRange === "Week") {
+            const startOfWeek = new Date(now.setDate(now.getDate() - now.getDay()));
+            const endOfWeek = new Date(startOfWeek);
+            endOfWeek.setDate(endOfWeek.getDate() + 6);
+
+            if (taskDate >= startOfWeek && taskDate <= endOfWeek) {
+                task.completed ? completed++ : checkOverdue(task) && overdue++;
+            }
+        } else if (dataRange === "Month") {
+            if (taskDate.getMonth() === now.getMonth() && taskDate.getFullYear() === now.getFullYear()) {
+                task.completed ? completed++ : checkOverdue(task) && overdue++;
+            }
+        }
+    });
+
+    return [completed, overdue];
 };
 
 const TaskCompletionDoughnut = () => {
     const [dataRange, setDataRange] = useState("Today");
     const [menuVisible, setMenuVisible] = useState(false);
-    const contextMenuPos = {
-        top: "390px",
-        left: "1285px",
-    };
+    const { taskLists } = useListsContext();
 
-    // Генерация данных в зависимости от выбранного диапазона
-    const dataValues =
-        dataRange === "Today"
-            ? generateRandomData()
-            : dataRange === "Week"
-                ? generateRandomData()
-                : generateRandomData();
+    const allTasks = taskLists.flatMap(list => list.tasks);
+
+    const [completedTasks, overdueTasks] = getTasksDataForRange(allTasks, dataRange);
 
     const data = {
         labels: ["Completed", "Overdue"],
         datasets: [
             {
-                data: dataValues,
+                data: [completedTasks, overdueTasks],
                 backgroundColor: ["rgba(75, 192, 192, 0.6)", "rgba(255, 99, 132, 0.6)"],
                 borderColor: ["rgba(75, 192, 192, 1)", "rgba(255, 99, 132, 1)"],
                 borderWidth: 1,
@@ -53,8 +86,8 @@ const TaskCompletionDoughnut = () => {
                 callbacks: {
                     label: (tooltipItem) => {
                         const value = tooltipItem.raw;
-                        const total = dataValues.reduce((sum, val) => sum + val, 0);
-                        const percentage = ((value / total) * 100).toFixed(1);
+                        const total = completedTasks + overdueTasks;
+                        const percentage = total ? ((value / total) * 100).toFixed(1) : 0;
                         return `${value} tasks (${percentage}%)`;
                     },
                 },
@@ -77,7 +110,7 @@ const TaskCompletionDoughnut = () => {
                 </button>
                 {menuVisible && (
                     <ContextMenu
-                        position={contextMenuPos}
+                        position={{ top: "390px", left: "1285px" }}
                         toggleVisibility={() => setMenuVisible(false)}
                     >
                         <ContextMenuButton

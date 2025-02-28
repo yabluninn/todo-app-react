@@ -9,7 +9,8 @@ const TaskSchema = new mongoose.Schema(
             endTime: { type: String },
             priority: { type: String, enum: ["none", "low", "medium", "high"], default: "none" },
             listId: { type: mongoose.Schema.Types.ObjectId, ref: "TaskList", required: true },
-            relatedNoteId: { type: mongoose.Schema.Types.ObjectId, ref: "Note", default: null }
+            relatedNoteId: { type: mongoose.Schema.Types.ObjectId, ref: "Note", default: null },
+            completed: { type: Boolean, default: false }
     },
     { timestamps: true }
 );
