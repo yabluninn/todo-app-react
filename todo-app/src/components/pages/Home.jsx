@@ -7,7 +7,8 @@ import HomeNoteWidget from "../layout/home/HomeNoteWidget";
 import HomeAddWidget from "../layout/home/HomeAddWidget";
 import CreateTaskModal from "../modals/CreateTaskModal";
 import CreateNoteModal from "../modals/CreateNoteModal";
-import { useListsContext } from "../../contexts/ListsContext"; // Добавляем контекст
+import { useListsContext } from "../../contexts/ListsContext";
+import HomeTasksAnalyticsWidget from "../layout/home/HomeTasksAnalyticsWidget.jsx"; // Добавляем контекст
 
 export default function Home() {
   const [isCreateTaskModalOpen, setCreateTaskModalOpen] = useState(false);
@@ -37,6 +38,7 @@ export default function Home() {
           >
             <HomeTasksWidget selectedPeriod={selectedPeriod}/>
             <HomeNoteWidget/>
+            <HomeTasksAnalyticsWidget selectedPeriod={selectedPeriod}/>
             <HomeAddWidget/>
           </div>
           {selectedPeriod === "Today" && (
