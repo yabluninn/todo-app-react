@@ -1,57 +1,102 @@
 .profile-container {
-    width: 86%;
-    height: 100%;
-    padding: 30px 112px 24px 112px;
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
+    width: 100%;
+    height: 100vh;
+    background: linear-gradient(135deg, #f9f9f9, #e3e3e3);
 }
 
-.profile-wrapper{
-    width: 50%;
-    height: 90%;
-    background-color: white;
-    border-radius: 8px;
-    padding: 18px;
-    box-shadow: rgba(99, 99, 99, 0.05) 0px 2px 12px 0px;
+.profile-card {
+    background: white;
+    width: 380px;
+    padding: 24px;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    text-align: center;
     display: flex;
-    justify-content: start;
-    align-items: center;
     flex-direction: column;
+    align-items: center;
 }
 
-.profile-main{
+.profile-header {
     display: flex;
-    justify-content: center;
-    align-items: center;
     flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
 }
 
-.logout-button{
-    width: 50%;
-    height: 35px;
-    border-radius: 8px;
-    font-size: 18px;
+.profile-avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid #ddd;
+    transition: transform 0.3s ease-in-out;
+}
+
+.profile-avatar:hover {
+    transform: scale(1.05);
+}
+
+.profile-info {
+    margin-top: 12px;
+}
+
+.profile-username {
+    font-size: 22px;
     font-weight: bold;
-    color: #aaa;
-    transition: background-color 0.3s;
+    color: #333;
 }
 
-.logout-button:hover{
-    background-color: #f4f4f4;
+.profile-email {
+    font-size: 14px;
+    color: #777;
+    margin-top: 4px;
 }
 
-.delete-button{
-    width: 50%;
-    height: 35px;
+.profile-account {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 6px 16px;
     border-radius: 8px;
-    font-size: 18px;
-    font-weight: bold;
-    color: #cf0000;
-    transition: background-color 0.3s;
+    background: #f0f0f0;
+    font-size: 14px;
+    color: #555;
 }
 
-.delete-button:hover{
-    background-color: rgba(255, 0, 0, 0.1);
+.profile-actions {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.profile-button {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.logout-button {
+    background: #7437ff;
+    color: white;
+}
+
+.logout-button:hover {
+    background: #602bda;
+}
+
+.delete-button {
+    background: #e74c3c;
+    color: white;
+}
+
+.delete-button:hover {
+    background: #c0392b;
 }
