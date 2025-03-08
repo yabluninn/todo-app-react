@@ -19,25 +19,43 @@ export default function TaskSideSection({ task, onClose }) {
     setNewTaskName(task.name || "");
     setNewStartTime(task.startTime || "");
     setNewEndTime(task.endTime || "");
-    setNewTaskDate(task.date || "");
     setNewTaskPriority(task.priority || "none");
     setNewTaskDescription(task.description || "");
+
+    if (task.date) {
+      const formattedDate = new Date(task.date).toISOString().split("T")[0];
+      setNewTaskDate(formattedDate);
+    } else {
+      setNewTaskDate("");
+    }
   }, [task]);
 
+
   const saveTask = () => {
+    const formattedDate = newTaskDate
+        ? new Date(newTaskDate).toISOString().split("T")[0]
+        : "";
+
     const updatedTask = {
       name: newTaskName,
       startTime: newStartTime,
       endTime: newEndTime,
-      date: newTaskDate,
+      date: formattedDate,
       priority: newTaskPriority,
       description: newTaskDescription,
       listId: task.listId,
+      completed: task.completed ?? false,
     };
+
+    console.log("🔹 Данные перед отправкой в updateTask:", updatedTask);
 
     updateTask(task._id, updatedTask);
     onClose();
   };
+
+
+
+
 
   const list = getTaskListById(task.listId);
   const listName = list ? list.name : "Unknown List";
@@ -124,8 +142,8 @@ const styles = {
     position: "absolute",
     top: "0",
     right: "0",
-    width: "25%",
-    height: "100%",
+    width: "30%",
+    height: "100vh",
     background: "white",
     boxShadow: "rgba(99, 99, 99, 0.2) 0px 8px 16px 0px",
     padding: "18px",

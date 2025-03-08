@@ -1,6 +1,7 @@
 import express from "express";
 import Task from "../models/Task.js";
 import TaskList from "../models/TaskList.js";
+import mongoose from "mongoose";
 
 const router = express.Router();
 
@@ -26,23 +27,26 @@ router.post("/", async (req, res) => {
 
 router.put("/:id", async (req, res) => {
     try {
-        const { completed } = req.body;
+        const { id } = req.params;
+        const updatedData = req.body;
 
-        if (typeof completed !== "boolean") {
-            return res.status(400).json({ message: "Completed field must be a boolean" });
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            return res.status(400).json({ error: "Invalid task ID format" });
         }
 
-        const task = await Task.findByIdAndUpdate(
-            req.params.id,
-            { completed },
-            { new: true }
+        const updatedTask = await Task.findByIdAndUpdate(
+            id,
+            { $set: updatedData },
+            { new: true, runValidators: true }
         );
 
-        if (!task) return res.status(404).json({ message: "Task not found" });
+        if (!updatedTask) {
+            return res.status(404).json({ error: "Task not found" });
+        }
 
-        res.json(task);
-    } catch (err) {
-        res.status(500).json({ message: "Error updating task", error: err.message });
+        res.json(updatedTask);
+    } catch (error) {
+        res.status(500).json({ error: "Internal server error" });
     }
 });
 

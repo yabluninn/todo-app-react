@@ -75,6 +75,7 @@ export const ListsProvider = ({ children }) => {
 
     const updateTask = async (taskId, updatedData) => {
         try {
+
             const response = await axios.put(`http://localhost:5000/api/tasks/${taskId}`, updatedData);
 
             setTaskLists((prevLists) =>
@@ -86,9 +87,12 @@ export const ListsProvider = ({ children }) => {
                 }))
             );
         } catch (err) {
-            console.error("Error updating task:", err);
+            console.error("Task updating error: ", err.response?.data || err.message);
         }
     };
+
+
+
 
     const updateNote = async (noteId, updatedData) => {
         try {
