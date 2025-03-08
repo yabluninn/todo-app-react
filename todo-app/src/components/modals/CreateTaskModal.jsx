@@ -44,7 +44,7 @@ export default function CreateTaskModal({ onClose }) {
       endTime: taskEndTime,
       priority: taskPriority.toLowerCase(),
       listId: selectedList,
-      relatedNoteId: relatedNote?.id || null,
+      relatedNoteId: relatedNote?._id || null,
     };
 
     addTask(newTask, selectedList);

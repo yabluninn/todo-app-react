@@ -61,7 +61,7 @@ export default function Task({
             </div>
             <div
               className={
-                task.note == "" ? "invisible-block" : "visible-task-info-block"
+                task.relatedNoteId == null ? "invisible-block" : "visible-task-info-block"
               }
             >
               <i className="hgi-stroke hgi-sticky-note-02"></i>
