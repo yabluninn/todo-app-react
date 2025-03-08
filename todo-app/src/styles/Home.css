@@ -6,6 +6,8 @@
   justify-content: start;
   align-items: start;
   flex-direction: column;
+  margin-left: 15%;
+  position: relative;
 }
 
 .page-app-container {

@@ -1,11 +1,15 @@
 .tasks-container {
   width: 86%;
-  height: 100%;
+  min-height: 100%;
+  height: fit-content;
+  background-color: #f7f7f7;
   padding: 30px 112px 24px 112px;
   display: flex;
   justify-content: start;
   align-items: start;
   flex-direction: column;
+  margin-left: 15%;
+  position: relative;
 }
 
 .tasks-header {
