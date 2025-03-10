@@ -1,25 +1,46 @@
 import express from "express";
 import TaskList from "../models/TaskList.js";
 import User from "../models/User.js";
+import Task from "../models/Task.js";
 
 const router = express.Router();
 
+// router.get("/", async (req, res) => {
+//     try {
+//         const { userId } = req.query;
+//         if (!userId) return res.status(400).json({ message: "User ID is required" });
+//
+//         // Загружаем taskLists вместе с их задачами
+//         const user = await User.findById(userId).populate({
+//             path: "taskLists",
+//             populate: {
+//                 path: "tasks", // Загружаем вложенные задачи
+//             },
+//         });
+//
+//         if (!user) return res.status(404).json({ message: "User not found" });
+//
+//         res.json(user.taskLists);
+//     } catch (err) {
+//         console.error("Error fetching task lists:", err);
+//         res.status(500).json({ message: "Server error" });
+//     }
+// });
 router.get("/", async (req, res) => {
     try {
         const { userId } = req.query;
         if (!userId) return res.status(400).json({ message: "User ID is required" });
 
-        // Загружаем taskLists вместе с их задачами
         const user = await User.findById(userId).populate({
             path: "taskLists",
-            populate: {
-                path: "tasks", // Загружаем вложенные задачи
-            },
         });
 
-        if (!user) return res.status(404).json({ message: "User not found" });
+        const updatedTaskLists = await Promise.all(user.taskLists.map(async (list) => {
+            const tasks = await Task.find({ listId: list._id });
+            return { ...list.toObject(), tasks };
+        }));
 
-        res.json(user.taskLists);
+        res.json(updatedTaskLists);
     } catch (err) {
         console.error("Error fetching task lists:", err);
         res.status(500).json({ message: "Server error" });
@@ -99,6 +120,29 @@ router.delete("/:id", async (req, res) => {
         res.json({ message: "Task list deleted" });
     } catch (err) {
         console.error("Error deleting task list:", err);
+        res.status(500).json({ message: "Server error" });
+    }
+});
+
+router.put("/moveTasksToAll/:oldListId", async (req, res) => {
+    try {
+        const { newListId } = req.body; // ID нового списка ("All")
+
+        if (!newListId) {
+            return res.status(400).json({ message: "New list ID is required" });
+        }
+
+        // 🔄 Обновляем listId у всех задач из удаленного списка
+        const updatedTasks = await Task.updateMany(
+            { listId: req.params.oldListId }, // Найти задачи с этим listId
+            { $set: { listId: newListId } }  // Установить новый listId
+        );
+
+        console.log(`✅ ${updatedTasks.modifiedCount} задач перенесены в All`);
+
+        res.json({ message: "Tasks successfully moved to All" });
+    } catch (err) {
+        console.error("❌ Ошибка при перемещении задач:", err);
         res.status(500).json({ message: "Server error" });
     }
 });

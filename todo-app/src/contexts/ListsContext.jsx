@@ -403,13 +403,43 @@ export const ListsProvider = ({ children }) => {
                 return;
             }
 
-            await axios.delete(`http://localhost:5000/api/taskLists/${id}?userId=${user.id}`);
+            const allList = taskLists.find((list) => list.name === "All");
 
-            setTaskLists((prevLists) =>
-                prevLists.filter((list) => list._id !== id) 
-            );
+            if (!allList) {
+                console.error("⚠️ Ошибка: Не найден список 'All'. Создайте его вручную.");
+                return;
+            }
+
+            console.log("✅ All list id: ", allList._id);
+
+            const listToRemove = taskLists.find((list) => list._id === id);
+            if (!listToRemove) {
+                console.error("❌ Ошибка: Список задач не найден.");
+                return;
+            }
+
+            const tasksToMove = listToRemove.tasks || [];
+            console.log(`🔄 Переносим ${tasksToMove.length} задач в All`);
+
+            // 🔥 Проверяем правильность ID перед отправкой
+            console.log("📡 Отправляем запрос на сервер:", {
+                oldListId: id,
+                newListId: allList._id
+            });
+
+            // API: Переносим задачи в "All"
+            await axios.put(`http://localhost:5000/api/taskLists/moveTasksToAll/${id}`, {
+                newListId: allList._id
+            });
+
+            // Удаляем список задач
+            await axios.delete(`http://localhost:5000/api/taskLists/${id}`);
+
+            console.log("✅ Все задачи успешно перемещены в 'All' и сохранены в БД!");
+
+            await fetchTaskLists();
         } catch (err) {
-            console.error("Error deleting task list:", err);
+            console.error("❌ Ошибка при удалении списка задач:", err);
         }
     };
 
@@ -478,16 +508,7 @@ export const ListsProvider = ({ children }) => {
     };
 
     const removeNoteList = async (id) => {
-        try {
-            const user = JSON.parse(localStorage.getItem("user"));
-            await axios.delete(`http://localhost:5000/api/noteLists/${id}?userId=${user.id}`);
 
-            setNoteLists((prevLists) =>
-                prevLists.filter((list) => list._id !== id)
-            );
-        } catch (err) {
-            console.error("Error deleting note list:", err);
-        }
     };
 
     const removeAllNoteLists = async () => {
