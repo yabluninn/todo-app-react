@@ -1,6 +1,8 @@
 import express from "express";
 import NoteList from "../models/NoteList.js";
 import User from "../models/User.js";
+import Note from "../models/Note.js";
+import Task from "../models/Task.js";
 
 const router = express.Router();
 
@@ -10,23 +12,41 @@ router.get("/", async (req, res) => {
         const { userId } = req.query;
         if (!userId) return res.status(400).json({ message: "User ID is required" });
 
-        // Загружаем пользователя с его списками заметок + заметки в этих списках
-        const user = await User.findById(userId).populate({
-            path: "noteLists",
-            populate: {
-                path: "notes", // Теперь заметки загружаются в списках
-                populate: { path: "categories" } // Загружаем категории заметок (если есть)
-            }
-        });
+        // Загружаем пользователя с его списками заметок
+        const user = await User.findById(userId).populate("noteLists");
 
         if (!user) return res.status(404).json({ message: "User not found" });
 
-        res.json(user.noteLists);
+        // Проверяем наличие дефолтного списка "Notes"
+        let notesList = user.noteLists.find((list) => list.name === "Notes");
+
+        if (!notesList) {
+            console.warn("⚠️ Default list 'Notes' not found, creating new one...");
+
+            notesList = new NoteList({ name: "Notes", color: "#FFFFFF" });
+            await notesList.save();
+
+            // Добавляем "Notes" в список пользователя
+            await User.findByIdAndUpdate(userId, { $push: { noteLists: notesList._id } });
+
+            // Обновляем пользователя
+            user.noteLists.push(notesList);
+        }
+
+        // Загружаем заметки для каждого списка заметок
+        const updatedNoteLists = await Promise.all(user.noteLists.map(async (list) => {
+            const notes = await Note.find({ listId: list._id }).populate("categories"); // Загружаем категории
+            return { ...list.toObject(), notes };
+        }));
+
+        res.json(updatedNoteLists);
     } catch (err) {
-        console.error("Error fetching note lists:", err);
+        console.error("❌ Ошибка при загрузке списков заметок:", err);
         res.status(500).json({ message: "Server error" });
     }
 });
+
+
 
 // Создание списка заметок
 router.post("/", async (req, res) => {
@@ -106,5 +126,30 @@ router.delete("/", async (req, res) => {
         res.status(500).json({ message: "Server error" });
     }
 });
+
+
+router.put("/moveNotesToNotes/:oldListId", async (req, res) => {
+    try {
+        const { newListId } = req.body; // ID нового списка ("All")
+
+        if (!newListId) {
+            return res.status(400).json({ message: "New list ID is required" });
+        }
+
+        // 🔄 Обновляем listId у всех задач из удаленного списка
+        const updatedNotes = await Note.updateMany(
+            { listId: req.params.oldListId }, // Найти задачи с этим listId
+            { $set: { listId: newListId } }  // Установить новый listId
+        );
+
+        console.log(`✅ ${updatedNotes.modifiedCount} notes moved to Notes`);
+
+        res.json({ message: "Notes successfully moved to All" });
+    } catch (err) {
+        console.error("❌ Error moving:", err);
+        res.status(500).json({ message: "Server error" });
+    }
+});
+
 
 export default router;

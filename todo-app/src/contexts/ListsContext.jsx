@@ -406,7 +406,6 @@ export const ListsProvider = ({ children }) => {
             const allList = taskLists.find((list) => list.name === "All");
 
             if (!allList) {
-                console.error("⚠️ Ошибка: Не найден список 'All'. Создайте его вручную.");
                 return;
             }
 
@@ -414,18 +413,17 @@ export const ListsProvider = ({ children }) => {
 
             const listToRemove = taskLists.find((list) => list._id === id);
             if (!listToRemove) {
-                console.error("❌ Ошибка: Список задач не найден.");
                 return;
             }
 
             const tasksToMove = listToRemove.tasks || [];
-            console.log(`🔄 Переносим ${tasksToMove.length} задач в All`);
+            console.log(`🔄 Moving ${tasksToMove.length} tasks to All`);
 
-            // 🔥 Проверяем правильность ID перед отправкой
-            console.log("📡 Отправляем запрос на сервер:", {
-                oldListId: id,
-                newListId: allList._id
-            });
+            // // 🔥 Проверяем правильность ID перед отправкой
+            // console.log("📡 Отправляем запрос на сервер:", {
+            //     oldListId: id,
+            //     newListId: allList._id
+            // });
 
             // API: Переносим задачи в "All"
             await axios.put(`http://localhost:5000/api/taskLists/moveTasksToAll/${id}`, {
@@ -435,11 +433,11 @@ export const ListsProvider = ({ children }) => {
             // Удаляем список задач
             await axios.delete(`http://localhost:5000/api/taskLists/${id}`);
 
-            console.log("✅ Все задачи успешно перемещены в 'All' и сохранены в БД!");
+            console.log("✅ Successful deleting task list");
 
             await fetchTaskLists();
         } catch (err) {
-            console.error("❌ Ошибка при удалении списка задач:", err);
+            console.error("❌ Deleting task list error:", err);
         }
     };
 
@@ -508,7 +506,47 @@ export const ListsProvider = ({ children }) => {
     };
 
     const removeNoteList = async (id) => {
+        try {
+            const user = JSON.parse(localStorage.getItem("user"));
+            if (!user) {
+                console.error("User not found in localStorage");
+                return;
+            }
 
+            if (!id) {
+                console.error("Error: Note List ID is undefined");
+                return;
+            }
+
+            const noteList = noteLists.find((list) => list.name === "Notes");
+
+            if (!noteList) {
+                return;
+            }
+
+            console.log("✅ Note list id: ", noteList._id);
+
+            const noteListToRemove = noteLists.find((list) => list._id === id);
+            if (!noteListToRemove) {
+                return;
+            }
+
+            const notesToMove = noteListToRemove.notes || [];
+            console.log(`🔄 Moving ${notesToMove.length} notes to Notes`);
+
+            await axios.put(`http://localhost:5000/api/noteLists/moveNotesToNotes/${id}`, {
+                newListId: noteList._id
+            });
+
+            // Удаляем список задач
+            await axios.delete(`http://localhost:5000/api/noteLists/${id}`);
+
+            console.log("✅ Successful deleting note list:", noteList._id);
+
+            await fetchTaskLists();
+        } catch (err) {
+            console.error("❌ Error:", err);
+        }
     };
 
     const removeAllNoteLists = async () => {

@@ -138,11 +138,11 @@ router.put("/moveTasksToAll/:oldListId", async (req, res) => {
             { $set: { listId: newListId } }  // Установить новый listId
         );
 
-        console.log(`✅ ${updatedTasks.modifiedCount} задач перенесены в All`);
+        console.log(`✅ ${updatedTasks.modifiedCount} moved to All`);
 
         res.json({ message: "Tasks successfully moved to All" });
     } catch (err) {
-        console.error("❌ Ошибка при перемещении задач:", err);
+        console.error("❌ Error moving:", err);
         res.status(500).json({ message: "Server error" });
     }
 });
