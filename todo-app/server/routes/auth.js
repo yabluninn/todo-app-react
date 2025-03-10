@@ -5,6 +5,9 @@ import { validationResult } from "express-validator";
 
 import User from "../models/User.js";
 import { registerValidation } from "../validations/auth.js";
+import Category from "../models/Category.js";
+import TaskList from "../models/TaskList.js";
+import NoteList from "../models/NoteList.js";
 
 const router = express.Router();
 
@@ -33,14 +36,38 @@ router.post("/auth/register", registerValidation, async (req, res) => {
             noteLists: [],
         });
 
-        const savedUser = await newUser.save();
+        const uncategorizedCategory = await Category.create({
+            name: "Uncategorized",
+            color: "#bbbbbb",
+        });
+
+        // Создаем список задач "All"
+        const allTasksList = await TaskList.create({
+            name: "All",
+            color: "#009688",
+            tasks: [],
+        });
+
+        // Создаем список заметок "Notes"
+        const notesList = await NoteList.create({
+            name: "Notes",
+            color: "#ffcc00",
+            notes: [],
+        });
+
+        // Добавляем созданные объекты в пользователя
+        newUser.categories.push(uncategorizedCategory._id);
+        newUser.taskLists.push(allTasksList._id);
+        newUser.noteLists.push(notesList._id);
+
+        await newUser.save();
 
         res.status(201).json({
             message: "User registered successfully",
             user: {
-                id: savedUser._id,
-                username: savedUser.username,
-                email: savedUser.email,
+                id: newUser._id,
+                username: newUser.username,
+                email: newUser.email,
             },
         });
     } catch (err) {
