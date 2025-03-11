@@ -71,6 +71,10 @@ router.delete("/:id", async (req, res) => {
             return res.status(404).json({ message: "Category not found" });
         }
 
+        if (category.name === "Uncategorized"){
+            return;
+        }
+
         await Category.findByIdAndDelete(req.params.id);
         await User.findByIdAndUpdate(userId, { $pull: { categories: req.params.id } });
 
@@ -81,25 +85,25 @@ router.delete("/:id", async (req, res) => {
     }
 });
 
-router.delete("/all/:userId", async (req, res) => {
-    try {
-        const { userId } = req.params;
-
-        // Удаляем все категории пользователя
-        const user = await User.findById(userId);
-        if (!user) {
-            return res.status(404).json({ message: "User not found" });
-        }
-
-        await Category.deleteMany({ _id: { $in: user.categories } });
-        await User.findByIdAndUpdate(userId, { $set: { categories: [] } });
-
-        res.json({ message: "All categories deleted" });
-    } catch (err) {
-        console.error("Error deleting all categories:", err);
-        res.status(500).json({ message: "Server error" });
-    }
-});
+// router.delete("/all/:userId", async (req, res) => {
+//     try {
+//         const { userId } = req.params;
+//
+//         // Удаляем все категории пользователя
+//         const user = await User.findById(userId);
+//         if (!user) {
+//             return res.status(404).json({ message: "User not found" });
+//         }
+//
+//         await Category.deleteMany({ _id: { $in: user.categories } });
+//         await User.findByIdAndUpdate(userId, { $set: { categories: [] } });
+//
+//         res.json({ message: "All categories deleted" });
+//     } catch (err) {
+//         console.error("Error deleting all categories:", err);
+//         res.status(500).json({ message: "Server error" });
+//     }
+// });
 
 
 export default router;
