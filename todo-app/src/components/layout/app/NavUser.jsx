@@ -2,6 +2,7 @@
 import {stringExtensions} from "../../../utils/string-extensions.js";
 import {useState} from "react";
 import {Link} from "react-router-dom";
+import {ACCOUNT_TYPES} from "../../../constants/account-types.js";
 
 export default function NavUser({ user }) {
   const [isHovered, setIsHovered] = useState(false);
@@ -24,7 +25,7 @@ export default function NavUser({ user }) {
         <i style={styles.userIcon} className="hgi hgi-stroke hgi-user"></i>
         <div style={styles.info}>
           <p style={styles.username}>{formattedUsername}</p>
-          <p style={styles.account}>{user.accountType} Account</p>
+          <p style={styles.account}>{ACCOUNT_TYPES.FREE} Account</p>
         </div>
       </Link>
   );
@@ -43,13 +44,6 @@ const styles = {
     padding: "6px",
     marginTop: "44px",
     textDecoration: "none",
-  },
-  image: {
-    width: "50px",
-    height: "50px",
-    background: "lightblue",
-    padding: "8px",
-    borderRadius: "8px",
   },
   info: {
     marginLeft: "12px",
