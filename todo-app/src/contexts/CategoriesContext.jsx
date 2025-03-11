@@ -1,11 +1,14 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import axios from "axios";
+import {useListsContext} from "./ListsContext.jsx";
 
 const CategoriesContext = createContext();
 
 // eslint-disable-next-line react/prop-types
 export const CategoriesProvider = ({ children }) => {
     const [categories, setCategories] = useState([]);
+
+    const { fetchNoteLists } = useListsContext()
 
     useEffect(() => {
         fetchCategories();
@@ -52,6 +55,19 @@ export const CategoriesProvider = ({ children }) => {
         }
     };
 
+    // const removeCategory = async (id) => {
+    //     try {
+    //         const user = JSON.parse(localStorage.getItem("user"));
+    //         await axios.delete(`http://localhost:5000/api/categories/${id}?userId=${user.id}`);
+    //
+    //         setCategories((prevCategories) =>
+    //             prevCategories.filter((category) => category._id !== id)
+    //         );
+    //     } catch (err) {
+    //         console.error("Error deleting category:", err);
+    //     }
+    // };
+
     const removeCategory = async (id) => {
         try {
             const user = JSON.parse(localStorage.getItem("user"));
@@ -60,10 +76,13 @@ export const CategoriesProvider = ({ children }) => {
             setCategories((prevCategories) =>
                 prevCategories.filter((category) => category._id !== id)
             );
+
+            fetchNoteLists();
         } catch (err) {
-            console.error("Error deleting category:", err);
+            console.error("❌ Error deleting category:", err);
         }
     };
+
 
     const removeAllCategories = async () => {
         try {
@@ -72,7 +91,7 @@ export const CategoriesProvider = ({ children }) => {
 
             await axios.delete(`http://localhost:5000/api/categories/all/${user.id}`);
 
-            setCategories([]); // Очищаем стейт
+            setCategories([]);
         } catch (err) {
             console.error("Error deleting all categories:", err);
         }

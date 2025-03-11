@@ -637,7 +637,8 @@ export const ListsProvider = ({ children }) => {
         shownNotifications,
         removeNotification,
         removeAllNotesFromList,
-        getTasksByPeriod
+        getTasksByPeriod,
+        fetchNoteLists
       }}
     >
       {children}
