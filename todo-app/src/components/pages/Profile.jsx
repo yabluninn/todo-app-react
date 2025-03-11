@@ -30,6 +30,28 @@ export default function Profile() {
         navigate("/login");
     };
 
+    const handleDeleteAccount = async () => {
+        const storedUser = JSON.parse(localStorage.getItem("user"));
+        if (!storedUser || !storedUser.id) {
+            alert("User ID not found. Please log in again.");
+            return;
+        }
+
+        const confirmDelete = window.confirm("Are you sure you want to delete your account? This action is irreversible.");
+        if (!confirmDelete) return;
+
+        try {
+            await axios.delete(`http://localhost:5000/api/user/${storedUser.id}`);
+
+            localStorage.removeItem("user");
+
+            navigate("/signup");
+        } catch (err) {
+            alert("Failed to delete account. Please try again.");
+        }
+    };
+
+
     if (!user) {
         return <div className="profile-container">Loading...</div>;
     }
@@ -49,7 +71,9 @@ export default function Profile() {
                     <button className="profile-button logout-button" onClick={handleLogout}>
                         Log Out
                     </button>
-                    <button className="profile-button delete-button">Delete Account</button>
+                    <button className="profile-button delete-button" onClick={handleDeleteAccount}>
+                        Delete Account
+                    </button>
                 </div>
             </div>
         </div>
