@@ -10,19 +10,23 @@ export default function NavUser({ user }) {
 
   const formattedUsername = stringExtensions.sliceWithDots(user.username, 15);
 
+  if (!user) {
+    return null;
+  }
+
   return (
-    <Link
-        to={DEFAULT_APP_URL + "/profile"}
-        style={{...styles.main, cursor: isHovered? "pointer" : "default"}}
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
-    >
-      <img src={user.avatar} style={styles.image}></img>
-      <div style={styles.info}>
-        <p style={styles.username}>{formattedUsername}</p>
-        <p style={styles.account}>{user.accountType} Account</p>
-      </div>
-    </Link>
+      <Link
+          to={DEFAULT_APP_URL + "/profile"}
+          style={{...styles.main, cursor: isHovered ? "pointer" : "default"}}
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+      >
+        <i style={styles.userIcon} className="hgi hgi-stroke hgi-user"></i>
+        <div style={styles.info}>
+          <p style={styles.username}>{formattedUsername}</p>
+          <p style={styles.account}>{user.accountType} Account</p>
+        </div>
+      </Link>
   );
 }
 
@@ -57,4 +61,10 @@ const styles = {
     fontSize: "12px",
     color: "#aaa",
   },
+  userIcon: {
+    fontSize: "18px",
+    padding: "8px",
+    borderRadius: "25%",
+    backgroundColor: "#f6f6f6",
+  }
 };

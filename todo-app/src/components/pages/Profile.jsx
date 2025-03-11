@@ -7,7 +7,7 @@ import axios from "axios";
 
 export default function Profile() {
     const [user, setUser] = useState(null);
-    const navigate = useNavigate(); // Хук для редиректа
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchUserProfile = async () => {
@@ -26,8 +26,8 @@ export default function Profile() {
     }, []);
 
     const handleLogout = () => {
-        localStorage.removeItem("user"); // Удаляем данные пользователя
-        navigate("/login"); // Перенаправляем на страницу логина
+        localStorage.removeItem("user");
+        navigate("/login");
     };
 
     if (!user) {
@@ -42,7 +42,7 @@ export default function Profile() {
                     <div className="profile-info">
                         <h2 className="profile-username">{user.username}</h2>
                         <p className="profile-email">{user.email}</p>
-                        <span className="profile-account">{user.accountType || ACCOUNT_TYPES.FREE} Account</span>
+                        <span className="profile-account">{ACCOUNT_TYPES.FREE} Account</span>
                     </div>
                 </div>
                 <div className="profile-actions">

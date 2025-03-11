@@ -1,16 +1,31 @@
 import "../../../styles/NavMenu.css";
 import NavButton from "../../ui/NavButton";
 import NavUser from "./NavUser";
-import ava from "../../../assets/avatar.png";
-import { ACCOUNT_TYPES } from "../../../constants/account-types";
+import {useEffect, useState} from "react";
+import axios from "axios";
 
 export default function NavMenu() {
-  const accType = ACCOUNT_TYPES.FREE;
-  const user = {
-    username: "Artem Yablunin",
-    avatar: ava,
-    accountType: accType,
-  };
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const fetchUserProfile = async () => {
+      const storedUser = localStorage.getItem("user");
+      if (!storedUser) return;
+
+      const parsedUser = JSON.parse(storedUser);
+      if (!parsedUser?.id) return;
+
+      try {
+        const response = await axios.get(`http://localhost:5000/api/user/${parsedUser.id}`);
+        setUser(response.data);
+      } catch (err) {
+        console.error("Error fetching user profile:", err);
+      }
+    };
+
+    fetchUserProfile();
+  }, []);
+
 
   return (
     <div className="nav-menu-container">
@@ -58,7 +73,7 @@ export default function NavMenu() {
           />
         </div>
       </div>
-      <NavUser user={user} />
+      {user ? <NavUser user={user} /> : <p>Loading...</p>}
     </div>
   );
 }
