@@ -147,4 +147,34 @@ router.put("/moveTasksToAll/:oldListId", async (req, res) => {
     }
 });
 
+// router.delete("/deleteMultiple", async (req, res) => {
+//     try {
+//         const { listIds } = req.body;
+//
+//         if (!listIds || listIds.length === 0) {
+//             return res.status(400).json({ message: "No lists provided for deletion" });
+//         }
+//
+//         console.log(`🗑 Удаляем списки задач: ${listIds.length} шт.`, listIds);
+//
+//         // Проверяем, что такие списки существуют
+//         const existingLists = await TaskList.find({ _id: { $in: listIds } });
+//
+//         if (existingLists.length === 0) {
+//             return res.status(404).json({ message: "No matching task lists found" });
+//         }
+//
+//         // Удаляем только списки, которые не являются "All"
+//         const result = await TaskList.deleteMany({ _id: { $in: listIds }, name: { $ne: "All" } });
+//
+//         console.log(`✅ Удалено списков: ${result.deletedCount}`);
+//
+//         res.json({ message: "Task lists deleted successfully", deletedCount: result.deletedCount });
+//     } catch (err) {
+//         console.error("❌ Ошибка при удалении всех списков задач:", err);
+//         res.status(500).json({ message: "Server error", error: err.message });
+//     }
+// });
+
+
 export default router;

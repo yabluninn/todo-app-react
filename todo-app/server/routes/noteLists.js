@@ -151,5 +151,24 @@ router.put("/moveNotesToNotes/:oldListId", async (req, res) => {
     }
 });
 
+// router.delete("/deleteMultiple", async (req, res) => {
+//     try {
+//         const { listIds } = req.body;
+//         if (!listIds || listIds.length === 0) {
+//             return res.status(400).json({ message: "No lists provided for deletion" });
+//         }
+//
+//         console.log(`🗑 Удаляем списки заметок: ${listIds.length} шт.`);
+//
+//         // Удаляем только те списки, которые не являются "Notes"
+//         await NoteList.deleteMany({ _id: { $in: listIds }, name: { $ne: "Notes" } });
+//
+//         res.json({ message: "Note lists deleted successfully" });
+//     } catch (err) {
+//         console.error("❌ Ошибка при удалении всех списков заметок:", err);
+//         res.status(500).json({ message: "Server error" });
+//     }
+// });
+
 
 export default router;

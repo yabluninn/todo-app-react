@@ -416,6 +416,10 @@ export const ListsProvider = ({ children }) => {
                 return;
             }
 
+            if (listToRemove.name === "All"){
+                return;
+            }
+
             const tasksToMove = listToRemove.tasks || [];
             console.log(`🔄 Moving ${tasksToMove.length} tasks to All`);
 
@@ -441,18 +445,37 @@ export const ListsProvider = ({ children }) => {
         }
     };
 
-    const removeAllTaskLists = async () => {
-        try {
-            const user = JSON.parse(localStorage.getItem("user"));
-            if (!user) return;
+    // const removeAllTaskLists = async () => {
+    //     try {
+    //         const user = JSON.parse(localStorage.getItem("user"));
+    //         if (!user) return;
+    //
+    //         const listsToRemove = taskLists.filter((list) => list.name !== "All");
+    //
+    //         if (listsToRemove.length === 0) {
+    //             console.warn("⚠️ Нет списков для удаления.");
+    //             return;
+    //         }
+    //
+    //         console.log(`🔄 Удаляем ${listsToRemove.length} списков (без 'All')`);
+    //
+    //         const listIdsToRemove = listsToRemove.map((list) => list._id);
+    //
+    //         // Удаляем списки (кроме "All")
+    //         const response = await axios.delete(`http://localhost:5000/api/taskLists/deleteMultiple`, {
+    //             data: { listIds: listIdsToRemove },
+    //             headers: { "Content-Type": "application/json" }
+    //         });
+    //
+    //         console.log("✅ Успешно удалены списки:", response.data);
+    //
+    //         // Обновляем состояние, оставляя только "All"
+    //         setTaskLists((prevLists) => prevLists.filter((list) => list.name === "All"));
+    //     } catch (err) {
+    //         console.error("❌ Ошибка при удалении всех списков задач:", err.response?.data || err);
+    //     }
+    // };
 
-            await axios.delete(`http://localhost:5000/api/taskLists?userId=${user.id}`);
-
-            setTaskLists([]);
-        } catch (err) {
-            console.error("Error deleting all task lists:", err);
-        }
-    };
 
     const getTaskListsLength = () => taskLists.length;
 
@@ -531,6 +554,10 @@ export const ListsProvider = ({ children }) => {
                 return;
             }
 
+            if (noteListToRemove.name === "Notes"){
+                return;
+            }
+
             const notesToMove = noteListToRemove.notes || [];
             console.log(`🔄 Moving ${notesToMove.length} notes to Notes`);
 
@@ -549,18 +576,36 @@ export const ListsProvider = ({ children }) => {
         }
     };
 
-    const removeAllNoteLists = async () => {
-        try {
-            const user = JSON.parse(localStorage.getItem("user"));
-            if (!user) return;
+    // const removeAllNoteLists = async () => {
+    //     try {
+    //         const user = JSON.parse(localStorage.getItem("user"));
+    //         if (!user) return;
+    //
+    //         // Фильтруем списки, исключая "Notes"
+    //         const listsToRemove = noteLists.filter((list) => list.name !== "Notes");
+    //
+    //         if (listsToRemove.length === 0) {
+    //             console.warn("⚠️ Нет списков для удаления.");
+    //             return;
+    //         }
+    //
+    //         console.log(`🔄 Удаляем ${listsToRemove.length} списков (без 'Notes')`);
+    //
+    //         const listIdsToRemove = listsToRemove.map((list) => list._id);
+    //
+    //         // Удаляем списки (кроме "Notes")
+    //         await axios.delete(`http://localhost:5000/api/noteLists/deleteMultiple`, {
+    //             data: { listIds: listIdsToRemove },
+    //         });
+    //
+    //         // Обновляем состояние, оставляя только "Notes"
+    //         setNoteLists((prevLists) => prevLists.filter((list) => list.name === "Notes"));
+    //         console.log("✅ Успешно удалены все списки заметок (кроме 'Notes')");
+    //     } catch (err) {
+    //         console.error("❌ Ошибка при удалении всех списков заметок:", err);
+    //     }
+    // };
 
-            await axios.delete(`http://localhost:5000/api/noteLists?userId=${user.id}`);
-
-            setNoteLists([]);
-        } catch (err) {
-            console.error("Error deleting all note lists:", err);
-        }
-    };
 
     const getNoteListsLength = () => noteLists.length;
 
@@ -587,8 +632,8 @@ export const ListsProvider = ({ children }) => {
         removeTask,
         removeNote,
         getRecentNotes,
-        removeAllTaskLists,
-        removeAllNoteLists,
+        // removeAllTaskLists,
+        // removeAllNoteLists,
         shownNotifications,
         removeNotification,
         removeAllNotesFromList,
