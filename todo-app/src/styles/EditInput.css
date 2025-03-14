@@ -28,16 +28,18 @@
 .edit-input-container input[type="password"]:focus,
 .edit-input-container input[type="number"]:focus,
 .edit-input-container input[type="time"]:focus,
+.edit-input-container input[type="color"]:focus,
 .edit-input-container input[type="date"]:focus {
   border-color: #7437ff;
 }
 
 .edit-input-container input[type="color"] {
   -webkit-appearance: none;
-  border: none;
+  border: 1px solid #ccc;
   height: 40px;
+  padding: 8px 12px;
   cursor: pointer;
-  border-radius: 8px;
+  border-radius: 4px;
   overflow: hidden;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
   transition: box-shadow 0.3s ease;

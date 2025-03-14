@@ -9,7 +9,7 @@ import ContextMenu from "../../contextMenus/ContextMenu.jsx";
 import ContextMenuButton from "../../contextMenus/ContextMenuButton.jsx";
 import { useListsContext } from "../../../contexts/ListsContext.jsx";
 
-export default function ListContainer({ listType, lists, onOpenCreateListModal }) {
+export default function ListContainer({ listType, lists, onOpenCreateListModal, onListSideMenuOpen }) {
 
   const { removeTaskList, removeNoteList } = useListsContext();
 
@@ -44,6 +44,9 @@ export default function ListContainer({ listType, lists, onOpenCreateListModal }
                                   ? removeNoteList(list._id)
                                   : console.error("Unknown list type")
                       }
+                      onEdit={() => {
+                          onListSideMenuOpen(list);
+                      }}
                   />
               ))}
         </div>
