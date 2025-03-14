@@ -17,7 +17,8 @@ import Profile from "./components/pages/Profile.jsx";
 import Analytics from "./components/pages/Analytics.jsx";
 import Settings from "./components/pages/Settings.jsx";
 import Notifications from "./components/pages/Notifications.jsx";
-import LandingProduct from "./landing/pages/LandingProduct.jsx";
+import {NotificationsProvider} from "./contexts/NotificationsContext.jsx";
+import NotificationsHandler from "./utils/NotificationsHandler.jsx";
 
 function AppWrapper() {
   return (
@@ -30,7 +31,6 @@ function AppWrapper() {
 function App() {
   const DEFAULT_APP_URL = "/app";
 
-  // Используем useLocation, чтобы корректно получать текущий путь
   const location = useLocation();
 
   const isLandingPage =
@@ -46,23 +46,26 @@ function App() {
   return (
       <ListsProvider>
         <CategoriesProvider>
-              <div className="app">
-                {!isLandingPage && <NavMenu />}
-                <Routes>
-                  <Route path="/" element={<LandingPage />} />
-                  <Route path="/signup" element={<LandingSignIn />} />
-                  <Route path="/login" element={<LandingLogin />} />
-                  <Route path="/*" element={<LandingPage />} />
-                  <Route path={DEFAULT_APP_URL + "/"} element={<Home />} />
-                  <Route path={DEFAULT_APP_URL + "/tasks"} element={<Tasks />} />
-                  <Route path={DEFAULT_APP_URL + "/notes"} element={<Notes />} />
-                  <Route path={DEFAULT_APP_URL + "/analytics"} element={<Analytics />} />
-                  <Route path={DEFAULT_APP_URL + "/settings"} element={<Settings />} />
-                  <Route path={DEFAULT_APP_URL + "/notifications"} element={<Notifications />} />
-                  <Route path={DEFAULT_APP_URL + "/groups"} element={<Groups />} />
-                  <Route path={DEFAULT_APP_URL + "/profile"} element={<Profile />} />
-                </Routes>
-              </div>
+            <NotificationsProvider>
+                <div className="app">
+                    {!isLandingPage && <NavMenu/>}
+                    <NotificationsHandler />
+                    <Routes>
+                        <Route path="/" element={<LandingPage/>}/>
+                        <Route path="/signup" element={<LandingSignIn/>}/>
+                        <Route path="/login" element={<LandingLogin/>}/>
+                        <Route path="/*" element={<LandingPage/>}/>
+                        <Route path={DEFAULT_APP_URL + "/"} element={<Home/>}/>
+                        <Route path={DEFAULT_APP_URL + "/tasks"} element={<Tasks/>}/>
+                        <Route path={DEFAULT_APP_URL + "/notes"} element={<Notes/>}/>
+                        <Route path={DEFAULT_APP_URL + "/analytics"} element={<Analytics/>}/>
+                        <Route path={DEFAULT_APP_URL + "/settings"} element={<Settings/>}/>
+                        <Route path={DEFAULT_APP_URL + "/notifications"} element={<Notifications/>}/>
+                        <Route path={DEFAULT_APP_URL + "/groups"} element={<Groups/>}/>
+                        <Route path={DEFAULT_APP_URL + "/profile"} element={<Profile/>}/>
+                    </Routes>
+                </div>
+            </NotificationsProvider>
         </CategoriesProvider>
       </ListsProvider>
   );

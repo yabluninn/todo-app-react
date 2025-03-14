@@ -2,13 +2,7 @@
 import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
-import bcrypt from "bcrypt";
 
-import { registerValidation } from "./validations/auth.js";
-
-import { validationResult } from "express-validator";
-
-import User from "./models/User.js";
 import authRoutes from "./routes/auth.js";
 import categoryRoutes from "./routes/categories.js";
 import taskListsRoutes from "./routes/taskLists.js";
@@ -16,6 +10,7 @@ import noteListRoutes from "./routes/noteLists.js";
 import tasksRoutes from "./routes/tasks.js";
 import notesRoutes from "./routes/notes.js";
 import userRoutes from "./routes/user.js";
+import notificationRoutes from "./routes/notifications.js";
 
 mongoose
   .connect(
@@ -33,7 +28,6 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-// Подключение маршрутов
 app.use("/api", authRoutes);
 app.use("/api/categories", categoryRoutes);
 app.use("/api/taskLists", taskListsRoutes);
@@ -41,8 +35,8 @@ app.use("/api/noteLists", noteListRoutes);
 app.use("/api/tasks", tasksRoutes);
 app.use("/api/notes", notesRoutes);
 app.use("/api/user", userRoutes);
+app.use("/api/notifications", notificationRoutes);
 
-// Тестовый маршрут
 app.get("/", (req, res) => {
   res.send("API is running!");
 });

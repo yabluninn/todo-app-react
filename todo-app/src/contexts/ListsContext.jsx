@@ -10,12 +10,12 @@ export const ListsProvider = ({ children }) => {
   const [taskLists, setTaskLists] = useState([]);
   const [noteLists, setNoteLists] = useState([]);
 
-  const { showNotification } = useNotifications();
-  const [shownNotifications, setShownNotifications] = useState([]);
-
-  const removeNotification = (id) => {
-      setShownNotifications((prevState) => prevState.filter(notification => notification.id !== id));
-  }
+  // const { showNotification } = useNotifications();
+  // const [shownNotifications, setShownNotifications] = useState([]);
+  //
+  // const removeNotification = (id) => {
+  //     setShownNotifications((prevState) => prevState.filter(notification => notification.id !== id));
+  // }
 
     const removeAllNotesFromList = (listId) => {
         setNoteLists((prevLists) =>
@@ -273,72 +273,6 @@ export const ListsProvider = ({ children }) => {
 
         return [];
     };
-
-
-
-
-    useEffect(() => {
-        if (taskLists.length === 0) return;
-
-        const tasks = taskLists.flatMap(list => list.tasks || []);
-
-        tasks.forEach((task) => {
-            if (!task.startTime || shownNotifications.some(n => n.id === task.id && n.type === "start")) return;
-
-            const now = new Date();
-            let taskStartTime = new Date(task.startTime);
-
-            if (task.startTime.includes(":") && !task.startTime.includes("T")) {
-                const today = now.toISOString().split("T")[0];
-                taskStartTime = new Date(`${today}T${task.startTime}:00`);
-            }
-
-            const delayStart = taskStartTime - now;
-
-            // First Notification Type
-            if (delayStart > 0) {
-                setTimeout(() => {
-                    if (!shownNotifications.some(n => n.id === task.id && n.type === "start")) {
-                        showNotification(`It's time to complete the task: ${task.name}`, {
-                            body: `Start time: ${taskStartTime.toLocaleTimeString()} \nEnd time: ${task.endTime || "No time limit"}`,
-                        });
-
-                        setShownNotifications((prev) => [
-                            ...prev,
-                            { id: task.id, timestamp: new Date().toISOString(), type: "start" }
-                        ]);
-                    }
-                }, delayStart);
-            }
-
-            // Second Notification type
-            if (task.endTime) {
-                let taskEndTime = new Date(task.endTime);
-
-                if (task.endTime.includes(":") && !task.endTime.includes("T")) {
-                    const today = now.toISOString().split("T")[0];
-                    taskEndTime = new Date(`${today}T${task.endTime}:00`);
-                }
-
-                const delayReminder = taskEndTime - now - 5 * 60 * 1000; // 5 minutes
-
-                if (delayReminder > 0) {
-                    setTimeout(() => {
-                        if (!shownNotifications.some(n => n.id === task.id && n.type === "reminder")) {
-                            showNotification(`You have 5 minutes left to complete: ${task.name}`, {
-                                body: `End time: ${taskEndTime.toLocaleTimeString()}. Hurry up to finish!`,
-                            });
-
-                            setShownNotifications((prev) => [
-                                ...prev,
-                                { id: task.id, timestamp: new Date().toISOString(), type: "reminder" }
-                            ]);
-                        }
-                    }, delayReminder);
-                }
-            }
-        });
-    }, [taskLists]);
 
     // TASK LISTS
     useEffect(() => {
@@ -634,8 +568,8 @@ export const ListsProvider = ({ children }) => {
         getRecentNotes,
         // removeAllTaskLists,
         // removeAllNoteLists,
-        shownNotifications,
-        removeNotification,
+        // shownNotifications,
+        // removeNotification,
         removeAllNotesFromList,
         getTasksByPeriod,
         fetchNoteLists
