@@ -10,6 +10,8 @@ export default function ListSideSection({ list, listType, onClose }) {
   const [newListName, setNewListName] = useState(list.name || "");
   const [newListColor, setNewListColor] = useState(list.color || "#ffffff");
 
+  const [isSaveButtonDisabled, setIsSaveButtonDisabled] = useState(false);
+
   useEffect(() => {
     setNewListName(list.name || "");
     setNewListColor(list.color || "#ffffff");
@@ -23,17 +25,24 @@ export default function ListSideSection({ list, listType, onClose }) {
     };
 
     if (listType === LIST_TYPES.TASK_LIST){
-      // update task list
       updateTaskList(list._id, updatedList);
 
     }
     else if (listType === LIST_TYPES.NOTES_LIST){
-      // update note list
       updateNoteList(list._id, updatedList);
     }
 
     onClose();
   };
+
+  const isDefaultList = () => {
+    if (listType === LIST_TYPES.TASK_LIST){
+      return list.name === "All";
+    }
+    else if (listType === LIST_TYPES.NOTES_LIST){
+      return list.name === "Notes";
+    }
+  }
 
   return (
       <div style={styles.container}>
@@ -71,9 +80,15 @@ export default function ListSideSection({ list, listType, onClose }) {
             </div>
           </div>
 
-          <button style={styles.saveButton} onClick={saveList}>
+          <p style={isDefaultList() ? styles.errorLabel : {display: "none"}}>Default lists are not allowed to edit!</p>
+          <button
+              style={isDefaultList() ? styles.saveButtonDisabled : styles.saveButton}
+              onClick={saveList}
+              disabled={isDefaultList()}
+          >
             Save
           </button>
+
         </div>
       </div>
   );
@@ -166,4 +181,25 @@ const styles = {
     alignItems: "center",
     marginTop: "auto",
   },
+  saveButtonDisabled: {
+    backgroundColor: "#aaa",
+    color: "#ddd",
+    cursor: "not-allowed",
+    opacity: 0.6,
+    fontSize: "16px",
+    fontWeight: "bold",
+    borderRadius: "8px",
+    width: "100%",
+    height: "40px",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: "auto",
+  },
+  errorLabel: {
+    width: "100%",
+    textAlign: "center",
+    color: "#cc1010",
+    marginTop: "auto",
+  }
 };
