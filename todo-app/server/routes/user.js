@@ -77,5 +77,17 @@ router.put("/change-password", async (req, res) => {
     res.json({ success: true, message: "Password updated successfully" });
 });
 
+router.put("/change-username", async (req, res) => {
+    const { userId, newUsername } = req.body;
+
+    const user = await User.findById(userId);
+    if (!user) return res.status(404).json({ message: "User not found" });
+
+    user.username = newUsername;
+    await user.save();
+
+    res.json({ success: true, message: "Username updated successfully" });
+});
+
 
 export default router;

@@ -5,30 +5,32 @@ import {useEffect, useState} from "react";
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
 import ChangePasswordModal from "../modals/ChangePasswordModal.jsx";
+import ChangeUsernameModal from "../modals/ChangeUsernameModal.jsx";
 
 export default function Settings() {
     const [user, setUser] = useState(null);
 
     const [isChangePasswordModalOpen, setIsChangePasswordModalOpen] = useState(false);
+    const [isChangeUsernameModalOpen, setIsChangeUsernameModalOpen] = useState(false);
 
     const navigate = useNavigate();
 
+    const fetchUserProfile = async () => {
+        const storedUser = localStorage.getItem("user");
+        if (!storedUser) return;
+
+        const parsedUser = JSON.parse(storedUser);
+        if (!parsedUser?.id) return;
+
+        try {
+            const response = await axios.get(`http://localhost:5000/api/user/${parsedUser.id}`);
+            setUser(response.data);
+        } catch (err) {
+            console.error("Error fetching user profile:", err);
+        }
+    };
+
     useEffect(() => {
-        const fetchUserProfile = async () => {
-            const storedUser = localStorage.getItem("user");
-            if (!storedUser) return;
-
-            const parsedUser = JSON.parse(storedUser);
-            if (!parsedUser?.id) return;
-
-            try {
-                const response = await axios.get(`http://localhost:5000/api/user/${parsedUser.id}`);
-                setUser(response.data);
-            } catch (err) {
-                console.error("Error fetching user profile:", err);
-            }
-        };
-
         fetchUserProfile();
     }, []);
 
@@ -57,6 +59,10 @@ export default function Settings() {
         setIsChangePasswordModalOpen(!isChangePasswordModalOpen);
     }
 
+    const openChangeUsernameModal = () => {
+        setIsChangeUsernameModalOpen(!isChangeUsernameModalOpen);
+    }
+
     return (
         <div className="settings-container">
             <div className="settings-header">
@@ -73,7 +79,7 @@ export default function Settings() {
                         title="Username"
                         content={user ? user.username : "Loading..."}
                         buttonIcon="hgi-pencil-edit-01"
-                        buttonAction={() => alert("Edit username")}
+                        buttonAction={openChangeUsernameModal}
                     />
                     <SettingsItem title="Email" content={user ? user.email : "Loading..."} />
                     <SettingsItem
@@ -109,6 +115,7 @@ export default function Settings() {
                 </SettingsBlock>
             </div>
             {isChangePasswordModalOpen && (<ChangePasswordModal onClose={openChangePasswordModal} user={user} />)}
+            {isChangeUsernameModalOpen && (<ChangeUsernameModal onClose={openChangeUsernameModal} user={user} onUpdateUser={fetchUserProfile}/>)}
         </div>
     );
 }
