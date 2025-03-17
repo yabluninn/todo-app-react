@@ -1,8 +1,62 @@
 import "../../styles/Settings.css";
 import SettingsItem from "../layout/settings/SettingsItem.jsx";
 import SettingsBlock from "../layout/settings/SettingsBlock.jsx";
+import {useEffect, useState} from "react";
+import axios from "axios";
+import {useNavigate} from "react-router-dom";
+import ChangePasswordModal from "../modals/ChangePasswordModal.jsx";
 
 export default function Settings() {
+    const [user, setUser] = useState(null);
+
+    const [isChangePasswordModalOpen, setIsChangePasswordModalOpen] = useState(false);
+
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const fetchUserProfile = async () => {
+            const storedUser = localStorage.getItem("user");
+            if (!storedUser) return;
+
+            const parsedUser = JSON.parse(storedUser);
+            if (!parsedUser?.id) return;
+
+            try {
+                const response = await axios.get(`http://localhost:5000/api/user/${parsedUser.id}`);
+                setUser(response.data);
+            } catch (err) {
+                console.error("Error fetching user profile:", err);
+            }
+        };
+
+        fetchUserProfile();
+    }, []);
+
+    const handleDeleteAccount = async () => {
+        const storedUser = JSON.parse(localStorage.getItem("user"));
+        if (!storedUser || !storedUser.id) {
+            alert("User ID not found. Please log in again.");
+            return;
+        }
+
+        const confirmDelete = window.confirm("Are you sure you want to delete your account? This action is irreversible.");
+        if (!confirmDelete) return;
+
+        try {
+            await axios.delete(`http://localhost:5000/api/user/${storedUser.id}`);
+
+            localStorage.removeItem("user");
+
+            navigate("/signup");
+        } catch (err) {
+            alert("Failed to delete account. Please try again.");
+        }
+    };
+
+    const openChangePasswordModal = () => {
+        setIsChangePasswordModalOpen(!isChangePasswordModalOpen);
+    }
+
     return (
         <div className="settings-container">
             <div className="settings-header">
@@ -17,22 +71,22 @@ export default function Settings() {
                 <SettingsBlock title="Profile" icon="hgi-user">
                     <SettingsItem
                         title="Username"
-                        content="Artem Yablunin"
+                        content={user ? user.username : "Loading..."}
                         buttonIcon="hgi-pencil-edit-01"
                         buttonAction={() => alert("Edit username")}
                     />
-                    <SettingsItem title="Email" content="yablunin.artem@gmail.com" />
+                    <SettingsItem title="Email" content={user ? user.email : "Loading..."} />
                     <SettingsItem
                         title="Password"
                         buttonText="Manage password"
                         buttonClass="s-block-default-button"
-                        buttonAction={() => alert("Manage password")}
+                        buttonAction={openChangePasswordModal}
                     />
                     <SettingsItem
                         title="Account"
                         buttonText="Delete Account"
                         buttonClass="s-block-red-button"
-                        buttonAction={() => alert("Delete account")}
+                        buttonAction={handleDeleteAccount}
                     />
                 </SettingsBlock>
 
@@ -54,6 +108,7 @@ export default function Settings() {
                     />
                 </SettingsBlock>
             </div>
+            {isChangePasswordModalOpen && (<ChangePasswordModal onClose={openChangePasswordModal} user={user} />)}
         </div>
     );
 }
