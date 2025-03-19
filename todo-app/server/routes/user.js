@@ -52,6 +52,24 @@ router.delete("/:userId", async (req, res) => {
     }
 });
 
+router.put("/:userId/notifications", async (req, res) => {
+    try {
+        const { userId } = req.params;
+        const { isNotificationsEnabled } = req.body;
+
+        const user = await User.findById(userId);
+        if (!user) return res.status(404).json({ message: "User not found" });
+
+        user.isNotificationsEnabled = isNotificationsEnabled;
+        await user.save();
+
+        res.json({ success: true, isNotificationsEnabled });
+    } catch (err) {
+        console.error("Error updating notifications:", err);
+        res.status(500).json({ message: "Server error" });
+    }
+});
+
 router.post("/verify-password", async (req, res) => {
     const { userId, currentPassword } = req.body;
 

@@ -6,12 +6,15 @@ import axios from "axios";
 import {useNavigate} from "react-router-dom";
 import ChangePasswordModal from "../modals/ChangePasswordModal.jsx";
 import ChangeUsernameModal from "../modals/ChangeUsernameModal.jsx";
+import {useNotificationsContext} from "../../contexts/NotificationsContext.jsx";
 
 export default function Settings() {
     const [user, setUser] = useState(null);
 
     const [isChangePasswordModalOpen, setIsChangePasswordModalOpen] = useState(false);
     const [isChangeUsernameModalOpen, setIsChangeUsernameModalOpen] = useState(false);
+
+    const { isNotificationsEnabled, toggleNotifications } = useNotificationsContext();
 
     const navigate = useNavigate();
 
@@ -108,9 +111,9 @@ export default function Settings() {
                 <SettingsBlock title="Notifications" icon="hgi-notification-01">
                     <SettingsItem
                         title="Push Notifications"
-                        content="Enabled"
-                        buttonIcon="hgi-pencil-edit-01"
-                        buttonAction={() => alert("Edit notifications")}
+                        buttonText={isNotificationsEnabled ? "Enabled" : "Disabled"}
+                        buttonClass="s-block-default-button"
+                        buttonAction={toggleNotifications}
                     />
                 </SettingsBlock>
             </div>

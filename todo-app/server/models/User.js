@@ -9,6 +9,7 @@ const UserSchema = new mongoose.Schema(
             noteLists: [{ type: mongoose.Schema.Types.ObjectId, ref: "NoteList" }],
             categories: [{ type: mongoose.Schema.Types.ObjectId, ref: "Category" }],
             notifications: [{ type: mongoose.Schema.Types.ObjectId, ref: "Notification" }],
+            isNotificationsEnabled: { type: Boolean, default: true },
     },
     { timestamps: true }
 );

@@ -6,8 +6,11 @@ const NotificationsContext = createContext();
 export const NotificationsProvider = ({ children }) => {
     const [notifications, setNotifications] = useState([]);
 
+    const [isNotificationsEnabled, setIsNotificationsEnabled] = useState(true);
+
     useEffect(() => {
         fetchNotifications();
+        fetchUserSettings();
     }, []);
 
     const fetchNotifications = async () => {
@@ -19,6 +22,18 @@ export const NotificationsProvider = ({ children }) => {
             setNotifications(response.data);
         } catch (err) {
             console.error("Error fetching notifications:", err);
+        }
+    };
+
+    const fetchUserSettings = async () => {
+        const user = JSON.parse(localStorage.getItem("user"));
+        if (!user) return;
+
+        try {
+            const response = await axios.get(`http://localhost:5000/api/user/${user.id}`);
+            setIsNotificationsEnabled(response.data.isNotificationsEnabled);
+        } catch (err) {
+            console.error("Error fetching user settings:", err);
         }
     };
 
@@ -60,19 +75,35 @@ export const NotificationsProvider = ({ children }) => {
     };
 
     const showNotification = (title, options) => {
-        if (Notification.permission === "granted") {
+        if (Notification.permission === "granted" && isNotificationsEnabled) {
             new Notification(title, options);
         } else if (Notification.permission !== "denied") {
             Notification.requestPermission().then((perm) => {
-                if (perm === "granted") {
+                if (perm === "granted" && isNotificationsEnabled) {
                     new Notification(title, options);
                 }
             });
         }
     };
 
+    const toggleNotifications = async () => {
+        try {
+            const user = JSON.parse(localStorage.getItem("user"));
+            if (!user) return;
+
+            const updatedStatus = !isNotificationsEnabled;
+            await axios.put(`http://localhost:5000/api/user/${user.id}/notifications`, {
+                isNotificationsEnabled: updatedStatus,
+            });
+
+            setIsNotificationsEnabled(updatedStatus);
+        } catch (err) {
+            console.error("Error updating notifications:", err);
+        }
+    };
+
     return (
-        <NotificationsContext.Provider value={{ notifications, addNotification, removeNotification, removeAllNotifications, showNotification  }}>
+        <NotificationsContext.Provider value={{ notifications, addNotification, removeNotification, removeAllNotifications, showNotification, toggleNotifications, isNotificationsEnabled, setIsNotificationsEnabled  }}>
             {children}
         </NotificationsContext.Provider>
     );
