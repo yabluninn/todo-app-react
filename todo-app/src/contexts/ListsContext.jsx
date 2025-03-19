@@ -442,6 +442,14 @@ export const ListsProvider = ({ children }) => {
 
     const getNoteListsLength = () => noteLists.length;
 
+    const getNoteById = (noteId) => {
+        for (const list of noteLists) {
+            const note = list.notes.find((n) => n._id === noteId);
+            if (note) return note;
+        }
+        return null;
+    };
+
   return (
     <ListsContext.Provider
       value={{
@@ -470,6 +478,7 @@ export const ListsProvider = ({ children }) => {
         fetchNoteLists,
         updateTaskList,
         updateNoteList,
+        getNoteById
       }}
     >
       {children}

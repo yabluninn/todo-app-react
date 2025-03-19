@@ -4,9 +4,10 @@ import EditInput from "../../ui/EditInput";
 import EditPriorityDropdown from "../../ui/EditPriorityDropdown";
 import EditTextArea from "../../ui/EditTextArea";
 import { useListsContext } from "../../../contexts/ListsContext";
+import SelectRelatedNoteModal from "../../modals/SelectRelatedNoteModal.jsx";
 
 export default function TaskSideSection({ task, onClose }) {
-  const { getTaskListById, updateTask } = useListsContext();
+  const { getTaskListById, updateTask, getNoteById } = useListsContext();
 
   const [newTaskName, setNewTaskName] = useState(task.name || "");
   const [newStartTime, setNewStartTime] = useState(task.startTime || "");
@@ -14,6 +15,9 @@ export default function TaskSideSection({ task, onClose }) {
   const [newTaskDate, setNewTaskDate] = useState(task.date || "");
   const [newTaskPriority, setNewTaskPriority] = useState(task.priority || "none");
   const [newTaskDescription, setNewTaskDescription] = useState(task.description || "");
+  const [relatedNoteId, setRelatedNoteId] = useState(task.relatedNoteId || null);
+  const [relatedNote, setRelatedNote] = useState(null);
+  const [showSelectNoteModal, setShowSelectNoteModal] = useState(false);
 
   useEffect(() => {
     setNewTaskName(task.name || "");
@@ -21,6 +25,7 @@ export default function TaskSideSection({ task, onClose }) {
     setNewEndTime(task.endTime || "");
     setNewTaskPriority(task.priority || "none");
     setNewTaskDescription(task.description || "");
+    setRelatedNoteId(task.relatedNoteId || null);
 
     if (task.date) {
       const formattedDate = new Date(task.date).toISOString().split("T")[0];
@@ -28,7 +33,14 @@ export default function TaskSideSection({ task, onClose }) {
     } else {
       setNewTaskDate("");
     }
-  }, [task]);
+
+    if (task.relatedNoteId) {
+      const note = getNoteById(task.relatedNoteId);
+      setRelatedNote(note || null);
+    } else {
+      setRelatedNote(null);
+    }
+  }, [task, getNoteById]);
 
 
   const saveTask = () => {
@@ -45,6 +57,7 @@ export default function TaskSideSection({ task, onClose }) {
       description: newTaskDescription,
       listId: task.listId,
       completed: task.completed ?? false,
+      relatedNoteId: relatedNoteId,
     };
 
     console.log("🔹 Данные перед отправкой в updateTask:", updatedTask);
@@ -53,87 +66,117 @@ export default function TaskSideSection({ task, onClose }) {
     onClose();
   };
 
-
-
-
+  const handleRemoveRelatedNote = () => {
+    setRelatedNoteId(null);
+    setRelatedNote(null);
+  };
 
   const list = getTaskListById(task.listId);
   const listName = list ? list.name : "Unknown List";
 
   return (
-    <div style={styles.container}>
-      <div style={styles.header}>
-        <div style={styles.headerSubblock}>
-          <i
-            className="hgi-stroke hgi-arrow-right-double"
-            style={styles.headerIcon}
-          ></i>
-          <p style={styles.headerListName}>{listName}</p>
-        </div>
-        <button style={styles.closeButton} onClick={onClose}>
-          <i className="hgi-stroke hgi-cancel-01" style={styles.closeIcon}></i>
-        </button>
-      </div>
-      <EditInput
-        type="text"
-        placeholder="Task name..."
-        value={newTaskName}
-        onChange={(e) => setNewTaskName(e.target.value)}
-      />
-      <div style={styles.infoBlock}>
-        <div style={styles.infoSubBlock}>
+      <div style={styles.container}>
+        <div style={styles.contentWrapper}>
+          <div style={styles.header}>
+            <div style={styles.headerSubblock}>
+              <i
+                  className="hgi-stroke hgi-arrow-right-double"
+                  style={styles.headerIcon}
+              ></i>
+              <p style={styles.headerListName}>{listName}</p>
+            </div>
+            <button style={styles.closeButton} onClick={onClose}>
+              <i className="hgi-stroke hgi-cancel-01" style={styles.closeIcon}></i>
+            </button>
+          </div>
           <EditInput
-            type="time"
-            placeholder=""
-            value={newStartTime}
-            onChange={(e) => setNewStartTime(e.target.value)}
-            width={"100%"}
+              type="text"
+              placeholder="Task name..."
+              value={newTaskName}
+              onChange={(e) => setNewTaskName(e.target.value)}
           />
-          <p style={styles.infoLabel}>Start time</p>
+          <div style={styles.infoBlock}>
+            <div style={styles.infoSubBlock}>
+              <EditInput
+                  type="time"
+                  placeholder=""
+                  value={newStartTime}
+                  onChange={(e) => setNewStartTime(e.target.value)}
+                  width={"100%"}
+              />
+              <p style={styles.infoLabel}>Start time</p>
+            </div>
+            <div style={styles.infoSubBlock}>
+              <EditInput
+                  type="time"
+                  placeholder=""
+                  value={newEndTime}
+                  onChange={(e) => setNewEndTime(e.target.value)}
+                  width={"100%"}
+              />
+              <p style={styles.infoLabel}>Due time</p>
+            </div>
+            <div style={styles.infoSubBlock}>
+              <EditInput
+                  type="date"
+                  placeholder=""
+                  value={newTaskDate}
+                  onChange={(e) => setNewTaskDate(e.target.value)}
+                  width={"100%"}
+              />
+              <p style={styles.infoLabel}>Due date</p>
+            </div>
+          </div>
+          <div style={styles.infoBlock}>
+            <div style={styles.infoSubBlock}>
+              <EditPriorityDropdown
+                  onChange={setNewTaskPriority}
+                  width={"100%"}
+                  defaultValue={task.priority}
+              />
+              <p style={styles.infoLabel}>Priority</p>
+            </div>
+          </div>
+          <div style={styles.infoSubBlock}>
+            <EditTextArea
+                placeholder={"Task description..."}
+                value={newTaskDescription}
+                onChange={(e) => setNewTaskDescription(e.target.value)}
+            />
+            <p style={styles.infoLabel}>Description</p>
+          </div>
+          <div style={styles.infoBlock}>
+            <div style={styles.infoSubBlock}>
+              {relatedNote ? (
+                  <div style={styles.relatedNote}>
+                    <p>{relatedNote.name}</p>
+                    <button style={styles.removeNoteButton} onClick={handleRemoveRelatedNote}>
+                      Remove
+                    </button>
+                  </div>
+              ) : (
+                  <button style={styles.addNoteButton} onClick={() => setShowSelectNoteModal(true)}>
+                    + Add Related Note
+                  </button>
+              )}
+              <p style={styles.infoLabel}>Related Note</p>
+            </div>
+          </div>
+          <button style={styles.saveButton} onClick={saveTask}>
+            Save
+          </button>
         </div>
-        <div style={styles.infoSubBlock}>
-          <EditInput
-            type="time"
-            placeholder=""
-            value={newEndTime}
-            onChange={(e) => setNewEndTime(e.target.value)}
-            width={"100%"}
-          />
-          <p style={styles.infoLabel}>Due time</p>
-        </div>
-        <div style={styles.infoSubBlock}>
-          <EditInput
-            type="date"
-            placeholder=""
-            value={newTaskDate}
-            onChange={(e) => setNewTaskDate(e.target.value)}
-            width={"100%"}
-          />
-          <p style={styles.infoLabel}>Due date</p>
-        </div>
+        {showSelectNoteModal && (
+            <SelectRelatedNoteModal
+                onClose={() => setShowSelectNoteModal(false)}
+                onSelect={(note) => {
+                  setRelatedNoteId(note._id);
+                  setRelatedNote(note);
+                  setShowSelectNoteModal(false);
+                }}
+            />
+        )}
       </div>
-      <div style={styles.infoBlock}>
-        <div style={styles.infoSubBlock}>
-          <EditPriorityDropdown
-            onChange={setNewTaskPriority}
-            width={"100%"}
-            defaultValue={task.priority}
-          />
-          <p style={styles.infoLabel}>Priority</p>
-        </div>
-      </div>
-      <div style={styles.infoSubBlock}>
-        <EditTextArea
-          placeholder={"Task description..."}
-          value={newTaskDescription}
-          onChange={(e) => setNewTaskDescription(e.target.value)}
-        />
-        <p style={styles.infoLabel}>Description</p>
-      </div>
-      <button style={styles.saveButton} onClick={saveTask}>
-        Save
-      </button>
-    </div>
   );
 }
 
@@ -147,6 +190,12 @@ const styles = {
     background: "white",
     boxShadow: "rgba(99, 99, 99, 0.2) 0px 8px 16px 0px",
     padding: "18px",
+  },
+  contentWrapper: {
+    display: "flex",
+    height: "100%",
+    flexDirection: "column",
+    flexGrow: 1,
   },
   header: {
     width: "100%",
@@ -216,6 +265,29 @@ const styles = {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    marginTop: "43%",
+    marginTop: "auto",
+  },
+  relatedNote: {
+    width: "100%",
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    padding: "8px",
+    border: "1px solid #ccc",
+    borderRadius: "4px",
+  },
+  addNoteButton: {
+    backgroundColor: "#7437ff",
+    color: "white",
+    borderRadius: "4px",
+    padding: "8px",
+    cursor: "pointer",
+  },
+  removeNoteButton: {
+    backgroundColor: "#ff4747",
+    color: "white",
+    borderRadius: "4px",
+    padding: "8px",
+    cursor: "pointer",
   },
 };
