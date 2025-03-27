@@ -3,8 +3,8 @@
   height: 50px;
   background-color: white;
   box-shadow: rgba(99, 99, 99, 0.05) 0px 2px 12px 0px;
-  padding: 34px 12px 34px 12px;
   position: fixed;
+  z-index: 5;
 }
 
 .nm-header {
@@ -16,15 +16,24 @@
 
 .nm-buttons-container {
   width: 100%;
-  min-height: 80%;
+  min-height: 100%;
   color: #f1f1f1;
   overflow-y: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
 }
 
 .nm-buttons-group {
-  margin-top: 18px;
-  border-bottom: 1px solid #eee;
-  padding-bottom: 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+}
+
+.user-button {
+  display: block;
 }
 
 /*Laptop*/
@@ -56,5 +65,10 @@
     margin-top: 18px;
     border-bottom: 1px solid #eee;
     padding-bottom: 18px;
+    display: block;
+  }
+
+  .user-button {
+    display: none;
   }
 }

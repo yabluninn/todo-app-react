@@ -33,47 +33,54 @@ export default function NavMenu() {
       <div className="nm-buttons-container">
         <div className="nm-buttons-group">
           <NavButton
-            icon={"hgi-stroke hgi-home-09"}
-            label={"Home"}
-            path={"/"}
+              icon={"hgi-stroke hgi-home-09"}
+              label={"Home"}
+              path={"/"}
           />
         </div>
         <div className="nm-buttons-group">
           <NavButton
-            icon={"hgi-stroke hgi-task-01"}
-            label={"Tasks"}
-            path={"/tasks"}
+              icon={"hgi-stroke hgi-task-01"}
+              label={"Tasks"}
+              path={"/tasks"}
           />
           <NavButton
-            icon={"hgi-stroke hgi-sticky-note-02"}
-            label={"Notes"}
-            path={"/notes"}
+              icon={"hgi-stroke hgi-sticky-note-02"}
+              label={"Notes"}
+              path={"/notes"}
           />
           <NavButton
-            icon={"hgi-stroke hgi-dashboard-square-02"}
-            label={"Groups"}
-            path={"/groups"}
+              icon={"hgi-stroke hgi-dashboard-square-02"}
+              label={"Groups"}
+              path={"/groups"}
           />
         </div>
         <div className="nm-buttons-group">
           <NavButton
-            icon={"hgi-stroke hgi-analytics-01"}
-            label={"Analytics"}
-            path={"/analytics"}
+              icon={"hgi-stroke hgi-analytics-01"}
+              label={"Analytics"}
+              path={"/analytics"}
           />
           <NavButton
-            icon={"hgi-stroke hgi-notification-03"}
-            label={"Notifications"}
-            path={"/notifications"}
+              icon={"hgi-stroke hgi-notification-03"}
+              label={"Notifications"}
+              path={"/notifications"}
           />
           <NavButton
-            icon={"hgi-stroke hgi-settings-02"}
-            label={"Settings"}
-            path={"/settings"}
+              icon={"hgi-stroke hgi-settings-02"}
+              label={"Settings"}
+              path={"/settings"}
+          />
+        </div>
+        <div className="nm-buttons-group user-button">
+          <NavButton
+              icon={"hgi-stroke hgi-user"}
+              label={"Profile"}
+              path={"/profile"}
           />
         </div>
       </div>
-      {user ? <NavUser user={user} /> : <p>Loading...</p>}
+      {user ? <NavUser user={user}/> : <p>Loading...</p>}
     </div>
   );
 }
