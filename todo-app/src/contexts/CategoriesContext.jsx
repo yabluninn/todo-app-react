@@ -70,6 +70,9 @@ export const CategoriesProvider = ({ children }) => {
 
     const removeCategory = async (id) => {
         try {
+            const category = categories.find((c) => c._id === id);
+            if (category.name === "Uncategorized") { return; }
+
             const user = JSON.parse(localStorage.getItem("user"));
             await axios.delete(`http://localhost:5000/api/categories/${id}?userId=${user.id}`);
 
