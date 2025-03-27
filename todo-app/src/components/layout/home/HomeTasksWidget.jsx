@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 
-import "../../../styles/HomeTasksWidget.css";
+import "../../../styles/home/widgets/HomeTasksWidget.css";
 import HomeTask from "./HomeTask";
 import { useEffect, useState } from "react";
 import { useListsContext } from "../../../contexts/ListsContext";
@@ -50,7 +50,7 @@ export default function HomeTasksWidget({ selectedPeriod }) {
   return (
       <div className="home-tasks-widget">
         <div className="header">
-          <p className="title">Tasks for {selectedPeriod}</p>
+          <p className="title">Tasks</p>
           <div className="header-block">
             <button className="sort-button" onClick={toggleFilterContextMenuVisibility}>
               <i className="hgi-stroke hgi-filter sort-icon"></i>

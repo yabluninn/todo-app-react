@@ -1,0 +1,118 @@
+.home-note-widget {
+    width: 100%;
+    height: 315px;
+    border-radius: 8px;
+    background-color: white;
+    padding: 12px;
+    box-shadow: rgba(99, 99, 99, 0.05) 0px 2px 12px 0px;
+}
+
+.h-header {
+    width: 100%;
+    height: 35px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #eee;
+}
+
+.title {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.view-all-link {
+    height: 25px;
+    font-size: 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    color: #ab99dd;
+    margin-left: 8px;
+    border: 1px solid;
+    border-radius: 8px;
+    padding: 0 8px;
+    text-decoration: none;
+    transition: all 0.2s;
+}
+.view-all-link:hover {
+    background-color: #ab99dd;
+    color: #fff;
+}
+
+.note-container {
+    width: 100%;
+    height: 250px;
+    display: flex;
+    justify-content: start;
+    align-items: start;
+    flex-direction: row;
+    flex-wrap: wrap;
+    overflow-y: auto;
+    scrollbar-width: none;
+    gap: 12px;
+}
+
+@media screen and (min-width: 1024px) {
+    .home-note-widget {
+        width: 49%;
+        height: 315px;
+        border-radius: 8px;
+        background-color: white;
+        padding: 12px;
+        box-shadow: rgba(99, 99, 99, 0.05) 0px 2px 12px 0px;
+    }
+
+    .h-header {
+        width: 100%;
+        height: 35px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 8px;
+        padding-bottom: 8px;
+        border-bottom: 1px solid #eee;
+    }
+
+    .title {
+        font-size: 16px;
+        font-weight: bold;
+    }
+
+    .view-all-link {
+        height: 30px;
+        font-size: 16px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        color: #ab99dd;
+        margin-left: 8px;
+        border: 1px solid;
+        border-radius: 8px;
+        padding: 0 8px;
+        text-decoration: none;
+        transition: all 0.2s;
+    }
+
+    .view-all-link:hover {
+        background-color: #ab99dd;
+        color: #fff;
+    }
+
+    .note-container {
+        width: 100%;
+        height: 250px;
+        display: flex;
+        justify-content: start;
+        align-items: start;
+        flex-direction: row;
+        flex-wrap: wrap;
+        overflow-y: auto;
+        scrollbar-width: none;
+        gap: 12px;
+    }
+}

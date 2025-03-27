@@ -1,7 +1,7 @@
 import {useListsContext} from "../../../contexts/ListsContext.jsx";
 import {taskService} from "../../../services/TaskService.js";
 
-import "../../../styles/HomeTasksAnalyticsWidget.css"
+import "../../../styles/home/widgets/HomeTasksAnalyticsWidget.css"
 
 export default function HomeTasksAnalyticsWidget({selectedPeriod}) {
     const { taskLists } = useListsContext();

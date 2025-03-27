@@ -1,15 +1,14 @@
 import { useState } from "react";
 import HomeHeader from "../layout/home/HomeHeader";
 import HomeTasksWidget from "../layout/home/HomeTasksWidget";
-import "../../styles/Home.css";
+import "../../styles/home/Home.css";
 import VerticalTimeline from "../layout/app/VerticalTimeline";
 import HomeNoteWidget from "../layout/home/HomeNoteWidget";
-import HomeAddWidget from "../layout/home/HomeAddWidget";
 import CreateTaskModal from "../modals/CreateTaskModal";
 import CreateNoteModal from "../modals/CreateNoteModal";
 import { useListsContext } from "../../contexts/ListsContext";
 import HomeTasksAnalyticsWidget from "../layout/home/HomeTasksAnalyticsWidget.jsx";
-import HomeRecentTaskCompletionWidget from "../layout/home/HomeRecentTaskCompletionWidget.jsx"; // Добавляем контекст
+import HomeRecentTaskCompletionWidget from "../layout/home/HomeRecentTaskCompletionWidget.jsx";
 
 export default function Home() {
   const [isCreateTaskModalOpen, setCreateTaskModalOpen] = useState(false);
@@ -42,12 +41,12 @@ export default function Home() {
             <HomeTasksAnalyticsWidget selectedPeriod={selectedPeriod}/>
             <HomeRecentTaskCompletionWidget selectedPeriod={selectedPeriod}/>
           </div>
-          {selectedPeriod === "Today" && (
-              <div className="home-day-overview">
-                <p className="home-day-overview-title">Day Overview</p>
-                <VerticalTimeline tasks={tasks || []} />
-              </div>
-          )}
+            {selectedPeriod === "Today" && (
+                <div className="home-day-overview">
+                    <p className="home-day-overview-title">Day Overview</p>
+                    <VerticalTimeline tasks={tasks || []} />
+                </div>
+            )}
         </div>
         {isCreateTaskModalOpen && <CreateTaskModal onClose={closeCreateTaskModal} />}
         {isCreateNoteModalOpen && <CreateNoteModal onClose={closeCreateNoteModal} />}

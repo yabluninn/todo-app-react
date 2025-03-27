@@ -1,4 +1,4 @@
-import "../../../styles/NavMenu.css";
+import "../../../styles/navigation/NavMenu.css";
 import NavButton from "../../ui/NavButton";
 import NavUser from "./NavUser";
 import {useEffect, useState} from "react";

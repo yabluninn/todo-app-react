@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 
-import "../../../styles/HomeNoteWidget.css"; // Подключаем CSS
+import "../../../styles/home/widgets/HomeNoteWidget.css"; // Подключаем CSS
 import { Link } from "react-router-dom";
 import HomeNote from "./HomeNote";
 import NothingHere from "../../ui/NothingHere";

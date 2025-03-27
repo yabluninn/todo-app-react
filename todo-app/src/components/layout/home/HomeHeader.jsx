@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { headerService } from "../../../services/HeaderService";
-import "../../../styles/Header.css";
+import "../../../styles/home/Header.css";
 import { dateExtensions } from "../../../utils/date-extensions";
 import ContextMenu from "../../contextMenus/ContextMenu.jsx";
 import ContextMenuButton from "../../contextMenus/ContextMenuButton.jsx";

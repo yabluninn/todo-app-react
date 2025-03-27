@@ -1,7 +1,7 @@
 import {useListsContext} from "../../../contexts/ListsContext.jsx";
 import {taskService} from "../../../services/TaskService.js";
 
-import "../../../styles/HomeTasksAnalyticsWidget.css"
+import "../../../styles/home/widgets/HomeTasksAnalyticsWidget.css"
 import {useState} from "react";
 import {
     CategoryScale,
@@ -154,10 +154,10 @@ export default function HomeRecentTaskCompletionWidget({selectedPeriod}) {
     return (
         <div className="hta-widget">
             <div className="header">
-                <p className="title">Tasks Statistics</p>
+                <p className="title">Recent Tasks Completion</p>
             </div>
 
-            <div className="task-container" style={{ width: "450px", height: "160px", display: "flex", justifyContent: "center", alignItems: "center" }}>
+            <div className="ht-chart-container">
                 <Line data={data} options={options} />
             </div>
         </div>
