@@ -3,6 +3,7 @@ import {stringExtensions} from "../../../utils/string-extensions.js";
 import {useState} from "react";
 import {Link} from "react-router-dom";
 import {ACCOUNT_TYPES} from "../../../constants/account-types.js";
+import "../../../styles/navigation/NavUser.css"
 
 export default function NavUser({ user }) {
   const [isHovered, setIsHovered] = useState(false);
@@ -18,14 +19,15 @@ export default function NavUser({ user }) {
   return (
       <Link
           to={DEFAULT_APP_URL + "/profile"}
-          style={{...styles.main, cursor: isHovered ? "pointer" : "default"}}
+          className="nav-user"
+          style={{ cursor: isHovered ? "pointer" : "default" }}
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
       >
-        <i style={styles.userIcon} className="hgi hgi-stroke hgi-user"></i>
-        <div style={styles.info}>
-          <p style={styles.username}>{formattedUsername}</p>
-          <p style={styles.account}>{ACCOUNT_TYPES.FREE} Account</p>
+        <i className="hgi hgi-stroke hgi-user nav-user-icon"></i>
+        <div className="nav-user-info">
+          <p className="nav-user-name">{formattedUsername}</p>
+          <p className="nav-user-account">{ACCOUNT_TYPES.FREE} Account</p>
         </div>
       </Link>
   );
