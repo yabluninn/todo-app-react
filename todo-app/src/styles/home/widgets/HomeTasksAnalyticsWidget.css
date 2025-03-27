@@ -32,7 +32,6 @@
 
 .ht-chart-container {
     width: 100%;
-    max-width: 450px;
     height: 160px;
     display: flex;
     justify-content: center;
@@ -74,7 +73,6 @@
 
     .ht-chart-container {
         width: 100%;
-        max-width: 450px;
         height: 160px;
         display: flex;
         justify-content: center;

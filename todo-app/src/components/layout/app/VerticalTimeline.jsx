@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import { useState, useEffect } from "react";
-import "../../../styles/VerticalTimeline.css";
+import "../../../styles/home/VerticalTimeline.css";
 import { useListsContext } from "../../../contexts/ListsContext";
 import {colorExtensions} from "../../../utils/color-extensions.js";
 

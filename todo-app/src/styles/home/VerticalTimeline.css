@@ -8,6 +8,7 @@
   align-self: flex-end;
   margin-right: 16px;
   top: -15px;
+  right: 0;
 }
 
 .timeline-hour {
@@ -71,6 +72,12 @@
   z-index: 3;
 }
 
+@media screen and (min-width: 768px) {
+  .timeline {
+    right: 36%;
+  }
+}
+
 @media screen and (min-width: 1024px) {
   .timeline {
     position: relative;
@@ -82,6 +89,7 @@
     align-self: flex-end;
     margin-right: 16px;
     top: -15px;
+    right: 0;
   }
 
   .timeline-hour {
