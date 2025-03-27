@@ -28,6 +28,15 @@ export const CategoriesProvider = ({ children }) => {
 
     const addCategory = async (category) => {
         try {
+            const alreadyExists = categories.some(
+                (c) => c.name.toLowerCase().trim() === category.name.toLowerCase().trim()
+            );
+
+            if (alreadyExists) {
+                alert("Category with same name already exists.");
+                return;
+            }
+
             const user = JSON.parse(localStorage.getItem("user"));
             const response = await axios.post("http://localhost:5000/api/categories", {
                 userId: user.id,
