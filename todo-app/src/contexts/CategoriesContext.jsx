@@ -33,7 +33,7 @@ export const CategoriesProvider = ({ children }) => {
             );
 
             if (alreadyExists) {
-                alert("Category with same name already exists.");
+                alert("Category with same name already exists!");
                 return;
             }
 
@@ -80,7 +80,10 @@ export const CategoriesProvider = ({ children }) => {
     const removeCategory = async (id) => {
         try {
             const category = categories.find((c) => c._id === id);
-            if (category.name === "Uncategorized") { return; }
+            if (category.name === "Uncategorized") {
+                alert("You can't remove default Category!")
+                return;
+            }
 
             const user = JSON.parse(localStorage.getItem("user"));
             await axios.delete(`http://localhost:5000/api/categories/${id}?userId=${user.id}`);

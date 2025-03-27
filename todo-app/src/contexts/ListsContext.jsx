@@ -267,6 +267,15 @@ export const ListsProvider = ({ children }) => {
 
     const addTaskList = async (list) => {
         try {
+            const alreadyExists = taskLists.some(
+                (list) => list.name.toLowerCase().trim() === list.name.toLowerCase().trim()
+            );
+
+            if (alreadyExists) {
+                alert("Task list with same name already exists!");
+                return;
+            }
+
             const user = JSON.parse(localStorage.getItem("user"));
             const response = await axios.post("http://localhost:5000/api/taskLists", {
                 userId: user.id,
@@ -321,6 +330,7 @@ export const ListsProvider = ({ children }) => {
             }
 
             if (listToRemove.name === "All"){
+                alert("You can't remove default Task list!")
                 return;
             }
 
@@ -366,6 +376,15 @@ export const ListsProvider = ({ children }) => {
 
     const addNoteList = async (list) => {
         try {
+            const alreadyExists = noteLists.some(
+                (list) => list.name.toLowerCase().trim() === list.name.toLowerCase().trim()
+            );
+
+            if (alreadyExists) {
+                alert("Note list with same name already exists!");
+                return;
+            }
+
             const user = JSON.parse(localStorage.getItem("user"));
             const response = await axios.post("http://localhost:5000/api/noteLists", {
                 userId: user.id,
@@ -420,6 +439,7 @@ export const ListsProvider = ({ children }) => {
             }
 
             if (noteListToRemove.name === "Notes"){
+                alert("You can't remove default Note list!")
                 return;
             }
 
