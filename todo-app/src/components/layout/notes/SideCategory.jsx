@@ -19,7 +19,7 @@ export default function SideCategory({ category, onSelected }) {
         onMouseLeave={() => setHovered(false)}
         >
             {category.name}
-            {isHovered && (<button style={styles.deleteButton} onClick={selectCategory}><i className={"hgi-stroke hgi-cancel-01"} style={styles.deleteIcon}></i></button>)}
+            {isHovered && (<button style={styles.deleteButton} onClick={selectCategory}><i className={"hgi hgi-stroke hgi-delete-02"} style={styles.deleteIcon}></i></button>)}
         </p>
     );
 }
@@ -31,22 +31,22 @@ const styles = {
         fontWeight: "bold",
         padding: "4px 12px 4px 12px",
         borderRadius: "16px",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        flexDirection: "row",
+        gap: "10px",
     },
     deleteButton: {
         width: "18px",
         height: "18px",
-        position: "absolute",
-        backgroundColor: "red",
-        borderRadius: "16px",
-        marginTop: "-30px",
-        marginLeft: "25px",
+        background: "transparent",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
     },
     deleteIcon: {
-        fontSize: "12px",
-        fontWeight: "bold",
+        fontSize: "16px",
         color: "white",
     }
 };

@@ -2,8 +2,19 @@
 import "../../../styles/Note.css";
 import { stringExtensions } from "../../../utils/string-extensions";
 import Category from "../groups/Category.jsx";
+import NoteCategory from "./NoteCategory.jsx";
+import {useCategories} from "../../../contexts/CategoriesContext.jsx";
 
 export default function Note({ note, handleDelete, handleEdit }) {
+  const { categories: allCategories } = useCategories();
+
+  const resolvedCategories = (note.categories || []).map((cat) =>
+      typeof cat === "string"
+          ? allCategories.find((c) => c._id === cat)
+          : cat
+  ).filter(Boolean);
+
+
   const formattedContent = stringExtensions.sliceWithDots(note.content || "", 80);
 
   console.log("🚀 Debug Note:", note);
@@ -26,9 +37,9 @@ export default function Note({ note, handleDelete, handleEdit }) {
               <p style={styles.noteContent}>{formattedContent}</p>
             </div>
             <div style={styles.categories}>
-              {note.categories && note.categories.map(category => {
-                return <Category key={category._id} category={category}/>
-              })}
+              {resolvedCategories.map((category) => (
+                  <NoteCategory key={category._id} category={category}/>
+              ))}
             </div>
           </div>
           <div style={styles.subBlock}>

@@ -2,41 +2,64 @@
 import { useEffect, useState } from "react";
 import EditInput from "../../ui/EditInput";
 import EditTextArea from "../../ui/EditTextArea";
-import {useCategories} from "../../../contexts/CategoriesContext.jsx";
 import SideCategory from "./SideCategory.jsx";
+import SelectCategoryModal from "../../modals/SelectCategoryModal.jsx";
 import {useListsContext} from "../../../contexts/ListsContext.jsx";
+import {useCategories} from "../../../contexts/CategoriesContext.jsx";
 
 export default function NoteSideSection({ note, onClose }) {
+  const { categories: allCategories } = useCategories();
 
   const [newName, setNewName] = useState("");
   const [newContent, setNewContent] = useState("");
   const [categories, setCategories] = useState(note.categories || []);
+
+  const [showCategoryModal, setShowCategoryModal] = useState(false);
 
   const {getNoteListById, updateNote} = useListsContext();
 
   useEffect(() => {
     setNewName(note.name);
     setNewContent(note.content);
-  }, [note.name, note.content]);
+
+    const resolvedCategories = (note.categories || [])
+        .map(id => typeof id === "string"
+            ? allCategories.find(c => c._id === id)
+            : id)
+        .filter(Boolean);
+
+    setCategories(resolvedCategories);
+  }, [note.name, note.content, note.categories, allCategories]);
 
   const saveNote = () => {
-    note.name = newName;
-    note.content = newContent;
-    note.categories = categories;
-    updateNote(note._id, note);
+    const updatedNote = {
+      ...note,
+      name: newName,
+      content: newContent,
+      categories: categories,
+    };
+
+    console.log("categories: ", categories);
+
+    updateNote(note._id, updatedNote);
     onClose();
   };
 
-  const removeCategory = (categoryId) => {
-    setCategories((prevCategories) =>
-        prevCategories.filter((id) => id !== categoryId)
-    );
+
+  const handleAddCategory = (newCategory) => {
+    const alreadyExists = categories.find((c) => c._id === newCategory._id);
+    if (!alreadyExists) {
+      setCategories([...categories, newCategory]);
+    }
+    setShowCategoryModal(false);
   };
 
-  console.log("Note list id to edit: ", note.listId);
+  const removeCategory = (categoryId) => {
+    const updatedCategories = categories.filter((c) => c._id !== categoryId);
+    setCategories(updatedCategories);
+  };
+
   const list = getNoteListById(note.listId);
-  console.log("List to edit: ", list);
-  //const listName = getNoteListById(note.listId).name;
 
   return (
       <div style={styles.container}>
@@ -86,6 +109,19 @@ export default function NoteSideSection({ note, onClose }) {
                 );
               })}
             </div>
+            <button
+                style={{
+                  marginTop: "8px",
+                  fontSize: "14px",
+                  color: "#7437ff",
+                  background: "none",
+                  border: "none",
+                  cursor: "pointer"
+                }}
+                onClick={() => setShowCategoryModal(true)}
+            >
+              + Add Category
+            </button>
             <p style={styles.infoLabel}>Categories</p>
           </div>
         </div>
@@ -93,6 +129,12 @@ export default function NoteSideSection({ note, onClose }) {
         <button style={styles.saveButton} onClick={saveNote}>
           Save
         </button>
+        {showCategoryModal && (
+            <SelectCategoryModal
+                onClose={() => setShowCategoryModal(false)}
+                onSelect={handleAddCategory}
+            />
+        )}
       </div>
   );
 }
@@ -185,6 +227,7 @@ const styles = {
     justifyContent: "start",
     alignItems: "center",
     flexDirection: "row",
+    gap: "12px",
     flexWrap: "wrap",
     padding: "8px 12px",
     border: "1px solid #ccc",

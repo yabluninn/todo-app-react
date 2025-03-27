@@ -1,9 +1,19 @@
 import { dateExtensions } from "../../../utils/date-extensions";
 import { stringExtensions } from "../../../utils/string-extensions";
 import HomeCategory from "./HomeCategory";
+import {useCategories} from "../../../contexts/CategoriesContext.jsx";
 
 /* eslint-disable react/prop-types */
 export default function HomeNote({ note }) {
+  const { categories: allCategories } = useCategories();
+
+  const resolvedCategories = (note.categories || []).map((cat) =>
+      typeof cat === "string"
+          ? allCategories.find((c) => c._id === cat)
+          : cat
+  ).filter(Boolean);
+
+
   const formattedContent = stringExtensions.sliceWithDots(note.content || "", 180);
 
   const formattedDate = dateExtensions.getFormattedDate(new Date(note.creationDate));
@@ -17,7 +27,7 @@ export default function HomeNote({ note }) {
       </div>
       <p style={styles.content}>{formattedContent}</p>
       <div style={styles.categories}>
-        {note.categories && note.categories.map((category) => {
+        {resolvedCategories.map((category) => {
           if (!category) {
             return null;
           }
