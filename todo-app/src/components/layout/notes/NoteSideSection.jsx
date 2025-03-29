@@ -7,6 +7,8 @@ import SelectCategoryModal from "../../modals/SelectCategoryModal.jsx";
 import {useListsContext} from "../../../contexts/ListsContext.jsx";
 import {useCategories} from "../../../contexts/CategoriesContext.jsx";
 
+import "../../../styles/tasks/TaskSideSection.css"
+
 export default function NoteSideSection({ note, onClose }) {
   const { categories: allCategories } = useCategories();
 
@@ -60,45 +62,43 @@ export default function NoteSideSection({ note, onClose }) {
   };
 
   const list = getNoteListById(note.listId);
+  const listName = list ? list.name : "Unknown List";
 
   return (
-      <div style={styles.container}>
-        <div style={styles.header}>
-          <div style={styles.headerSubblock}>
-            <i
-                className="hgi-stroke hgi-arrow-right-double"
-                style={styles.headerIcon}
-            ></i>
-            <p style={styles.headerListName}>{list.name}</p>
+      <div className="task-side-container">
+        <div className="task-side-header">
+          <div className="task-side-header-subblock">
+            <i className="hgi-stroke hgi-arrow-right-double task-side-header-icon"></i>
+            <p className="task-side-header-listname">{listName}</p>
           </div>
-          <button style={styles.closeButton} onClick={onClose}>
-            <i className="hgi-stroke hgi-cancel-01" style={styles.closeIcon}></i>
+          <button className="task-side-close-button" onClick={onClose}>
+            <i className="hgi-stroke hgi-cancel-01 task-side-close-icon"></i>
           </button>
         </div>
-        <div style={styles.infoBlock}>
-          <div style={styles.infoSubBlock}>
+        <div className="task-side-info-block">
+          <div className="task-side-info-subblock">
             <EditInput
                 type="text"
                 placeholder="Note name..."
                 value={newName}
                 onChange={(e) => setNewName(e.target.value)}
             />
-            <p style={styles.infoLabel}>Name</p>
+            <p className="task-side-info-label">Name</p>
           </div>
         </div>
-        <div style={styles.infoBlock}>
-          <div style={styles.infoSubBlock}>
+        <div className="task-side-info-block">
+          <div className="task-side-info-subblock">
             <EditTextArea
                 placeholder={"Note text..."}
                 value={newContent}
                 onChange={(e) => setNewContent(e.target.value)}
             />
-            <p style={styles.infoLabel}>Text</p>
+            <p className="task-side-info-label">Text</p>
           </div>
         </div>
-        <div style={styles.infoBlock}>
-          <div style={styles.infoSubBlock}>
-            <div style={styles.categories}>
+        <div className="task-side-info-block">
+          <div className="task-side-info-subblock">
+            <div className="note-categories-block">
               {categories.map((category) => {
                 return (
                     <SideCategory
@@ -110,23 +110,16 @@ export default function NoteSideSection({ note, onClose }) {
               })}
             </div>
             <button
-                style={{
-                  marginTop: "8px",
-                  fontSize: "14px",
-                  color: "#7437ff",
-                  background: "none",
-                  border: "none",
-                  cursor: "pointer"
-                }}
+                className="add-note-category-button"
                 onClick={() => setShowCategoryModal(true)}
             >
               + Add Category
             </button>
-            <p style={styles.infoLabel}>Categories</p>
+            <p className="task-side-info-label">Categories</p>
           </div>
         </div>
 
-        <button style={styles.saveButton} onClick={saveNote}>
+        <button className="task-side-save-button" onClick={saveNote}>
           Save
         </button>
         {showCategoryModal && (
@@ -138,100 +131,3 @@ export default function NoteSideSection({ note, onClose }) {
       </div>
   );
 }
-
-const styles = {
-  container: {
-    position: "absolute",
-    top: "0",
-    right: "0",
-    width: "25%",
-    height: "100%",
-    background: "white",
-    boxShadow: "rgba(99, 99, 99, 0.2) 0px 8px 16px 0px",
-    padding: "18px",
-  },
-  header: {
-    width: "100%",
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    flexDirection: "row",
-    marginBottom: "16px",
-  },
-  headerIcon: {
-    fontSize: "16px",
-    fontWeight: "bold",
-    color: "#aaa",
-  },
-  headerListName: {
-    fontSize: "18px",
-    fontWeight: "bold",
-    color: "#333",
-    marginLeft: "8px",
-  },
-  headerSubblock: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    flexDirection: "row",
-  },
-  closeButton: {
-    backgroundColor: "transparent",
-    border: "none",
-    cursor: "pointer",
-  },
-  closeIcon: {
-    fontSize: "20px",
-    color: "#888",
-  },
-  infoBlock: {
-    width: "100%",
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    flexDirection: "row",
-    marginTop: "16px",
-    paddingBottom: "16px",
-    gap: "8px",
-    borderBottom: "1px solid #ccc",
-  },
-  infoSubBlock: {
-    width: "100%",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    flexDirection: "column",
-  },
-  infoLabel: {
-    fontSize: "14px",
-    color: "grey",
-    marginTop: "6px",
-  },
-  saveButton: {
-    backgroundColor: "#7437ff",
-    color: "white",
-    fontSize: "16px",
-    fontWeight: "bold",
-    borderRadius: "8px",
-    width: "100%",
-    height: "40px",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    marginTop: "43%",
-  },
-  categories: {
-    width: "100%",
-    minHeight: "40px",
-    display: "flex",
-    justifyContent: "start",
-    alignItems: "center",
-    flexDirection: "row",
-    gap: "12px",
-    flexWrap: "wrap",
-    padding: "8px 12px",
-    border: "1px solid #ccc",
-    borderRadius: "4px",
-    backgroundColor:"rgb(251, 251, 251)",
-  }
-};

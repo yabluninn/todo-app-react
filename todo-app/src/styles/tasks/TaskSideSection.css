@@ -127,6 +127,30 @@
     cursor: pointer;
 }
 
+.add-note-category-button {
+    margin-top: 8px;
+    font-size: 14px;
+    color: #7437ff;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.note-categories-block {
+    width: 100%;
+    min-height: 40px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    flex-direction: row;
+    gap: 12px;
+    flex-wrap: wrap;
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: rgb(251, 251, 251);
+}
+
 @media screen and (min-width: 768px) {
     .task-side-container {
         width: 40%;
@@ -261,5 +285,29 @@
         border-radius: 4px;
         padding: 8px;
         cursor: pointer;
+    }
+
+    .add-note-category-button {
+        margin-top: 8px;
+        font-size: 14px;
+        color: #7437ff;
+        background: none;
+        border: none;
+        cursor: pointer;
+    }
+
+    .note-categories-block {
+        width: 100%;
+        min-height: 40px;
+        display: flex;
+        justify-content: start;
+        align-items: center;
+        flex-direction: row;
+        gap: 12px;
+        flex-wrap: wrap;
+        padding: 8px 12px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        background-color: rgb(251, 251, 251);
     }
 }
