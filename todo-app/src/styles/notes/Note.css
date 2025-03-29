@@ -1,0 +1,159 @@
+.n-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent !important;
+  position: relative;
+  margin-top: 16px;
+}
+
+.note-block {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+
+.note-main-block {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+}
+
+.note-name {
+  font-size: 16px;
+  color: #333;
+}
+
+.note-content {
+  font-size: 14px;
+  color: #aaa;
+  display: none;
+}
+
+.note-sub-block {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+
+.note-action-button {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.note-action-icon {
+  font-size: 20px;
+  color: #333;
+}
+
+.note-action-icon.delete {
+  color: red;
+}
+
+.note-main-subblock {
+  width: 100%;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  flex-direction: row;
+}
+
+.note-categories {
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  flex-direction: row;
+  margin-left: 12px;
+}
+
+@media screen and (min-width: 1024px){
+  .n-container {
+    width: 100%;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left: 8px;
+    padding-right: 8px;
+    background-color: transparent !important;
+    position: relative;
+    margin-top: 16px;
+  }
+
+  .note-block {
+    width: 100%;
+    margin-left: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+  }
+
+  .note-main-block {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+  }
+
+  .note-name {
+    font-size: 16px;
+    color: #333;
+  }
+
+  .note-content {
+    font-size: 14px;
+    color: #aaa;
+    display: block;
+  }
+
+  .note-sub-block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+  }
+
+  .note-action-button {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .note-action-icon {
+    font-size: 20px;
+    color: #333;
+  }
+
+  .note-action-icon.delete {
+    color: red;
+  }
+
+  .note-main-subblock {
+    width: 100%;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    flex-direction: row;
+  }
+
+  .note-categories {
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    flex-direction: row;
+    margin-left: 12px;
+  }
+}

@@ -1,31 +1,13 @@
 /* eslint-disable react/prop-types */
-import { useState } from "react";
-import {useCategories} from "../../../contexts/CategoriesContext.jsx";
+import "../../../styles/notes/NoteCategory.css";
 
 export default function NoteCategory({ category }) {
     return (
         <div
-            style={{
-                ...styles.main,
-                backgroundColor: category.color,
-            }}
+            className="note-category"
+            style={{ backgroundColor: category.color }}
         >
-            <p style={{ color: "white" }}>{category.name}</p>
+            <p className="note-category-name">{category.name}</p>
         </div>
     );
 }
-
-const styles = {
-    main: {
-        width: "fit-content",
-        fontSize: "14px",
-        fontWeight: "bold",
-        padding: "4px 16px",
-        borderRadius: "16px",
-        marginRight: "8px",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        flexDirection: "row",
-    }
-};

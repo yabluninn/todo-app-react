@@ -7,6 +7,8 @@ import ContextMenu from "../../contextMenus/ContextMenu.jsx";
 import ContextMenuButton from "../../contextMenus/ContextMenuButton.jsx";
 import {SORTING_ACTIONS} from "../../../constants/sorting-actions.js";
 
+import "../../../styles/notes/NoteListContainer.css"
+
 export default function NoteListContainer({ list, onNoteSideOpen }) {
   const [isNotesVisible, setNotesVisibility] = useState(false);
 
@@ -26,55 +28,31 @@ export default function NoteListContainer({ list, onNoteSideOpen }) {
   };
 
   return (
-    <div style={styles.main}>
-      <i
-        className="hgi-stroke hgi-note"
-        style={{
-          position: "absolute",
-          color: "#bbb",
-          marginLeft: "-50px",
-          fontSize: "20px",
-        }}
-      ></i>
+    <div className="nlc-main">
       <div
-        style={{
-          ...styles.header,
-          borderBottom: isNotesVisible ? "1px solid #eee" : "0",
-          paddingBottom: isNotesVisible ? "8px" : "",
-        }}
+          className="nlc-header"
+          style={{
+            borderBottom: isNotesVisible ? "1px solid #eee" : "0",
+            paddingBottom: isNotesVisible ? "8px" : "",
+          }}
       >
         <button
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-          onClick={toggleNotesVisibility}
+            onClick={toggleNotesVisibility}
         >
           <i
-            className={
-              isNotesVisible
-                ? "hgi-stroke hgi-arrow-up-01"
-                : "hgi-stroke hgi-arrow-down-01"
-            }
-            style={styles.headerIcon}
+              className={`hgi-stroke ${isNotesVisible ? "hgi-arrow-up-01" : "hgi-arrow-down-01"} nlc-header-icon`}
           ></i>
         </button>
-        <div
-          style={{
-            ...styles.icon,
-            border: `2px solid ${list.color}`,
-          }}
-        ></div>
-        <p style={styles.listName}>{list.name}</p>
-        <div style={styles.notesCount}>{list.notes.length}</div>
-        <div style={styles.actions}>
-          <button style={styles.sortButton} onClick={toggleNotesContextMenuVisibility}>
-            <i className="hgi-stroke hgi-more-vertical" style={styles.sortIcon}></i>
+        <div className="nlc-color-icon" style={{border: `2px solid ${list.color}`}}></div>
+        <p className="nlc-list-name">{list.name}</p>
+        <div className="nlc-notes-count">{list.notes.length}</div>
+        <div className="tlc-actions">
+          <button className="tlc-sort-button" onClick={toggleNotesContextMenuVisibility}>
+            <i className="hgi-stroke hgi-more-vertical nlc-sort-icon"></i>
           </button>
         </div>
       </div>
-      <div style={{ ...styles.notes, display: isNotesVisible ? "" : "none" }}>
+      <div className="nlc-notes" style={{display: isNotesVisible ? "" : "none"}}>
         {list.notes.map((note) => (
             <Note
                 key={note._id}
@@ -97,72 +75,3 @@ export default function NoteListContainer({ list, onNoteSideOpen }) {
     </div>
   );
 }
-
-const styles = {
-  main: {
-    width: "100%",
-    marginTop: "14px",
-    backgroundColor: "white",
-    padding: "12px",
-    borderRadius: "8px",
-    boxShadow: "rgba(99, 99, 99, 0.05) 0px 2px 12px 0px",
-  },
-  header: {
-    width: "100%",
-    display: "flex",
-    justifyContent: "start",
-    alignItems: "center",
-    flexDirection: "row",
-    borderBottom: "1px solid #eee",
-    paddingBottom: "8px",
-  },
-  headerIcon: {
-    fontSize: "20px",
-    fontWeight: "bold",
-  },
-  icon: {
-    width: "20px",
-    height: "20px",
-    marginRight: "12px",
-    marginLeft: "16px",
-    border: "2x solid",
-    borderRadius: "8px",
-  },
-  listName: {
-    fontSize: "18px",
-    fontWeight: "bold",
-  },
-  notesCount: {
-    fontSize: "14px",
-    backgroundColor: "#e6e6e6",
-    borderRadius: "16px",
-    paddingLeft: "6px",
-    paddingRight: "6px",
-    color: "#333",
-    marginLeft: "12px",
-  },
-  notes: {
-    marginLeft: "64px",
-    marginTop: "12px",
-  },
-  actions: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    flexDirection: "row",
-    marginLeft: "auto",
-  },
-  sortButton: {
-    width: "30px",
-    height: "30px",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    marginRight: "4px",
-  },
-  sortIcon: {
-    fontSize: "22px",
-    fontWeight: "bold",
-    color: "#333",
-  },
-};

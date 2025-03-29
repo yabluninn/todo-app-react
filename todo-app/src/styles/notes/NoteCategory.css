@@ -1,0 +1,35 @@
+.note-category {
+    width: 20px;
+    height: 20px;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 16px;
+    margin-right: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+
+.note-category-name {
+    display: none;
+}
+
+@media screen and (min-width: 1024px){
+    .note-category {
+        width: fit-content;
+        font-size: 14px;
+        font-weight: bold;
+        padding: 4px 16px;
+        border-radius: 16px;
+        margin-right: 8px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: row;
+    }
+
+    .note-category-name {
+        color: white;
+    }
+}

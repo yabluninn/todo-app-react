@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import "../../styles/Notes.css";
+import "../../styles/notes/Notes.css";
 
 import NoteListContainer from "../layout/notes/NoteListContainer";
 import CreateNoteModal from "../modals/CreateNoteModal";
@@ -35,7 +35,7 @@ export default function Notes() {
   console.log("Note lists: ", noteLists);
 
   return (
-    <div className="tasks-container">
+    <div className="page-container">
       <div className="tasks-header">
         <div>
           <p className="t-header-title">Notes</p>
