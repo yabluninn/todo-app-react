@@ -6,6 +6,8 @@ import EditTextArea from "../../ui/EditTextArea";
 import { useListsContext } from "../../../contexts/ListsContext";
 import SelectRelatedNoteModal from "../../modals/SelectRelatedNoteModal.jsx";
 
+import "../../../styles/tasks/TaskSideSection.css"
+
 export default function TaskSideSection({ task, onClose }) {
   const { getTaskListById, updateTask, getNoteById } = useListsContext();
 
@@ -75,18 +77,15 @@ export default function TaskSideSection({ task, onClose }) {
   const listName = list ? list.name : "Unknown List";
 
   return (
-      <div style={styles.container}>
-        <div style={styles.contentWrapper}>
-          <div style={styles.header}>
-            <div style={styles.headerSubblock}>
-              <i
-                  className="hgi-stroke hgi-arrow-right-double"
-                  style={styles.headerIcon}
-              ></i>
-              <p style={styles.headerListName}>{listName}</p>
+      <div className="task-side-container">
+        <div className="task-side-content">
+          <div className="task-side-header">
+            <div className="task-side-header-subblock">
+              <i className="hgi-stroke hgi-arrow-right-double task-side-header-icon"></i>
+              <p className="task-side-header-listname">{listName}</p>
             </div>
-            <button style={styles.closeButton} onClick={onClose}>
-              <i className="hgi-stroke hgi-cancel-01" style={styles.closeIcon}></i>
+            <button className="task-side-close-button" onClick={onClose}>
+              <i className="hgi-stroke hgi-cancel-01 task-side-close-icon"></i>
             </button>
           </div>
           <EditInput
@@ -95,8 +94,8 @@ export default function TaskSideSection({ task, onClose }) {
               value={newTaskName}
               onChange={(e) => setNewTaskName(e.target.value)}
           />
-          <div style={styles.infoBlock}>
-            <div style={styles.infoSubBlock}>
+          <div className="task-side-info-block">
+            <div className="task-side-info-subblock">
               <EditInput
                   type="time"
                   placeholder=""
@@ -104,9 +103,9 @@ export default function TaskSideSection({ task, onClose }) {
                   onChange={(e) => setNewStartTime(e.target.value)}
                   width={"100%"}
               />
-              <p style={styles.infoLabel}>Start time</p>
+              <p className="task-side-info-label">Start time</p>
             </div>
-            <div style={styles.infoSubBlock}>
+            <div className="task-side-info-subblock">
               <EditInput
                   type="time"
                   placeholder=""
@@ -114,9 +113,9 @@ export default function TaskSideSection({ task, onClose }) {
                   onChange={(e) => setNewEndTime(e.target.value)}
                   width={"100%"}
               />
-              <p style={styles.infoLabel}>Due time</p>
+              <p className="task-side-info-label">Due time</p>
             </div>
-            <div style={styles.infoSubBlock}>
+            <div className="task-side-info-subblock">
               <EditInput
                   type="date"
                   placeholder=""
@@ -124,45 +123,45 @@ export default function TaskSideSection({ task, onClose }) {
                   onChange={(e) => setNewTaskDate(e.target.value)}
                   width={"100%"}
               />
-              <p style={styles.infoLabel}>Due date</p>
+              <p className="task-side-info-label">Due date</p>
             </div>
           </div>
-          <div style={styles.infoBlock}>
-            <div style={styles.infoSubBlock}>
+          <div className="task-side-info-block">
+            <div className="task-side-info-subblock">
               <EditPriorityDropdown
                   onChange={setNewTaskPriority}
                   width={"100%"}
                   defaultValue={task.priority}
               />
-              <p style={styles.infoLabel}>Priority</p>
+              <p className="task-side-info-label">Priority</p>
             </div>
           </div>
-          <div style={styles.infoSubBlock}>
+          <div className="task-side-info-subblock">
             <EditTextArea
                 placeholder={"Task description..."}
                 value={newTaskDescription}
                 onChange={(e) => setNewTaskDescription(e.target.value)}
             />
-            <p style={styles.infoLabel}>Description</p>
+            <p className="task-side-info-label">Description</p>
           </div>
-          <div style={styles.infoBlock}>
-            <div style={styles.infoSubBlock}>
+          <div className="task-side-info-block">
+            <div className="task-side-info-subblock">
               {relatedNote ? (
-                  <div style={styles.relatedNote}>
+                  <div className="task-side-related-note">
                     <p>{relatedNote.name}</p>
-                    <button style={styles.removeNoteButton} onClick={handleRemoveRelatedNote}>
+                    <button className="task-side-remove-note-button" onClick={handleRemoveRelatedNote}>
                       Remove
                     </button>
                   </div>
               ) : (
-                  <button style={styles.addNoteButton} onClick={() => setShowSelectNoteModal(true)}>
+                  <button className="task-side-add-note-button" onClick={() => setShowSelectNoteModal(true)}>
                     + Add Related Note
                   </button>
               )}
-              <p style={styles.infoLabel}>Related Note</p>
+              <p className="task-side-info-label">Related Note</p>
             </div>
           </div>
-          <button style={styles.saveButton} onClick={saveTask}>
+          <button className="task-side-save-button" onClick={saveTask}>
             Save
           </button>
         </div>
@@ -179,115 +178,3 @@ export default function TaskSideSection({ task, onClose }) {
       </div>
   );
 }
-
-const styles = {
-  container: {
-    position: "absolute",
-    top: "0",
-    right: "0",
-    width: "30%",
-    height: "100vh",
-    background: "white",
-    boxShadow: "rgba(99, 99, 99, 0.2) 0px 8px 16px 0px",
-    padding: "18px",
-  },
-  contentWrapper: {
-    display: "flex",
-    height: "100%",
-    flexDirection: "column",
-    flexGrow: 1,
-  },
-  header: {
-    width: "100%",
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    flexDirection: "row",
-    marginBottom: "16px",
-  },
-  headerIcon: {
-    fontSize: "16px",
-    fontWeight: "bold",
-    color: "#aaa",
-  },
-  headerListName: {
-    fontSize: "18px",
-    fontWeight: "bold",
-    color: "#333",
-    marginLeft: "8px",
-  },
-  headerSubblock: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    flexDirection: "row",
-  },
-  closeButton: {
-    backgroundColor: "transparent",
-    border: "none",
-    cursor: "pointer",
-  },
-  closeIcon: {
-    fontSize: "20px",
-    color: "#888",
-  },
-  infoBlock: {
-    width: "100%",
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    flexDirection: "row",
-    marginTop: "16px",
-    paddingBottom: "16px",
-    gap: "8px",
-    borderBottom: "1px solid #ccc",
-  },
-  infoSubBlock: {
-    width: "100%",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    flexDirection: "column",
-  },
-  infoLabel: {
-    fontSize: "14px",
-    color: "grey",
-    marginTop: "6px",
-  },
-  saveButton: {
-    backgroundColor: "#7437ff",
-    color: "white",
-    fontSize: "16px",
-    fontWeight: "bold",
-    borderRadius: "8px",
-    width: "100%",
-    height: "40px",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    marginTop: "auto",
-  },
-  relatedNote: {
-    width: "100%",
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    padding: "8px",
-    border: "1px solid #ccc",
-    borderRadius: "4px",
-  },
-  addNoteButton: {
-    backgroundColor: "#7437ff",
-    color: "white",
-    borderRadius: "4px",
-    padding: "8px",
-    cursor: "pointer",
-  },
-  removeNoteButton: {
-    backgroundColor: "#ff4747",
-    color: "white",
-    borderRadius: "4px",
-    padding: "8px",
-    cursor: "pointer",
-  },
-};

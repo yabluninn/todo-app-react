@@ -1,0 +1,265 @@
+.task-side-container {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: white;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 8px 16px 0px;
+    padding: 18px;
+    z-index: 100;
+}
+
+.task-side-content {
+    display: flex;
+    max-height: 100%;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.task-side-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    margin-bottom: 16px;
+}
+
+.task-side-header-subblock {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+
+.task-side-header-icon {
+    font-size: 16px;
+    font-weight: bold;
+    color: #aaa;
+}
+
+.task-side-header-listname {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    margin-left: 8px;
+}
+
+.task-side-close-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.task-side-close-icon {
+    font-size: 20px;
+    color: #888;
+}
+
+.task-side-info-block {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    margin-top: 16px;
+    padding-bottom: 16px;
+    gap: 8px;
+    border-bottom: 1px solid #ccc;
+}
+
+.task-side-info-subblock {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.task-side-info-label {
+    font-size: 12px;
+    color: grey;
+    margin-top: 6px;
+}
+
+.task-side-save-button {
+    background-color: #7437ff;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 8px;
+    width: 100%;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: auto;
+}
+
+.task-side-related-note {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.task-side-related-note p {
+    font-size: 14px;
+}
+
+.task-side-add-note-button {
+    background-color: #7437ff;
+    color: white;
+    border-radius: 4px;
+    padding: 4px 8px;
+    cursor: pointer;
+}
+
+.task-side-remove-note-button {
+    background-color: #ff4747;
+    color: white;
+    border-radius: 4px;
+    padding: 4px 8px;
+    cursor: pointer;
+}
+
+@media screen and (min-width: 768px) {
+    .task-side-container {
+        width: 40%;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .task-side-container {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 30%;
+        height: 100vh;
+        background: white;
+        box-shadow: rgba(99, 99, 99, 0.2) 0px 8px 16px 0px;
+        padding: 18px;
+        z-index: 100;
+    }
+
+    .task-side-content {
+        display: flex;
+        height: 100%;
+        flex-direction: column;
+        flex-grow: 1;
+    }
+
+    .task-side-header {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-direction: row;
+        margin-bottom: 16px;
+    }
+
+    .task-side-header-subblock {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: row;
+    }
+
+    .task-side-header-icon {
+        font-size: 16px;
+        font-weight: bold;
+        color: #aaa;
+    }
+
+    .task-side-header-listname {
+        font-size: 18px;
+        font-weight: bold;
+        color: #333;
+        margin-left: 8px;
+    }
+
+    .task-side-close-button {
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+    }
+
+    .task-side-close-icon {
+        font-size: 20px;
+        color: #888;
+    }
+
+    .task-side-info-block {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-direction: row;
+        margin-top: 16px;
+        padding-bottom: 16px;
+        gap: 8px;
+        border-bottom: 1px solid #ccc;
+    }
+
+    .task-side-info-subblock {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .task-side-info-label {
+        font-size: 14px;
+        color: grey;
+        margin-top: 6px;
+    }
+
+    .task-side-save-button {
+        background-color: #7437ff;
+        color: white;
+        font-size: 16px;
+        font-weight: bold;
+        border-radius: 8px;
+        width: 100%;
+        height: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: auto;
+    }
+
+    .task-side-related-note {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    .task-side-related-note p {
+        font-size: 16px;
+    }
+
+    .task-side-add-note-button {
+        background-color: #7437ff;
+        color: white;
+        border-radius: 4px;
+        padding: 8px;
+        cursor: pointer;
+    }
+
+    .task-side-remove-note-button {
+        background-color: #ff4747;
+        color: white;
+        border-radius: 4px;
+        padding: 8px;
+        cursor: pointer;
+    }
+}
