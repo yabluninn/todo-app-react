@@ -57,7 +57,7 @@ export default function TasksListContainer({ list, onTaskSideOpen }) {
   const toggleSortContextMenuVisibility = (event) => {
     setSortMenuPosition({
       top: window.scrollY + event.clientY  + 25,
-      left: 1185
+      left: 1265
     });
     setSortContextMenuVisible(!isSortContextMenuVisible);
     setFilterContextMenuVisible(false);
@@ -66,7 +66,7 @@ export default function TasksListContainer({ list, onTaskSideOpen }) {
   const toggleFilterContextMenuVisibility = (event) => {
     setFilterMenuPosition({
       top: window.scrollY + event.clientY + 25,
-      left: 1150
+      left: 1240
     });
     setFilterContextMenuVisible(!isFilterContextMenuVisible);
     setSortContextMenuVisible(false);

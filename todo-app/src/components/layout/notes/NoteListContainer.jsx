@@ -5,7 +5,6 @@ import Note from "../notes/Note";
 import {useListsContext} from "../../../contexts/ListsContext.jsx";
 import ContextMenu from "../../contextMenus/ContextMenu.jsx";
 import ContextMenuButton from "../../contextMenus/ContextMenuButton.jsx";
-import {SORTING_ACTIONS} from "../../../constants/sorting-actions.js";
 
 import "../../../styles/notes/NoteListContainer.css"
 
@@ -22,7 +21,7 @@ export default function NoteListContainer({ list, onNoteSideOpen }) {
   const toggleNotesContextMenuVisibility = (event) => {
     setNotesMenuPosition({
       top: window.scrollY + event.clientY  + 25,
-      left: 1185
+      left: 1280
     });
     setNotesContextMenuVisible(!notesContextMenuVisible);
   };
