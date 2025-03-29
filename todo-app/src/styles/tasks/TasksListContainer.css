@@ -1,0 +1,151 @@
+.tlc-main {
+    width: 100%;
+    max-height: 400px;
+    margin-top: 14px;
+    background-color: white;
+    padding: 12px;
+    border-radius: 8px;
+    box-shadow: rgba(99, 99, 99, 0.05) 0px 2px 12px 0px;
+}
+
+.tlc-header {
+    width: 100%;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    flex-direction: row;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 8px;
+}
+
+.tlc-header-icon {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.tlc-color-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 12px;
+    margin-left: 16px;
+    border: 2px solid;
+    border-radius: 8px;
+}
+
+.tlc-list-name {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.tlc-tasks-count {
+    font-size: 14px;
+    background-color: #e6e6e6;
+    border-radius: 16px;
+    padding-left: 6px;
+    padding-right: 6px;
+    color: #333;
+    margin-left: 12px;
+}
+
+.tlc-tasks {
+    margin-top: 12px;
+}
+
+.tlc-actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    margin-left: auto;
+}
+
+.tlc-sort-button {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 4px;
+}
+
+.tlc-sort-icon {
+    font-size: 18px;
+    color: #333;
+}
+
+@media screen and (min-width: 1024px) {
+    .tlc-main {
+        width: 100%;
+        margin-top: 14px;
+        background-color: white;
+        padding: 12px;
+        border-radius: 8px;
+        box-shadow: rgba(99, 99, 99, 0.05) 0px 2px 12px 0px;
+    }
+
+    .tlc-header {
+        width: 100%;
+        display: flex;
+        justify-content: start;
+        align-items: center;
+        flex-direction: row;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 8px;
+    }
+
+    .tlc-header-icon {
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    .tlc-color-icon {
+        width: 20px;
+        height: 20px;
+        margin-right: 12px;
+        margin-left: 16px;
+        border: 2px solid;
+        border-radius: 8px;
+    }
+
+    .tlc-list-name {
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    .tlc-tasks-count {
+        font-size: 14px;
+        background-color: #e6e6e6;
+        border-radius: 16px;
+        padding-left: 6px;
+        padding-right: 6px;
+        color: #333;
+        margin-left: 12px;
+    }
+
+    .tlc-tasks {
+        margin-left: 64px;
+        margin-top: 12px;
+    }
+
+    .tlc-actions {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: row;
+        margin-left: auto;
+    }
+
+    .tlc-sort-button {
+        width: 30px;
+        height: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-right: 4px;
+    }
+
+    .tlc-sort-icon {
+        font-size: 18px;
+        color: #333;
+    }
+}

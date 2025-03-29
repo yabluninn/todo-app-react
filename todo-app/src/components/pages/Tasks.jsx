@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import "../../styles/Tasks.css";
+import "../../styles/tasks/Tasks.css";
 
 import TasksListContainer from "../layout/tasks/TasksListContainer";
 import CreateTaskModal from "../modals/CreateTaskModal";
@@ -33,7 +33,7 @@ export default function Tasks() {
   };
 
   return (
-    <div className="tasks-container">
+    <div className="page-container">
       <div className="tasks-header">
         <div>
           <p className="t-header-title">Tasks</p>

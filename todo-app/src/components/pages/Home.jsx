@@ -26,7 +26,7 @@ export default function Home() {
   const closeCreateNoteModal = () => setCreateNoteModalOpen(false);
 
   return (
-      <div className="page-container">
+      <div className="home-container">
         <HomeHeader
             onOpenCreateTaskModal={openCreateTaskModal}
             onOpenCreateNoteModal={openCreateNoteModal}
