@@ -1,7 +1,7 @@
 .categories-container {
     width: 100%;
-    height: 120px;
-    max-height: 240px;
+    height: 170px;
+    max-height: 170px;
     background-color: white;
     border-radius: 8px;
     box-shadow: rgba(99, 99, 99, 0.05) 0px 2px 12px 0px;
@@ -52,10 +52,146 @@
 }
 
 .grid {
+    height: 100px;
+    max-height: 100px;
     padding-top: 12px;
     display: flex;
     justify-content: start;
     align-items: center;
     flex-direction: row;
     flex-wrap: wrap;
+    gap: 12px;
+    overflow-y: auto;
+}
+
+@media screen and (min-width: 768px) {
+    .categories-container {
+        width: 100%;
+        height: 120px;
+        max-height: 120px;
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: rgba(99, 99, 99, 0.05) 0px 2px 12px 0px;
+        padding: 12px;
+    }
+
+    .header {
+        width: 100%;
+        height: 40px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid #eee;
+    }
+
+    .header-block {
+        display: flex;
+        justify-content: start;
+        align-items: center;
+    }
+
+    .header-icon {
+        font-size: 18px;
+        margin-right: 8px;
+    }
+
+    .title {
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    .more-button {
+        width: 35px;
+        height: 35px;
+        background: none;
+        border: none;
+        cursor: pointer;
+    }
+
+    .more-button:hover .more-icon {
+        color: #7437ff;
+    }
+
+    .more-icon {
+        font-size: 22px;
+        font-weight: bold;
+        transition: color 0.3s;
+    }
+
+    .grid {
+        height: 50px;
+        max-height: 50px;
+        padding-top: 0;
+        display: flex;
+        justify-content: start;
+        align-items: center;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 12px;
+        overflow-y: auto;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .categories-container {
+        width: 100%;
+        height: 120px;
+        max-height: 240px;
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: rgba(99, 99, 99, 0.05) 0px 2px 12px 0px;
+        padding: 12px;
+    }
+
+    .header {
+        width: 100%;
+        height: 40px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid #eee;
+    }
+
+    .header-block {
+        display: flex;
+        justify-content: start;
+        align-items: center;
+    }
+
+    .header-icon {
+        font-size: 18px;
+        margin-right: 8px;
+    }
+
+    .title {
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    .more-button {
+        width: 35px;
+        height: 35px;
+        background: none;
+        border: none;
+        cursor: pointer;
+    }
+
+    .more-button:hover .more-icon {
+        color: #7437ff;
+    }
+
+    .more-icon {
+        font-size: 22px;
+        font-weight: bold;
+        transition: color 0.3s;
+    }
+
+    .grid {
+        padding-top: 12px;
+        display: flex;
+        justify-content: start;
+        align-items: center;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
 }

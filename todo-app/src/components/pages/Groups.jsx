@@ -58,7 +58,7 @@ export default function Groups() {
   };
 
   return (
-    <div className="lists-container">
+    <div className="page-container">
       <div className="lists-header">
         <div>
           <p className="t-header-title">Groups</p>
