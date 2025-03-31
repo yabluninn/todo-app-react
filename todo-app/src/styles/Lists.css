@@ -45,6 +45,7 @@
   flex-direction: column;
   gap: 16px;
   overflow-y: auto;
+  padding-bottom: 36px;
 }
 
 @media screen and (min-width: 1024px) {
