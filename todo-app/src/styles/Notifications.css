@@ -31,7 +31,8 @@
 
 .notifications-body {
     width: 100%;
-    max-height: 85%;
+    height: 75%;
+    max-height: 75%;
     overflow-y: auto;
     background-color: white;
     border-radius: 8px;
@@ -124,4 +125,18 @@
 
 .notification-remove-btn:hover i {
     color: #7437ff;
+}
+
+@media screen and (min-width: 768px) {
+    .notifications-body {
+        height: fit-content;
+        max-height: 78%;
+    }
+}
+
+@media screen and (min-width: 1024px){
+    .notifications-body {
+        width: 100%;
+        max-height: 85%;
+    }
 }

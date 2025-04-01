@@ -18,7 +18,7 @@ export default function Notifications() {
         .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
 
     return (
-        <div className="notifications-container">
+        <div className="page-container">
             <div className="notifications-header">
                 <div>
                     <p className="n-header-title">Notifications</p>
