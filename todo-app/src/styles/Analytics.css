@@ -1,15 +1,3 @@
-.analytics-container {
-    width: 86%;
-    height: 100%;
-    padding: 30px 112px 24px 112px;
-    display: flex;
-    justify-content: start;
-    align-items: start;
-    flex-direction: column;
-    margin-left: 15%;
-    position: relative;
-}
-
 .analytics-header {
     width: 100%;
     display: flex;
@@ -37,9 +25,9 @@
     box-shadow: rgba(99, 99, 99, 0.05) 0px 2px 12px 0px;
     display: flex;
     justify-content: start;
-    align-items: center;
-    flex-direction: row;
-    gap: 32px;
+    align-items: start;
+    flex-direction: column;
+    gap: 12px;
 }
 
 .a-overview-block p{
@@ -48,11 +36,14 @@
 
 .a-data-container{
     width: 100%;
+    min-height: 400px;
+    max-height: 400px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    flex-direction: row;
-    gap: 24px;
+    flex-direction: column;
+    gap: 6px;
+    overflow-y: auto;
 }
 
 .a-textinfo-block{
@@ -79,7 +70,7 @@
 }
 
 .a-tibh-title{
-    font-size: 18px;
+    font-size: 16px;
     font-weight: bold;
 }
 
@@ -104,11 +95,11 @@
 .a-tib-data{
     width: 100%;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: row;
+    justify-content: start;
+    align-items: start;
+    flex-direction: column;
     margin-top: 16px;
-    gap: 32px;
+    gap: 12px;
 }
 
 .a-tib-data p{
@@ -116,8 +107,8 @@
 }
 
 .a-g-block{
-    width: 50%;
-    height: 340px;
+    width: 100%;
+    height: 270px;
     background-color: white;
     border-radius: 8px;
     padding: 18px;
@@ -136,4 +127,193 @@
     height: 250px; /* Высота контейнера */
     width: 250px; /* Ширина контейнера */
     margin: 0 auto; /* Отцентровка */
+}
+
+.a-graphs-block {
+    width: 100%;
+    flex-direction: column;
+    gap: 16px;
+}
+
+@media screen and (min-width: 768px) {
+    .a-overview-block{
+        width: 100%;
+        background-color: white;
+        border-radius: 8px;
+        padding: 18px;
+        box-shadow: rgba(99, 99, 99, 0.05) 0px 2px 12px 0px;
+        display: flex;
+        justify-content: center;
+        align-items: start;
+        flex-direction: row;
+        gap: 32px;
+    }
+
+    .a-data-container{
+        min-height: 480px;
+        max-height: 480px;
+        padding-bottom: 32px;
+    }
+
+    .a-tib-data{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: row;
+        margin-top: 16px;
+        gap: 32px;
+    }
+
+    .a-tibh-title{
+        font-size: 18px;
+    }
+
+    .a-graphs-block {
+        width: 100%;
+        flex-direction: column;
+        gap: 16px;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .analytics-header {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-direction: row;
+        margin-bottom: 26px;
+    }
+
+    .a-header-title {
+        font-size: 22px;
+        font-weight: bold;
+    }
+
+    .a-header-subtitle {
+        font-size: 16px;
+        color: #676767;
+    }
+
+    .a-overview-block{
+        width: 100%;
+        background-color: white;
+        border-radius: 8px;
+        padding: 18px;
+        box-shadow: rgba(99, 99, 99, 0.05) 0px 2px 12px 0px;
+        display: flex;
+        justify-content: start;
+        align-items: center;
+        flex-direction: row;
+        gap: 32px;
+    }
+
+    .a-overview-block p{
+        color: #535353;
+    }
+
+    .a-data-container{
+        width: 100%;
+        min-height: 560px;
+        max-height: 560px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-direction: column;
+        gap: 24px;
+        padding-bottom: 0px;
+    }
+
+    .a-textinfo-block{
+        width: 100%;
+        background-color: white;
+        border-radius: 8px;
+        padding: 18px;
+        box-shadow: rgba(99, 99, 99, 0.05) 0px 2px 12px 0px;
+        display: flex;
+        justify-content: start;
+        align-items: start;
+        flex-direction: column;
+        margin-top: 24px;
+    }
+
+    .a-tib-header{
+        width: 100%;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 8px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-direction: row;
+    }
+
+    .a-tibh-title{
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    .a-tib-button{
+        color: #737373;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        font-size: 18px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: row;
+        padding: 4px 24px;
+    }
+
+    .a-tib-button i{
+        color: #737373;
+        font-size: 19px;
+        margin-left: 8px;
+    }
+
+    .a-tib-data{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: row;
+        margin-top: 16px;
+        gap: 32px;
+    }
+
+    .a-tib-data p{
+        color: #535353;
+    }
+
+    .a-g-block{
+        width: 50%;
+        height: 340px;
+        background-color: white;
+        border-radius: 8px;
+        padding: 18px;
+        box-shadow: rgba(99, 99, 99, 0.05) 0px 2px 12px 0px;
+        display: flex;
+        justify-content: start;
+        align-items: start;
+        flex-direction: column;
+        margin-top: 24px;
+    }
+
+    .chart-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 250px; /* Высота контейнера */
+        width: 250px; /* Ширина контейнера */
+        margin: 0 auto; /* Отцентровка */
+    }
+
+    .a-graphs-block {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: row;
+        gap: 32px;
+    }
 }

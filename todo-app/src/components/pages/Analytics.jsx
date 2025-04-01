@@ -27,7 +27,7 @@ export default function Analytics() {
 
 
     return (
-        <div className="analytics-container">
+        <div className="page-container">
             <div className="analytics-header">
                 <div>
                     <p className="a-header-title">Analytics</p>
@@ -36,14 +36,14 @@ export default function Analytics() {
                     </p>
                 </div>
             </div>
-            <div className="a-overview-block">
-                <p><strong style={{marginRight: "4px", color: "black"}}>{totalTasks}</strong> Tasks</p>
-                <p><strong style={{marginRight: "4px", color: "black"}}>{completedTasks}</strong> Completed</p>
-                <p><strong style={{marginRight: "4px", color: "black"}}>{overdueTasks}</strong> Overdue</p>
-                <p><strong style={{marginRight: "4px", color: "black"}}>{taskListsCount}</strong> Task Lists</p>
-                <p><strong style={{marginRight: "4px", color: "black"}}>{noteListsCount}</strong> Note Lists</p>
-            </div>
             <div className="a-data-container">
+                <div className="a-overview-block">
+                    <p><strong style={{marginRight: "4px", color: "black"}}>{totalTasks}</strong> Tasks</p>
+                    <p><strong style={{marginRight: "4px", color: "black"}}>{completedTasks}</strong> Completed</p>
+                    <p><strong style={{marginRight: "4px", color: "black"}}>{overdueTasks}</strong> Overdue</p>
+                    <p><strong style={{marginRight: "4px", color: "black"}}>{taskListsCount}</strong> Task Lists</p>
+                    <p><strong style={{marginRight: "4px", color: "black"}}>{noteListsCount}</strong> Note Lists</p>
+                </div>
                 <TasksCompletionBlock/>
                 <div className="a-textinfo-block">
                     <div className="a-tib-header">
@@ -57,11 +57,15 @@ export default function Analytics() {
                         <p><strong style={{marginRight: "4px", color: "black"}}>{totalNotes}</strong> Total</p>
                     </div>
                 </div>
+                <div className="a-graphs-block">
+                    <RecentCompletionCurve/>
+                    <TaskCompletionDoughnut/>
+                </div>
             </div>
-            <div className="a-data-container">
-                <RecentCompletionCurve/>
-                <TaskCompletionDoughnut/>
-            </div>
+            {/*<div className="a-data-container">*/}
+            {/*    <RecentCompletionCurve/>*/}
+            {/*    <TaskCompletionDoughnut/>*/}
+            {/*</div>*/}
         </div>
     )
 }
