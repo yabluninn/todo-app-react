@@ -1,6 +1,8 @@
 /* eslint-disable react/prop-types */
 import { useState } from "react";
 
+import "../../styles/PriorityDropdown.css"
+
 export default function PriorityDropdown({ onChange }) {
   const [selectedPriority, setSelectedPriority] = useState("none");
   const [isListVisible, setListVisible] = useState(false);
@@ -10,65 +12,65 @@ export default function PriorityDropdown({ onChange }) {
   const handleSelect = (priority) => {
     setSelectedPriority(priority);
     onChange(priority);
+    setListVisible(false); // скрываем список после выбора
   };
 
   const toggleVisibility = () => {
     setListVisible(!isListVisible);
   };
 
+  const getPriorityColor = (priority) => {
+    switch (priority) {
+      case "low":
+        return "blue";
+      case "medium":
+        return "orange";
+      case "high":
+        return "red";
+      default:
+        return "grey";
+    }
+  };
+
   return (
-    <div style={styles.container}>
-      <p style={styles.label}>
-        <i className="hgi-stroke hgi-flag-02"></i>Priority
-      </p>
-      <div style={styles.dropdownContainer}>
-        <div style={styles.selectedItem} onClick={toggleVisibility}>
-          <i className="hgi-stroke hgi-arrow-up-01" style={{ scale: 0 }}></i>
-          {selectedPriority}
-          <i
-            className={
-              isListVisible
-                ? "hgi-stroke hgi-arrow-up-01"
-                : "hgi-stroke hgi-arrow-down-01"
-            }
-            style={styles.dropdownIcon}
-          ></i>
+      <div className="priority-dropdown-container">
+        <p className="priority-label">
+          <i className="hgi-stroke hgi-flag-02"></i>Priority
+        </p>
+        <div className="priority-dropdown">
+          <div className="priority-selected" onClick={toggleVisibility}>
+            <i className="hgi-stroke hgi-arrow-up-01" style={{ scale: 0 }}></i>
+            {selectedPriority}
+            <i
+                className={`hgi-stroke ${
+                    isListVisible ? "hgi-arrow-up-01" : "hgi-arrow-down-01"
+                } priority-dropdown-icon`}
+            ></i>
+          </div>
+          <ul
+              className="priority-list"
+              style={{ display: isListVisible ? "block" : "none" }}
+          >
+            {priorities.map((priority) => (
+                <li
+                    key={priority}
+                    className="priority-item"
+                    style={{
+                      fontWeight: priority === selectedPriority ? "bold" : "normal",
+                    }}
+                    onClick={() => handleSelect(priority)}
+                >
+                  <div
+                      className="priority-icon"
+                      style={{ backgroundColor: getPriorityColor(priority) }}
+                  ></div>
+                  {priority}
+                  <div style={{ scale: "0" }}></div>
+                </li>
+            ))}
+          </ul>
         </div>
-        <ul
-          style={{
-            ...styles.dropdownList,
-            display: isListVisible ? "block" : "none",
-          }}
-        >
-          {priorities.map((priority) => (
-            <li
-              key={priority}
-              style={{
-                ...styles.dropdownItem,
-                fontWeight: priority === selectedPriority ? "bold" : "normal",
-              }}
-              onClick={() => handleSelect(priority)}
-            >
-              <div
-                style={{
-                  ...styles.priorityIcon,
-                  backgroundColor:
-                    priority === "low"
-                      ? "blue"
-                      : priority === "medium"
-                      ? "orange"
-                      : priority === "high"
-                      ? "red"
-                      : "grey",
-                }}
-              ></div>
-              {priority}
-              <div style={{ scale: "0" }}></div>
-            </li>
-          ))}
-        </ul>
       </div>
-    </div>
   );
 }
 

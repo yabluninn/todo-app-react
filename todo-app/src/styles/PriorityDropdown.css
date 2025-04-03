@@ -1,0 +1,142 @@
+.priority-dropdown-container {
+    position: relative;
+    width: 100%;
+}
+
+.priority-label {
+    font-size: 12px;
+    font-weight: 500;
+    color: #333;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-bottom: 4px;
+}
+
+.priority-dropdown {
+    width: 100%;
+    height: 30px;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+.priority-selected {
+    padding: 0px 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 30px;
+}
+
+.priority-dropdown-icon {
+    font-size: 16px;
+}
+
+.priority-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    width: 100%;
+    max-height: 140px;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #fff;
+    z-index: 10;
+}
+
+.priority-item {
+    padding: 4px 12px;
+    text-align: center;
+    cursor: pointer;
+    background-color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.priority-item:hover {
+    background-color: #f0f0f0;
+}
+
+.priority-icon {
+    width: 10px;
+    height: 10px;
+    border-radius: 3px;
+}
+
+@media screen and (min-width: 1024px) {
+    .priority-dropdown-container {
+        position: relative;
+        width: 450px;
+        margin-bottom: 16px;
+    }
+
+    .priority-label {
+        font-size: 14px;
+        font-weight: 500;
+        color: #333;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 8px;
+    }
+
+    .priority-dropdown {
+        width: 100%;
+        height: 40px;
+        border: 2px solid #ccc;
+        border-radius: 4px;
+        background-color: #fff;
+        cursor: pointer;
+    }
+
+    .priority-selected {
+        padding: 8px 12px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 40px;
+    }
+
+    .priority-dropdown-icon {
+        font-size: 18px;
+    }
+
+    .priority-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        position: absolute;
+        width: 100%;
+        max-height: 160px;
+        overflow-y: auto;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        background-color: #fff;
+        z-index: 10;
+    }
+
+    .priority-item {
+        padding: 8px 12px;
+        text-align: center;
+        cursor: pointer;
+        background-color: #fff;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .priority-item:hover {
+        background-color: #f0f0f0;
+    }
+
+    .priority-icon {
+        width: 10px;
+        height: 10px;
+        border-radius: 3px;
+    }
+}

@@ -1,4 +1,4 @@
-import ".././../styles/ContextMenu.css"
+import "../../styles/modals/ContextMenu.css"
 import { useEffect, useState } from "react";
 
 export default function ContextMenu({ position, toggleVisibility, children }) {

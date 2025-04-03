@@ -3,16 +3,16 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
-  margin-bottom: 16px;
+  margin-bottom: 10px;
 }
 
 .input-container label {
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 500;
   color: #333;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 4px;
 }
 
 .input-container input[type="text"],
@@ -21,14 +21,18 @@
 .input-container input[type="number"],
 .input-container input[type="time"],
 .input-container input[type="color"] {
-  padding: 8px 12px;
+  padding: 4px 12px;
   border: 2px solid #ccc;
   border-radius: 4px;
-  font-size: 14px;
+  font-size: 12px;
   outline: none;
   transition: border-color 0.3s ease;
   width: 100%;
-  height: 40px;
+  height: 35px;
+}
+
+.input-container input[type="time"]{
+  width: 100%;
 }
 
 .input-container input[type="text"]:focus,
@@ -41,7 +45,7 @@
 .input-container input[type="color"] {
   -webkit-appearance: none;
   border: none;
-  height: 40px;
+  height: 35px;
   cursor: pointer;
   border-radius: 8px;
   overflow: hidden;
@@ -77,7 +81,7 @@
   outline: none;
   transition: border-color 0.3s ease;
   width: 100%;
-  height: 40px;
+  height: 35px;
   background-color: white;
   color: #333;
 }
@@ -94,4 +98,104 @@
 .input-container input[type="date"]::-webkit-calendar-picker-indicator {
   color: #7437ff;
   cursor: pointer;
+}
+
+@media screen and (min-width: 1024px) {
+  .input-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+
+  .input-container label {
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .input-container input[type="text"],
+  .input-container input[type="email"],
+  .input-container input[type="password"],
+  .input-container input[type="number"],
+  .input-container input[type="time"],
+  .input-container input[type="color"] {
+    padding: 8px 12px;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.3s ease;
+    width: 100%;
+    height: 40px;
+  }
+
+  .input-container input[type="text"]:focus,
+  .input-container input[type="email"]:focus,
+  .input-container input[type="password"]:focus,
+  .input-container input[type="number"]:focus {
+    border-color: #7437ff;
+  }
+
+  .input-container input[type="color"] {
+    -webkit-appearance: none;
+    border: none;
+    height: 40px;
+    cursor: pointer;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    transition: box-shadow 0.3s ease;
+  }
+
+  .input-container input[type="color"]::-webkit-color-swatch-wrapper {
+    padding: 0;
+  }
+
+  .input-container input[type="color"]::-webkit-color-swatch {
+    border: none;
+    border-radius: 8px;
+  }
+
+  .input-container input[type="color"]:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+  }
+
+  .input-container input[type="color"]:active {
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.6);
+  }
+
+  .input-container input[type="date"] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    padding: 8px 12px;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.3s ease;
+    width: 100%;
+    height: 40px;
+    background-color: white;
+    color: #333;
+  }
+
+  .input-container input[type="date"]:focus {
+    border-color: #7437ff;
+  }
+
+  .input-container input[type="date"]::-webkit-inner-spin-button,
+  .input-container input[type="date"]::-webkit-clear-button {
+    display: none;
+  }
+
+  .input-container input[type="date"]::-webkit-calendar-picker-indicator {
+    color: #7437ff;
+    cursor: pointer;
+  }
 }

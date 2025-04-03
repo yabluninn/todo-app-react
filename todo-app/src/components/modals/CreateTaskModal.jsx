@@ -10,6 +10,8 @@ import { LIST_TYPES } from "../../constants/list-types";
 import CreateButton from "../ui/CreateButton.jsx";
 import SelectRelatedNoteModal from "./SelectRelatedNoteModal.jsx";
 
+import "../../styles/modals/CreateTaskModal.css";
+
 export default function CreateTaskModal({ onClose }) {
   const root = document.getElementById("root");
   const { addTask } = useListsContext();
@@ -52,18 +54,15 @@ export default function CreateTaskModal({ onClose }) {
   };
 
   return createPortal(
-      <div style={styles.container}>
-        <div style={styles.modal}>
-          <div style={styles.header}>
-            <p style={styles.title}>Create new task</p>
-            <button style={styles.closeButton} onClick={onClose}>
-              <i
-                  className="hgi-stroke hgi-cancel-01"
-                  style={styles.closeIcon}
-              ></i>
+      <div className="modal-container">
+        <div className="modal">
+          <div className="modal-header">
+            <p className="modal-title">Create new task</p>
+            <button className="modal-close-button" onClick={onClose}>
+              <i className="hgi-stroke hgi-cancel-01 modal-close-icon"></i>
             </button>
           </div>
-          <div style={styles.content}>
+          <div className="modal-content">
             <InputWithLabel
                 icon="hgi-stroke hgi-text-font"
                 type="text"
@@ -79,7 +78,7 @@ export default function CreateTaskModal({ onClose }) {
                 value={taskDescription}
                 onChange={(e) => setTaskDescription(e.target.value)}
             />
-            <div style={styles.timeInputs}>
+            <div className="modal-input-block">
               <InputWithLabel
                   icon={"hgi-stroke hgi-calendar-01"}
                   type="date"
@@ -87,22 +86,24 @@ export default function CreateTaskModal({ onClose }) {
                   value={taskDate}
                   onChange={(e) => setTaskDate(e.target.value)}
               />
-              <InputWithLabel
-                  icon={"hgi-stroke hgi-clock-03"}
-                  type="time"
-                  label="From"
-                  value={taskStartTime}
-                  onChange={(e) => setTaskStartTime(e.target.value)}
-              />
-              <InputWithLabel
-                  icon={"hgi-stroke hgi-clock-02"}
-                  type="time"
-                  label="To"
-                  value={taskEndTime}
-                  onChange={(e) => setTaskEndTime(e.target.value)}
-              />
+              <div className="time-inputs">
+                <InputWithLabel
+                    icon={"hgi-stroke hgi-clock-03"}
+                    type="time"
+                    label="From"
+                    value={taskStartTime}
+                    onChange={(e) => setTaskStartTime(e.target.value)}
+                />
+                <InputWithLabel
+                    icon={"hgi-stroke hgi-clock-02"}
+                    type="time"
+                    label="To"
+                    value={taskEndTime}
+                    onChange={(e) => setTaskEndTime(e.target.value)}
+                />
+              </div>
             </div>
-            <div style={styles.timeInputs}>
+            <div className="time-inputs">
               <TaskPriorityDropdown onChange={setTaskPriority} />
               <ListDropdown
                   onChange={setSelectedList}
@@ -110,12 +111,9 @@ export default function CreateTaskModal({ onClose }) {
               />
             </div>
             {relatedNote ? (
-                <div style={styles.relatedNote}>
+                <div className="related-note">
                   <p>Related Note: {relatedNote.name}</p>
-                  <button
-                      style={styles.changeNoteButton}
-                      onClick={() => setShowSelectNoteModal(true)}
-                  >
+                  <button className="change-note-button" onClick={() => setShowSelectNoteModal(true)}>
                     Change Related Note
                   </button>
                 </div>
@@ -126,8 +124,8 @@ export default function CreateTaskModal({ onClose }) {
                 />
             )}
           </div>
-          <div style={styles.footer}>
-            <button style={styles.addButton} className="add-task-button" onClick={handleAddTask}>
+          <div className="modal-footer">
+            <button className="add-task-button" onClick={handleAddTask}>
               Create Task
             </button>
           </div>
@@ -145,90 +143,3 @@ export default function CreateTaskModal({ onClose }) {
       root
   );
 }
-
-const styles = {
-  container: {
-    position: "fixed",
-    top: 0,
-    left: 0,
-    width: "100%",
-    height: "100%",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "rgba(0, 0, 0, 0.35)",
-    zIndex: 1000,
-  },
-  modal: {
-    position: "relative",
-    width: "60%",
-    maxWidth: "500px",
-    backgroundColor: "#fff",
-    borderRadius: "8px",
-    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-    zIndex: 1001,
-  },
-  header: {
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    padding: "16px 24px",
-    borderBottom: "1px solid #eee",
-  },
-  title: {
-    fontSize: "18px",
-    fontWeight: "bold",
-    margin: 0,
-  },
-  closeButton: {
-    backgroundColor: "transparent",
-    border: "none",
-    cursor: "pointer",
-  },
-  closeIcon: {
-    fontSize: "20px",
-    color: "#888",
-  },
-  content: {
-    padding: "24px",
-  },
-  footer: {
-    padding: "16px 24px",
-    borderTop: "1px solid #eee",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  timeInputs: {
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    flexDirection: "row",
-    gap: "36px",
-  },
-  addButton: {
-    backgroundColor: "#7437ff",
-    color: "white",
-    fontSize: "16px",
-    fontWeight: "bold",
-    borderRadius: "8px",
-    width: "50%",
-    height: "40px",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    cursor: "pointer",
-    transition: "background 0.3s ease-in-out",
-  },
-  addIcon: {
-    color: "white",
-    marginRight: "8px",
-  },
-};
-
-const styleSheet = document.styleSheets[0];
-styleSheet.insertRule(`
-  .add-addButton-button:hover {
-    background: #5b2db3 !important;
-  }
-`, styleSheet.cssRules.length);

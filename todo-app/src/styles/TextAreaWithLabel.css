@@ -5,7 +5,7 @@
 }
 
 .textarea-container label {
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 500;
   color: #333;
   display: flex;
@@ -18,16 +18,52 @@
 }
 
 .textarea-container textarea {
-  padding: 8px 12px;
-  font-size: 14px;
+  padding: 4px 12px;
+  font-size: 12px;
   border: 2px solid #ccc;
   border-radius: 4px;
   resize: vertical;
   min-height: 100px;
-  max-height: 300px;
+  max-height: 250px;
   resize: none;
 }
 
 .textarea-container textarea:focus {
   outline: 1px solid #7437ff;
+}
+
+@media screen and (min-width: 1024px) {
+  .textarea-container {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+  }
+
+  .textarea-container label {
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+
+  .textarea-container label i {
+    margin-right: 0.5rem;
+  }
+
+  .textarea-container textarea {
+    padding: 8px 12px;
+    font-size: 14px;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+    min-height: 100px;
+    max-height: 300px;
+    resize: none;
+  }
+
+  .textarea-container textarea:focus {
+    outline: 1px solid #7437ff;
+  }
 }
