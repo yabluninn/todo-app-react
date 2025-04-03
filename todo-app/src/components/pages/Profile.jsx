@@ -53,11 +53,11 @@ export default function Profile() {
 
 
     if (!user) {
-        return <div className="profile-container">Loading...</div>;
+        return <div className="page-container profile-container">Loading...</div>;
     }
 
     return (
-        <div className="profile-container">
+        <div className="page-container profile-container">
             <div className="profile-card">
                 <div className="profile-header">
                     <img src={ava} alt="Avatar" className="profile-avatar" />
