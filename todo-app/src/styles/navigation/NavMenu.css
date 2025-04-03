@@ -13,10 +13,13 @@
 }
 
 .nm-header {
+  border: 2px solid #7437ff;
+  border-radius: 24px;
   font-size: 24px;
   font-weight: bold;
   text-align: center;
   display: none;
+  color: #7437ff;
 }
 
 .nm-buttons-container {
