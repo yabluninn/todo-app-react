@@ -67,7 +67,7 @@ export default function Settings() {
     }
 
     return (
-        <div className="settings-container">
+        <div className="page-container">
             <div className="settings-header">
                 <div>
                     <p className="s-header-title">Settings</p>

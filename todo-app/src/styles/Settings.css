@@ -1,15 +1,3 @@
-.settings-container {
-    width: 86%;
-    height: 100%;
-    padding: 30px 112px 24px 112px;
-    display: flex;
-    justify-content: start;
-    align-items: start;
-    flex-direction: column;
-    margin-left: 15%;
-    position: relative;
-}
-
 .settings-header {
     width: 100%;
     display: flex;
@@ -31,6 +19,8 @@
 
 .settings-wrapper {
     width: 100%;
+    height: 75%;
+    max-height: 75%;
     background-color: white;
     border-radius: 8px;
     padding: 18px;
@@ -40,6 +30,7 @@
     align-items: center;
     flex-direction: column;
     gap: 16px;
+    overflow-y: auto;
 }
 
 .s-block {
@@ -52,7 +43,7 @@
 .s-block-title {
     width: 100%;
     text-align: start;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: bold;
     border-bottom: 1px solid #e4e4e4;
     padding-bottom: 12px;
@@ -72,11 +63,11 @@
 }
 
 .s-block-info-title {
-    font-size: 16px;
+    font-size: 14px;
 }
 
 .s-block-info-content-p {
-    font-size: 16px;
+    font-size: 14px;
     color: #6a6a6a;
     display: flex;
     justify-content: center;
@@ -92,16 +83,77 @@
 }
 
 .s-block-info-content-p i {
-    font-size: 18px;
+    font-size: 16px;
     color: #6a6a6a;
 }
 
 .s-block-default-button {
-    font-size: 16px;
+    font-size: 14px;
     color: #7437ff;
 }
 
 .s-block-red-button {
-    font-size: 16px;
+    font-size: 14px;
     color: #ea1111;
+}
+
+@media screen and (min-width: 1024px){
+    .settings-wrapper {
+        width: 100%;
+        height: fit-content;
+        max-height: fit-content;
+        background-color: white;
+        border-radius: 8px;
+        padding: 18px;
+        box-shadow: rgba(99, 99, 99, 0.05) 0px 2px 12px 0px;
+        display: flex;
+        justify-content: start;
+        align-items: center;
+        flex-direction: column;
+        gap: 16px;
+        overflow-y: hidden;
+    }
+
+    .s-block-title {
+        width: 100%;
+        text-align: start;
+        font-size: 18px;
+        font-weight: bold;
+        border-bottom: 1px solid #e4e4e4;
+        padding-bottom: 12px;
+        display: flex;
+        justify-content: start;
+        align-items: center;
+        flex-direction: row;
+        gap: 12px;
+    }
+
+    .s-block-info-title {
+        font-size: 16px;
+    }
+
+    .s-block-info-content-p {
+        font-size: 16px;
+        color: #6a6a6a;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: row;
+        gap: 12px;
+    }
+
+    .s-block-info-content-p i {
+        font-size: 18px;
+        color: #6a6a6a;
+    }
+
+    .s-block-default-button {
+        font-size: 16px;
+        color: #7437ff;
+    }
+
+    .s-block-red-button {
+        font-size: 16px;
+        color: #ea1111;
+    }
 }
