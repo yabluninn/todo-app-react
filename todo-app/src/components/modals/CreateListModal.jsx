@@ -5,6 +5,8 @@ import InputWithLabel from "../ui/InputWithLabel";
 import { LIST_TYPES } from "../../constants/list-types";
 import { useListsContext } from "../../contexts/ListsContext";
 
+import "../../styles/modals/CreateListModal.css"
+
 export default function CreateListModal({ listType, onClose }) {
   const root = document.getElementById("root");
 
@@ -41,10 +43,10 @@ export default function CreateListModal({ listType, onClose }) {
   };
 
   return createPortal(
-      <div style={styles.container}>
-        <div style={styles.modal}>
-          <div style={styles.header}>
-            <p style={styles.title}>
+      <div className="create-list-container">
+        <div className="create-list-modal">
+          <div className="create-list-header">
+            <p className="create-list-title">
               {"Create " +
                   (listType === LIST_TYPES.TASK_LIST
                       ? "Task"
@@ -53,14 +55,11 @@ export default function CreateListModal({ listType, onClose }) {
                           : "") +
                   " List"}
             </p>
-            <button style={styles.closeButton} onClick={onClose}>
-              <i
-                  className="hgi-stroke hgi-cancel-01"
-                  style={styles.closeIcon}
-              ></i>
+            <button className="create-list-close-button" onClick={onClose}>
+              <i className="hgi-stroke hgi-cancel-01 create-list-close-icon"></i>
             </button>
           </div>
-          <div style={styles.content}>
+          <div className="create-list-content">
             <InputWithLabel
                 type="text"
                 placeholder="Enter list name"
@@ -78,17 +77,16 @@ export default function CreateListModal({ listType, onClose }) {
                 onChange={(e) => setListColor(e.target.value)}
             />
           </div>
-          <div style={styles.footer}>
-            <button style={styles.addButton} className="add-list-button" onClick={handleAddList}>
+          <div className="create-list-footer">
+            <button className="add-list-button" onClick={handleAddList}>
               <i
                   className={
                     listType === LIST_TYPES.TASK_LIST
-                        ? "hgi-stroke hgi-task-daily-02"
+                        ? "hgi-stroke hgi-task-daily-02 add-list-icon"
                         : listType === LIST_TYPES.NOTES_LIST
-                            ? "hgi-stroke hgi-sticky-note-02"
-                            : ""
+                            ? "hgi-stroke hgi-sticky-note-02 add-list-icon"
+                            : "add-list-icon"
                   }
-                  style={styles.addIcon}
               ></i>
               Create list
             </button>
@@ -98,83 +96,3 @@ export default function CreateListModal({ listType, onClose }) {
       root
   );
 }
-
-const styles = {
-  container: {
-    position: "fixed",
-    top: 0,
-    left: 0,
-    width: "100%",
-    height: "100%",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "rgba(0, 0, 0, 0.35)",
-    zIndex: 1000,
-  },
-  modal: {
-    position: "relative",
-    width: "60%",
-    maxWidth: "500px",
-    backgroundColor: "#fff",
-    borderRadius: "8px",
-    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-    zIndex: 1001,
-  },
-  header: {
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    padding: "16px 24px",
-    borderBottom: "1px solid #eee",
-  },
-  title: {
-    fontSize: "18px",
-    fontWeight: "bold",
-    margin: 0,
-  },
-  closeButton: {
-    backgroundColor: "transparent",
-    border: "none",
-    cursor: "pointer",
-  },
-  closeIcon: {
-    fontSize: "20px",
-    color: "#888",
-  },
-  content: {
-    padding: "24px",
-  },
-  footer: {
-    padding: "16px 24px",
-    borderTop: "1px solid #eee",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  addButton: {
-    backgroundColor: "#7437ff",
-    color: "white",
-    fontSize: "16px",
-    fontWeight: "bold",
-    borderRadius: "8px",
-    width: "50%",
-    height: "40px",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    cursor: "pointer",
-    transition: "background 0.3s ease-in-out",
-  },
-  addIcon: {
-    color: "white",
-    marginRight: "8px",
-  },
-};
-
-const styleSheet = document.styleSheets[0];
-styleSheet.insertRule(`
-  .add-list-button:hover {
-    background: #5b2db3 !important;
-  }
-`, styleSheet.cssRules.length);
