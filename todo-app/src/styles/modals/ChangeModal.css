@@ -1,0 +1,161 @@
+.change-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.35);
+    z-index: 1000;
+}
+
+.change-modal {
+    position: relative;
+    width: 80%;
+    max-width: 500px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1001;
+}
+
+.change-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 24px;
+    border-bottom: 1px solid #eee;
+}
+
+.change-title {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.change-close-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.change-close-icon {
+    font-size: 18px;
+}
+
+.change-content {
+    padding: 24px;
+}
+
+.change-footer {
+    padding: 16px 24px;
+    border-top: 1px solid #eee;
+    display: flex;
+    justify-content: center;
+}
+
+.change-add-button {
+    background-color: #7437ff;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 8px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+}
+
+.change-error {
+    color: red;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+.change-success {
+    color: green;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+@media screen and (min-width: 768px) {
+    .change-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: rgba(0, 0, 0, 0.35);
+        z-index: 1000;
+    }
+
+    .change-modal {
+        position: relative;
+        width: 60%;
+        max-width: 500px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        z-index: 1001;
+    }
+
+    .change-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 16px 24px;
+        border-bottom: 1px solid #eee;
+    }
+
+    .change-title {
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    .change-close-button {
+        background: none;
+        border: none;
+        cursor: pointer;
+    }
+
+    .change-close-icon {
+        font-size: 18px;
+    }
+
+    .change-content {
+        padding: 24px;
+    }
+
+    .change-footer {
+        padding: 16px 24px;
+        border-top: 1px solid #eee;
+        display: flex;
+        justify-content: center;
+    }
+
+    .change-add-button {
+        background-color: #7437ff;
+        color: white;
+        font-size: 16px;
+        font-weight: bold;
+        border-radius: 8px;
+        padding: 10px 20px;
+        cursor: pointer;
+        transition: background 0.3s ease-in-out;
+    }
+
+    .change-error {
+        color: red;
+        font-size: 14px;
+        margin-top: 10px;
+    }
+
+    .change-success {
+        color: green;
+        font-size: 14px;
+        margin-top: 10px;
+    }
+}

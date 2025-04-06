@@ -3,6 +3,8 @@ import { useState } from "react";
 import InputWithLabel from "../ui/InputWithLabel.jsx";
 import axios from "axios";
 
+import "../../styles/modals/ChangeModal.css"
+
 export default function ChangeUsernameModal({ user, onClose, onUpdateUser }) {
     const root = document.getElementById("root");
 
@@ -48,15 +50,15 @@ export default function ChangeUsernameModal({ user, onClose, onUpdateUser }) {
     };
 
     return createPortal(
-        <div style={styles.container}>
-            <div style={styles.modal}>
-                <div style={styles.header}>
-                    <p style={styles.title}>Change Username</p>
-                    <button style={styles.closeButton} onClick={onClose}>
-                        <i className="hgi-stroke hgi-cancel-01" style={styles.closeIcon}></i>
+        <div className="change-container">
+            <div className="change-modal">
+                <div className="change-header">
+                    <p className="change-title">Change Username</p>
+                    <button className="change-close-button" onClick={onClose}>
+                        <i className="hgi-stroke hgi-cancel-01 change-close-icon"></i>
                     </button>
                 </div>
-                <div style={styles.content}>
+                <div className="change-content">
                     <InputWithLabel
                         type="password"
                         placeholder="Enter current password"
@@ -73,13 +75,12 @@ export default function ChangeUsernameModal({ user, onClose, onUpdateUser }) {
                         value={newUsername}
                         onChange={(e) => setNewUsername(e.target.value)}
                     />
-                    {error && <p style={styles.error}>{error}</p>}
-                    {success && <p style={styles.success}>{success}</p>}
+                    {error && <p className="change-error">{error}</p>}
+                    {success && <p className="change-success">{success}</p>}
                 </div>
-                <div style={styles.footer}>
+                <div className="change-footer">
                     <button
-                        style={styles.addButton}
-                        className="add-related-note-button"
+                        className="change-add-button"
                         onClick={handleChangeUsername}
                         disabled={!currentPassword || !newUsername}
                     >
@@ -91,63 +92,3 @@ export default function ChangeUsernameModal({ user, onClose, onUpdateUser }) {
         root
     );
 }
-
-const styles = {
-    container: {
-        position: "fixed",
-        top: 0,
-        left: 0,
-        width: "100%",
-        height: "100%",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        backgroundColor: "rgba(0, 0, 0, 0.35)",
-        zIndex: 1000,
-    },
-    modal: {
-        position: "relative",
-        width: "60%",
-        maxWidth: "500px",
-        backgroundColor: "#fff",
-        borderRadius: "8px",
-        boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-        zIndex: 1001,
-    },
-    header: {
-        display: "flex",
-        justifyContent: "space-between",
-        alignItems: "center",
-        padding: "16px 24px",
-        borderBottom: "1px solid #eee",
-    },
-    content: {
-        padding: "24px",
-    },
-    footer: {
-        padding: "16px 24px",
-        borderTop: "1px solid #eee",
-        display: "flex",
-        justifyContent: "center",
-    },
-    addButton: {
-        backgroundColor: "#7437ff",
-        color: "white",
-        fontSize: "16px",
-        fontWeight: "bold",
-        borderRadius: "8px",
-        padding: "10px 20px",
-        cursor: "pointer",
-        transition: "background 0.3s ease-in-out",
-    },
-    error: {
-        color: "red",
-        fontSize: "14px",
-        marginTop: "10px",
-    },
-    success: {
-        color: "green",
-        fontSize: "14px",
-        marginTop: "10px",
-    }
-};
