@@ -47,7 +47,7 @@
     color: #888;
 }
 
-.modal-content {
+.note-modal-content {
     padding: 8px 24px;
 }
 
@@ -74,7 +74,7 @@
     font-size: 16px;
     font-weight: bold;
     border-radius: 8px;
-    width: 50%;
+    width: 60%;
     height: 40px;
     display: flex;
     justify-content: center;
@@ -108,6 +108,67 @@
     gap: 2px;
 }
 
+.addIcon {
+    color: white;
+    margin-right: 8px;
+}
+
+.categoriesGrid {
+    width: 100%;
+    height: 104px;
+    display: flex;
+    justify-content: start;
+    align-items: start;
+    flex-direction: row;
+    flex-wrap: wrap;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    padding: 8px;
+    overflow-y: auto;
+    gap: 8px;
+}
+
+.categoriesLabel {
+    width: 100%;
+    font-size: 12px;
+    font-weight: 500;
+    color: #333;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    flex-direction: row;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+.createButton {
+    font-size: 14px;
+    font-weight: bold;
+    padding: 4px 12px;
+    border-radius: 16px;
+    color: black;
+    border: 2px dashed #bbb;
+    background: #eee;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    text-decoration: none;
+}
+
+.createIcon {
+    margin-right: 8px;
+}
+
+.note-modal-content .textarea-container {
+    height: 190px;
+    margin-top: 12px;
+}
+
+.note-modal-content .textarea-container textarea {
+    min-height: 180px;
+}
+
 @media screen and (min-width: 768px) {
     .modal {
         position: relative;
@@ -118,6 +179,21 @@
         border-radius: 8px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         z-index: 1001;
+    }
+
+
+    .categoriesGrid {
+        height: 84px;
+        display: flex;
+        justify-content: start;
+        align-items: start;
+        flex-direction: row;
+        flex-wrap: wrap;
+        border: 2px solid #ccc;
+        border-radius: 4px;
+        padding: 8px;
+        overflow-y: auto;
+        gap: 8px;
     }
 }
 
@@ -171,15 +247,15 @@
         color: #888;
     }
 
-    .modal-content {
+    .note-modal-content {
         padding: 24px;
     }
 
-    .modal-input-block {
+    .note-modal-input-block {
         justify-content: space-between;
         align-items: center;
-        flex-direction: row !important;
-        gap: 32px !important;
+        flex-direction: column;
+        gap: 8px;
     }
 
     .modal-footer {
@@ -195,7 +271,7 @@
         justify-content: space-between;
         align-items: center;
         flex-direction: row;
-        gap: 36px;
+        gap: 24px;
     }
 
     .add-task-button {
@@ -228,5 +304,23 @@
         color: #7437ff;
         cursor: pointer;
         text-decoration: underline;
+    }
+
+    .categoriesLabel {
+        margin-top: 0;
+        font-size: 14px;
+    }
+
+    .categoriesGrid {
+        height: 50px;
+    }
+
+    .note-modal-content .textarea-container {
+        height: 170px;
+    }
+
+    .note-modal-content .textarea-container textarea {
+        min-height: 170px;
+        max-height: 170px;
     }
 }
