@@ -1,8 +1,10 @@
 /* eslint-disable react/prop-types */
 import {useState} from "react";
+import { useTranslation } from 'react-i18next';
 
 export default function ContextMenuButton({title, icon, onClick}) {
     const [isHovered, setHovered] = useState(false);
+    const { t } = useTranslation();
 
     return (
         <button
@@ -14,7 +16,7 @@ export default function ContextMenuButton({title, icon, onClick}) {
                 className={icon}
                 style={styles.contextMenuButtonIcon}
             ></i>
-            {title}
+            {t(title)}
         </button>)
 }
 

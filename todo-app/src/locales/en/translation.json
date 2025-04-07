@@ -1,0 +1,23 @@
+{
+  "dismiss": "Dismiss",
+  "create-task": "Create Task",
+  "create-note": "Create Note",
+  "today": "Today",
+  "3-days": "3 Days",
+  "week": "Week",
+  "month": "Month",
+  "good-morning": "Good Morning",
+  "good-day": "Good Day",
+  "good-evening": "Good Evening",
+  "good-night": "Good Night",
+  "recent_completion_curve": "Recent Completion Curve",
+  "tasks_completed": "Tasks Completed",
+  "week_of": "Week of {{date}}",
+  "task_completion_status": "Task Completion Status",
+  "completed": "Completed",
+  "overdue": "Overdue",
+  "tasks_label": "{{count}} tasks ({{percentage}}%)",
+  "tasks": "Tasks",
+  "total": "Total",
+  "completion_rate": "Completion Rate"
+}

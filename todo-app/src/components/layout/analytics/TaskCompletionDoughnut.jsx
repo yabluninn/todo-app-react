@@ -9,6 +9,7 @@ import { useState } from "react";
 import ContextMenuButton from "../../contextMenus/ContextMenuButton.jsx";
 import ContextMenu from "../../contextMenus/ContextMenu.jsx";
 import {useListsContext} from "../../../contexts/ListsContext.jsx";
+import { useTranslation } from "react-i18next";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -62,10 +63,12 @@ const TaskCompletionDoughnut = () => {
 
     const allTasks = taskLists.flatMap(list => list.tasks);
 
+    const { t } = useTranslation();
+
     const [completedTasks, overdueTasks] = getTasksDataForRange(allTasks, dataRange);
 
     const data = {
-        labels: ["Completed", "Overdue"],
+        labels: [t("completed"), t("overdue")],
         datasets: [
             {
                 data: [completedTasks, overdueTasks],
@@ -88,7 +91,10 @@ const TaskCompletionDoughnut = () => {
                         const value = tooltipItem.raw;
                         const total = completedTasks + overdueTasks;
                         const percentage = total ? ((value / total) * 100).toFixed(1) : 0;
-                        return `${value} tasks (${percentage}%)`;
+                        return t("tasks_label", {
+                            count: value,
+                            percentage
+                        });
                     },
                 },
             },
@@ -103,9 +109,9 @@ const TaskCompletionDoughnut = () => {
     return (
         <div className="a-g-block">
             <div className="a-tib-header">
-                <p className="a-tibh-title">Task Completion Status</p>
+                <p className="a-tibh-title">{t("task_completion_status")}</p>
                 <button onClick={toggleMenu} className="a-tib-button">
-                    {dataRange}
+                    {t(dataRange.toLowerCase())}
                     <i className="hgi-stroke hgi-arrow-down-01"></i>
                 </button>
                 {menuVisible && (

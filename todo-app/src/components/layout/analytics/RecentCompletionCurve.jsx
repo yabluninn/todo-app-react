@@ -13,6 +13,7 @@ import { useState } from "react";
 import ContextMenuButton from "../../contextMenus/ContextMenuButton.jsx";
 import ContextMenu from "../../contextMenus/ContextMenu.jsx";
 import {useListsContext} from "../../../contexts/ListsContext.jsx";
+import {useTranslation} from "react-i18next";
 
 ChartJS.register(
     CategoryScale,
@@ -24,18 +25,18 @@ ChartJS.register(
     Legend
 );
 
-const getLast7Days = () => {
+const getLast7Days = (locale) => {
     const days = [];
     const today = new Date();
     for (let i = 6; i >= 0; i--) {
         const date = new Date();
         date.setDate(today.getDate() - i);
-        days.push(date.toLocaleDateString("en-US", { day: "numeric", month: "short" }));
+        days.push(date.toLocaleDateString(locale, { day: "numeric", month: "short" }));
     }
     return days;
 };
 
-const getLast7Weeks = () => {
+const getLast7Weeks = (t, locale) => {
     const weeks = [];
     const today = new Date();
     for (let i = 6; i >= 0; i--) {
@@ -43,18 +44,19 @@ const getLast7Weeks = () => {
         date.setDate(today.getDate() - i * 7);
         const weekStart = new Date(date);
         weekStart.setDate(date.getDate() - date.getDay());
-        weeks.push(`Week of ${weekStart.toLocaleDateString("en-US", { month: "short", day: "numeric" })}`);
+        const formattedDate = weekStart.toLocaleDateString(locale, { month: "short", day: "numeric" });
+        weeks.push(t("week_of", { date: formattedDate }));
     }
     return weeks;
 };
 
-const getLast7Months = () => {
+const getLast7Months = (locale) => {
     const months = [];
     const today = new Date();
     for (let i = 6; i >= 0; i--) {
         const date = new Date();
         date.setMonth(today.getMonth() - i);
-        months.push(date.toLocaleDateString("en-US", { month: "long", year: "numeric" }));
+        months.push(date.toLocaleDateString(locale, { month: "long", year: "numeric" }));
     }
     return months;
 };
@@ -93,14 +95,18 @@ const RecentCompletionCurve = () => {
     const { taskLists } = useListsContext();
 
     const allTasks = taskLists.flatMap(list => list.tasks);
-    const completedTasks = allTasks.filter(task => task.completed && task.date); // Только завершенные
+    const completedTasks = allTasks.filter(task => task.completed && task.date);
+
+    const { t, i18n } = useTranslation();
+
+    const locale = i18n.language === "ua" ? "uk-UA" : "en-US";
 
     const labels =
         dataRange === "Today"
-            ? getLast7Days()
+            ? getLast7Days(locale)
             : dataRange === "Week"
-                ? getLast7Weeks()
-                : getLast7Months();
+                ? getLast7Weeks(t, locale)
+                : getLast7Months(locale);
 
     const dataValues = labels.map(() => getTasksCompletedInRange(completedTasks, dataRange));
 
@@ -108,7 +114,7 @@ const RecentCompletionCurve = () => {
         labels,
         datasets: [
             {
-                label: "Tasks Completed",
+                label: t("tasks_completed"),
                 data: dataValues,
                 borderColor: "rgba(54, 162, 235, 1)",
                 backgroundColor: "rgba(54, 162, 235, 0.2)",
@@ -142,9 +148,9 @@ const RecentCompletionCurve = () => {
     return (
         <div className="a-g-block">
             <div className="a-tib-header">
-                <p className="a-tibh-title">Recent Completion Curve</p>
+                <p className="a-tibh-title">{t("recent_completion_curve")}</p>
                 <button onClick={toggleMenu} className="a-tib-button">
-                    {dataRange}
+                    {t(dataRange.toLowerCase())}
                     <i className="hgi-stroke hgi-arrow-down-01"></i>
                 </button>
                 {menuVisible && (

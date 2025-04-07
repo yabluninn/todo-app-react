@@ -1,0 +1,23 @@
+{
+  "dismiss": "Закрити",
+  "create-task": "Нова Задача",
+  "create-note": "Нова Замітка",
+  "today": "Сьогодні",
+  "3-days": "3 Дні",
+  "week": "Тиждень",
+  "month": "Місяць",
+  "good-morning": "Продуктивного дня",
+  "good-day": "Добрий день",
+  "good-evening": "Доброго вечора",
+  "good-night": "Доброї ночі",
+  "recent_completion_curve": "Графік виконання",
+  "tasks_completed": "Виконані завдання",
+  "week_of": "Тиждень з {{date}}",
+  "task_completion_status": "Статус виконання завдань",
+  "completed": "Виконано",
+  "overdue": "Протерміновано",
+  "tasks_label": "{{count}} завдань ({{percentage}}%)",
+  "tasks": "Завдання",
+  "total": "Усього",
+  "completion_rate": "Відсоток виконання"
+}

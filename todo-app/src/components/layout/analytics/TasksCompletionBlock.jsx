@@ -3,11 +3,14 @@ import ContextMenuButton from "../../contextMenus/ContextMenuButton.jsx";
 import {useState} from "react";
 import {useListsContext} from "../../../contexts/ListsContext.jsx";
 import {taskService} from "../../../services/TaskService.js";
+import { useTranslation } from "react-i18next";
 
 export default function TasksCompletionBlock() {
     const [tasksMenuVisible, setTasksMenuVisible] = useState(false);
     const [selectedPeriod, setSelectedPeriod] = useState("Today");
     const { taskLists } = useListsContext();
+
+    const { t } = useTranslation();
 
     const tasksContextMenuPos = {
         top: "250px",
@@ -24,24 +27,24 @@ export default function TasksCompletionBlock() {
     return (
         <div className="a-textinfo-block">
             <div className="a-tib-header">
-                <p className="a-tibh-title">Tasks</p>
+                <p className="a-tibh-title">{t("tasks")}</p>
                 <button className="a-tib-button" onClick={() => setTasksMenuVisible(true)}>
-                    {selectedPeriod}
+                    {t(selectedPeriod)}
                     <i className="hgi-stroke hgi-arrow-down-01"></i>
                 </button>
             </div>
             <div className="a-tib-data">
-                <p><strong style={{marginRight: "4px", color: "black"}}>{totalTasks}</strong> Total</p>
-                <p><strong style={{marginRight: "4px", color: "black"}}>{completedTasks}</strong> Completed</p>
-                <p><strong style={{marginRight: "4px", color: "black"}}>{overdueTasks}</strong> Overdue</p>
-                <p><strong style={{marginRight: "4px", color: "black"}}>{completionRate + "%"}</strong> Completion Rate</p>
+                <p><strong style={{marginRight: "4px", color: "black"}}>{totalTasks}</strong> {t("total")}</p>
+                <p><strong style={{marginRight: "4px", color: "black"}}>{completedTasks}</strong> {t("completed")}</p>
+                <p><strong style={{marginRight: "4px", color: "black"}}>{overdueTasks}</strong> {t("overdue")}</p>
+                <p><strong style={{marginRight: "4px", color: "black"}}>{completionRate + "%"}</strong> {t("completion_rate")}</p>
             </div>
             {tasksMenuVisible && (
                 <ContextMenu
                     position={tasksContextMenuPos}
                     toggleVisibility={() => setTasksMenuVisible(false)}
                 >
-                    {["Today", "Week", "Month"].map(period => (
+                    {[t("today"), t("week"), t("month")].map(period => (
                         <ContextMenuButton
                             key={period}
                             title={period}
@@ -49,7 +52,7 @@ export default function TasksCompletionBlock() {
                                 setSelectedPeriod(period);
                                 setTasksMenuVisible(false);
                             }}
-                            icon={`hgi-stroke hgi-calendar-${period === "Today" ? "01" : period === "Week" ? "03" : "02"}`}
+                            icon={`hgi-stroke hgi-calendar-${period === t("today") ? "01" : period === t("week") ? "03" : "02"}`}
                         />
                     ))}
                 </ContextMenu>

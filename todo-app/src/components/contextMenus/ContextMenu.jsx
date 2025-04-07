@@ -1,8 +1,11 @@
 import "../../styles/modals/ContextMenu.css"
 import { useEffect, useState } from "react";
+import { useTranslation } from 'react-i18next';
 
 export default function ContextMenu({ position, toggleVisibility, children }) {
     const [isMobile, setIsMobile] = useState(false);
+
+    const { t } = useTranslation();
 
     useEffect(() => {
         const checkScreen = () => setIsMobile(window.innerWidth <= 768);
@@ -31,7 +34,7 @@ export default function ContextMenu({ position, toggleVisibility, children }) {
             >
                 <div className="context-menu-buttons">{children}</div>
                 <button className="context-menu-dismiss-button" onClick={toggleVisibility}>
-                    Dismiss
+                    {t('dismiss')}
                 </button>
             </div>
         </>
