@@ -1,7 +1,7 @@
 {
   "dismiss": "Закрити",
   "create-task": "Нова Задача",
-  "create-note": "Нова Замітка",
+  "create-note": "Нова Нотатка",
   "today": "Сьогодні",
   "3-days": "3 Дні",
   "week": "Тиждень",
@@ -19,5 +19,13 @@
   "tasks_label": "{{count}} завдань ({{percentage}}%)",
   "tasks": "Завдання",
   "total": "Усього",
-  "completion_rate": "Відсоток виконання"
+  "completion_rate": "Відсоток виконання",
+  "notes": "Нотатки",
+  "home": "Головна",
+  "analytics": "Аналітика",
+  "groups": "Списки",
+  "settings": "Налаштування",
+  "profile": "Профіль",
+  "notifications": "Повідомлення",
+  "account": "Акаунт"
 }

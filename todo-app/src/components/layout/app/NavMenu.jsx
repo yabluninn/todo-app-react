@@ -34,48 +34,48 @@ export default function NavMenu() {
         <div className="nm-buttons-group">
           <NavButton
               icon={"hgi-stroke hgi-home-09"}
-              label={"Home"}
+              label={"home"}
               path={"/"}
           />
         </div>
         <div className="nm-buttons-group">
           <NavButton
               icon={"hgi-stroke hgi-task-01"}
-              label={"Tasks"}
+              label={"tasks"}
               path={"/tasks"}
           />
           <NavButton
               icon={"hgi-stroke hgi-sticky-note-02"}
-              label={"Notes"}
+              label={"notes"}
               path={"/notes"}
           />
           <NavButton
               icon={"hgi-stroke hgi-dashboard-square-02"}
-              label={"Groups"}
+              label={"groups"}
               path={"/groups"}
           />
         </div>
         <div className="nm-buttons-group">
           <NavButton
               icon={"hgi-stroke hgi-analytics-01"}
-              label={"Analytics"}
+              label={"analytics"}
               path={"/analytics"}
           />
           <NavButton
               icon={"hgi-stroke hgi-notification-03"}
-              label={"Notifications"}
+              label={"notifications"}
               path={"/notifications"}
           />
           <NavButton
               icon={"hgi-stroke hgi-settings-02"}
-              label={"Settings"}
+              label={"settings"}
               path={"/settings"}
           />
         </div>
         <div className="nm-buttons-group user-button">
           <NavButton
               icon={"hgi-stroke hgi-user"}
-              label={"Profile"}
+              label={"profile"}
               path={"/profile"}
           />
         </div>
