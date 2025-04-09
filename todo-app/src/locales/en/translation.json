@@ -60,5 +60,8 @@
   "days": "{{count}} days",
   "notifications_subtitle": "Here you can manage your notifications",
   "clear_all": "Clear All",
-  "no_notifications": "No notifications available"
+  "no_notifications": "No notifications available",
+  "remove-all-notes": "Remove All Notes",
+  "unknown-list": "Unknown List",
+  "text": "Text"
 }

@@ -8,6 +8,7 @@ import {useListsContext} from "../../../contexts/ListsContext.jsx";
 import {useCategories} from "../../../contexts/CategoriesContext.jsx";
 
 import "../../../styles/tasks/TaskSideSection.css"
+import {useTranslation} from "react-i18next";
 
 export default function NoteSideSection({ note, onClose }) {
   const { categories: allCategories } = useCategories();
@@ -19,6 +20,7 @@ export default function NoteSideSection({ note, onClose }) {
   const [showCategoryModal, setShowCategoryModal] = useState(false);
 
   const {getNoteListById, updateNote} = useListsContext();
+  const { t } = useTranslation();
 
   useEffect(() => {
     setNewName(note.name);
@@ -62,7 +64,7 @@ export default function NoteSideSection({ note, onClose }) {
   };
 
   const list = getNoteListById(note.listId);
-  const listName = list ? list.name : "Unknown List";
+  const listName = list ? list.name : t("unknown-list");
 
   return (
       <div className="task-side-container">
@@ -83,7 +85,7 @@ export default function NoteSideSection({ note, onClose }) {
                 value={newName}
                 onChange={(e) => setNewName(e.target.value)}
             />
-            <p className="task-side-info-label">Name</p>
+            <p className="task-side-info-label">{t("name")}</p>
           </div>
         </div>
         <div className="task-side-info-block">
@@ -93,7 +95,7 @@ export default function NoteSideSection({ note, onClose }) {
                 value={newContent}
                 onChange={(e) => setNewContent(e.target.value)}
             />
-            <p className="task-side-info-label">Text</p>
+            <p className="task-side-info-label">{t("text")}</p>
           </div>
         </div>
         <div className="task-side-info-block">
@@ -115,12 +117,12 @@ export default function NoteSideSection({ note, onClose }) {
             >
               + Add Category
             </button>
-            <p className="task-side-info-label">Categories</p>
+            <p className="task-side-info-label">{t("categories")}</p>
           </div>
         </div>
 
         <button className="task-side-save-button" onClick={saveNote}>
-          Save
+          {t("save")}
         </button>
         {showCategoryModal && (
             <SelectCategoryModal

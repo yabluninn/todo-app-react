@@ -61,5 +61,8 @@
   "days": "{{count}} днів",
   "notifications_subtitle": "Тут ви можете керувати своїми сповіщеннями",
   "clear_all": "Очистити все",
-  "no_notifications": "Немає доступних сповіщень"
+  "no_notifications": "Немає доступних сповіщень",
+  "remove-all-notes": "Видалити всі нотатки",
+  "unknown-list": "Невідомий список",
+  "text": "Текст"
 }

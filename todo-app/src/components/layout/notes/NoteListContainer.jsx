@@ -7,6 +7,7 @@ import ContextMenu from "../../contextMenus/ContextMenu.jsx";
 import ContextMenuButton from "../../contextMenus/ContextMenuButton.jsx";
 
 import "../../../styles/notes/NoteListContainer.css"
+import {useTranslation} from "react-i18next";
 
 export default function NoteListContainer({ list, onNoteSideOpen }) {
   const [isNotesVisible, setNotesVisibility] = useState(false);
@@ -15,6 +16,7 @@ export default function NoteListContainer({ list, onNoteSideOpen }) {
   const [notesMenuPosition, setNotesMenuPosition] = useState({ top: 0, left: 1185 });
 
   const {removeNote, removeAllNotesFromList} = useListsContext()
+  const { t } = useTranslation();
 
   const toggleNotesVisibility = () => setNotesVisibility(!isNotesVisible);
 
@@ -67,7 +69,7 @@ export default function NoteListContainer({ list, onNoteSideOpen }) {
       </div>
       {notesContextMenuVisible && (
           <ContextMenu position={notesMenuPosition} toggleVisibility={toggleNotesContextMenuVisibility}>
-            <ContextMenuButton title={"Remove All Notes"} icon={"hgi-stroke hgi-delete-02"} onClick={() => {
+            <ContextMenuButton title={"remove-all-notes"} icon={"hgi-stroke hgi-delete-02"} onClick={() => {
               removeAllNotesFromList(list._id);
             }} />
           </ContextMenu>)}
