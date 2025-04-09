@@ -57,5 +57,8 @@
   "just_now": "just now",
   "minutes": "{{count}} minutes",
   "hours": "{{count}} hours",
-  "days": "{{count}} days"
+  "days": "{{count}} days",
+  "notifications_subtitle": "Here you can manage your notifications",
+  "clear_all": "Clear All",
+  "no_notifications": "No notifications available"
 }

@@ -27,7 +27,7 @@
   "groups": "Списки",
   "settings": "Налаштування",
   "profile": "Профіль",
-  "notifications": "Повідомлення",
+  "notifications": "Сповіщення",
   "account": "Акаунт",
   "categories": "Категорії",
   "create-category": "Створити Категорію",
@@ -58,5 +58,8 @@
   "just_now": "щойно",
   "minutes": "{{count}} хвилин",
   "hours": "{{count}} годин",
-  "days": "{{count}} днів"
+  "days": "{{count}} днів",
+  "notifications_subtitle": "Тут ви можете керувати своїми сповіщеннями",
+  "clear_all": "Очистити все",
+  "no_notifications": "Немає доступних сповіщень"
 }

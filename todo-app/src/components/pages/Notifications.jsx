@@ -2,10 +2,12 @@ import "../../styles/Notifications.css";
 import { useListsContext } from "../../contexts/ListsContext.jsx";
 import NotificationComponent from "../layout/notifications/NotificationComponent.jsx";
 import {useNotificationsContext} from "../../contexts/NotificationsContext.jsx";
+import {useTranslation} from "react-i18next";
 
 export default function Notifications() {
     const { notifications, removeNotification, removeAllNotifications } = useNotificationsContext();
     const { taskLists } = useListsContext();
+    const { t } = useTranslation();
 
     const tasks = taskLists.flatMap((list) => list.tasks || []);
 
@@ -21,12 +23,10 @@ export default function Notifications() {
         <div className="page-container">
             <div className="notifications-header">
                 <div>
-                    <p className="n-header-title">Notifications</p>
-                    <p className="n-header-subtitle">
-                        Here you can manage your notifications
-                    </p>
+                    <p className="n-header-title">{t("notifications")}</p>
+                    <p className="n-header-subtitle">{t("notifications_subtitle")}</p>
                 </div>
-                <button className="clear-all-btn" onClick={removeAllNotifications}>Clear All</button>
+                <button className="clear-all-btn" onClick={removeAllNotifications}>{t("clear_all")}</button>
             </div>
 
             <div className="notifications-body">
@@ -35,7 +35,7 @@ export default function Notifications() {
                         <NotificationComponent key={task._id} task={task} removeNotification={removeNotification}/>
                     ))
                 ) : (
-                    <p>No notifications available</p>
+                    <p>{t("no_notifications")}</p>
                 )}
             </div>
         </div>
