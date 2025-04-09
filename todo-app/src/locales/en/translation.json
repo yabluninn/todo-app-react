@@ -37,5 +37,17 @@
   "name": "Name",
   "color": "Color",
   "edit-default-list-error": "Default lists are not allowed to edit!",
-  "save": "Save"
+  "save": "Save",
+  "recent-notes": "Recent Notes",
+  "view-all": "View All",
+  "nothing-here": "Nothing Here",
+  "task-statistics": "Task Statistics",
+  "sort-priority": "Sort by Priority",
+  "sort-completed": "Sort by Completed",
+  "sort-uncompleted": "Sort by Uncompleted",
+  "show-completed": "Show Completed",
+  "show-uncompleted": "Show Uncompleted",
+  "show-overdue": "Show Overdue",
+  "current-task": "Current Task",
+  "overdue-task": "Overdue Task"
 }

@@ -11,11 +11,13 @@ import ContextMenuButton from "../../contextMenus/ContextMenuButton.jsx";
 import { taskActionsService } from "../../../services/TaskActionsService.js";
 import { SORTING_ACTIONS } from "../../../constants/sorting-actions.js";
 import { FILTER_ACTIONS } from "../../../constants/filter-actions.js";
+import {useTranslation} from "react-i18next";
 
 export default function HomeTasksWidget({ selectedPeriod }) {
   const [filteredTasks, setFilteredTasks] = useState([]);
   const [originalTasks, setOriginalTasks] = useState([]);
   const { getTasksByPeriod, completeTask } = useListsContext();
+  const { t } = useTranslation();
 
   const [isSortContextMenuVisible, setSortContextMenuVisible] = useState(false);
   const [isFilterContextMenuVisible, setFilterContextMenuVisible] = useState(false);
@@ -50,7 +52,7 @@ export default function HomeTasksWidget({ selectedPeriod }) {
   return (
       <div className="home-tasks-widget">
         <div className="header">
-          <p className="title">Tasks</p>
+          <p className="title">{t("tasks")}</p>
           <div className="header-block">
             <button className="sort-button" onClick={toggleFilterContextMenuVisibility}>
               <i className="hgi-stroke hgi-filter sort-icon"></i>
@@ -59,24 +61,24 @@ export default function HomeTasksWidget({ selectedPeriod }) {
               <i className="hgi-stroke hgi-sort-by-down-02 sort-icon"></i>
             </button>
             <Link to={"/app/tasks"} className="view-all-link">
-              View All
+              {t("view-all")}
             </Link>
           </div>
         </div>
 
         {isSortContextMenuVisible && (
             <ContextMenu position={{ top: "160px", left: "410px" }} toggleVisibility={toggleSortContextMenuVisibility}>
-              <ContextMenuButton title={"Sort by Priority"} icon={"hgi-stroke hgi-flag-02"} onClick={() => sortTasks(SORTING_ACTIONS.HIGH_PRIORITY_FIRST)} />
-              <ContextMenuButton title={"Sort by Completed"} icon={"hgi-stroke hgi-checkmark-square-02"} onClick={() => sortTasks(SORTING_ACTIONS.COMPLETED_FIRST)} />
-              <ContextMenuButton title={"Sort by Uncompleted"} icon={"hgi-stroke hgi-cancel-square"} onClick={() => sortTasks(SORTING_ACTIONS.UNCOMPLETED_FIRST)} />
+              <ContextMenuButton title={"sort-priority"} icon={"hgi-stroke hgi-flag-02"} onClick={() => sortTasks(SORTING_ACTIONS.HIGH_PRIORITY_FIRST)} />
+              <ContextMenuButton title={"sort-completed"} icon={"hgi-stroke hgi-checkmark-square-02"} onClick={() => sortTasks(SORTING_ACTIONS.COMPLETED_FIRST)} />
+              <ContextMenuButton title={"sort-uncompleted"} icon={"hgi-stroke hgi-cancel-square"} onClick={() => sortTasks(SORTING_ACTIONS.UNCOMPLETED_FIRST)} />
             </ContextMenu>
         )}
 
         {isFilterContextMenuVisible && (
             <ContextMenu position={{ top: "160px", left: "375px" }} toggleVisibility={toggleFilterContextMenuVisibility}>
-              <ContextMenuButton title={"Show Completed"} icon={"hgi-stroke hgi-checkmark-square-02"} onClick={() => filterTasks(FILTER_ACTIONS.SHOW_COMPLETED)} />
-              <ContextMenuButton title={"Show Uncompleted"} icon={"hgi-stroke hgi-cancel-square"} onClick={() => filterTasks(FILTER_ACTIONS.SHOW_UNCOMPLETED)} />
-              <ContextMenuButton title={"Show Overdue"} icon={"hgi-stroke hgi-clock-04"} onClick={() => filterTasks(FILTER_ACTIONS.SHOW_OVERDUE)} />
+              <ContextMenuButton title={"show-completed"} icon={"hgi-stroke hgi-checkmark-square-02"} onClick={() => filterTasks(FILTER_ACTIONS.SHOW_COMPLETED)} />
+              <ContextMenuButton title={"show-uncompleted"} icon={"hgi-stroke hgi-cancel-square"} onClick={() => filterTasks(FILTER_ACTIONS.SHOW_UNCOMPLETED)} />
+              <ContextMenuButton title={"show-overdue"} icon={"hgi-stroke hgi-clock-04"} onClick={() => filterTasks(FILTER_ACTIONS.SHOW_OVERDUE)} />
             </ContextMenu>
         )}
 
@@ -93,11 +95,11 @@ export default function HomeTasksWidget({ selectedPeriod }) {
         <div className="hint-block">
           <div className="home-hint">
             <i className="fa-solid fa-circle-dot" style={{ color: "#378aff", marginRight: "8px" }}></i>
-            <p>Current task</p>
+            <p>{t("current-task")}</p>
           </div>
           <div className="home-hint">
             <i className="fa-solid fa-clock" style={{ color: "rgb(223, 58, 58)", marginRight: "8px" }}></i>
-            <p>Overdue task</p>
+            <p>{t("overdue-task")}</p>
           </div>
         </div>
       </div>

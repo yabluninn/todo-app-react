@@ -1,9 +1,12 @@
+import {useTranslation} from "react-i18next";
+
 /* eslint-disable react/prop-types */
 export default function NothingHere({ icon }) {
+  const { t } = useTranslation();
   return (
     <div style={styles.nothing}>
       <i className={icon} style={styles.nothingIcon}></i>
-      <p style={styles.nothingLabel}>Nothing here</p>
+      <p style={styles.nothingLabel}>{t("nothing-here")}</p>
     </div>
   );
 }

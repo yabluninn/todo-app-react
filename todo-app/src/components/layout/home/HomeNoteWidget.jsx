@@ -6,16 +6,20 @@ import HomeNote from "./HomeNote";
 import NothingHere from "../../ui/NothingHere";
 import { useListsContext } from "../../../contexts/ListsContext";
 
+import {useTranslation} from "react-i18next";
+
 export default function HomeNoteWidget() {
   const { getRecentNotes } = useListsContext();
+  const { t } = useTranslation();
+
   const notes = getRecentNotes();
 
   return (
       <div className="home-note-widget">
         <div className="h-header">
-          <p className="title">Recent Notes</p>
+          <p className="title">{t("recent-notes")}</p>
           <Link to={"/app/notes"} className="view-all-link">
-            View All
+              {t("view-all")}
           </Link>
         </div>
         <div className="note-container">

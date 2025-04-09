@@ -38,5 +38,17 @@
   "name": "Назва",
   "color": "Колір",
   "edit-default-list-error": "Неможна редагувати базові списки!",
-  "save": "Зберегти"
+  "save": "Зберегти",
+  "recent-notes": "Останні Нотатки",
+  "view-all": "Більше",
+  "nothing-here": "Тут нічого нема",
+  "task-statistics": "Статистика Завдань",
+  "sort-priority": "Сортувати за пріоритетом",
+  "sort-completed": "Сортувати за виконаними",
+  "sort-uncompleted": "Сортувати за невиконаними",
+  "show-completed": "Показати виконані",
+  "show-uncompleted": "Показати невиконані",
+  "show-overdue": "Показати протерміновані",
+  "current-task": "Поточне",
+  "overdue-task": "Протерміноване"
 }

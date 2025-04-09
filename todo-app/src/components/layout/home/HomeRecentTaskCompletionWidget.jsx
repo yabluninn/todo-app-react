@@ -14,6 +14,7 @@ import {
     Tooltip
 } from "chart.js";
 import {Line} from "react-chartjs-2";
+import {useTranslation} from "react-i18next";
 
 ChartJS.register(
     CategoryScale,
@@ -25,18 +26,18 @@ ChartJS.register(
     Legend
 );
 
-const getLast7Days = () => {
+const getLast7Days = (locale) => {
     const days = [];
     const today = new Date();
     for (let i = 6; i >= 0; i--) {
         const date = new Date();
         date.setDate(today.getDate() - i);
-        days.push(date.toLocaleDateString("en-US", { day: "numeric", month: "short" }));
+        days.push(date.toLocaleDateString(locale, { day: "numeric", month: "short" }));
     }
     return days;
 };
 
-const getLast7Weeks = () => {
+const getLast7Weeks = (t, locale) => {
     const weeks = [];
     const today = new Date();
     for (let i = 6; i >= 0; i--) {
@@ -44,18 +45,19 @@ const getLast7Weeks = () => {
         date.setDate(today.getDate() - i * 7);
         const weekStart = new Date(date);
         weekStart.setDate(date.getDate() - date.getDay());
-        weeks.push(`Week of ${weekStart.toLocaleDateString("en-US", { month: "short", day: "numeric" })}`);
+        const formattedDate = weekStart.toLocaleDateString(locale, { month: "short", day: "numeric" });
+        weeks.push(t("week_of", { date: formattedDate }));
     }
     return weeks;
 };
 
-const getLast7Months = () => {
+const getLast7Months = (locale) => {
     const months = [];
     const today = new Date();
     for (let i = 6; i >= 0; i--) {
         const date = new Date();
         date.setMonth(today.getMonth() - i);
-        months.push(date.toLocaleDateString("en-US", { month: "long", year: "numeric" }));
+        months.push(date.toLocaleDateString(locale, { month: "long", year: "numeric" }));
     }
     return months;
 };
@@ -90,15 +92,19 @@ const getTasksCompletedInRange = (tasks, dataRange) => {
 
 export default function HomeRecentTaskCompletionWidget({selectedPeriod}) {
     const { taskLists } = useListsContext();
+    const { t, i18n } = useTranslation();
+
     const allTasks = taskLists?.flatMap(list => list.tasks) || [];
     const completedTasks = allTasks.filter(task => task.completed && task.date);
 
+    const locale = i18n.language === "ua" ? "uk-UA" : "en-US";
+
     const labels =
         selectedPeriod === "Today"
-            ? getLast7Days()
+            ? getLast7Days(locale)
             : selectedPeriod === "Week"
-                ? getLast7Weeks()
-                : getLast7Months();
+                ? getLast7Weeks(locale)
+                : getLast7Months(locale);
 
     const dataValues = labels.map(label => {
         return completedTasks.filter(task => {
@@ -123,7 +129,7 @@ export default function HomeRecentTaskCompletionWidget({selectedPeriod}) {
         labels,
         datasets: [
             {
-                label: "Tasks Completed",
+                label: t("tasks_completed"),
                 data: dataValues,
                 borderColor: "rgba(54, 162, 235, 1)",
                 backgroundColor: "rgba(54, 162, 235, 0.2)",
@@ -154,7 +160,7 @@ export default function HomeRecentTaskCompletionWidget({selectedPeriod}) {
     return (
         <div className="hta-widget">
             <div className="header">
-                <p className="title">Recent Tasks Completion</p>
+                <p className="title">{t("recent_completion_curve")}</p>
             </div>
 
             <div className="ht-chart-container">
