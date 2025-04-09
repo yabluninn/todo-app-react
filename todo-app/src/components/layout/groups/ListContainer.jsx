@@ -4,15 +4,14 @@ import "../../../styles/ListContainer.css"; // Подключаем CSS
 import { LIST_TYPES } from "../../../constants/list-types";
 import CreateButton from "../../ui/CreateButton";
 import List from "./List";
-import { useState } from "react";
-import ContextMenu from "../../contextMenus/ContextMenu.jsx";
-import ContextMenuButton from "../../contextMenus/ContextMenuButton.jsx";
 import { useListsContext } from "../../../contexts/ListsContext.jsx";
+
+import {useTranslation} from "react-i18next";
 
 export default function ListContainer({ listType, lists, onOpenCreateListModal, onListSideMenuOpen }) {
 
   const { removeTaskList, removeNoteList } = useListsContext();
-
+  const { t } = useTranslation();
 
   return (
       <div className="list-container">
@@ -27,7 +26,7 @@ export default function ListContainer({ listType, lists, onOpenCreateListModal, 
                             : ""
                 }`}
             />
-            <p className="list-title">{listType + " Lists"}</p>
+            <p className="list-title">{t("lists_type_title", {type: t(listType.toLowerCase())})}</p>
           </div>
         </div>
         <div className="list-grid">
@@ -50,7 +49,7 @@ export default function ListContainer({ listType, lists, onOpenCreateListModal, 
                   />
               ))}
         </div>
-        <CreateButton title={"New List"} onClick={onOpenCreateListModal} />
+        <CreateButton title={"new-list"} onClick={onOpenCreateListModal} />
       </div>
   );
 }

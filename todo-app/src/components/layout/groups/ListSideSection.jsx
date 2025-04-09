@@ -3,16 +3,16 @@ import { useEffect, useState } from "react";
 import EditInput from "../../ui/EditInput";
 import {LIST_TYPES} from "../../../constants/list-types.js";
 import {useListsContext} from "../../../contexts/ListsContext.jsx";
+import {useTranslation} from "react-i18next";
 
 import "../../../styles/tasks/TaskSideSection.css"
 
 export default function ListSideSection({ list, listType, onClose }) {
   const { updateTaskList, updateNoteList } = useListsContext();
+  const { t } = useTranslation();
 
   const [newListName, setNewListName] = useState(list.name || "");
   const [newListColor, setNewListColor] = useState(list.color || "#ffffff");
-
-  const [isSaveButtonDisabled, setIsSaveButtonDisabled] = useState(false);
 
   useEffect(() => {
     setNewListName(list.name || "");
@@ -52,7 +52,7 @@ export default function ListSideSection({ list, listType, onClose }) {
           <div className="task-side-header">
             <div className="task-side-header-subblock">
               <i className="hgi-stroke hgi-arrow-right-double task-side-header-icon"></i>
-              <p className="task-side-header-listname">{listType} list</p>
+              <p className="task-side-header-listname">{t("list_type_title", {type: t(listType.toLowerCase())})}</p>
             </div>
             <button className="task-side-close-button" onClick={onClose}>
               <i className="hgi-stroke hgi-cancel-01 task-side-close-icon"></i>
@@ -62,11 +62,11 @@ export default function ListSideSection({ list, listType, onClose }) {
             <div className="task-side-info-subblock">
               <EditInput
                   type="text"
-                  placeholder="List name..."
+                  placeholder={t("list-name-placeholder")}
                   value={newListName}
                   onChange={(e) => setNewListName(e.target.value)}
               />
-              <p className="task-side-info-label">Name</p>
+              <p className="task-side-info-label">{t("name")}</p>
             </div>
           </div>
           <div className="task-side-info-block">
@@ -77,17 +77,17 @@ export default function ListSideSection({ list, listType, onClose }) {
                   value={newListColor}
                   onChange={(e) => setNewListColor(e.target.value)}
               />
-              <p className="task-side-info-label">Color</p>
+              <p className="task-side-info-label">{t("color")}</p>
             </div>
           </div>
 
-          <p className={isDefaultList() ? "error-label" : "label-hidden"}>Default lists are not allowed to edit!</p>
+          <p className={isDefaultList() ? "error-label" : "label-hidden"}>{t("edit-default-list-error")}</p>
           <button
               className={isDefaultList() ? "save-button-disabled" : "task-side-save-button"}
               onClick={saveList}
               disabled={isDefaultList()}
           >
-            Save
+            {t("save")}
           </button>
         </div>
       </div>

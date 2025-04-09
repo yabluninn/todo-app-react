@@ -18,6 +18,7 @@
   "overdue": "Протерміновано",
   "tasks_label": "{{count}} завдань ({{percentage}}%)",
   "tasks": "Завдання",
+  "task": "Завдання",
   "total": "Усього",
   "completion_rate": "Відсоток виконання",
   "notes": "Нотатки",
@@ -27,5 +28,15 @@
   "settings": "Налаштування",
   "profile": "Профіль",
   "notifications": "Повідомлення",
-  "account": "Акаунт"
+  "account": "Акаунт",
+  "categories": "Категорії",
+  "create-category": "Створити Категорію",
+  "lists_type_title": "Списки: {{type}}",
+  "list_type_title": "Список: {{type}}",
+  "new-list": "Створити Список",
+  "list-name-placeholder": "Назва Списку",
+  "name": "Назва",
+  "color": "Колір",
+  "edit-default-list-error": "Неможна редагувати базові списки!",
+  "save": "Зберегти"
 }

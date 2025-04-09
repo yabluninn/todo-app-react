@@ -1,9 +1,13 @@
+import {useTranslation} from "react-i18next";
+
 // eslint-disable-next-line react/prop-types
 export default function CreateCategoryButton({ onOpenModal }) {
+  const { t, i18n } = useTranslation();
+
   return (
       <button style={styles.main} onClick={onOpenModal} className="create-category-button">
         <i className="fa-solid fa-plus" style={styles.icon}></i>
-        Create Category
+        {t("create-category")}
       </button>
   );
 }

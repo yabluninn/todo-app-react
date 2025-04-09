@@ -27,5 +27,15 @@
   "settings": "Settings",
   "profile": "Profile",
   "notifications": "Notifications",
-  "account": "Account"
+  "account": "Account",
+  "categories": "Categories",
+  "create-category": "Create Category",
+  "lists_type_title": "{{type}} Lists",
+  "list_type_title": "{{type}} List",
+  "new-list": "New List",
+  "list-name-placeholder": "List name...",
+  "name": "Name",
+  "color": "Color",
+  "edit-default-list-error": "Default lists are not allowed to edit!",
+  "save": "Save"
 }
