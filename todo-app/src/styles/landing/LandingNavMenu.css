@@ -1,9 +1,27 @@
 .lnm-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: row;
-  width: fit-content;
-  margin-left: 120px;
-  gap: 12px;
+  display: none;
+}
+
+@media screen and (min-width: 768px) {
+  .lnm-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    width: fit-content;
+    margin-left: 32px;
+    gap: 12px;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .lnm-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    width: fit-content;
+    margin-left: 120px;
+    gap: 12px;
+  }
 }

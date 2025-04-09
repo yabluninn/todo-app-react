@@ -15,6 +15,12 @@ export default function LandingApp() {
     return (
         <div className="lpa-container">
             <div className="lp-header">
+                <div className="lp-h-mobile">
+                    <Link to="/" className="lp-h-mobile-logo">
+                        <img src={logo} alt="" />
+                    </Link>
+                    <i className="hgi hgi-stroke hgi-menu-01 lp-h-mobile-menu"></i>
+                </div>
                 <div className="lp-h-block">
                     <Link to="/" className="logo-block">
                         <img src={logo} alt="" />

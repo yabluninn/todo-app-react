@@ -35,11 +35,11 @@
 }
 
 .lp-h-button {
-  padding: 6px 14px 6px 14px;
+  padding: 4px 8px 4px 8px;
   border: 0;
   border-radius: 8px;
   background-color: transparent;
-  font-size: 16px;
+  font-size: 14px;
 }
 
 .lph-b-demo {
@@ -75,6 +75,89 @@
   border-radius: 8px;
   margin-left: 8px;
   text-decoration: none;
+}
+
+.lp-h-mobile {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 16px;
+  z-index: 2;
+}
+
+.lp-h-mobile-logo {
+  width: 30px;
+  height: 30px;
+}
+
+.lp-h-mobile-logo img{
+  width: 30px;
+  height: auto;
+}
+
+.lp-h-mobile-menu {
+  font-size: 28px;
+}
+
+@media screen and (min-width: 768px) {
+  .lp-h-mobile {
+    display: none;
+  }
+
+  .lp-h-block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+  }
+
+  .lp-header {
+    width: 100%;
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    padding: 0px 12px 0px 12px;
+    background: #fff;
+  }
+
+  .lp-h-block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+  }
+
+  .logo-block {
+    width: fit-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  .logo-block img {
+    width: 40px;
+    height: auto;
+  }
+
+  .logo-block p {
+    font-size: 24px;
+    font-weight: bold;
+    margin-left: 14px;
+  }
 }
 
 @media screen and (min-width: 1024px) {
