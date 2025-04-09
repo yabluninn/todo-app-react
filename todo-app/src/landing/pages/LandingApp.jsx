@@ -10,8 +10,16 @@ import LandingFeatures from "./LandingFeatures.jsx";
 import LandingSolution from "./LandingSolution.jsx";
 import LandingHelp from "./LandingHelp.jsx";
 import LandingPricing from "./LandingPricing.jsx";
+import LandingMobileMenu from "../LandingMobileMenu.jsx";
+import {useState} from "react";
 
 export default function LandingApp() {
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+    const toggleMobileMenu = () => {
+        setIsMobileMenuOpen(!isMobileMenuOpen);
+    }
+
     return (
         <div className="lpa-container">
             <div className="lp-header">
@@ -19,7 +27,7 @@ export default function LandingApp() {
                     <Link to="/" className="lp-h-mobile-logo">
                         <img src={logo} alt="" />
                     </Link>
-                    <i className="hgi hgi-stroke hgi-menu-01 lp-h-mobile-menu"></i>
+                    <i className="hgi hgi-stroke hgi-menu-01 lp-h-mobile-menu" onClick={toggleMobileMenu}></i>
                 </div>
                 <div className="lp-h-block">
                     <Link to="/" className="logo-block">
@@ -45,6 +53,7 @@ export default function LandingApp() {
                     <Route path="/pricing" element={<LandingPricing/>}/>
                 </Routes>
             </main>
+            {isMobileMenuOpen && (<LandingMobileMenu onClose={toggleMobileMenu} isVisible={isMobileMenuOpen} />)}
         </div>
     );
 }
