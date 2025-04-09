@@ -50,5 +50,13 @@
   "show-uncompleted": "Показати невиконані",
   "show-overdue": "Показати протерміновані",
   "current-task": "Поточне",
-  "overdue-task": "Протерміноване"
+  "overdue-task": "Протерміноване",
+  "notification_start": "Час розпочати завдання!",
+  "notification_end": "Залишилось 5 хвилин!",
+  "notification_task": "Завдання: {{name}}",
+  "notification_ago": "{{time}} тому",
+  "just_now": "щойно",
+  "minutes": "{{count}} хвилин",
+  "hours": "{{count}} годин",
+  "days": "{{count}} днів"
 }

@@ -49,5 +49,13 @@
   "show-uncompleted": "Show Uncompleted",
   "show-overdue": "Show Overdue",
   "current-task": "Current Task",
-  "overdue-task": "Overdue Task"
+  "overdue-task": "Overdue Task",
+  "notification_start": "It's time to start the task!",
+  "notification_end": "You have 5 minutes left!",
+  "notification_task": "Task: {{name}}",
+  "notification_ago": "{{time}} ago",
+  "just_now": "just now",
+  "minutes": "{{count}} minutes",
+  "hours": "{{count}} hours",
+  "days": "{{count}} days"
 }
