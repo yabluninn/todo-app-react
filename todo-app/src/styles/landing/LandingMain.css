@@ -19,7 +19,7 @@
 
 .lp-main-h {
   width: 100%;
-  font-size: 32px;
+  font-size: 26px;
   font-weight: bold;
   text-align: center;
   z-index: 10;
@@ -32,7 +32,7 @@
 
 .lp-main-subh {
   width: 90%;
-  font-size: 20px;
+  font-size: 18px;
   text-align: center;
   margin-top: 12px;
   z-index: 10;
@@ -68,7 +68,7 @@
 
 .lp-icon {
   position: absolute;
-  width: 128px;
+  width: 86px;
   height: auto;
 }
 
@@ -81,10 +81,34 @@
 }
 
 .lpi-2 {
-  bottom: 35px;
+  bottom: 75px;
   right: 155px;
   rotate: 25deg;
   opacity: 50%;
+}
+
+@media screen and (min-width: 768px) {
+  .lp-main-h{
+    font-size: 30px;
+  }
+
+  .lp-main-subh {
+    font-size: 18px;
+  }
+
+  .lpi-1 {
+    top: 70px;
+    left: 80px;
+  }
+
+  .lpi-2 {
+    bottom: 105px;
+    right: 125px;
+  }
+
+  .lp-main-button {
+    width: 50%;
+  }
 }
 
 @media screen and (min-width: 1024px) {
@@ -94,6 +118,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-top: 0;
   }
 
   .lp-main {
