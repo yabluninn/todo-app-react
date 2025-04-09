@@ -1,6 +1,5 @@
 .lpa-container {
   width: 100%;
-  height: 100%;
 }
 
 .lp-content {
@@ -28,31 +27,11 @@
 }
 
 .lp-h-block {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: row;
+  display: none;
 }
 
 .logo-block {
-  width: fit-content;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: row;
-  cursor: pointer;
-  text-decoration: none;
-}
-
-.logo-block img {
-  width: 45px;
-  height: auto;
-}
-
-.logo-block p {
-  font-size: 28px;
-  font-weight: bold;
-  margin-left: 14px;
+  display: none;
 }
 
 .lp-h-button {
@@ -96,4 +75,106 @@
   border-radius: 8px;
   margin-left: 8px;
   text-decoration: none;
+}
+
+@media screen and (min-width: 1024px) {
+  .lpa-container {
+    width: 100%;
+    height: 100%;
+  }
+
+  .lp-content {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 30px;
+  }
+
+  .lp-header {
+    width: 100%;
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    padding: 0px 144px 0px 144px;
+    background: #fff;
+  }
+
+  .lp-h-block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+  }
+
+  .logo-block {
+    width: fit-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  .logo-block img {
+    width: 45px;
+    height: auto;
+  }
+
+  .logo-block p {
+    font-size: 28px;
+    font-weight: bold;
+    margin-left: 14px;
+  }
+
+  .lp-h-button {
+    padding: 6px 14px 6px 14px;
+    border: 0;
+    border-radius: 8px;
+    background-color: transparent;
+    font-size: 16px;
+  }
+
+  .lph-b-demo {
+    border-radius: 0;
+    border-right: 1px solid #ccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #6a6a6a;
+  }
+
+  .lph-b-demo i {
+    margin-left: 8px;
+    color: #6a6a6a;
+  }
+
+  .lph-b-login {
+    border: 1px solid #bbb;
+    border-radius: 8px;
+    margin-left: 8px;
+    transition: 0.3s all;
+    text-decoration: none;
+  }
+
+  .lph-b-login:hover {
+    background-color: #eee;
+  }
+
+  .lph-b-signup {
+    background-color: #7437ff;
+    color: white;
+    font-weight: bold;
+    border-radius: 8px;
+    margin-left: 8px;
+    text-decoration: none;
+  }
 }
