@@ -80,5 +80,14 @@
   "description": "Опис",
   "remove": "Видалити",
   "add-related-note": "Додати пов'язану нотатку",
-  "related-note": "Пов'язана нотатка"
+  "related-note": "Пов'язана нотатка",
+  "change_password": "Змінити пароль",
+  "current_password": "Поточний пароль",
+  "new_password": "Новий пароль",
+  "enter_current_password": "Введіть поточний пароль",
+  "enter_new_password": "Введіть новий пароль",
+  "change_password_success": "Пароль успішно змінено!",
+  "change_password_error": "Не вдалося змінити пароль. Спробуйте ще раз.",
+  "incorrect_password": "Поточний пароль невірний.",
+  "user_not_found": "Користувача не знайдено. Будь ласка, увійдіть знову."
 }

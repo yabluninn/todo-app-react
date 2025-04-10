@@ -4,10 +4,13 @@ import InputWithLabel from "../ui/InputWithLabel.jsx";
 import axios from "axios";
 
 import "../../styles/modals/ChangeModal.css";
+import {useTranslation} from "react-i18next";
 
 
 export default function ChangePasswordModal({ user, onClose }) {
     const root = document.getElementById("root");
+
+    const { t } = useTranslation();
 
     const [currentPassword, setCurrentPassword] = useState("");
     const [newPassword, setNewPassword] = useState("");
@@ -19,7 +22,7 @@ export default function ChangePasswordModal({ user, onClose }) {
         setSuccess("");
 
         if (!user || !user._id) {
-            setError("User not found. Please log in again.");
+            setError(t("user_not_found"));
             return;
         }
 
@@ -30,7 +33,7 @@ export default function ChangePasswordModal({ user, onClose }) {
             });
 
             if (!response.data.success) {
-                setError("Current password is incorrect.");
+                setError(t("incorrect_password"));
                 return;
             }
 
@@ -39,11 +42,11 @@ export default function ChangePasswordModal({ user, onClose }) {
                 newPassword,
             });
 
-            setSuccess("Password changed successfully!");
+            setSuccess(t("change_password_success"));
             setCurrentPassword("");
             setNewPassword("");
         } catch (err) {
-            setError("Failed to change password. Please try again.");
+            setError(t("change_password_error"));
         }
     };
 
@@ -51,7 +54,7 @@ export default function ChangePasswordModal({ user, onClose }) {
         <div className="change-container">
             <div className="change-modal">
                 <div className="change-header">
-                    <p className="change-title">Change Password</p>
+                    <p className="change-title">{t("change_password")}</p>
                     <button className="change-close-button" onClick={onClose}>
                         <i className="hgi-stroke hgi-cancel-01 change-close-icon"></i>
                     </button>
@@ -59,16 +62,16 @@ export default function ChangePasswordModal({ user, onClose }) {
                 <div className="change-content">
                     <InputWithLabel
                         type="password"
-                        placeholder="Enter current password"
-                        label="Current password"
+                        placeholder={t("enter_current_password")}
+                        label={t("current_password")}
                         icon="hgi-stroke hgi-lock"
                         value={currentPassword}
                         onChange={(e) => setCurrentPassword(e.target.value)}
                     />
                     <InputWithLabel
                         type="password"
-                        placeholder="Enter new password"
-                        label="New password"
+                        placeholder={t("enter_new_password")}
+                        label={t("new_password")}
                         icon="hgi-stroke hgi-lock"
                         value={newPassword}
                         onChange={(e) => setNewPassword(e.target.value)}
@@ -82,7 +85,7 @@ export default function ChangePasswordModal({ user, onClose }) {
                         onClick={handleChangePassword}
                         disabled={!currentPassword || !newPassword}
                     >
-                        Change Password
+                        {t("change_password")}
                     </button>
                 </div>
             </div>
