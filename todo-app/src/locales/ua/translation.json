@@ -100,5 +100,12 @@
   "enter_category_name": "Введіть назву категорії",
   "category_color": "Колір",
   "set_category_color": "Виберіть колір категорії",
-  "create_category_button": "Створити категорію"
+  "create_category_button": "Створити категорію",
+  "create_task_list": "Створити список завдань",
+  "create_notes_list": "Створити список нотаток",
+  "list_name": "Назва",
+  "enter_list_name": "Введіть назву списку",
+  "list_color": "Колір",
+  "set_list_color": "Виберіть колір списку",
+  "create_list_button": "Створити список"
 }

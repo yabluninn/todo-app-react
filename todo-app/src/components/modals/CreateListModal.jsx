@@ -6,9 +6,12 @@ import { LIST_TYPES } from "../../constants/list-types";
 import { useListsContext } from "../../contexts/ListsContext";
 
 import "../../styles/modals/CreateListModal.css"
+import {useTranslation} from "react-i18next";
 
 export default function CreateListModal({ listType, onClose }) {
   const root = document.getElementById("root");
+
+  const { t } = useTranslation();
 
   const { addTaskList, getTaskListsLength, addNoteList, getNoteListsLength } =
       useListsContext();
@@ -42,19 +45,17 @@ export default function CreateListModal({ listType, onClose }) {
     }
   };
 
+  const getModalTitle = () => {
+    if (listType === LIST_TYPES.TASK_LIST) return t("create_task_list");
+    if (listType === LIST_TYPES.NOTES_LIST) return t("create_notes_list");
+    return t("create_list_button");
+  };
+
   return createPortal(
       <div className="create-list-container">
         <div className="create-list-modal">
           <div className="create-list-header">
-            <p className="create-list-title">
-              {"Create " +
-                  (listType === LIST_TYPES.TASK_LIST
-                      ? "Task"
-                      : listType === LIST_TYPES.NOTES_LIST
-                          ? "Notes"
-                          : "") +
-                  " List"}
-            </p>
+            <p className="create-list-title">{getModalTitle()}</p>
             <button className="create-list-close-button" onClick={onClose}>
               <i className="hgi-stroke hgi-cancel-01 create-list-close-icon"></i>
             </button>
@@ -62,16 +63,16 @@ export default function CreateListModal({ listType, onClose }) {
           <div className="create-list-content">
             <InputWithLabel
                 type="text"
-                placeholder="Enter list name"
-                label="Name"
+                placeholder={t("enter_list_name")}
+                label={t("list_name")}
                 icon="hgi-stroke hgi-text-font"
                 value={listName}
                 onChange={(e) => setListName(e.target.value)}
             />
             <InputWithLabel
                 type="color"
-                placeholder="Set list color"
-                label="Color"
+                placeholder={t("set_list_color")}
+                label={t("list_color")}
                 icon="hgi-stroke hgi-paint-board"
                 value={listColor}
                 onChange={(e) => setListColor(e.target.value)}
@@ -88,7 +89,7 @@ export default function CreateListModal({ listType, onClose }) {
                             : "add-list-icon"
                   }
               ></i>
-              Create list
+              {t("create_list_button")}
             </button>
           </div>
         </div>

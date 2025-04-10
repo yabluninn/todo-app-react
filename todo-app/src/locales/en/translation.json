@@ -99,5 +99,12 @@
   "enter_category_name": "Enter category name",
   "category_color": "Color",
   "set_category_color": "Set category color",
-  "create_category_button": "Create category"
+  "create_category_button": "Create category",
+  "create_task_list": "Create Task List",
+  "create_notes_list": "Create Notes List",
+  "list_name": "Name",
+  "enter_list_name": "Enter list name",
+  "list_color": "Color",
+  "set_list_color": "Set list color",
+  "create_list_button": "Create list"
 }
