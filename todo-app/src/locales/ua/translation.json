@@ -128,5 +128,8 @@
   "related_note": "Пов’язана нотатка: {{name}}",
   "create_task_button": "Створити завдання",
   "select_category_modal_title": "Оберіть категорію",
-  "add_category_button": "Додати категорію"
+  "add_category_button": "Додати категорію",
+  "select_related_note_title": "Оберіть пов’язану нотатку",
+  "no_recent_notes": "Немає доступних недавніх нотаток.",
+  "add_related_note_button": "Додати пов’язану нотатку"
 }

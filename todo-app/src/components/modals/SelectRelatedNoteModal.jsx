@@ -1,10 +1,12 @@
 import { createPortal } from "react-dom";
 import { useListsContext } from "../../contexts/ListsContext";
 import { useState } from "react";
+import {useTranslation} from "react-i18next";
 
 export default function SelectRelatedNoteModal({ onClose, onSelect }) {
     const root = document.getElementById("root");
     const { getRecentNotes } = useListsContext();
+    const { t } = useTranslation();
     const [selectedNote, setSelectedNote] = useState(null);
 
     const recentNotes = getRecentNotes();
@@ -19,7 +21,7 @@ export default function SelectRelatedNoteModal({ onClose, onSelect }) {
         <div style={styles.container}>
             <div style={styles.modal}>
                 <div style={styles.header}>
-                    <p style={styles.title}>Select Related Note</p>
+                    <p style={styles.title}>{t("select_related_note_title")}</p>
                     <button style={styles.closeButton} onClick={onClose}>
                         <i
                             className="hgi-stroke hgi-cancel-01"
@@ -43,7 +45,7 @@ export default function SelectRelatedNoteModal({ onClose, onSelect }) {
                             </div>
                         ))
                     ) : (
-                        <p>No recent notes available.</p>
+                        <p>{t("no_recent_notes")}</p>
                     )}
                 </div>
                 <div style={styles.footer}>
@@ -53,7 +55,7 @@ export default function SelectRelatedNoteModal({ onClose, onSelect }) {
                         onClick={handleSelect}
                         disabled={!selectedNote}
                     >
-                        Add Related Note
+                        {t("add_related_note_button")}
                     </button>
                 </div>
             </div>
