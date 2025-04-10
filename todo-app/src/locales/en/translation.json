@@ -71,5 +71,13 @@
   "delete-account": "Delete Account",
   "appearance": "Appearance",
   "language": "Language",
-  "push-notifications": "Push Notifications"
+  "push-notifications": "Push Notifications",
+  "start-time": "Start Time",
+  "end-time": "End Time",
+  "due-time": "Due Date",
+  "priority": "Priority",
+  "description": "Description",
+  "remove": "Remove",
+  "add-related-note": "Add Related Note",
+  "related-note": "Related Note"
 }

@@ -7,6 +7,7 @@ import { useListsContext } from "../../../contexts/ListsContext";
 import SelectRelatedNoteModal from "../../modals/SelectRelatedNoteModal.jsx";
 
 import "../../../styles/tasks/TaskSideSection.css"
+import {useTranslation} from "react-i18next";
 
 export default function TaskSideSection({ task, onClose }) {
   const { getTaskListById, updateTask, getNoteById } = useListsContext();
@@ -73,8 +74,10 @@ export default function TaskSideSection({ task, onClose }) {
     setRelatedNote(null);
   };
 
+  const { t } = useTranslation();
+
   const list = getTaskListById(task.listId);
-  const listName = list ? list.name : "Unknown List";
+  const listName = list ? list.name : t("unknown-list");
 
   return (
       <div className="task-side-container">
@@ -103,7 +106,7 @@ export default function TaskSideSection({ task, onClose }) {
                   onChange={(e) => setNewStartTime(e.target.value)}
                   width={"100%"}
               />
-              <p className="task-side-info-label">Start time</p>
+              <p className="task-side-info-label">{t("start-time")}</p>
             </div>
             <div className="task-side-info-subblock">
               <EditInput
@@ -113,7 +116,7 @@ export default function TaskSideSection({ task, onClose }) {
                   onChange={(e) => setNewEndTime(e.target.value)}
                   width={"100%"}
               />
-              <p className="task-side-info-label">Due time</p>
+              <p className="task-side-info-label">{t("end-time")}</p>
             </div>
             <div className="task-side-info-subblock">
               <EditInput
@@ -123,7 +126,7 @@ export default function TaskSideSection({ task, onClose }) {
                   onChange={(e) => setNewTaskDate(e.target.value)}
                   width={"100%"}
               />
-              <p className="task-side-info-label">Due date</p>
+              <p className="task-side-info-label">{t("due-time")}</p>
             </div>
           </div>
           <div className="task-side-info-block">
@@ -133,7 +136,7 @@ export default function TaskSideSection({ task, onClose }) {
                   width={"100%"}
                   defaultValue={task.priority}
               />
-              <p className="task-side-info-label">Priority</p>
+              <p className="task-side-info-label">{t("priority")}</p>
             </div>
           </div>
           <div className="task-side-info-subblock">
@@ -142,7 +145,7 @@ export default function TaskSideSection({ task, onClose }) {
                 value={newTaskDescription}
                 onChange={(e) => setNewTaskDescription(e.target.value)}
             />
-            <p className="task-side-info-label">Description</p>
+            <p className="task-side-info-label">{t("description")}</p>
           </div>
           <div className="task-side-info-block">
             <div className="task-side-info-subblock">
@@ -150,19 +153,19 @@ export default function TaskSideSection({ task, onClose }) {
                   <div className="task-side-related-note">
                     <p>{relatedNote.name}</p>
                     <button className="task-side-remove-note-button" onClick={handleRemoveRelatedNote}>
-                      Remove
+                      {t("remove")}
                     </button>
                   </div>
               ) : (
                   <button className="task-side-add-note-button" onClick={() => setShowSelectNoteModal(true)}>
-                    + Add Related Note
+                    + {t("add-related-note")}
                   </button>
               )}
-              <p className="task-side-info-label">Related Note</p>
+              <p className="task-side-info-label">{t("related-note")}</p>
             </div>
           </div>
           <button className="task-side-save-button" onClick={saveTask}>
-            Save
+            {t("save")}
           </button>
         </div>
         {showSelectNoteModal && (

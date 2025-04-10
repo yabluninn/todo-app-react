@@ -116,25 +116,25 @@ export default function TasksListContainer({ list, onTaskSideOpen }) {
       </div>
       {isSortContextMenuVisible && (
           <ContextMenu position={sortMenuPosition} toggleVisibility={toggleSortContextMenuVisibility}>
-            <ContextMenuButton title={"Sort by Priority"} icon={"hgi-stroke hgi-flag-02"} onClick={() => {
+            <ContextMenuButton title={"sort-priority"} icon={"hgi-stroke hgi-flag-02"} onClick={() => {
               sortListTasks(SORTING_ACTIONS.HIGH_PRIORITY_FIRST)
             }}/>
-            <ContextMenuButton title={"Sort by Completed"} icon={"hgi-stroke hgi-checkmark-square-02"} onClick={() => {
+            <ContextMenuButton title={"sort-completed"} icon={"hgi-stroke hgi-checkmark-square-02"} onClick={() => {
               sortListTasks(SORTING_ACTIONS.COMPLETED_FIRST)
             }}/>
-            <ContextMenuButton title={"Sort by Uncompleted"} icon={"hgi-stroke hgi-cancel-square"} onClick={() => {
+            <ContextMenuButton title={"sort-uncompleted"} icon={"hgi-stroke hgi-cancel-square"} onClick={() => {
               sortListTasks(SORTING_ACTIONS.UNCOMPLETED_FIRST)
             }}/>
           </ContextMenu>)}
       {isFilterContextMenuVisible && (
           <ContextMenu position={filterMenuPosition} toggleVisibility={toggleFilterContextMenuVisibility}>
-            <ContextMenuButton title={"Show Completed"} icon={"hgi-stroke hgi-checkmark-square-02"} onClick={() => {
+            <ContextMenuButton title={"show-completed"} icon={"hgi-stroke hgi-checkmark-square-02"} onClick={() => {
               filterListTasks(FILTER_ACTIONS.SHOW_COMPLETED)
             }} />
-            <ContextMenuButton title={"Show Uncompleted"} icon={"hgi-stroke hgi-cancel-square"} onClick={() => {
+            <ContextMenuButton title={"show-uncompleted"} icon={"hgi-stroke hgi-cancel-square"} onClick={() => {
               filterListTasks(FILTER_ACTIONS.SHOW_UNCOMPLETED)
             }}/>
-            <ContextMenuButton title={"Show Overdue"} icon={"hgi-stroke hgi-clock-04"} onClick={() => {
+            <ContextMenuButton title={"show-overdue"} icon={"hgi-stroke hgi-clock-04"} onClick={() => {
               filterListTasks(FILTER_ACTIONS.SHOW_OVERDUE)
             }}/>
           </ContextMenu>)}

@@ -72,5 +72,13 @@
   "delete-account": "Видалити акаунт",
   "appearance": "Зовнішній вигляд",
   "language": "Мова",
-  "push-notifications": "Push-сповіщення"
+  "push-notifications": "Push-сповіщення",
+  "start-time": "Час (Початок)",
+  "end-time": "Час (Кінець)",
+  "due-time": "Кінцева Дата",
+  "priority": "Пріорітет",
+  "description": "Опис",
+  "remove": "Видалити",
+  "add-related-note": "Додати пов'язану нотатку",
+  "related-note": "Пов'язана нотатка"
 }
