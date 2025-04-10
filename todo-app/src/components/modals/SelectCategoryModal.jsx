@@ -1,10 +1,13 @@
 import { createPortal } from "react-dom";
 import { useState } from "react";
 import {useCategories} from "../../contexts/CategoriesContext.jsx";
+import {useTranslation} from "react-i18next";
 
 export default function SelectCategoryModal({ onClose, onSelect }) {
     const root = document.getElementById("root");
     const { categories } = useCategories();
+    const { t } = useTranslation();
+
     const [selectedCategory, setSelectedCategory] = useState(null);
 
     const handleSelect = () => {
@@ -17,7 +20,7 @@ export default function SelectCategoryModal({ onClose, onSelect }) {
         <div style={styles.container}>
             <div style={styles.modal}>
                 <div style={styles.header}>
-                    <p style={styles.title}>Выберите категорию</p>
+                    <p style={styles.title}>{t("select_category_modal_title")}</p>
                     <button style={styles.closeButton} onClick={onClose}>
                         <i className="hgi-stroke hgi-cancel-01" style={styles.closeIcon}></i>
                     </button>
@@ -44,7 +47,7 @@ export default function SelectCategoryModal({ onClose, onSelect }) {
                         onClick={handleSelect}
                         disabled={!selectedCategory}
                     >
-                        Add Category
+                        {t("add_category_button")}
                     </button>
                 </div>
             </div>

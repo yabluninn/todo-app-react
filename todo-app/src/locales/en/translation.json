@@ -125,5 +125,7 @@
   "add_related_note": "Add Related Note",
   "change_related_note": "Change Related Note",
   "related_note": "Related Note: {{name}}",
-  "create_task_button": "Create Task"
+  "create_task_button": "Create Task",
+  "select_category_modal_title": "Select a category",
+  "add_category_button": "Add Category"
 }
