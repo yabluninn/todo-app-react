@@ -11,10 +11,13 @@ import CreateButton from "../ui/CreateButton.jsx";
 import SelectRelatedNoteModal from "./SelectRelatedNoteModal.jsx";
 
 import "../../styles/modals/CreateTaskModal.css";
+import {useTranslation} from "react-i18next";
 
 export default function CreateTaskModal({ onClose }) {
   const root = document.getElementById("root");
   const { addTask } = useListsContext();
+
+  const { t } = useTranslation();
 
   const [taskName, setTaskName] = useState("");
   const [taskDescription, setTaskDescription] = useState("");
@@ -57,7 +60,7 @@ export default function CreateTaskModal({ onClose }) {
       <div className="modal-container">
         <div className="modal">
           <div className="modal-header">
-            <p className="modal-title">Create new task</p>
+            <p className="modal-title">{t("create_new_task")}</p>
             <button className="modal-close-button" onClick={onClose}>
               <i className="hgi-stroke hgi-cancel-01 modal-close-icon"></i>
             </button>
@@ -66,38 +69,38 @@ export default function CreateTaskModal({ onClose }) {
             <InputWithLabel
                 icon="hgi-stroke hgi-text-font"
                 type="text"
-                placeholder="Enter task name"
-                label="Name"
+                placeholder={t("enter_task_name")}
+                label={t("task_name")}
                 value={taskName}
                 onChange={(e) => setTaskName(e.target.value)}
             />
             <TextAreaWithLabel
                 icon="hgi-stroke hgi-text-firstline-left"
-                placeholder="Enter task description"
-                label="Description"
+                placeholder={t("enter_task_description")}
+                label={t("task_description")}
                 value={taskDescription}
                 onChange={(e) => setTaskDescription(e.target.value)}
             />
             <div className="modal-input-block">
               <InputWithLabel
-                  icon={"hgi-stroke hgi-calendar-01"}
+                  icon="hgi-stroke hgi-calendar-01"
                   type="date"
-                  label="Date"
+                  label={t("date")}
                   value={taskDate}
                   onChange={(e) => setTaskDate(e.target.value)}
               />
               <div className="time-inputs">
                 <InputWithLabel
-                    icon={"hgi-stroke hgi-clock-03"}
+                    icon="hgi-stroke hgi-clock-03"
                     type="time"
-                    label="From"
+                    label={t("from")}
                     value={taskStartTime}
                     onChange={(e) => setTaskStartTime(e.target.value)}
                 />
                 <InputWithLabel
-                    icon={"hgi-stroke hgi-clock-02"}
+                    icon="hgi-stroke hgi-clock-02"
                     type="time"
-                    label="To"
+                    label={t("to")}
                     value={taskEndTime}
                     onChange={(e) => setTaskEndTime(e.target.value)}
                 />
@@ -112,21 +115,24 @@ export default function CreateTaskModal({ onClose }) {
             </div>
             {relatedNote ? (
                 <div className="related-note">
-                  <p>Related Note: {relatedNote.name}</p>
-                  <button className="change-note-button" onClick={() => setShowSelectNoteModal(true)}>
-                    Change Related Note
+                  <p>{t("related_note", { name: relatedNote.name })}</p>
+                  <button
+                      className="change-note-button"
+                      onClick={() => setShowSelectNoteModal(true)}
+                  >
+                    {t("change_related_note")}
                   </button>
                 </div>
             ) : (
                 <CreateButton
-                    title={"Add Related Note"}
+                    title={t("add_related_note")}
                     onClick={() => setShowSelectNoteModal(true)}
                 />
             )}
           </div>
           <div className="modal-footer">
             <button className="add-task-button" onClick={handleAddTask}>
-              Create Task
+              {t("create_task_button")}
             </button>
           </div>
         </div>

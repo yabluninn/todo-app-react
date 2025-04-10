@@ -113,5 +113,17 @@
   "note_content": "Content",
   "enter_note_content": "Enter note content",
   "select_category": "Select Category",
-  "create_note_button": "Create note"
+  "create_note_button": "Create note",
+  "create_new_task": "Create new task",
+  "task_name": "Name",
+  "enter_task_name": "Enter task name",
+  "task_description": "Description",
+  "enter_task_description": "Enter task description",
+  "date": "Date",
+  "from": "From",
+  "to": "To",
+  "add_related_note": "Add Related Note",
+  "change_related_note": "Change Related Note",
+  "related_note": "Related Note: {{name}}",
+  "create_task_button": "Create Task"
 }

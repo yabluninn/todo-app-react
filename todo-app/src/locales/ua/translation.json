@@ -114,5 +114,17 @@
   "note_content": "Зміст",
   "enter_note_content": "Введіть зміст нотатки",
   "select_category": "Оберіть категорію",
-  "create_note_button": "Створити нотатку"
+  "create_note_button": "Створити нотатку",
+  "create_new_task": "Створити нове завдання",
+  "task_name": "Назва",
+  "enter_task_name": "Введіть назву завдання",
+  "task_description": "Опис",
+  "enter_task_description": "Введіть опис завдання",
+  "date": "Дата",
+  "from": "З",
+  "to": "До",
+  "add_related_note": "Додати пов’язану нотатку",
+  "change_related_note": "Змінити пов’язану нотатку",
+  "related_note": "Пов’язана нотатка: {{name}}",
+  "create_task_button": "Створити завдання"
 }
