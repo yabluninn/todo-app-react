@@ -88,5 +88,10 @@
   "change_password_success": "Password changed successfully!",
   "change_password_error": "Failed to change password. Please try again.",
   "incorrect_password": "Current password is incorrect.",
-  "user_not_found": "User not found. Please log in again."
+  "user_not_found": "User not found. Please log in again.",
+  "change_username": "Change Username",
+  "new_username": "New username",
+  "enter_new_username": "Enter new username",
+  "change_username_success": "Username changed successfully!",
+  "change_username_error": "Failed to change username. Please try again.",
 }
