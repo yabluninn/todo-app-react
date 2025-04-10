@@ -77,40 +77,40 @@ export default function Settings() {
                 </div>
             </div>
             <div className="settings-wrapper">
-                <SettingsBlock title="Profile" icon="hgi-user">
+                <SettingsBlock title="profile" icon="hgi-user">
                     <SettingsItem
-                        title="Username"
+                        title="username"
                         content={user ? user.username : "Loading..."}
                         buttonIcon="hgi-pencil-edit-01"
                         buttonAction={openChangeUsernameModal}
                     />
-                    <SettingsItem title="Email" content={user ? user.email : "Loading..."} />
+                    <SettingsItem title="email" content={user ? user.email : "Loading..."} />
                     <SettingsItem
-                        title="Password"
-                        buttonText="Manage password"
+                        title="password"
+                        buttonText="manage-password"
                         buttonClass="s-block-default-button"
                         buttonAction={openChangePasswordModal}
                     />
                     <SettingsItem
-                        title="Account"
-                        buttonText="Delete Account"
+                        title="account"
+                        buttonText="delete-account"
                         buttonClass="s-block-red-button"
                         buttonAction={handleDeleteAccount}
                     />
                 </SettingsBlock>
 
-                <SettingsBlock title="Appearance" icon="hgi-paint-brush-04">
+                <SettingsBlock title="appearance" icon="hgi-paint-brush-04">
                     <SettingsItem
-                        title="Language"
+                        title="language"
                         content="English"
                         buttonIcon="hgi-pencil-edit-01"
                         buttonAction={() => alert("Change language")}
                     />
                 </SettingsBlock>
 
-                <SettingsBlock title="Notifications" icon="hgi-notification-01">
+                <SettingsBlock title="notifications" icon="hgi-notification-01">
                     <SettingsItem
-                        title="Push Notifications"
+                        title="puhs-notifications"
                         buttonText={isNotificationsEnabled ? "Enabled" : "Disabled"}
                         buttonClass="s-block-default-button"
                         buttonAction={toggleNotifications}

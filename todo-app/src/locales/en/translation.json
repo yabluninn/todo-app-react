@@ -63,5 +63,13 @@
   "no_notifications": "No notifications available",
   "remove-all-notes": "Remove All Notes",
   "unknown-list": "Unknown List",
-  "text": "Text"
+  "text": "Text",
+  "email": "Email",
+  "password": "Password",
+  "username": "Username",
+  "manage-password": "Manage Password",
+  "delete-account": "Delete Account",
+  "appearance": "Appearance",
+  "language": "Language",
+  "push-notifications": "Push Notifications"
 }
