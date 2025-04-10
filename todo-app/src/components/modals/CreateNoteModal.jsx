@@ -11,9 +11,12 @@ import { Link } from "react-router-dom";
 import NoteModalCategory from "../layout/groups/NoteModalCategory.jsx";
 
 import "../../styles/modals/CreateNoteModal.css";
+import {useTranslation} from "react-i18next";
 
 export default function CreateNoteModal({ onClose }) {
   const root = document.getElementById("root");
+
+  const { t } = useTranslation();
 
   const { addNoteToList } = useListsContext();
   const { categories } = useCategories();
@@ -57,7 +60,7 @@ export default function CreateNoteModal({ onClose }) {
       <div className="modal-container">
         <div className="modal note-modal">
           <div className="modal-header">
-            <p className="modal-title">Create new note</p>
+            <p className="modal-title">{t("create_new_note")}</p>
             <button className="modal-close-button" onClick={onClose}>
               <i className="hgi-stroke hgi-cancel-01 modal-close-icon"></i>
             </button>
@@ -66,8 +69,8 @@ export default function CreateNoteModal({ onClose }) {
             <div className="note-modal-input-block">
               <InputWithLabel
                   type="text"
-                  placeholder="Enter note name"
-                  label="Name"
+                  placeholder={t("enter_note_name")}
+                  label={t("note_name")}
                   icon="hgi-stroke hgi-text-font"
                   value={noteName}
                   onChange={(e) => setNoteName(e.target.value)}
@@ -77,7 +80,8 @@ export default function CreateNoteModal({ onClose }) {
                   listType={LIST_TYPES.NOTES_LIST}
               />
               <p className="categoriesLabel">
-                <i className={"hgi-stroke hgi-delivery-box-01"}></i>Select Category
+                <i className={"hgi-stroke hgi-delivery-box-01"}></i>
+                {t("select_category")}
               </p>
               <div className="categoriesGrid">
                 {categories &&
@@ -91,24 +95,22 @@ export default function CreateNoteModal({ onClose }) {
                     ))}
                 <Link className="createButton" to={"/app/groups"}>
                   <i className="fa-solid fa-plus createIcon"></i>
-                  Create Category
+                  {t("create_category")}
                 </Link>
               </div>
             </div>
             <TextAreaWithLabel
-                placeholder="Enter note content"
-                label="Content"
+                placeholder={t("enter_note_content")}
+                label={t("note_content")}
                 icon="hgi-stroke hgi-text-firstline-left"
                 value={noteContent}
                 onChange={(e) => setNoteContent(e.target.value)}
-                // width={"100%"}
-                // height={"150px"}
             />
           </div>
           <div className="modal-footer">
             <button className="add-task-button" onClick={handleAddNote}>
               <i className="hgi-stroke hgi-sticky-note-01 addIcon"></i>
-              Create note
+              {t("create_note_button")}
             </button>
           </div>
         </div>
@@ -116,133 +118,3 @@ export default function CreateNoteModal({ onClose }) {
       root
   );
 }
-
-// const styles = {
-//   container: {
-//     position: "fixed",
-//     top: 0,
-//     left: 0,
-//     width: "100%",
-//     height: "100%",
-//     display: "flex",
-//     justifyContent: "center",
-//     alignItems: "center",
-//     backgroundColor: "rgba(0, 0, 0, 0.35)",
-//     zIndex: 1000,
-//   },
-//   modal: {
-//     position: "relative",
-//     width: "60%",
-//     maxWidth: "55%",
-//     backgroundColor: "#fff",
-//     borderRadius: "8px",
-//     boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-//     zIndex: 1001,
-//   },
-//   header: {
-//     display: "flex",
-//     justifyContent: "space-between",
-//     alignItems: "center",
-//     padding: "16px 24px",
-//     borderBottom: "1px solid #eee",
-//   },
-//   title: {
-//     fontSize: "18px",
-//     fontWeight: "bold",
-//     margin: 0,
-//   },
-//   closeButton: {
-//     backgroundColor: "transparent",
-//     border: "none",
-//     cursor: "pointer",
-//   },
-//   closeIcon: {
-//     fontSize: "20px",
-//     color: "#888",
-//   },
-//   content: {
-//     display: "flex",
-//     justifyContent: "space-between",
-//     alignItems: "start",
-//     flexDirection: "row",
-//     padding: "24px",
-//   },
-//   block: {
-//     width: "55%",
-//     marginRight: "24px",
-//   },
-//   footer: {
-//     padding: "16px 24px",
-//     borderTop: "1px solid #eee",
-//     display: "flex",
-//     justifyContent: "center",
-//     alignItems: "center",
-//   },
-//   addButton: {
-//     backgroundColor: "#7437ff",
-//     color: "white",
-//     fontSize: "16px",
-//     fontWeight: "bold",
-//     borderRadius: "8px",
-//     width: "50%",
-//     height: "40px",
-//     display: "flex",
-//     justifyContent: "center",
-//     alignItems: "center",
-//     cursor: "pointer",
-//     transition: "background 0.3s ease-in-out",
-//   },
-//   addIcon: {
-//     color: "white",
-//     marginRight: "8px",
-//   },
-//   categoriesGrid: {
-//     width: "100%",
-//     height: "134px",
-//     display: "flex",
-//     justifyContent: "start",
-//     alignItems: "start",
-//     flexDirection: "row",
-//     flexWrap: "wrap",
-//     border: "2px solid #ccc",
-//     borderRadius: "4px",
-//     padding: "8px",
-//     overflowY: "auto",
-//   },
-//   categoriesLabel: {
-//     fontSize: "14px",
-//     fontWeight: "500",
-//     color: "#333",
-//     display: "flex",
-//     justifyContent: "start",
-//     alignItems: "center",
-//     flexDirection: "row",
-//     gap: "8px",
-//     marginBottom: "8px",
-//   },
-//   createButton: {
-//     width: "fit-content",
-//     fontSize: "14px",
-//     fontWeight: "bold",
-//     padding: "4px 12px",
-//     borderRadius: "16px",
-//     color: "black",
-//     border: "2px dashed #bbb",
-//     background: "#eee",
-//     display: "flex",
-//     justifyContent: "center",
-//     alignItems: "center",
-//     flexDirection: "row",
-//     textDecoration: "none",
-//   },
-//   createIcon: {
-//     marginRight: "8px",
-//   },
-// };
-//
-// const styleSheet = document.styleSheets[0];
-// styleSheet.insertRule(`
-//   .add-note-button:hover {
-//     background: #5b2db3 !important;
-//   }
-// `, styleSheet.cssRules.length);

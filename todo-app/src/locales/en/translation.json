@@ -106,5 +106,12 @@
   "enter_list_name": "Enter list name",
   "list_color": "Color",
   "set_list_color": "Set list color",
-  "create_list_button": "Create list"
+  "create_list_button": "Create list",
+  "create_new_note": "Create new note",
+  "note_name": "Name",
+  "enter_note_name": "Enter note name",
+  "note_content": "Content",
+  "enter_note_content": "Enter note content",
+  "select_category": "Select Category",
+  "create_note_button": "Create note"
 }

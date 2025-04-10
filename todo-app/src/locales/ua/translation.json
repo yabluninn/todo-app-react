@@ -107,5 +107,12 @@
   "enter_list_name": "Введіть назву списку",
   "list_color": "Колір",
   "set_list_color": "Виберіть колір списку",
-  "create_list_button": "Створити список"
+  "create_list_button": "Створити список",
+  "create_new_note": "Створити нову нотатку",
+  "note_name": "Назва",
+  "enter_note_name": "Введіть назву нотатки",
+  "note_content": "Зміст",
+  "enter_note_content": "Введіть зміст нотатки",
+  "select_category": "Оберіть категорію",
+  "create_note_button": "Створити нотатку"
 }
