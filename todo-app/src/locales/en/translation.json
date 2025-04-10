@@ -94,4 +94,10 @@
   "enter_new_username": "Enter new username",
   "change_username_success": "Username changed successfully!",
   "change_username_error": "Failed to change username. Please try again.",
+  "create_category": "Create Category",
+  "category_name": "Name",
+  "enter_category_name": "Enter category name",
+  "category_color": "Color",
+  "set_category_color": "Set category color",
+  "create_category_button": "Create category"
 }

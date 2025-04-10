@@ -2,9 +2,12 @@ import { createPortal } from "react-dom";
 import { useState } from "react";
 import InputWithLabel from "../ui/InputWithLabel";
 import { useCategories } from "../../contexts/CategoriesContext.jsx";
+import {useTranslation} from "react-i18next";
 
 export default function CreateCategoryModal({ onClose }) {
   const root = document.getElementById("root");
+
+  const { t } = useTranslation();
 
   const { addCategory, getCategoriesLength } = useCategories();
 
@@ -29,27 +32,24 @@ export default function CreateCategoryModal({ onClose }) {
       <div style={styles.container}>
         <div style={styles.modal}>
           <div style={styles.header}>
-            <p style={styles.title}>Create Category</p>
+            <p style={styles.title}>{t("create_category")}</p>
             <button style={styles.closeButton} onClick={onClose}>
-              <i
-                  className="hgi-stroke hgi-cancel-01"
-                  style={styles.closeIcon}
-              ></i>
+              <i className="hgi-stroke hgi-cancel-01" style={styles.closeIcon}></i>
             </button>
           </div>
           <div style={styles.content}>
             <InputWithLabel
                 type="text"
-                placeholder="Enter category name"
-                label="Name"
+                placeholder={t("enter_category_name")}
+                label={t("category_name")}
                 icon="hgi-stroke hgi-text-font"
                 value={categoryName}
                 onChange={(e) => setCategoryName(e.target.value)}
             />
             <InputWithLabel
                 type="color"
-                placeholder="Set category color"
-                label="Color"
+                placeholder={t("set_category_color")}
+                label={t("category_color")}
                 icon="hgi-stroke hgi-paint-board"
                 value={categoryColor}
                 onChange={(e) => setCategoryColor(e.target.value)}
@@ -57,7 +57,7 @@ export default function CreateCategoryModal({ onClose }) {
           </div>
           <div style={styles.footer}>
             <button style={styles.addButton} onClick={handleAddCategory}>
-              Create category
+              {t("create_category_button")}
             </button>
           </div>
         </div>

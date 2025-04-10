@@ -95,4 +95,10 @@
   "enter_new_username": "Введіть нове ім’я користувача",
   "change_username_success": "Ім’я користувача успішно змінено!",
   "change_username_error": "Не вдалося змінити ім’я користувача. Спробуйте ще раз.",
+  "create_category": "Створити категорію",
+  "category_name": "Назва",
+  "enter_category_name": "Введіть назву категорії",
+  "category_color": "Колір",
+  "set_category_color": "Виберіть колір категорії",
+  "create_category_button": "Створити категорію"
 }
