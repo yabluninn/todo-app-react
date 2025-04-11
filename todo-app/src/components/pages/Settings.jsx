@@ -42,86 +42,95 @@ export default function Settings() {
     const handleDeleteAccount = async () => {
         const storedUser = JSON.parse(localStorage.getItem("user"));
         if (!storedUser || !storedUser.id) {
-            alert("User ID not found. Please log in again.");
+            alert(t("user_id_missing"));
             return;
         }
 
-        const confirmDelete = window.confirm("Are you sure you want to delete your account? This action is irreversible.");
+        const confirmDelete = window.confirm(t("delete_confirm"));
         if (!confirmDelete) return;
 
         try {
             await axios.delete(`http://localhost:5000/api/user/${storedUser.id}`);
-
             localStorage.removeItem("token");
             localStorage.removeItem("user");
-
             navigate("/signup");
         } catch (err) {
-            alert("Failed to delete account. Please try again.");
+            alert(t("delete_error"));
         }
     };
 
     const openChangePasswordModal = () => {
         setIsChangePasswordModalOpen(!isChangePasswordModalOpen);
-    }
+    };
 
     const openChangeUsernameModal = () => {
         setIsChangeUsernameModalOpen(!isChangeUsernameModalOpen);
-    }
+    };
 
     return (
         <div className="page-container">
             <div className="settings-header">
                 <div>
-                    <p className="s-header-title">Settings</p>
-                    <p className="s-header-subtitle">
-                        Here you can manage your profile&apos;s info, data, and appearance
-                    </p>
+                    <p className="s-header-title">{t("settings")}</p>
+                    <p className="s-header-subtitle">{t("settings_subtitle")}</p>
                 </div>
             </div>
+
             <div className="settings-wrapper">
-                <SettingsBlock title="profile" icon="hgi-user">
+                <SettingsBlock title={t("profile")} icon="hgi-user">
                     <SettingsItem
-                        title="username"
-                        content={user ? user.username : "Loading..."}
+                        title={t("username")}
+                        content={user ? user.username : t("loading")}
                         buttonIcon="hgi-pencil-edit-01"
                         buttonAction={openChangeUsernameModal}
                     />
-                    <SettingsItem title="email" content={user ? user.email : "Loading..."} />
                     <SettingsItem
-                        title="password"
-                        buttonText="manage-password"
+                        title={t("email")}
+                        content={user ? user.email : t("loading")}
+                    />
+                    <SettingsItem
+                        title={t("password")}
+                        buttonText={t("manage-password")}
                         buttonClass="s-block-default-button"
                         buttonAction={openChangePasswordModal}
                     />
                     <SettingsItem
-                        title="account"
-                        buttonText="delete-account"
+                        title={t("account")}
+                        buttonText={t("delete-account")}
                         buttonClass="s-block-red-button"
                         buttonAction={handleDeleteAccount}
                     />
                 </SettingsBlock>
 
-                <SettingsBlock title="appearance" icon="hgi-paint-brush-04">
+                <SettingsBlock title={t("appearance")} icon="hgi-paint-brush-04">
                     <SettingsItem
-                        title="language"
+                        title={t("language")}
                         content="English"
                         buttonIcon="hgi-pencil-edit-01"
                         buttonAction={() => alert("Change language")}
                     />
                 </SettingsBlock>
 
-                <SettingsBlock title="notifications" icon="hgi-notification-01">
+                <SettingsBlock title={t("notifications")} icon="hgi-notification-01">
                     <SettingsItem
-                        title="puhs-notifications"
-                        buttonText={isNotificationsEnabled ? "Enabled" : "Disabled"}
+                        title={t("push-notifications")}
+                        buttonText={isNotificationsEnabled ? t("enabled") : t("disabled")}
                         buttonClass="s-block-default-button"
                         buttonAction={toggleNotifications}
                     />
                 </SettingsBlock>
             </div>
-            {isChangePasswordModalOpen && (<ChangePasswordModal onClose={openChangePasswordModal} user={user} />)}
-            {isChangeUsernameModalOpen && (<ChangeUsernameModal onClose={openChangeUsernameModal} user={user} onUpdateUser={fetchUserProfile}/>)}
+
+            {isChangePasswordModalOpen && (
+                <ChangePasswordModal onClose={openChangePasswordModal} user={user} />
+            )}
+            {isChangeUsernameModalOpen && (
+                <ChangeUsernameModal
+                    onClose={openChangeUsernameModal}
+                    user={user}
+                    onUpdateUser={fetchUserProfile}
+                />
+            )}
         </div>
     );
 }

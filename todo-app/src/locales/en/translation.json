@@ -146,4 +146,11 @@
   "delete_account": "Delete Account",
   "delete_account_confirm": "Are you sure you want to delete your account? This action is irreversible.",
   "delete_account_error": "Failed to delete account. Please try again.",
+  "settings_subtitle": "Here you can manage your profile's info, data, and appearance",
+  "enabled": "Enabled",
+  "disabled": "Disabled",
+  "loading": "Loading...",
+  "delete_confirm": "Are you sure you want to delete your account? This action is irreversible.",
+  "delete_error": "Failed to delete account. Please try again.",
+  "user_id_missing": "User ID not found. Please log in again."
 }
