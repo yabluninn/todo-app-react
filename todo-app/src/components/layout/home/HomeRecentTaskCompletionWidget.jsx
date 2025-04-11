@@ -103,7 +103,7 @@ export default function HomeRecentTaskCompletionWidget({selectedPeriod}) {
         selectedPeriod === "Today"
             ? getLast7Days(locale)
             : selectedPeriod === "Week"
-                ? getLast7Weeks(locale)
+                ? getLast7Weeks(t, locale)
                 : getLast7Months(locale);
 
     const dataValues = labels.map(label => {
