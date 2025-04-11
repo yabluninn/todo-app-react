@@ -12,13 +12,13 @@
   padding: 40px;
   border-radius: 10px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-  width: 480px;
+  width: 85%;
   text-align: center;
 }
 
 .signup-box h2 {
   margin-bottom: 20px;
-  font-size: 24px;
+  font-size: 20px;
   color: #333;
 }
 
@@ -101,4 +101,111 @@
 
 .login-link a:hover {
   text-decoration: underline;
+}
+
+@media screen and (min-width: 1024px) {
+  .signup-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f5f7fa;
+  }
+
+  .signup-box {
+    background: white;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    width: 480px;
+    text-align: center;
+  }
+
+  .signup-box h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+  }
+
+  .error-message {
+    color: red;
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
+
+  .success-message {
+    color: green;
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
+
+  .signup-form {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .input-group {
+    margin-bottom: 15px;
+    text-align: left;
+  }
+
+  .input-group label {
+    font-size: 14px;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+  }
+
+  .input-group input {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    transition: 0.3s;
+  }
+
+  .input-group input:focus {
+    border-color: #7437ff;
+    outline: none;
+  }
+
+  .submit-btn {
+    background-color: #7437ff;
+    color: white;
+    border: none;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+  .submit-btn:hover {
+    background-color: #660fff;
+  }
+
+  .submit-btn:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+
+  .login-link {
+    margin-top: 15px;
+    font-size: 14px;
+    color: #555;
+  }
+
+  .login-link a {
+    color: #7437ff;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+  }
+
+  .login-link a:hover {
+    text-decoration: underline;
+  }
 }
