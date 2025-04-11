@@ -137,5 +137,7 @@
   "task_lists_label": "Task Lists",
   "note_lists_label": "Note Lists",
   "total_label": "Total",
-  "groups_subtitle": "Here you can manage all your lists and categories"
+  "groups_subtitle": "Here you can manage all your lists and categories",
+  "notes_subtitle": "Here you can manage all your notes",
+  "new_note_button": "New Note"
 }

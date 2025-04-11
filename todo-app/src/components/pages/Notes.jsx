@@ -37,33 +37,28 @@ export default function Notes() {
   console.log("Note lists: ", noteLists);
 
   return (
-    <div className="page-container">
-      <div className="tasks-header">
-        <div>
-          <p className="t-header-title">Notes</p>
-          <p className="t-header-subtitle">
-            Here you can manage all your notes
-          </p>
+      <div className="page-container">
+        <div className="tasks-header">
+          <div>
+            <p className="t-header-title">{t("notes")}</p>
+            <p className="t-header-subtitle">{t("notes_subtitle")}</p>
+          </div>
         </div>
+        <CreateButton title={t("new_note_button")} onClick={openCreateNoteModal} />
+        {noteLists &&
+            noteLists.map((list) => (
+                <NoteListContainer
+                    key={list._id}
+                    list={list}
+                    onNoteSideOpen={handleEditNote}
+                />
+            ))}
+        {isCreateNoteModalOpen && (
+            <CreateNoteModal onClose={closeCreateNoteModal} />
+        )}
+        {isNoteSideMenuOpen && selectedNote && (
+            <NoteSideSection note={selectedNote} onClose={closeNoteSideMenu} />
+        )}
       </div>
-      <CreateButton title={"New Note"} onClick={openCreateNoteModal} />
-      {noteLists &&
-        noteLists.map((list) => (
-          <NoteListContainer
-            key={list._id}
-            list={list}
-            onNoteSideOpen={handleEditNote}
-          />
-        ))}
-      {isCreateNoteModalOpen && (
-        <CreateNoteModal onClose={closeCreateNoteModal} />
-      )}
-      {isNoteSideMenuOpen && selectedNote && (
-        <NoteSideSection
-          note={selectedNote}
-          onClose={closeNoteSideMenu}
-        />
-      )}
-    </div>
   );
 }
