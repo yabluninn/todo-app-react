@@ -26,7 +26,7 @@ export default function ListContainer({ listType, lists, onOpenCreateListModal, 
                             : ""
                 }`}
             />
-            <p className="list-title">{t("lists_type_title", {type: t(listType.toLowerCase())})}</p>
+            <p className="list-title">{t("lists_type_title", {type: t(listType)})}</p>
           </div>
         </div>
         <div className="list-grid">

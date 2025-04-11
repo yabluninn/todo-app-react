@@ -7,8 +7,6 @@
 }
 
 .features-content {
-    width: 100%;
-    max-width: 100%;
     text-align: center;
     background: white;
     padding: 24px;
@@ -142,6 +140,7 @@
     .feature-item p {
         font-size: 16px;
         color: #555;
+        text-align: start;
     }
 
     .cta-container {
