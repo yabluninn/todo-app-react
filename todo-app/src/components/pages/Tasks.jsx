@@ -35,30 +35,28 @@ export default function Tasks() {
   };
 
   return (
-    <div className="page-container">
-      <div className="tasks-header">
-        <div>
-          <p className="t-header-title">Tasks</p>
-          <p className="t-header-subtitle">
-            Here you can manage all your tasks
-          </p>
+      <div className="page-container">
+        <div className="tasks-header">
+          <div>
+            <p className="t-header-title">{t("tasks")}</p>
+            <p className="t-header-subtitle">{t("tasks_subtitle")}</p>
+          </div>
         </div>
+        <CreateButton title={t("new_task_button")} onClick={openCreateTaskModal} />
+        {taskLists &&
+            taskLists.map((list) => (
+                <TasksListContainer
+                    key={list._id}
+                    list={list}
+                    onTaskSideOpen={handleEditTask}
+                />
+            ))}
+        {isCreateTaskModalOpen && (
+            <CreateTaskModal onClose={closeCreateTaskModal} />
+        )}
+        {isTaskSideMenuOpen && selectedTask && (
+            <TaskSideSection task={selectedTask} onClose={closeTaskSideMenu} />
+        )}
       </div>
-      <CreateButton title={"New Task"} onClick={openCreateTaskModal} />
-      {taskLists &&
-        taskLists.map((list) => (
-          <TasksListContainer
-            key={list._id}
-            list={list}
-            onTaskSideOpen={handleEditTask}
-          />
-        ))}
-      {isCreateTaskModalOpen && (
-        <CreateTaskModal onClose={closeCreateTaskModal} />
-      )}
-      {isTaskSideMenuOpen && selectedTask && (
-        <TaskSideSection task={selectedTask} onClose={closeTaskSideMenu} />
-      )}
-    </div>
   );
 }
