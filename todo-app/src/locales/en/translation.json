@@ -139,5 +139,11 @@
   "total_label": "Total",
   "groups_subtitle": "Here you can manage all your lists and categories",
   "notes_subtitle": "Here you can manage all your notes",
-  "new_note_button": "New Note"
+  "new_note_button": "New Note",
+  "profile_loading": "Loading...",
+  "free_account": "Free Account",
+  "log_out": "Log Out",
+  "delete_account": "Delete Account",
+  "delete_account_confirm": "Are you sure you want to delete your account? This action is irreversible.",
+  "delete_account_error": "Failed to delete account. Please try again.",
 }

@@ -36,11 +36,11 @@ export default function Profile() {
     const handleDeleteAccount = async () => {
         const storedUser = JSON.parse(localStorage.getItem("user"));
         if (!storedUser || !storedUser.id) {
-            alert("User ID not found. Please log in again.");
+            alert(t("user_not_found"));
             return;
         }
 
-        const confirmDelete = window.confirm("Are you sure you want to delete your account? This action is irreversible.");
+        const confirmDelete = window.confirm(t("delete_account_confirm"));
         if (!confirmDelete) return;
 
         try {
@@ -51,13 +51,13 @@ export default function Profile() {
 
             navigate("/signup");
         } catch (err) {
-            alert("Failed to delete account. Please try again.");
+            alert(t("delete_account_error"));
         }
     };
 
 
     if (!user) {
-        return <div className="page-container profile-container">Loading...</div>;
+        return <div className="page-container profile-container">{t("profile_loading")}</div>;
     }
 
     return (
@@ -68,15 +68,15 @@ export default function Profile() {
                     <div className="profile-info">
                         <h2 className="profile-username">{user.username}</h2>
                         <p className="profile-email">{user.email}</p>
-                        <span className="profile-account">{ACCOUNT_TYPES.FREE} Account</span>
+                        <span className="profile-account">{t("free_account")}</span>
                     </div>
                 </div>
                 <div className="profile-actions">
                     <button className="profile-button logout-button" onClick={handleLogout}>
-                        Log Out
+                        {t("log_out")}
                     </button>
                     <button className="profile-button delete-button" onClick={handleDeleteAccount}>
-                        Delete Account
+                        {t("delete_account")}
                     </button>
                 </div>
             </div>
