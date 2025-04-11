@@ -131,5 +131,11 @@
   "add_category_button": "Додати категорію",
   "select_related_note_title": "Оберіть пов’язану нотатку",
   "no_recent_notes": "Немає доступних недавніх нотаток.",
-  "add_related_note_button": "Додати пов’язану нотатку"
+  "add_related_note_button": "Додати пов’язану нотатку",
+  "analytics_subtitle": "Відстежуйте свій прогрес, звички та завдання за допомогою детальної аналітики, щоб оптимізувати робочий процес",
+  "completed_label": "Виконано",
+  "overdue_label": "Протерміновано",
+  "task_lists_label": "Списки завдань",
+  "note_lists_label": "Списки нотаток",
+  "total_label": "Усього"
 }

@@ -130,5 +130,11 @@
   "add_category_button": "Add Category",
   "select_related_note_title": "Select Related Note",
   "no_recent_notes": "No recent notes available.",
-  "add_related_note_button": "Add Related Note"
+  "add_related_note_button": "Add Related Note",
+  "analytics_subtitle": "Track your progress, habits, and tasks with detailed analytics to optimize your workflow",
+  "completed_label": "Completed",
+  "overdue_label": "Overdue",
+  "task_lists_label": "Task Lists",
+  "note_lists_label": "Note Lists",
+  "total_label": "Total"
 }
