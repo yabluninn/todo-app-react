@@ -4,10 +4,12 @@ import { ACCOUNT_TYPES } from "../../constants/account-types.js";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import {useTranslation} from "react-i18next";
 
 export default function Profile() {
     const [user, setUser] = useState(null);
     const navigate = useNavigate();
+    const { t } = useTranslation();
 
     useEffect(() => {
         const fetchUserProfile = async () => {

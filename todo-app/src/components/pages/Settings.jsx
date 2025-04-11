@@ -7,6 +7,7 @@ import {useNavigate} from "react-router-dom";
 import ChangePasswordModal from "../modals/ChangePasswordModal.jsx";
 import ChangeUsernameModal from "../modals/ChangeUsernameModal.jsx";
 import {useNotificationsContext} from "../../contexts/NotificationsContext.jsx";
+import {useTranslation} from "react-i18next";
 
 export default function Settings() {
     const [user, setUser] = useState(null);
@@ -15,6 +16,7 @@ export default function Settings() {
     const [isChangeUsernameModalOpen, setIsChangeUsernameModalOpen] = useState(false);
 
     const { isNotificationsEnabled, toggleNotifications } = useNotificationsContext();
+    const { t } = useTranslation();
 
     const navigate = useNavigate();
 

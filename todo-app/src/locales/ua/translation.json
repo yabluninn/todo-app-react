@@ -137,5 +137,6 @@
   "overdue_label": "Протерміновано",
   "task_lists_label": "Списки завдань",
   "note_lists_label": "Списки нотаток",
-  "total_label": "Усього"
+  "total_label": "Усього",
+  "groups_subtitle": "Тут ви можете керувати всіма списками та категоріями"
 }

@@ -7,6 +7,7 @@ import CreateNoteModal from "../modals/CreateNoteModal";
 import CreateButton from "../ui/CreateButton";
 import NoteSideSection from "../layout/notes/NoteSideSection";
 import { useListsContext } from "../../contexts/ListsContext";
+import {useTranslation} from "react-i18next";
 
 export default function Notes() {
   const [isCreateNoteModalOpen, setCreateNoteModalOpen] = useState(false);
@@ -14,6 +15,7 @@ export default function Notes() {
   const [selectedNote, setSelectedNote] = useState(null);
 
   const { noteLists } = useListsContext();
+  const { t } = useTranslation();
 
   const openCreateNoteModal = () => setCreateNoteModalOpen(true);
   const closeCreateNoteModal = () => setCreateNoteModalOpen(false);

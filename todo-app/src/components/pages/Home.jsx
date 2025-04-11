@@ -9,6 +9,7 @@ import CreateNoteModal from "../modals/CreateNoteModal";
 import { useListsContext } from "../../contexts/ListsContext";
 import HomeTasksAnalyticsWidget from "../layout/home/HomeTasksAnalyticsWidget.jsx";
 import HomeRecentTaskCompletionWidget from "../layout/home/HomeRecentTaskCompletionWidget.jsx";
+import {useTranslation} from "react-i18next";
 
 export default function Home() {
   const [isCreateTaskModalOpen, setCreateTaskModalOpen] = useState(false);
@@ -16,6 +17,7 @@ export default function Home() {
   const [selectedPeriod, setSelectedPeriod] = useState("Today");
 
   const { getTasksByPeriod } = useListsContext();
+  const { t } = useTranslation();
   const tasks = getTasksByPeriod(selectedPeriod);
 
 

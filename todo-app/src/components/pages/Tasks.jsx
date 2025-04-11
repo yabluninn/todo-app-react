@@ -7,6 +7,7 @@ import CreateTaskModal from "../modals/CreateTaskModal";
 import CreateButton from "../ui/CreateButton";
 import TaskSideSection from "../layout/tasks/TaskSideSection";
 import { useListsContext } from "../../contexts/ListsContext";
+import {useTranslation} from "react-i18next";
 
 export default function Tasks() {
   const [isCreateTaskModalOpen, setCreateTaskModalOpen] = useState(false);
@@ -14,6 +15,7 @@ export default function Tasks() {
   const [selectedTask, setSelectedTask] = useState(null);
 
   const { taskLists } = useListsContext();
+  const { t } = useTranslation();
 
   const openCreateTaskModal = () => setCreateTaskModalOpen(true);
   const closeCreateTaskModal = () => setCreateTaskModalOpen(false);

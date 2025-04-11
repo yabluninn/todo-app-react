@@ -11,6 +11,7 @@ import CategoriesContainer from "../layout/groups/CategoriesContainer";
 import CreateCategoryModal from "../modals/CreateCategoryModal.jsx";
 import TaskSideSection from "../layout/tasks/TaskSideSection.jsx";
 import ListSideSection from "../layout/groups/ListSideSection.jsx";
+import {useTranslation} from "react-i18next";
 
 export default function Groups() {
   const [isCreateListModalOpen, setCreateListModalOpen] = useState(false);
@@ -23,6 +24,7 @@ export default function Groups() {
   const [currentListType, setCurrentListType] = useState(null);
 
   const { taskLists, noteLists } = useListsContext();
+  const { t } = useTranslation();
 
   const openCreateListModal = (listType) => {
     setCurrentListType(listType);
@@ -61,16 +63,16 @@ export default function Groups() {
     <div className="page-container">
       <div className="lists-header">
         <div>
-          <p className="t-header-title">Groups</p>
+          <p className="t-header-title">{t("groups")}</p>
           <p className="t-header-subtitle">
-            Here you can manage all your lists and categories
+            {t("groups_subtitle")}
           </p>
         </div>
       </div>
       <CategoriesContainer openModal={openCreateCategoryModal}/>
       <div className="lists-grid">
         <ListContainer
-          listType={LIST_TYPES.TASK_LIST}
+            listType={LIST_TYPES.TASK_LIST}
           lists={taskLists}
           onOpenCreateListModal={() => {
             openCreateListModal(LIST_TYPES.TASK_LIST);
