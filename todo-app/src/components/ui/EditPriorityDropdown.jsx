@@ -1,9 +1,11 @@
 /* eslint-disable react/prop-types */
 import { useState } from "react";
+import {useTranslation} from "react-i18next";
 
 export default function PriorityDropdown({ onChange, width, defaultValue }) {
   const [selectedPriority, setSelectedPriority] = useState(defaultValue);
   const [isListVisible, setListVisible] = useState(false);
+  const { t } = useTranslation();
 
   const priorities = ["none", "low", "medium", "high"];
 
@@ -17,55 +19,55 @@ export default function PriorityDropdown({ onChange, width, defaultValue }) {
   };
 
   return (
-    <div style={{ ...styles.container, width: width }}>
-      <div style={styles.dropdownContainer}>
-        <div style={styles.selectedItem} onClick={toggleVisibility}>
-          <i className="hgi-stroke hgi-arrow-up-01" style={{ scale: 0 }}></i>
-          {selectedPriority}
-          <i
-            className={
-              isListVisible
-                ? "hgi-stroke hgi-arrow-up-01"
-                : "hgi-stroke hgi-arrow-down-01"
-            }
-            style={styles.dropdownIcon}
-          ></i>
-        </div>
-        <ul
-          style={{
-            ...styles.dropdownList,
-            display: isListVisible ? "block" : "none",
-          }}
-        >
-          {priorities.map((priority) => (
-            <li
-              key={priority}
+      <div style={{ ...styles.container, width: width }}>
+        <div style={styles.dropdownContainer}>
+          <div style={styles.selectedItem} onClick={toggleVisibility}>
+            <i className="hgi-stroke hgi-arrow-up-01" style={{ scale: 0 }}></i>
+            {t(`priority_${selectedPriority}`)}
+            <i
+                className={
+                  isListVisible
+                      ? "hgi-stroke hgi-arrow-up-01"
+                      : "hgi-stroke hgi-arrow-down-01"
+                }
+                style={styles.dropdownIcon}
+            ></i>
+          </div>
+          <ul
               style={{
-                ...styles.dropdownItem,
-                fontWeight: priority === selectedPriority ? "bold" : "normal",
+                ...styles.dropdownList,
+                display: isListVisible ? "block" : "none",
               }}
-              onClick={() => handleSelect(priority)}
-            >
-              <div
-                style={{
-                  ...styles.priorityIcon,
-                  backgroundColor:
-                    priority === "low"
-                      ? "blue"
-                      : priority === "medium"
-                      ? "orange"
-                      : priority === "high"
-                      ? "red"
-                      : "grey",
-                }}
-              ></div>
-              {priority}
-              <div style={{ scale: "0" }}></div>
-            </li>
-          ))}
-        </ul>
+          >
+            {priorities.map((priority) => (
+                <li
+                    key={priority}
+                    style={{
+                      ...styles.dropdownItem,
+                      fontWeight: priority === selectedPriority ? "bold" : "normal",
+                    }}
+                    onClick={() => handleSelect(priority)}
+                >
+                  <div
+                      style={{
+                        ...styles.priorityIcon,
+                        backgroundColor:
+                            priority === "low"
+                                ? "blue"
+                                : priority === "medium"
+                                    ? "orange"
+                                    : priority === "high"
+                                        ? "red"
+                                        : "grey",
+                      }}
+                  ></div>
+                  {t(`priority_${priority}`)}
+                  <div style={{ scale: "0" }}></div>
+                </li>
+            ))}
+          </ul>
+        </div>
       </div>
-    </div>
   );
 }
 

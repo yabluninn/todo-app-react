@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import "../../styles/TextAreaWithLabel.css";
+import {useTranslation} from "react-i18next";
 
 export default function TextAreaWithLabel({
   placeholder,
@@ -10,14 +11,16 @@ export default function TextAreaWithLabel({
   width,
   height,
 }) {
+    const { t } = useTranslation();
+
   return (
     <div className="textarea-container">
       <label>
         {icon && <i className={icon}></i>}
-        {label}
+        {t(label)}
       </label>
       <textarea
-        placeholder={placeholder}
+        placeholder={t(placeholder)}
         value={value}
         onChange={onChange}
         required

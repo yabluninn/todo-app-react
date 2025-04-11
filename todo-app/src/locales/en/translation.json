@@ -152,5 +152,15 @@
   "loading": "Loading...",
   "delete_confirm": "Are you sure you want to delete your account? This action is irreversible.",
   "delete_error": "Failed to delete account. Please try again.",
-  "user_id_missing": "User ID not found. Please log in again."
+  "user_id_missing": "User ID not found. Please log in again.",
+  "cancel": "Cancel",
+  "priority_none": "None",
+  "priority_low": "Low",
+  "priority_medium": "Medium",
+  "priority_high": "High",
+  "select_list": "Select List",
+  "no_list": "No List",
+  "new_task_list": "New Task List",
+  "new_notes_list": "New Notes List",
+  "priority_label": "Priority"
 }

@@ -1,7 +1,9 @@
 import { useTaskForm } from "../../contexts/TaskFormContext";
+import {useTranslation} from "react-i18next";
 
 export default function CreateTaskButton() {
   const { toggleNewTaskForm } = useTaskForm();
+  const { t } = useTranslation();
 
   return (
     <button
@@ -9,7 +11,7 @@ export default function CreateTaskButton() {
       style={styles.main}
       onClick={toggleNewTaskForm}
     >
-      Cancel
+      {t("cancel")}
     </button>
   );
 }

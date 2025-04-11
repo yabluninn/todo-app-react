@@ -2,17 +2,20 @@
 import { useState } from "react";
 
 import "../../styles/PriorityDropdown.css"
+import {useTranslation} from "react-i18next";
 
 export default function PriorityDropdown({ onChange }) {
   const [selectedPriority, setSelectedPriority] = useState("none");
   const [isListVisible, setListVisible] = useState(false);
+
+  const { t } = useTranslation();
 
   const priorities = ["none", "low", "medium", "high"];
 
   const handleSelect = (priority) => {
     setSelectedPriority(priority);
     onChange(priority);
-    setListVisible(false); // скрываем список после выбора
+    setListVisible(false);
   };
 
   const toggleVisibility = () => {
@@ -35,12 +38,13 @@ export default function PriorityDropdown({ onChange }) {
   return (
       <div className="priority-dropdown-container">
         <p className="priority-label">
-          <i className="hgi-stroke hgi-flag-02"></i>Priority
+          <i className="hgi-stroke hgi-flag-02"></i>
+          {t("priority_label")}
         </p>
         <div className="priority-dropdown">
           <div className="priority-selected" onClick={toggleVisibility}>
             <i className="hgi-stroke hgi-arrow-up-01" style={{ scale: 0 }}></i>
-            {selectedPriority}
+            {t(`priority_${selectedPriority}`)}
             <i
                 className={`hgi-stroke ${
                     isListVisible ? "hgi-arrow-up-01" : "hgi-arrow-down-01"
@@ -64,7 +68,7 @@ export default function PriorityDropdown({ onChange }) {
                       className="priority-icon"
                       style={{ backgroundColor: getPriorityColor(priority) }}
                   ></div>
-                  {priority}
+                  {t(`priority_${priority}`)}
                   <div style={{ scale: "0" }}></div>
                 </li>
             ))}
@@ -73,68 +77,3 @@ export default function PriorityDropdown({ onChange }) {
       </div>
   );
 }
-
-const styles = {
-  container: {
-    position: "relative",
-    width: "450px",
-    marginBottom: "16px",
-  },
-  label: {
-    fontSize: "14px",
-    fontWeight: "500",
-    color: "#333",
-    display: "flex",
-    alignItems: "center",
-    gap: "8px",
-    marginBottom: "8px",
-  },
-  dropdownContainer: {
-    width: "100%",
-    height: "40px",
-    border: "2px solid #ccc",
-    borderRadius: "4px",
-    backgroundColor: "#fff",
-    cursor: "pointer",
-  },
-  selectedItem: {
-    padding: "8px 12px",
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    height: "40px",
-  },
-  dropdownIcon: {
-    fontSize: "18px",
-  },
-  dropdownList: {
-    listStyle: "none",
-    margin: 0,
-    padding: 0,
-    position: "absolute",
-    width: "100%",
-    maxHeight: "160px",
-    overflowY: "auto",
-    border: "1px solid #ccc",
-    borderRadius: "8px",
-    backgroundColor: "#fff",
-    zIndex: 10,
-  },
-  dropdownItem: {
-    padding: "8px 12px",
-    textAlign: "center",
-    cursor: "pointer",
-    backgroundColor: "#fff",
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-  },
-  dropdownItemHover: {
-    backgroundColor: "#f0f0f0",
-  },
-  priorityIcon: {
-    width: "10px",
-    height: "10px",
-    borderRadius: "3px",
-  },
-};

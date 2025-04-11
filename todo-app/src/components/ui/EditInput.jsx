@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import "../../styles/EditInput.css";
+import {useTranslation} from "react-i18next";
 
 export default function EditInput({
   type,
@@ -9,6 +10,8 @@ export default function EditInput({
   onChange,
   width,
 }) {
+  const { t } = useTranslation();
+
   return (
     <div className="edit-input-container" style={{ width: width }}>
       {type === "color" ? (
@@ -22,7 +25,7 @@ export default function EditInput({
       ) : (
         <input
           type={type}
-          placeholder={placeholder}
+          placeholder={t(placeholder)}
           value={value}
           onChange={onChange}
           required
