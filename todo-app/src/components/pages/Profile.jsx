@@ -26,6 +26,7 @@ export default function Profile() {
     }, []);
 
     const handleLogout = () => {
+        localStorage.removeItem("token");
         localStorage.removeItem("user");
         navigate("/login");
     };
@@ -43,6 +44,7 @@ export default function Profile() {
         try {
             await axios.delete(`http://localhost:5000/api/user/${storedUser.id}`);
 
+            localStorage.removeItem("token");
             localStorage.removeItem("user");
 
             navigate("/signup");

@@ -19,6 +19,7 @@ import Settings from "./components/pages/Settings.jsx";
 import Notifications from "./components/pages/Notifications.jsx";
 import {NotificationsProvider} from "./contexts/NotificationsContext.jsx";
 import NotificationsHandler from "./utils/NotificationsHandler.jsx";
+import ProtectedRoute from "./components/ProtectedRoute.jsx";
 
 function AppWrapper() {
   return (
@@ -51,18 +52,36 @@ function App() {
                     {!isLandingPage && <NavMenu/>}
                     <NotificationsHandler />
                     <Routes>
-                        <Route path="/" element={<LandingPage/>}/>
-                        <Route path="/signup" element={<LandingSignIn/>}/>
-                        <Route path="/login" element={<LandingLogin/>}/>
-                        <Route path="/*" element={<LandingPage/>}/>
-                        <Route path={DEFAULT_APP_URL + "/"} element={<Home/>}/>
-                        <Route path={DEFAULT_APP_URL + "/tasks"} element={<Tasks/>}/>
-                        <Route path={DEFAULT_APP_URL + "/notes"} element={<Notes/>}/>
-                        <Route path={DEFAULT_APP_URL + "/analytics"} element={<Analytics/>}/>
-                        <Route path={DEFAULT_APP_URL + "/settings"} element={<Settings/>}/>
-                        <Route path={DEFAULT_APP_URL + "/notifications"} element={<Notifications/>}/>
-                        <Route path={DEFAULT_APP_URL + "/groups"} element={<Groups/>}/>
-                        <Route path={DEFAULT_APP_URL + "/profile"} element={<Profile/>}/>
+                        <Route path="/" element={<LandingPage />} />
+                        <Route path="/signup" element={<LandingSignIn />} />
+                        <Route path="/login" element={<LandingLogin />} />
+
+                        <Route path="/app/" element={
+                            <ProtectedRoute><Home /></ProtectedRoute>
+                        } />
+                        <Route path="/app/tasks" element={
+                            <ProtectedRoute><Tasks /></ProtectedRoute>
+                        } />
+                        <Route path="/app/notes" element={
+                            <ProtectedRoute><Notes /></ProtectedRoute>
+                        } />
+                        <Route path="/app/analytics" element={
+                            <ProtectedRoute><Analytics /></ProtectedRoute>
+                        } />
+                        <Route path="/app/settings" element={
+                            <ProtectedRoute><Settings /></ProtectedRoute>
+                        } />
+                        <Route path="/app/notifications" element={
+                            <ProtectedRoute><Notifications /></ProtectedRoute>
+                        } />
+                        <Route path="/app/groups" element={
+                            <ProtectedRoute><Groups /></ProtectedRoute>
+                        } />
+                        <Route path="/app/profile" element={
+                            <ProtectedRoute><Profile /></ProtectedRoute>
+                        } />
+
+                        <Route path="/*" element={<LandingPage />} />
                     </Routes>
                 </div>
             </NotificationsProvider>

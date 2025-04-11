@@ -50,6 +50,7 @@ export default function Settings() {
         try {
             await axios.delete(`http://localhost:5000/api/user/${storedUser.id}`);
 
+            localStorage.removeItem("token");
             localStorage.removeItem("user");
 
             navigate("/signup");
