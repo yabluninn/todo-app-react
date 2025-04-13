@@ -39,7 +39,7 @@ export default function Analytics() {
             </div>
             <div className="a-data-container">
                 <div className="a-overview-block">
-                    <p><strong style={{ marginRight: "4px", color: "black" }}>{totalTasks}</strong> {t("tasks_label")}</p>
+                    <p><strong style={{ marginRight: "4px", color: "black" }}>{totalTasks}</strong> {t("total_tasks_label")}</p>
                     <p><strong style={{ marginRight: "4px", color: "black" }}>{completedTasks}</strong> {t("completed_label")}</p>
                     <p><strong style={{ marginRight: "4px", color: "black" }}>{overdueTasks}</strong> {t("overdue_label")}</p>
                     <p><strong style={{ marginRight: "4px", color: "black" }}>{taskListsCount}</strong> {t("task_lists_label")}</p>

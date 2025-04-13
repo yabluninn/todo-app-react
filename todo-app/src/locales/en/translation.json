@@ -17,6 +17,7 @@
   "completed": "Completed",
   "overdue": "Overdue",
   "tasks_label": "{{count}} tasks ({{percentage}}%)",
+  "total_tasks_label": "Total",
   "tasks": "Tasks",
   "total": "Total",
   "completion_rate": "Completion Rate",
@@ -162,5 +163,7 @@
   "no_list": "No List",
   "new_task_list": "New Task List",
   "new_notes_list": "New Notes List",
-  "priority_label": "Priority"
+  "priority_label": "Priority",
+  "new_task_button": "New Task",
+  "tasks_subtitle": "Here you can manage all your tasks"
 }

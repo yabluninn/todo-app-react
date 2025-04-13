@@ -163,5 +163,8 @@
   "no_list": "Без списку",
   "new_task_list": "Новий список",
   "new_notes_list": "Новий список",
-  "priority_label": "Пріоритет"
+  "priority_label": "Пріоритет",
+  "new_task_button": "Нова задача",
+  "tasks_subtitle": "Тут ви можете керувати всіма своїми нотатками",
+  "total_tasks_label": "Всього"
 }
