@@ -165,5 +165,8 @@
   "new_notes_list": "New Notes List",
   "priority_label": "Priority",
   "new_task_button": "New Task",
-  "tasks_subtitle": "Here you can manage all your tasks"
+  "tasks_subtitle": "Here you can manage all your tasks",
+  "change_language": "Change Language",
+  "change_language_success": "Language has been changed successfully.",
+  "save_changes": "Save Changes"
 }

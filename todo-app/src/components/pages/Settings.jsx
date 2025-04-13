@@ -8,12 +8,15 @@ import ChangePasswordModal from "../modals/ChangePasswordModal.jsx";
 import ChangeUsernameModal from "../modals/ChangeUsernameModal.jsx";
 import {useNotificationsContext} from "../../contexts/NotificationsContext.jsx";
 import {useTranslation} from "react-i18next";
+import ChangeLanguageModal from "../modals/ChangeLanguageModal.jsx";
+import i18n from "../../i18n.js";
 
 export default function Settings() {
     const [user, setUser] = useState(null);
 
     const [isChangePasswordModalOpen, setIsChangePasswordModalOpen] = useState(false);
     const [isChangeUsernameModalOpen, setIsChangeUsernameModalOpen] = useState(false);
+    const [isChangeLanguageModalOpen, setIsChangeLanguageModalOpen] = useState(false);
 
     const { isNotificationsEnabled, toggleNotifications } = useNotificationsContext();
     const { t } = useTranslation();
@@ -67,6 +70,10 @@ export default function Settings() {
         setIsChangeUsernameModalOpen(!isChangeUsernameModalOpen);
     };
 
+    const openChangeLanguageModal = () => {
+        setIsChangeLanguageModalOpen(!isChangeLanguageModalOpen);
+    }
+
     return (
         <div className="page-container">
             <div className="settings-header">
@@ -105,9 +112,9 @@ export default function Settings() {
                 <SettingsBlock title={t("appearance")} icon="hgi-paint-brush-04">
                     <SettingsItem
                         title={t("language")}
-                        content="English"
+                        content={i18n.language === "en" ? "English" : "Українська"}
                         buttonIcon="hgi-pencil-edit-01"
-                        buttonAction={() => alert("Change language")}
+                        buttonAction={openChangeLanguageModal}
                     />
                 </SettingsBlock>
 
@@ -130,6 +137,9 @@ export default function Settings() {
                     user={user}
                     onUpdateUser={fetchUserProfile}
                 />
+            )}
+            {isChangeLanguageModalOpen && (
+                <ChangeLanguageModal onClose={openChangeLanguageModal} />
             )}
         </div>
     );

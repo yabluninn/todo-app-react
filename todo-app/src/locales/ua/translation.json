@@ -166,5 +166,8 @@
   "priority_label": "Пріоритет",
   "new_task_button": "Нова задача",
   "tasks_subtitle": "Тут ви можете керувати всіма своїми нотатками",
-  "total_tasks_label": "Всього"
+  "total_tasks_label": "Всього",
+  "change_language": "Зміна мови",
+  "change_language_success": "Мову інтерфейсу успішно змінено.",
+  "save_changes": "Зберегти"
 }
