@@ -268,7 +268,8 @@ export const ListsProvider = ({ children }) => {
     const addTaskList = async (list) => {
         try {
             const alreadyExists = taskLists.some(
-                (list) => list.name.toLowerCase().trim() === list.name.toLowerCase().trim()
+                (existingList) =>
+                    existingList.name.toLowerCase().trim() === list.name.toLowerCase().trim()
             );
 
             if (alreadyExists) {
@@ -377,7 +378,8 @@ export const ListsProvider = ({ children }) => {
     const addNoteList = async (list) => {
         try {
             const alreadyExists = noteLists.some(
-                (list) => list.name.toLowerCase().trim() === list.name.toLowerCase().trim()
+                (existingList) =>
+                    existingList.name.toLowerCase().trim() === list.name.toLowerCase().trim()
             );
 
             if (alreadyExists) {
