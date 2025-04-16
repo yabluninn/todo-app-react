@@ -24,7 +24,7 @@ export default function NotificationComponent ({ task, removeNotification }) {
             if (hours > 0) result += `${hours} hours `;
             if (minutes > 0) result += `${minutes} minutes `;
 
-            setTimeAgo(result.length > 0 ? result.join(" ") : t("just_now"));
+            setTimeAgo(result.length > 0 ? result : t("just_now"));
         };
 
         updateTimeAgo();
