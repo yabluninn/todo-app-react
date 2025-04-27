@@ -19,7 +19,7 @@ export const CategoriesProvider = ({ children }) => {
             const user = JSON.parse(localStorage.getItem("user"));
             if (!user) return;
 
-            const response = await axios.get(`http://localhost:5000/api/categories?userId=${user.id}`);
+            const response = await axios.get(`https://booxee-server.onrender.com/api/categories?userId=${user.id}`);
             setCategories(response.data);
         } catch (err) {
             console.error("Error fetching categories:", err);
@@ -38,7 +38,7 @@ export const CategoriesProvider = ({ children }) => {
             }
 
             const user = JSON.parse(localStorage.getItem("user"));
-            const response = await axios.post("http://localhost:5000/api/categories", {
+            const response = await axios.post("https://booxee-server.onrender.com/api/categories", {
                 userId: user.id,
                 name: category.name,
                 color: category.color,
@@ -52,7 +52,7 @@ export const CategoriesProvider = ({ children }) => {
 
     const updateCategory = async (id, updatedData) => {
         try {
-            const response = await axios.put(`http://localhost:5000/api/categories/${id}`, updatedData);
+            const response = await axios.put(`https://booxee-server.onrender.com/api/categories/${id}`, updatedData);
 
             setCategories((prevCategories) =>
                 prevCategories.map((category) =>
@@ -86,7 +86,7 @@ export const CategoriesProvider = ({ children }) => {
             }
 
             const user = JSON.parse(localStorage.getItem("user"));
-            await axios.delete(`http://localhost:5000/api/categories/${id}?userId=${user.id}`);
+            await axios.delete(`https://booxee-server.onrender.com/api/categories/${id}?userId=${user.id}`);
 
             setCategories((prevCategories) =>
                 prevCategories.filter((category) => category._id !== id)
@@ -104,7 +104,7 @@ export const CategoriesProvider = ({ children }) => {
             const user = JSON.parse(localStorage.getItem("user"));
             if (!user) return;
 
-            await axios.delete(`http://localhost:5000/api/categories/all/${user.id}`);
+            await axios.delete(`https://booxee-server.onrender.com/api/categories/all/${user.id}`);
 
             setCategories([]);
         } catch (err) {

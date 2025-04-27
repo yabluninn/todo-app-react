@@ -18,7 +18,7 @@ export const NotificationsProvider = ({ children }) => {
             const user = JSON.parse(localStorage.getItem("user"));
             if (!user) return;
 
-            const response = await axios.get(`http://localhost:5000/api/notifications?userId=${user.id}`);
+            const response = await axios.get(`https://booxee-server.onrender.com/api/notifications?userId=${user.id}`);
             setNotifications(response.data);
         } catch (err) {
             console.error("Error fetching notifications:", err);
@@ -30,7 +30,7 @@ export const NotificationsProvider = ({ children }) => {
         if (!user) return;
 
         try {
-            const response = await axios.get(`http://localhost:5000/api/user/${user.id}`);
+            const response = await axios.get(`https://booxee-server.onrender.com/api/user/${user.id}`);
             setIsNotificationsEnabled(response.data.isNotificationsEnabled);
         } catch (err) {
             console.error("Error fetching user settings:", err);
@@ -40,7 +40,7 @@ export const NotificationsProvider = ({ children }) => {
     const addNotification = async (notification) => {
         try {
             const user = JSON.parse(localStorage.getItem("user"));
-            const response = await axios.post("http://localhost:5000/api/notifications", {
+            const response = await axios.post("https://booxee-server.onrender.com/api/notifications", {
                 userId: user.id,
                 ...notification,
             });
@@ -55,7 +55,7 @@ export const NotificationsProvider = ({ children }) => {
 
     const removeNotification = async (id) => {
         try {
-            await axios.delete(`http://localhost:5000/api/notifications/${id}`);
+            await axios.delete(`https://booxee-server.onrender.com/api/notifications/${id}`);
             setNotifications((prev) => prev.filter((notif) => notif._id !== id));
         } catch (err) {
             console.error("Error deleting notification:", err);
@@ -67,7 +67,7 @@ export const NotificationsProvider = ({ children }) => {
             const user = JSON.parse(localStorage.getItem("user"));
             if (!user) return;
 
-            await axios.delete(`http://localhost:5000/api/notifications?userId=${user.id}`);
+            await axios.delete(`https://booxee-server.onrender.com/api/notifications?userId=${user.id}`);
             setNotifications([]);
         } catch (err) {
             console.error("Error deleting all notifications:", err);
@@ -92,7 +92,7 @@ export const NotificationsProvider = ({ children }) => {
             if (!user) return;
 
             const updatedStatus = !isNotificationsEnabled;
-            await axios.put(`http://localhost:5000/api/user/${user.id}/notifications`, {
+            await axios.put(`https://booxee-server.onrender.com/api/user/${user.id}/notifications`, {
                 isNotificationsEnabled: updatedStatus,
             });
 
