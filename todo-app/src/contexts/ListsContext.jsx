@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import {createContext, useContext, useEffect, useState} from "react";
 import axios from "axios";
+import axiosInstance from "../services/axiosInstance.js";
 
 const ListsContext = createContext();
 
@@ -27,7 +28,7 @@ export const ListsProvider = ({ children }) => {
     const addTask = async (task, listId) => {
 
         try {
-            const response = await axios.post(`https://booxee-server.onrender.com/api/tasks`, {
+            const response = await axiosInstance.post("/tasks", {
                 listId,
                 ...task,
             });
@@ -46,7 +47,7 @@ export const ListsProvider = ({ children }) => {
 
     const addNoteToList = async (note, listId) => {
         try {
-            const response = await axios.post("https://booxee-server.onrender.com/api/notes", {
+            const response = await axiosInstance.post("/notes", {
                 ...note,
                 listId,
                 creationDate: new Date(),
@@ -65,7 +66,7 @@ export const ListsProvider = ({ children }) => {
     const updateTask = async (taskId, updatedData) => {
         try {
 
-            const response = await axios.put(`https://booxee-server.onrender.com/api/tasks/${taskId}`, updatedData);
+            const response = await axiosInstance.put(`/tasks/${taskId}`, updatedData);
 
             setTaskLists((prevLists) =>
                 prevLists.map((list) => ({
@@ -85,7 +86,7 @@ export const ListsProvider = ({ children }) => {
 
     const updateNote = async (noteId, updatedData) => {
         try {
-            const response = await axios.put(`https://booxee-server.onrender.com/api/notes/${noteId}`, updatedData);
+            const response = await axiosInstance.put(`/notes/${noteId}`, updatedData);
 
             setNoteLists((prevLists) =>
                 prevLists.map((list) => ({
@@ -116,7 +117,7 @@ export const ListsProvider = ({ children }) => {
 
             const updatedCompleted = !task.completed;
 
-            const response = await axios.put(`https://booxee-server.onrender.com/api/tasks/${taskId}`, {
+            const response = await axiosInstance.put(`/tasks/${taskId}`, {
                 completed: updatedCompleted
             });
 
@@ -142,7 +143,8 @@ export const ListsProvider = ({ children }) => {
 
     const removeTask = async (taskId, listId) => {
       try {
-          await axios.delete(`https://booxee-server.onrender.com/api/tasks/${taskId}`);
+          await axiosInstance.delete(`/tasks/${taskId}`);
+
           setTaskLists((prevLists) =>
               prevLists.map((list) =>
                   list._id === listId
@@ -157,7 +159,7 @@ export const ListsProvider = ({ children }) => {
 
     const removeNote = async (noteId, listId) => {
         try {
-            await axios.delete(`https://booxee-server.onrender.com/api/notes/${noteId}`);
+            await axiosInstance.delete(`/notes/${noteId}`);
 
             setNoteLists((prevLists) =>
                 prevLists.map((list) =>
@@ -256,7 +258,7 @@ export const ListsProvider = ({ children }) => {
             const user = JSON.parse(localStorage.getItem("user"));
             if (!user) return;
 
-            const response = await axios.get(`https://booxee-server.onrender.com/api/taskLists?userId=${user.id}`);
+            const response = await axiosInstance.get(`/taskLists`, { params: { userId: user.id } });
 
             setTaskLists(response.data);
         } catch (err) {
@@ -278,7 +280,7 @@ export const ListsProvider = ({ children }) => {
             }
 
             const user = JSON.parse(localStorage.getItem("user"));
-            const response = await axios.post("https://booxee-server.onrender.com/api/taskLists", {
+            const response = await axiosInstance.post("/taskLists", {
                 userId: user.id,
                 name: list.name,
                 color: list.color,
@@ -292,7 +294,7 @@ export const ListsProvider = ({ children }) => {
 
     const updateTaskList = async (id, updatedData) => {
         try {
-            const response = await axios.put(`https://booxee-server.onrender.com/api/taskLists/${id}`, updatedData);
+            const response = await axiosInstance.put(`/taskLists/${id}`, updatedData);
 
             setTaskLists((prevLists) =>
                 prevLists.map((list) =>
@@ -338,11 +340,11 @@ export const ListsProvider = ({ children }) => {
             const tasksToMove = listToRemove.tasks || [];
             console.log(`Moving ${tasksToMove.length} tasks to All`);
 
-            await axios.put(`https://booxee-server.onrender.com/api/taskLists/moveTasksToAll/${id}`, {
+            await axiosInstance.put(`/taskLists/moveTasksToAll/${id}`, {
                 newListId: allList._id
             });
 
-            await axios.delete(`https://booxee-server.onrender.com/api/taskLists/${id}`);
+            await axiosInstance.delete(`/taskLists/${id}`);
 
             console.log("Successful deleting task list");
 
@@ -365,9 +367,11 @@ export const ListsProvider = ({ children }) => {
             const user = JSON.parse(localStorage.getItem("user"));
             if (!user) return;
 
-            const response = await axios.get(`https://booxee-server.onrender.com/api/noteLists?userId=${user.id}`, {
+            const response = await axiosInstance.get(`/noteLists`, {
+                params: { userId: user.id },
                 timeout: 10000
             });
+
 
             setNoteLists(response.data);
         } catch (err) {
@@ -388,7 +392,7 @@ export const ListsProvider = ({ children }) => {
             }
 
             const user = JSON.parse(localStorage.getItem("user"));
-            const response = await axios.post("https://booxee-server.onrender.com/api/noteLists", {
+            const response = await axiosInstance.post(`/noteLists`, {
                 userId: user.id,
                 name: list.name,
                 color: list.color,
@@ -402,7 +406,7 @@ export const ListsProvider = ({ children }) => {
 
     const updateNoteList = async (id, updatedData) => {
         try {
-            const response = await axios.put(`https://booxee-server.onrender.com/api/noteLists/${id}`, updatedData);
+            const response = await axiosInstance.put(`/noteLists/${id}`, updatedData);
 
             setNoteLists((prevLists) =>
                 prevLists.map((list) =>
@@ -448,11 +452,11 @@ export const ListsProvider = ({ children }) => {
             const notesToMove = noteListToRemove.notes || [];
             console.log(`Moving ${notesToMove.length} notes to Notes`);
 
-            await axios.put(`https://booxee-server.onrender.com/api/noteLists/moveNotesToNotes/${id}`, {
+            await axiosInstance.put(`/noteLists/moveNotesToNotes/${id}`, {
                 newListId: noteList._id
             });
 
-            await axios.delete(`https://booxee-server.onrender.com/api/noteLists/${id}`);
+            await axiosInstance.delete(`/noteLists/${id}`);
 
             console.log("Successful deleting note list:", noteList._id);
 
