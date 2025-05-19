@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import {useTranslation} from "react-i18next";
+import axiosInstance from "../../services/axiosInstance.js";
 
 export default function Profile() {
     const [user, setUser] = useState(null);
@@ -17,7 +18,7 @@ export default function Profile() {
                 const storedUser = JSON.parse(localStorage.getItem("user"));
                 if (!storedUser) return;
 
-                const response = await axios.get(`http://localhost:5000/api/user/${storedUser.id}`);
+                const response = await axiosInstance.get(`/user/${storedUser.id}`);
                 setUser(response.data);
             } catch (err) {
                 console.error("Error fetching user profile:", err);

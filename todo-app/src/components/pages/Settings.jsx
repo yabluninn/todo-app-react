@@ -10,6 +10,7 @@ import {useNotificationsContext} from "../../contexts/NotificationsContext.jsx";
 import {useTranslation} from "react-i18next";
 import ChangeLanguageModal from "../modals/ChangeLanguageModal.jsx";
 import i18n from "../../i18n.js";
+import axiosInstance from "../../services/axiosInstance.js";
 
 export default function Settings() {
     const [user, setUser] = useState(null);
@@ -31,7 +32,7 @@ export default function Settings() {
         if (!parsedUser?.id) return;
 
         try {
-            const response = await axios.get(`http://localhost:5000/api/user/${parsedUser.id}`);
+            const response = await axiosInstance.get(`/user/${parsedUser.id}`);
             setUser(response.data);
         } catch (err) {
             console.error("Error fetching user profile:", err);
@@ -53,7 +54,7 @@ export default function Settings() {
         if (!confirmDelete) return;
 
         try {
-            await axios.delete(`http://localhost:5000/api/user/${storedUser.id}`);
+            await axiosInstance.delete(`/user/${storedUser.id}`);
             localStorage.removeItem("token");
             localStorage.removeItem("user");
             navigate("/signup");
