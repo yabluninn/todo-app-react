@@ -30,7 +30,7 @@ export default function LandingLogin() {
         setError("");
 
         try {
-            const response = await axiosInstance.post("/auth/login", formData);
+            const response = await axiosInstance.post("/login", formData);
             // Сохранение токена и данных пользователя
             localStorage.setItem("token", response.data.token);
             localStorage.setItem("user", JSON.stringify(response.data.user));

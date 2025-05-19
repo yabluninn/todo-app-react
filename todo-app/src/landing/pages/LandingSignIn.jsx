@@ -30,7 +30,7 @@ export default function LandingSignIn() {
         setSuccess(false);
 
         try {
-            const response = await axiosInstance.post("/auth/register", formData);
+            const response = await axiosInstance.post("/register", formData);
             setSuccess(true);
             console.log("Registration successful:", response.data);
             setFormData({ email: "", username: "", password: "" });
