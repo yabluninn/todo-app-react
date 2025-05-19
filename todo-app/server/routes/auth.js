@@ -11,7 +11,7 @@ import NoteList from "../models/NoteList.js";
 
 const router = express.Router();
 
-router.post("/auth/register", registerValidation, async (req, res) => {
+router.post("/register", registerValidation, async (req, res) => {
     try {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
@@ -76,7 +76,7 @@ router.post("/auth/register", registerValidation, async (req, res) => {
     }
 });
 
-router.post("/auth/login", async (req, res) => {
+router.post("/login", async (req, res) => {
     try {
         const { email, password } = req.body;
 
