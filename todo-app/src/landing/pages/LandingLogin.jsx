@@ -4,6 +4,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 
 import "../../styles/landing/LandingLogin.css";
+import axiosInstance from "../../services/axiosInstance.js";
 
 
 export default function LandingLogin() {
@@ -29,8 +30,7 @@ export default function LandingLogin() {
         setError("");
 
         try {
-            const response = await axios.post("http://localhost:5000/api/auth/login", formData);
-
+            const response = await axiosInstance.post("/auth/login", formData);
             // Сохранение токена и данных пользователя
             localStorage.setItem("token", response.data.token);
             localStorage.setItem("user", JSON.stringify(response.data.user));

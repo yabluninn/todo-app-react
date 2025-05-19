@@ -3,6 +3,7 @@ import "../../styles/landing/LandingSignIn.css";
 import axios from "axios";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import axiosInstance from "../../services/axiosInstance.js";
 
 export default function LandingSignIn() {
     const [formData, setFormData] = useState({
@@ -29,7 +30,7 @@ export default function LandingSignIn() {
         setSuccess(false);
 
         try {
-            const response = await axios.post("http://localhost:5000/api/auth/register", formData);
+            const response = await axiosInstance.post("/auth/register", formData);
             setSuccess(true);
             console.log("Registration successful:", response.data);
             setFormData({ email: "", username: "", password: "" });
