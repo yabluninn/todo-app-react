@@ -1,6 +1,6 @@
 Proprietary License
 
-Copyright (c) 2024 Artem Yablunin
+Copyright (c) 2025 Artem Yablunin
 
 All rights reserved.
 
