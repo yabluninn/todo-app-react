@@ -11,14 +11,6 @@ export default function Notifications() {
 
     const tasks = taskLists.flatMap((list) => list.tasks || []);
 
-    // const notificationsToShow = notifications
-    //     .map((notification) => {
-    //         const task = tasks.find((t) => t._id === notification.taskId);
-    //         return task ? { ...task, timestamp: notification.timestamp, type: notification.type } : null;
-    //     })
-    //     .filter((task) => task !== null)
-    //     .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
-
     const notificationsToShow = notifications
         .map((notification) => {
             if (!notification || !notification.taskId) return null;
